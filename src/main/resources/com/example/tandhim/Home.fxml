@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="620.0" prefWidth="1050.0" styleClass="Anchor" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.Controller">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" styleClass="optionbar" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="rightMenu" alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" styleClass="optionbar" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -141,7 +141,7 @@
             </Button>
          </children>
       </VBox>
-      <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
+      <StackPane fx:id="stackPane" layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
          <children>
             <Pane fx:id="pnlAdd2" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
                <children>
@@ -890,7 +890,7 @@
                         <HBox alignment="TOP_RIGHT" minWidth="793.0" spacing="20">
                            <children>
                               <Button mnemonicParsing="false" text="الغاء" />
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="إضاقة الحساب">
+                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addAccount" text="إضاقة الحساب">
                                  <HBox.margin>
                                     <Insets right="20.0" />
                                  </HBox.margin></Button>

@@ -143,6 +143,14 @@ public class Controller implements Initializable {
     @FXML
     private TextField firstName, lastName, address, phone, username, password;
 
+    /** Home StackPane */
+    @FXML
+    private StackPane stackPane;
+
+    /** Right menu */
+    @FXML
+    private VBox rightMenu;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pnlNotif.setVisible(true);
@@ -963,7 +971,26 @@ public class Controller implements Initializable {
         newPV.PrintPVSeance(demList.getItems(), oblAdr[0], oblAdr[1], "افتتاحية", "////", CitationCtrl.getNumCitation(), num_bon.getText(), CitationCtrl.getDateCitation(), CitationCtrl.getDateReport(), CitationCtrl.getDateReport2(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), ComCtrl.getComType(), "03", "01", "09:00", obligList.getSelectionModel().getSelectedIndex() + 1, 1);
     }
 
+    /** Add new account to the database */
+    public void addAccount(ActionEvent actionEvent) {
+        /* TODO: */
+    }
+
+    private void applyPressedStyle(Button button) {
+        button.getStyleClass().clear();
+        button.getStyleClass().add("button1-pressed");
+    }
+
+    private void showSelectedPane(Pane pane) {
+        pane.toFront();
+        pane.setVisible(true);
+    }
+
     public void handleClicks(ActionEvent actionEvent) {
+        /** hide all panes */
+        stackPane.getChildren().forEach((pane) -> pane.setVisible(false));
+
+        /*
         pnlStatsBon.setVisible(false);
         pnlStatsFinance.setVisible(false);
         pnlNotif.setVisible(false);
@@ -977,6 +1004,18 @@ public class Controller implements Initializable {
         pnlStatsBons2.setVisible(false);
         pnlStatsBons1.setVisible(false);
         pnlEdit.setVisible(false);
+
+         */
+
+        /** add {@button1} style to all {@Button} inside {@rightMenu}*/
+        rightMenu.getChildren().forEach((child) -> {
+            if (child instanceof Button) {
+                child.getStyleClass().clear();
+                child.getStyleClass().add("button1");
+            }
+        });
+
+        /*
         btnNotif.getStyleClass().clear();
         btnNotif.getStyleClass().add("button1");
         btnAdd.getStyleClass().clear();
@@ -989,36 +1028,30 @@ public class Controller implements Initializable {
         btnSettings.getStyleClass().add("button1");
         btnEdit.getStyleClass().clear();
         btnEdit.getStyleClass().add("button1");
+         */
+
         bonType = null;
+
         if (actionEvent.getSource() == btnNotif) {
-            btnNotif.getStyleClass().clear();
-            btnNotif.getStyleClass().add("button1-pressed");
-            pnlNotif.toFront();
-            pnlNotif.setVisible(true);
+            applyPressedStyle(btnNotif);
+            showSelectedPane(pnlNotif);
         }
         if (actionEvent.getSource() == btnSearch) {
-            btnSearch.getStyleClass().clear();
-            btnSearch.getStyleClass().add("button1-pressed");
-            pnlSearch.toFront();
-            pnlSearch.setVisible(true);
-
+            applyPressedStyle(btnSearch);
+            showSelectedPane(pnlSearch);
         }
         if (actionEvent.getSource() == btnAdd) {
-            btnAdd.getStyleClass().clear();
-            btnAdd.getStyleClass().add("button1-pressed");
-            pnlAdd.toFront();
-            pnlAdd.setVisible(true);
+            applyPressedStyle(btnAdd);
+            showSelectedPane(pnlAdd);
             ClearAddInterface();
         }
         if (actionEvent.getSource() == btnStats) {
-            btnStats.getStyleClass().clear();
-            btnStats.getStyleClass().add("button1-pressed");
-            pnlStats.toFront();
-            pnlStats.setVisible(true);
+            applyPressedStyle(btnStats);
+            showSelectedPane(pnlStats);
         }
         if (actionEvent.getSource() == btnStatsBons1) {
-            btnStats.getStyleClass().clear();
-            btnStats.getStyleClass().add("button1-pressed");
+            applyPressedStyle(btnStats);
+
             pnlStats.setVisible(true);
             pnlStatsBon.toFront();
             pnlStatsBon.setVisible(true);
@@ -1027,8 +1060,8 @@ public class Controller implements Initializable {
             pnlStatsBons1.setVisible(true);
         }
         if (actionEvent.getSource() == btnStatsBons2) {
-            btnStats.getStyleClass().clear();
-            btnStats.getStyleClass().add("button1-pressed");
+            applyPressedStyle(btnStats);
+
             pnlStats.setVisible(true);
             pnlStatsBon.toFront();
             pnlStatsBon.setVisible(true);
@@ -1037,8 +1070,8 @@ public class Controller implements Initializable {
             pnlStatsBons2.setVisible(true);
         }
         if (actionEvent.getSource() == btnStatsFinance) {
-            btnStats.getStyleClass().clear();
-            btnStats.getStyleClass().add("button1-pressed");
+            applyPressedStyle(btnStats);
+
             pnlStats.setVisible(true);
             pnlStatsFinance.toFront();
             pnlStatsFinance.setVisible(true);
@@ -1046,24 +1079,21 @@ public class Controller implements Initializable {
 
         }
         if (actionEvent.getSource() == btnStatsExe) {
-            btnStats.getStyleClass().clear();
-            btnStats.getStyleClass().add("button1-pressed");
+            applyPressedStyle(btnStats);
             pnlStats.setVisible(true);
-
         }
         if (actionEvent.getSource() == btnEdit) {
-            btnEdit.getStyleClass().clear();
-            btnEdit.getStyleClass().add("button1-pressed");
-            pnlEdit.toFront();
-            pnlEdit.setVisible(true);
+            applyPressedStyle(btnEdit);
+            showSelectedPane(pnlEdit);
         }
 
         /** Settings */
         if (actionEvent.getSource() == btnSettings) {
-            pnlSettings.toFront();
-            pnlSettings.setVisible(true);
+            applyPressedStyle(btnSettings);
+            showSelectedPane(pnlSettings);
         }
 
+        /** Close Application */
         if (actionEvent.getSource() == btnExit) {
             Stage stage = (Stage) btnExit.getScene().getWindow();
             stage.close();
