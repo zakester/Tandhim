@@ -833,12 +833,12 @@
                         <HBox minWidth="793.0" spacing="100.0">
                            <children>
                               <Label text="مظهر الجهاز" textFill="WHITE" />
-                              <RadioButton fx:id="darkMode" mnemonicParsing="false" selected="true" text="المظهر الداكن" textFill="WHITE">
+                              <RadioButton fx:id="darkMode" mnemonicParsing="false" selected="true" text="المظهر الداكن">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="modeTheme" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="lightMode" layoutX="78.0" layoutY="10.0" mnemonicParsing="false" text="المظهر الفاتح" textFill="WHITE" toggleGroup="$modeTheme">
+                              <RadioButton fx:id="lightMode" layoutX="78.0" layoutY="10.0" mnemonicParsing="false" text="المظهر الفاتح" toggleGroup="$modeTheme">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -862,6 +862,7 @@
                               <HBox spacing="25.0">
                                  <children>
                                     <TextField fx:id="username" promptText="اسم المستخدم" />
+                                    <PasswordField promptText="كلمة السر" />
                                     <TextField fx:id="password" layoutX="10.0" layoutY="10.0" promptText="كلمة السر" />
                                  </children>
                                  <VBox.margin>
