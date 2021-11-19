@@ -1,0 +1,193 @@
+.button1
+{
+-fx-background-color : #05071F;
+-fx-text-fill : #e7e5e5;
+}
+.button1:hover{
+-fx-background-color : #10165F;
+}
+.button1:pressed
+{
+-fx-background-color : #1620A1;
+}
+.button1-pressed {
+-fx-background-color : #1620A1;
+}
+.button2
+{
+-fx-background-color : #05071F;
+-fx-text-fill : #e7e5e5;
+}
+.button2:hover{
+-fx-background-color : #10165F;
+}
+.button2:pressed
+{
+-fx-background-color : #1620A1;
+}
+
+.scroll-pane {
+    -fx-background-color: #02030A;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #10165F;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: black;
+}
+
+.combo-status {
+    -fx-border-color: transparent !important ; /*linear-gradient(to right,#f5f5f5,#02030A, #02030A);*/
+}
+.hbox-status {
+    -fx-background-color:  transparent;
+    -fx-border-color:  #B7C3D7;
+    -fx-border-radius: 2em;
+}
+
+.combo-box-base {
+	-fx-background-color:  #02030A;
+    -fx-border-color:  #B7C3D7;
+    -fx-border-radius: 2em;
+}
+.table-view {
+    -fx-background-color:  #02030A;
+    
+}
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+.table-row-cell:hover {
+    -fx-background-color: #05071F;
+    -fx-text-background-color: #05071F;
+}
+.table-row-cell:odd{
+    -fx-background-color: white;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even{
+    -fx-background-color: lightgrey;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #05071F;
+    -fx-text-background-color: white;
+}
+.combo-box .cell{
+    -fx-text-fill: white;
+    -fx-font: 16px "System";
+}
+
+.combo-box .list-cell{
+
+-fx-background-color:#02030A;
+
+}
+.combo-box .list-cell:selected{
+
+-fx-background-color:transparent; 
+
+}
+.combo-box .list-cell:hover{
+
+-fx-background-color:#10165F;
+}
+ .combo-box{
+
+-fx-background-color:transparent; 
+ }
+ .combo-box .text-field{
+    -fx-background-color: transparent;
+    -fx-font-size :16px;
+
+    /*-fx-border-color: linear-gradient(from 25% 25% to 100% 100%, lightgrey, transparent);*/
+    }
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-radius: 2em;
+    -fx-border-color:transparent;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #02030A;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #05071F;
+}
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+.date-picker > .text-field {
+    -fx-background-color:transparent;
+    -fx-border-color:transparent;
+    -fx-background-insets: 1 0 1 1;
+    -fx-background-radius: 2 0 0 2;
+    -fx-font-size :16px;
+}
+.date-picker > .arrow-button {
+    -fx-background-color:#05071F;
+    -fx-background-radius: 2em;
+}
+.login-right {
+	-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 25% ,white, #B7C3D7, #02030A);
+}
+.login-left {
+	-fx-background-color : #05071F;
+}
+ 
+.dialog-pane .button{
+ 	-fx-border-color: lightgrey;
+  -fx-background-color : #02030A; 
+ }
+ .text-area {
+    text-area-background: #02030A ;
+}
+ .text-area .content {
+    -fx-background-color: text-area-background ;
+ 	-fx-border-color: lightgrey;
+    -fx-border-radius: 2em;
+    -fx-text-fill: white;
+ }
+ .Anchor {
+    -fx-background-color: #02030A ;
+ }
+ .text-field{
+-fx-background-color : #02030A;
+-fx-border-color: #B7C3D7;
+-fx-border-radius:2em;
+-fx-text-fill:white;
+ }
+ .text-area {
+    -fx-text-fill:white;
+}
+.optionbar {
+	-fx-background-color : #05071F;
+
+}

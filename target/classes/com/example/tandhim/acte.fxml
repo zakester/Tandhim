@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="30.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.ActeController">
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <TextField fx:id="numActe" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="257.0" promptText="رقم العقد" stylesheets="@css/style.css">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <TextField fx:id="nomNotaire" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="257.0" promptText="الموثق" stylesheets="@css/style.css">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <TextField fx:id="typeActe" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="257.0" promptText="نوع العقد" stylesheets="@css/style.css">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <DatePicker fx:id="dateActe" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="256.0" promptText="تاريخ العقد" stylesheets="@css/style.css" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

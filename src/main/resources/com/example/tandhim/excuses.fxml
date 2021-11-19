@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="30.0" styleClass="Anchor" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.ExcuseController">
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <DatePicker fx:id="dateMarquage" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="256.0" promptText="تاريخ التأشير" stylesheets="@css/style.css" />
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <ComboBox fx:id="comTypeExcuse" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="443.0" promptText="النوع" stylesheets="@css/style.css" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
