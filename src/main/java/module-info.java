@@ -10,12 +10,8 @@ module com.example.tandhim {
     requires java.management;
     requires poi.ooxml;
     requires poi.ooxml.schemas;
-    requires grabzit;
-    requires aspose.pdf;
     requires com.google.zxing;
     requires jfreesvg;
-    requires htmltopdf;
-    requires jep;
 
     opens com.example.tandhim to javafx.fxml;
     exports com.example.tandhim;

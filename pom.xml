@@ -58,12 +58,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>it.grabz.grabzit</groupId>
-            <artifactId>grabzit</artifactId>
-            <version>3.5.2</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
@@ -96,21 +90,6 @@
             <artifactId>jfreesvg</artifactId>
             <version>3.3</version>
         </dependency>
-        <dependency>
-            <groupId>io.woo</groupId>
-            <artifactId>htmltopdf</artifactId>
-            <version>1.0.8</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/jep/jep -->
-
-        <dependency>
-            <groupId>black.ninia</groupId>
-            <artifactId>jep</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-        <!-- Thanks for using https://jar-download.com -->
 
 
 

@@ -22,17 +22,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import it.grabz.grabzit.GrabzItClient;
-import it.grabz.grabzit.GrabzItException;
-import it.grabz.grabzit.parameters.DOCXOptions;
-import jep.JepConfig;
-import jep.JepException;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 import org.jfree.graphics2d.svg.ViewBox;
-import jep.Jep;
-import javax.imageio.ImageIO;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 public class impression {
 
     /**
