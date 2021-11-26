@@ -53,7 +53,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<BonStats.bonStatsRow, String> bonTable1_colNumBon, bonTable1_colDemandeur, bonTable1_colObligatoire, bonTable1_colType, bonTable1_colDate, bonTable1_colStatus;
     @FXML
-    private Button btnNotif;
+    private Button btnNotif,btnEnableEdit;
     @FXML
     private StackPane stpnlFormeExe, stpnlStatsBon;
     @FXML
@@ -963,6 +963,9 @@ public class Controller implements Initializable {
         BonSeances bon = new BonSeances(CitationCtrl.getNumCitation(), ComCtrl.getComType(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), CitationCtrl.getDateCitation(), CitationCtrl.getDateReport(), CitationCtrl.getDateReport2(), num_bon.getText(), prix, somme);
         bon.PrintBon();
 
+    }
+    public void EnableEdit(){
+        btnEnableEdit.setDisable(false);
     }
 
     public void PrintPV() {

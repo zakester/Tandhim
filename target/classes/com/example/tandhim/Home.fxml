@@ -714,8 +714,8 @@
                               <ComboBox fx:id="EditComObligList" onAction="#UpdateStatus" prefHeight="37.0" prefWidth="388.0" promptText="قائمة المطلوبين" stylesheets="@css/style.css" />
                               <HBox prefHeight="37.0" prefWidth="311.0" styleClass="hbox-status" stylesheets="@css/style.css">
                                  <children>
-                                    <ComboBox fx:id="comStatus" prefHeight="37.0" prefWidth="298.0" promptText="الحالة" styleClass="combo-status" stylesheets="@css/style.css" />
-                                    <Button fx:id="editBtnSearch1" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#EditSearch" prefHeight="37.0" prefWidth="43.0" stylesheets="@css/style%201.css">
+                                    <ComboBox fx:id="comStatus" disable="true" prefHeight="37.0" prefWidth="298.0" promptText="الحالة" styleClass="combo-status" stylesheets="@css/style.css" />
+                                    <Button fx:id="btnEnableEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#EditSearch" prefHeight="37.0" prefWidth="43.0" stylesheets="@css/style%201.css">
                                        <graphic>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -824,7 +824,7 @@
                   </HBox>
                </children>
             </Pane>
-            <Pane fx:id="pnlSettings" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
+            <Pane fx:id="pnlSettings" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
                <children>
                   <VBox minHeight="620.0" minWidth="793.0">
                      <children>

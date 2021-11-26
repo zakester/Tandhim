@@ -7,15 +7,8 @@ package com.example.tandhim.Models;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-//import static java.lang.Compiler.command;
 import java.nio.file.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Hashtable;
-import java.util.Objects;
-import java.util.Scanner;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
