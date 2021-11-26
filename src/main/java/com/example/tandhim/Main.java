@@ -40,26 +40,6 @@ public class Main extends Application {
         });
 
         stage.show();
-        /*
-        Parent root = FXMLLoader.load(Main.class.getResource("login.fxml"));
-        primaryStage.setScene(new Scene(root));
-        //set stage borderless
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-
-        //drag it here
-        root.setOnMousePressed(event -> {
-            x = event.getSceneX();
-            y = event.getSceneY();
-        });
-        root.setOnMouseDragged(event -> {
-
-            primaryStage.setX(event.getScreenX() - x);
-            primaryStage.setY(event.getScreenY() - y);
-
-        });
-        primaryStage.show();
-
-         */
     }
 
     public static void main(String[] args) {

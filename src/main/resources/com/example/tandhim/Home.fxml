@@ -143,7 +143,7 @@
       </VBox>
       <StackPane fx:id="stackPane" layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
          <children>
-            <Pane fx:id="pnlAdd2" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
+            <Pane fx:id="pnlAdd2" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
                <children>
                   <VBox layoutX="27.0" layoutY="110.0" spacing="25.0">
                      <children>
@@ -207,7 +207,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </TextField>
-                              <Button fx:id="btnDem" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#addToComboBoxList" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style 1.css">
+                              <Button fx:id="btnDem" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#addToComboBoxList" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style%201.css">
                                  <graphic>
                                     <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -235,7 +235,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </TextField>
-                              <Button fx:id="btnOblig" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#addToComboBoxList" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style 1.css">
+                              <Button fx:id="btnOblig" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#addToComboBoxList" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style%201.css">
                                  <graphic>
                                     <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -261,7 +261,7 @@
                   <VBox fx:id="vboxFormePrincipale" layoutX="510.0" layoutY="110.0" prefHeight="377.0" prefWidth="257.0" spacing="28.0" />
                   <HBox layoutX="115.0" layoutY="555.0" minHeight="37.0" prefHeight="37.0" prefWidth="666.0" spacing="30.0">
                      <children>
-                        <Button fx:id="btnAddBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#addBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style 1.css" text="إضافة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
+                        <Button fx:id="btnAddBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#addBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="إضافة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -279,7 +279,7 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnCreatePV" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintPV" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style 1.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
+                        <Button fx:id="btnCreatePV" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintPV" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -294,7 +294,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnCreateBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style 1.css" text="طباعة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
+                        <Button fx:id="btnCreateBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="طباعة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -382,13 +382,13 @@
                      <children>
                         <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                            <children>
-                              <Button fx:id="btnCitation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="تكليف بالحضور لجلسة" />
-                              <Button fx:id="btnOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="تبليغ أمر" />
-                              <Button fx:id="btnJugement" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="تبليغ حكم" />
-                              <Button fx:id="btnJugement1" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="تبليغ قرار " />
+                              <Button fx:id="btnCitation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تكليف بالحضور لجلسة" />
+                              <Button fx:id="btnOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ أمر" />
+                              <Button fx:id="btnJugement" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ حكم" />
+                              <Button fx:id="btnJugement1" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ قرار " />
                               <StackPane fx:id="stpnlFormeExe" onMouseExited="#exitHover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style.css">
                                  <children>
-                                    <Button fx:id="btnFormeExecutif" mnemonicParsing="false" onMouseEntered="#hover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="تكليف بالوفاء" />
+                                    <Button fx:id="btnFormeExecutif" mnemonicParsing="false" onMouseEntered="#hover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تكليف بالوفاء" />
                                     <Button fx:id="btnFormeJudiciere" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="بموجب سند قضائي" visible="false" StackPane.alignment="TOP_CENTER" />
                                     <Button fx:id="btnFormeNonJudiciere" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="بموجب سند غير قضائي" visible="false" StackPane.alignment="BOTTOM_CENTER" />
                                  </children>
@@ -397,29 +397,29 @@
                         </HBox>
                         <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                            <children>
-                              <Button fx:id="btnExcuse" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="تبليغ إرسالية / طلب / إعذار" />
-                              <Button fx:id="btnInspection" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="معاينة" />
-                              <Button fx:id="btnInspectionOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="معاينة بأمر" />
-                              <Button fx:id="btnAssociation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="حضور جمعية عامة" />
-                              <Button fx:id="btnJard" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="الجرد" />
+                              <Button fx:id="btnExcuse" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ إرسالية / طلب / إعذار" />
+                              <Button fx:id="btnInspection" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="معاينة" />
+                              <Button fx:id="btnInspectionOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="معاينة بأمر" />
+                              <Button fx:id="btnAssociation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="حضور جمعية عامة" />
+                              <Button fx:id="btnJard" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="الجرد" />
                            </children>
                         </HBox>
                         <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="تبليغ مذكرة" />
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="تبليغ عريضة" />
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="Button" />
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="Button" />
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="Button" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ مذكرة" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ عريضة" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
                            </children>
                         </HBox>
                         <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="Button" />
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="Button" />
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="Button" />
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="Button" />
-                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="Button" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
+                              <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
                            </children>
                         </HBox>
                      </children>
@@ -528,7 +528,7 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <Button alignment="BASELINE_LEFT" layoutX="706.0" layoutY="150.0" mnemonicParsing="false" onAction="#Search" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style 1.css">
+                  <Button alignment="BASELINE_LEFT" layoutX="706.0" layoutY="150.0" mnemonicParsing="false" onAction="#Search" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style%201.css">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -705,7 +705,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+            <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
                <children>
                   <Pane layoutX="37.0" layoutY="120.0" prefHeight="414.0" prefWidth="720.0">
                      <children>
@@ -715,7 +715,7 @@
                               <HBox prefHeight="37.0" prefWidth="311.0" styleClass="hbox-status" stylesheets="@css/style.css">
                                  <children>
                                     <ComboBox fx:id="comStatus" prefHeight="37.0" prefWidth="298.0" promptText="الحالة" styleClass="combo-status" stylesheets="@css/style.css" />
-                                    <Button fx:id="editBtnSearch1" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#EditSearch" prefHeight="37.0" prefWidth="43.0" stylesheets="@css/style 1.css">
+                                    <Button fx:id="editBtnSearch1" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#EditSearch" prefHeight="37.0" prefWidth="43.0" stylesheets="@css/style%201.css">
                                        <graphic>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -758,7 +758,7 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="editBtnSearch" alignment="BASELINE_LEFT" layoutX="707.0" layoutY="37.0" mnemonicParsing="false" onAction="#EditSearch" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style 1.css">
+                  <Button fx:id="editBtnSearch" alignment="BASELINE_LEFT" layoutX="707.0" layoutY="37.0" mnemonicParsing="false" onAction="#EditSearch" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style%201.css">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -769,7 +769,7 @@
                   </Button>
                   <HBox layoutX="115.0" layoutY="555.0" minHeight="37.0" prefHeight="37.0" prefWidth="666.0" spacing="30.0">
                      <children>
-                        <Button fx:id="btnEditBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#FillEditBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style 1.css" text="واجهة التعديل" textAlignment="CENTER" textFill="#e7e5e5">
+                        <Button fx:id="btnEditBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#FillEditBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="واجهة التعديل" textAlignment="CENTER" textFill="#e7e5e5">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -787,7 +787,7 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="editBtnCreatePV" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style 1.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
+                        <Button fx:id="editBtnCreatePV" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -802,7 +802,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="editBtnPrintPV" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style 1.css" text="طباعة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
+                        <Button fx:id="editBtnPrintPV" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="طباعة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -861,25 +861,32 @@
                                  </VBox.margin></Label>
                               <HBox spacing="25.0">
                                  <children>
-                                    <TextField fx:id="username" promptText="اسم المستخدم" />
-                                    <PasswordField fx:id="password" promptText="كلمة السر" />
+                                    <TextField fx:id="username" prefHeight="37.0" prefWidth="225.0" promptText="اسم المستخدم" />
+                                    <PasswordField fx:id="password" prefHeight="37.0" prefWidth="225.0" promptText="كلمة السر" />
                                  </children>
                                  <VBox.margin>
                                     <Insets left="15.0" top="40.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER" layoutX="10.0" layoutY="80.0" spacing="25.0">
+                              <HBox layoutX="10.0" layoutY="80.0" spacing="25.0">
                                  <children>
-                                    <TextField fx:id="firstName" promptText="الاسم" />
-                                    <TextField fx:id="lastName" layoutX="10.0" layoutY="10.0" promptText="اللقب" />
-                                    <TextField fx:id="address" layoutX="10.0" layoutY="10.0" promptText="عنوان السكن" />
-                                    <TextField fx:id="phone" layoutX="183.0" layoutY="10.0" promptText="رقم الهاتف" />
+                                    <TextField fx:id="firstName" prefHeight="37.0" prefWidth="225.0" promptText="الاسم" />
+                                    <TextField fx:id="lastName" layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="225.0" promptText="اللقب" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets left="15.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <TextField fx:id="address" prefHeight="37.0" prefWidth="225.0" promptText="عنوان السكن" />
+                                    <TextField fx:id="phone" prefHeight="37.0" prefWidth="225.0" promptText="رقم الهاتف" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="15.0" top="20.0" />
                                  </VBox.margin>
                               </HBox>
                            </children>
@@ -906,7 +913,7 @@
             </Pane>
          </children>
       </StackPane>
-      <Button fx:id="bntClose" layoutX="1007.0" minWidth="45.0" mnemonicParsing="false" onAction="#Close" prefHeight="37.0" prefWidth="39.0" styleClass="transparent-button1" stylesheets="@css/style 1.css">
+      <Button fx:id="bntClose" layoutX="1007.0" minWidth="45.0" mnemonicParsing="false" onAction="#Close" prefHeight="37.0" prefWidth="39.0" styleClass="transparent-button1" stylesheets="@css/style%201.css">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>

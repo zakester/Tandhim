@@ -990,23 +990,6 @@ public class Controller implements Initializable {
         /** hide all panes */
         stackPane.getChildren().forEach((pane) -> pane.setVisible(false));
 
-        /*
-        pnlStatsBon.setVisible(false);
-        pnlStatsFinance.setVisible(false);
-        pnlNotif.setVisible(false);
-        pnlAdd.setVisible(false);
-        pnlAdd2.setVisible(false);
-        pnlSearch.setVisible(false);
-        pnlStats.setVisible(false);
-        pnlStatsFinance.setVisible(false);
-        pnlStatsBon.setVisible(false);
-        pnlStatsFinance.setVisible(false);
-        pnlStatsBons2.setVisible(false);
-        pnlStatsBons1.setVisible(false);
-        pnlEdit.setVisible(false);
-
-         */
-
         /** add {@button1} style to all {@Button} inside {@rightMenu}*/
         rightMenu.getChildren().forEach((child) -> {
             if (child instanceof Button) {
@@ -1014,21 +997,6 @@ public class Controller implements Initializable {
                 child.getStyleClass().add("button1");
             }
         });
-
-        /*
-        btnNotif.getStyleClass().clear();
-        btnNotif.getStyleClass().add("button1");
-        btnAdd.getStyleClass().clear();
-        btnAdd.getStyleClass().add("button1");
-        btnStats.getStyleClass().clear();
-        btnStats.getStyleClass().add("button1");
-        btnSearch.getStyleClass().clear();
-        btnSearch.getStyleClass().add("button1");
-        btnSettings.getStyleClass().clear();
-        btnSettings.getStyleClass().add("button1");
-        btnEdit.getStyleClass().clear();
-        btnEdit.getStyleClass().add("button1");
-         */
 
         bonType = null;
 

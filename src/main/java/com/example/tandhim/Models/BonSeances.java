@@ -181,9 +181,9 @@ public class BonSeances extends BonNotification {
         System.out.println(demandeur+" ljsdnlsdn "+ oblig);
         try {
             typeService =typeService.replace("null", "///");
-            imp.imp(demandeur, oblig, typeService, prix, num_bon);
-        } catch (IOException ex) {
-            Logger.getLogger(BonSeances.class.getName()).log(Level.SEVERE, null, ex);
+            imp.PrintBon(demandeur, oblig, typeService, prix, num_bon);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
