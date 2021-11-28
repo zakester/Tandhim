@@ -167,6 +167,7 @@ public class BonSeances extends BonNotification {
     public void setDate_report2(String date_report2) {
         this.date_report2 = date_report2;
     }
+
     public void PrintBon() {
         String typeService ="تكليف بالحضور لجلسة يوم " + date_seance + " والمؤجلة ليوم: "+date_report+" والمؤجلة ليوم: "+date_report2+" رقم: " + num_seance+ " ب: " + commission;
         impression imp= new impression();
@@ -181,7 +182,8 @@ public class BonSeances extends BonNotification {
         System.out.println(demandeur+" ljsdnlsdn "+ oblig);
         try {
             typeService =typeService.replace("null", "///");
-            imp.PrintBon(demandeur, oblig, typeService, prix, num_bon);
+            imp.PrintBon(demandeur, oblig, typeService, "1200DA", num_bon);
+            //imp.PrintBon(demandeur, oblig, typeService, prix, num_bon);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -166,8 +166,7 @@ public class Controller implements Initializable {
         pnlStatsBons2.setVisible(false);
         pnlStatsBons1.setVisible(false);
         pnlEdit.setVisible(false);
-        demList.setCellFactory(lv
-                -> new ListCell<String>() {
+        demList.setCellFactory(lv -> new ListCell<String>() {
             // This is the node that will display the text and the cross. 
             // I chose a hyperlink, but you can change to button, image, etc. 
             private HBox graphic;
