@@ -7,8 +7,11 @@ package com.example.tandhim.Models;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.nio.file.*;
+import java.util.HashMap;
 import java.util.Hashtable;
+
+import com.example.tandhim.DOCXModifier.DOCXModifier;
+import com.example.tandhim.DOCXModifier.ToDOCX;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -86,14 +89,24 @@ public class impression {
         ImageIO.write(bufferedQRCode, "png", outQRCode);
     }
 
-    public void PrintBon(String requester, String wanted, String type, String price, String bonNumber) throws IOException {
+    public void PrintBon(String requester, String wanted, String service, String price, String bonNumber) throws IOException {
         bonNumber = bonNumber.replace("/", "-");
-        String docxName = "bon" + bonNumber;
+        String docxName = "bon" + bonNumber + ".zip";
 
-        QRCodePNG("docxModules/modbon/word/media/image1.png", "some data", 150, 150);
+        QRCodePNG("docxModules/modbon/word/media/image1.png", "mashi some data", 150, 150);
 
-        String pythonScript = String.format("cd docxModules/modbon/ && python main.py --requester \"%s\" --wanted \"%s\" --service \"%s\" --price \"%s\" --rest \"%s\" --docxName \"%s\"", requester, wanted, type, price, "0 DA", docxName);
-        Process p = Runtime.getRuntime().exec(new String[] { "/bin/sh", "-c", pythonScript });
+        HashMap<String, String> replacements = new HashMap<>() {{
+            put("@requester", requester);
+            put("@wanted", wanted);
+            put("@service", service);
+            put("@price", price);
+            put("@rest", "11DA");
+        }};
+
+        DOCXModifier docxModifier = new DOCXModifier(replacements);
+        docxModifier.replace("modbon"); // docxModules/"fileOf"/word/document.xml -> docxModules/modbon/word/document.xml
+
+        ToDOCX.zipFile("modbon", docxName, true);
     }
 
 }
