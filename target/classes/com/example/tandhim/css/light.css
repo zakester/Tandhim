@@ -68,6 +68,13 @@
     -fx-border-color:  #02030A;
     -fx-border-radius: 2em;
 }
+.label {
+    -fx-border-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: black;
+        -fx-font: 16px "System";
+
+}
 .combo-box-base {
 	-fx-background-color:  transparent;
     -fx-border-color:  #02030A;
@@ -167,8 +174,22 @@
  
 .dialog-pane .button{
  	-fx-border-color: lightgrey;
-  -fx-background-color : #cbcbcb; 
+  -fx-background-color : #02030A; 
  }
+ .dialog {
+    -fx-background-color : #f5f5f5;
+ }
+ .dialog-pane {
+ -fx-background-color : #cbcbcb;    
+ }
+ .dialog-pane:header .header-panel {
+    -fx-background-color: #cbcbcb;
+}
+.dialog-pane:header .header-panel .label {
+    -fx-font-style: italic;
+    -fx-font-size: 2em;
+    -fx-text-fill: black;
+}
  .text-area {
     text-area-background: #f5f5f5 ;
 }

@@ -1,6 +1,8 @@
 package com.example.tandhim;
 
 import com.example.tandhim.Models.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -166,55 +168,6 @@ public class Controller implements Initializable {
         pnlStatsBons2.setVisible(false);
         pnlStatsBons1.setVisible(false);
         pnlEdit.setVisible(false);
-        demList.setCellFactory(lv -> new ListCell<String>() {
-            // This is the node that will display the text and the cross. 
-            // I chose a hyperlink, but you can change to button, image, etc. 
-            private HBox graphic;
-
-            // this is the constructor for the anonymous class.
-            {
-                Label label = new Label();
-                // Bind the label text to the item property. If your ComboBox items are not Strings you should use a converter. 
-                label.textProperty().bind(itemProperty());
-                // Set max width to infinity so the cross is all the way to the right. 
-                label.setMaxWidth(Double.POSITIVE_INFINITY);
-                // We have to modify the hiding behavior of the ComboBox to allow clicking on the hyperlink, 
-                // so we need to hide the ComboBox when the label is clicked (item selected). 
-
-                Hyperlink cross = new Hyperlink("X");
-                cross.setVisited(true); // So it is black, and not blue. 
-
-                cross.setOnAction(event
-                        -> {
-                    System.out.println(".initialize()");
-                    // Since the ListView reuses cells, we need to get the item first, before making changes.  
-                    String item = getItem();
-                    System.out.println("Clicked cross on " + item);
-                    if (isSelected()) {
-                        // Not entirely sure if this is needed. 
-                        demList.getSelectionModel().select(null);
-                    }
-                    // Remove the item from A and add to B. You can add any additional logic in here. 
-                    demList.getItems().remove(item);
-                }
-                );
-                label.setOnMouseClicked(event -> demList.hide());
-                // Arrange controls in a HBox, and set display to graphic only (the text is included in the graphic in this implementation). 
-                graphic = new HBox(label, cross);
-                graphic.setHgrow(label, Priority.ALWAYS);
-                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            }
-
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(graphic);
-                }
-            }
-        });
         BDConnection.findMySqlServer();
         Connection bd = BDConnection.getConnection();
         colDate.setCellValueFactory(cellData -> cellData.getValue().getDateProperty());
@@ -874,6 +827,7 @@ public class Controller implements Initializable {
     }
 
     public void EditSearch() {
+        ClearEditInterface();
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
         if (result.getObligatoireList() != null) {
             for (Obligatoire obl : result.getObligatoireList()) {
@@ -905,6 +859,31 @@ public class Controller implements Initializable {
             comStatus.getItems().addAll("غير منجرة", "تم إرسال رسالة", "منجرة", "ملغاة");
             comStatus.getSelectionModel().select(obl.getStatus());
             statusArea.setText(obl.OblStatus());
+            comStatus.valueProperty().addListener(new ChangeListener <String>(){
+                @Override
+                public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                    if ((newValue!= null)||(!newValue.equals(oldValue))) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
+                        try {
+                            Parent p = (Parent) loader.load();
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            DialogPane dialogPane = alert.getDialogPane();
+                            dialogPane.getStylesheets().add(
+                                    getClass().getResource("css/style.css").toExternalForm());
+                            dialogPane.getStyleClass().add("dialog-pane");
+
+                            dialogPane.setContent(p);
+                            alert.setTitle("خطأ في الإدخال");
+                            alert.setContentText(
+                                    "اسم الهيئة خاطئ");
+                            alert.showAndWait();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            });
         }
     }
 
@@ -912,12 +891,27 @@ public class Controller implements Initializable {
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
         Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
         comStatus.getItems().clear();
-        comStatus.getItems().addAll("غير منجرة", "تم إرسال رسالة", "منجرة", "ملغاة");
+        comStatus.getItems().addAll("غير منجزة", "تم إرسال رسالة", "منجرة", "ملغاة");
         comStatus.getSelectionModel().select(obl.getStatus());
         statusArea.setText(obl.OblStatus());
 
     }
+    public void ChangeStatus() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
+        try {
+            Parent p = (Parent) loader.load();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.setContent(p);
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "اسم الهيئة خاطئ");
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
     public void UpdateBon() {
 
     }
@@ -964,7 +958,15 @@ public class Controller implements Initializable {
 
     }
     public void EnableEdit(){
-        btnEnableEdit.setDisable(false);
+        comStatus.setDisable(false);
+    }
+    public void ClearEditInterface() {
+        comStatus.getItems().clear();
+        EditComObligList.getItems().clear();
+        statusArea.clear();
+        typeArea.clear();
+        //editNumBon.clear();
+        editBtnCreatePV.setDisable(true);
     }
 
     public void PrintPV() {
