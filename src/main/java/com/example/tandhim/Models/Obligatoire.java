@@ -153,6 +153,7 @@ public class Obligatoire {
         System.out.println("addr = " + addr);
 
         if ((status==null) || (status.equals(""))) {
+            System.out.println("here is the null");
             return "غير منجزة";
         } else {
             return status;

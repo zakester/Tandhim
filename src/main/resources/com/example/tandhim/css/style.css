@@ -56,6 +56,13 @@
 .scroll-pane > .corner {
     -fx-background-color: black;
 }
+.label {
+	-fx-border-color: transparent;
+	-fx-border-color: transparent;
+  	-fx-text-fill: white;
+  	    -fx-font: 16px "System";
+
+}
 
 .combo-status {
     -fx-border-color: transparent !important ; /*linear-gradient(to right,#f5f5f5,#02030A, #02030A);*/
@@ -164,8 +171,20 @@
 }
 .dialog-pane .button{
  	-fx-border-color: lightgrey;
-  -fx-background-color : #02030A; 
  }
+ .dialog {
+ 	-fx-background-color : #02030A;
+ }
+ .dialog-pane {
+ -fx-background-color : #10165F;	
+ }
+ .dialog-pane:header .header-panel {
+    -fx-background-color: #10165F;
+}
+.dialog-pane:header .header-panel .label {
+    -fx-font-style: italic;
+    -fx-font-size: 2em;
+}
  .text-area {
     text-area-background: #02030A ;
 }
