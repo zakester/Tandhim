@@ -66,7 +66,7 @@ public class BonExcuses extends BonNotification {
                 return true;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
+            ex.printStackTrace();
         }
 
         return false;
@@ -82,11 +82,12 @@ public class BonExcuses extends BonNotification {
                 return true;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
+            ex.printStackTrace();
         }
 
         return false;
     }
+    public int getSomme(){ return somme;}
 
     public String getDate_marquage() {
         return date_marquage;

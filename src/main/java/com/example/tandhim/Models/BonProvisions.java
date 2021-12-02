@@ -111,6 +111,7 @@ public class BonProvisions extends BonNotification {
 
         return false;
     }
+    public int getSomme(){ return somme;}
 
     public String getNum_indice() {
         return num_indice;

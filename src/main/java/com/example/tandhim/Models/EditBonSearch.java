@@ -44,7 +44,8 @@ public class EditBonSearch {
                     Service = serv[i];
                     break;
                 }
-                if (Service.equals("bon_provisions")) {
+                if (Service.equals("bon_provisions")||Service.equals("bon_orders")) {
+                    if (Service.equals("bon_provisions")){
                     q = "SELECT type FROM bon_provisions WHERE num_bon='" + input + "'";
                     preparedStmt = bd.prepareStatement(q);
                     st = bd.createStatement();
@@ -57,6 +58,8 @@ public class EditBonSearch {
                         }
 
                     }
+                    }
+
                     q = "SELECT id FROM notification_fidelité WHERE id_provision='" + input + "'";
 
                     st1 = bd.createStatement();
@@ -72,9 +75,8 @@ public class EditBonSearch {
     }
 
     public BonSeances getBonData() {
-        if (Service.equals("bon_seances")) {
             System.out.println(Service);
-            String query = "SELECT prix,num_seance,type,commission,date_seance,date_report,date_report2,somme  FROM bon_seances WHERE num_bon='" + id + "'";
+            String query = "SELECT prix,num_seance,type,commission,date_seance,date_report,date_report2,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
             Statement st;
             ResultSet rs;
             try {
@@ -89,23 +91,126 @@ public class EditBonSearch {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        /*if (Service.equals("bon_orders")) {
-            String query = "SELECT num_order,date_order,commission,prix,somme FROM bon_orders WHERE num_bon='" + id + "'";
-            Statement st;
-            ResultSet rs;
-            try {
-                st = bd.createStatement();
-                rs = st.executeQuery(query);
+        return null;
+    }
+    public BonOrders getBonOrdersData() {
+        System.out.println(Service);
+        String query = "SELECT prix,num_order,type,commission,date_order,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
 
-                while (rs.next()) {
-                    BonOrders bon = new BonOrders(rs.getString("num_order"), rs.getString("date_order"), rs.getString("commission"), rs.getString("num_bon"), rs.getInt("prix"),rs.getInt("somme"));
-                    return bon;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonOrders bon = new BonOrders(rs.getString("num_order"),rs.getString("date_order"),rs.getString("commission"),rs.getString("type"),rs.getString("num_bon"),rs.getInt("prix"),rs.getInt("somme"));
+                return bon;
             }
-        }*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public BonMandat getBonMandatData() {
+        System.out.println(Service);
+        String query = "SELECT prix,num_mandat,type,commission,date,service,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonMandat bon = new BonMandat(rs.getString("num_mandat"),rs.getString("type"),rs.getString("service"),rs.getString("commission"),rs.getString("date"),rs.getString("num_bon"),rs.getInt("prix"),rs.getInt("somme"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public BonRqst getBonRqstData() {
+        System.out.println(Service);
+        String query = "SELECT prix,num_rqst,type,commission,date,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonRqst bon = new BonRqst(rs.getString("num_rqst"),rs.getString("type"),rs.getString("commission"),rs.getString("date"),rs.getString("num_bon"),rs.getInt("prix"),rs.getInt("somme"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public BonProvisions getBonProvisionsData() {
+        System.out.println(Service);
+        String query = "SELECT prix,num_indice,num_table,type,commission,date,spec,somme  FROM bon_seances WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonProvisions bon = new BonProvisions(rs.getString("num_indice"),rs.getString("num_table"),rs.getString("date"),rs.getString("commission"),rs.getString("type"),rs.getString("spec"),rs.getString("num_bon"),rs.getInt("prix"),rs.getInt("somme"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public BonExcuses getBonExcusesData() {
+        System.out.println(Service);
+        String query = "SELECT prix,type,date_marquage,somme  FROM bon_seances WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonExcuses bon = new BonExcuses(rs.getString("date_marquage"),rs.getString("num_bon"),rs.getString("type"),rs.getInt("prix"),rs.getInt("somme"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public BonActe getBonActData() {
+        System.out.println(Service);
+        String query = "SELECT prix,type_acte,date_acte,nom_notaire,num,somme  FROM bon_seances WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonActe bon = new BonActe(rs.getString("num_bon"),rs.getString("num"),rs.getString("nom_notaire"),rs.getString("type_acte"),rs.getString("date_acte"),rs.getInt("prix"),rs.getInt("somme"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

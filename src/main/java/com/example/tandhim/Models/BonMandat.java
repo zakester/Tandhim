@@ -17,7 +17,41 @@ import javax.swing.JOptionPane;
  * @author DELL
  */
 public class BonMandat extends BonNotification{
-        private String num_mandat,type,commission,date,num_bon,service; int prix,somme;
+    public String getNum_mandat() {
+        return num_mandat;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getCommission() {
+        return commission;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    @Override
+    public String getNum_bon() {
+        return num_bon;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    @Override
+    public int getPrix() {
+        return prix;
+    }
+
+    public int getSomme() {
+        return somme;
+    }
+
+    private String num_mandat,type,commission,date,num_bon,service; int prix,somme;
 
     public BonMandat(String num_mandat, String type,String service, String commission, String date, String num_bon, int prix,int somme) {
         super(num_bon, prix);

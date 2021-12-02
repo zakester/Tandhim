@@ -18,7 +18,11 @@ import javax.swing.JOptionPane;
  * @author DELL
  */
 public class BonRqst extends BonNotification{
-        private String num_rqst,type,commission,date,num_bon; int prix,somme;
+    public int getSomme() {
+        return somme;
+    }
+
+    private String num_rqst,type,commission,date,num_bon; int prix,somme;
 
     public BonRqst(String num_rqst, String type, String commission, String date, String num_bon, int prix, int somme) {
         super(num_bon, prix);

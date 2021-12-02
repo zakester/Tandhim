@@ -46,11 +46,9 @@ public class DOCXModifier {
 
                 bw.write(line);
             }
-
         } catch (Exception e) {
             return;
         }
-
         removeTmpFile(pathXML, tmpXMLPath); // after modification delete replace old XML with new XML
 
     }
@@ -64,6 +62,7 @@ public class DOCXModifier {
         // And rename tmp XML's name to old XML name
         File newFile = new File(tmpFilePath);
         newFile.renameTo(oldFile);
+
     }
 
 }

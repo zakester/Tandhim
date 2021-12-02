@@ -141,6 +141,8 @@ public class BonOrders extends BonNotification {
            b=false;
            return null;
      }
+    public int getSomme(){ return somme;}
+
     public String getNum_order() {
         return num_order;
     }
