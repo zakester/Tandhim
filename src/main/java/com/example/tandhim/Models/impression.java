@@ -89,11 +89,34 @@ public class impression {
         ImageIO.write(bufferedQRCode, "png", outQRCode);
     }
 
+    /** sometimes when generating QRCode it creates new files in media folder, so we clean this folder from any unnecessary files */
+    public void cleanMedia(String folderOf) {
+        String path = String.format("docxModules/%s/word/media/", folderOf);
+        File mediaFolder = new File(path);
+
+        // Files list inside media folder
+        File[] fileList = mediaFolder.listFiles();
+
+        if (fileList != null) {
+            for (File file : fileList) {
+                String fileName = file.getName();
+                if (!(fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".svg")))
+                    file.delete(); // if the file is not .png .jpg .jpeg .svg then delete file from media folder
+            }
+        }
+
+    }
+    
     public void PrintBon(String requester, String wanted, String service, String price, String bonNumber) throws IOException {
         bonNumber = bonNumber.replace("/", "-");
         String docxName = "bon" + bonNumber + ".zip";
+        String folderOf = "modbon";
+
 
         QRCodePNG("docxModules/modbon/word/media/image1.png", "mashi some data", 150, 150);
+
+        // clean media folder before zipping
+        cleanMedia(/* folderOf */folderOf);
 
         HashMap<String, String> replacements = new HashMap<>() {{
             put("@requester", requester);
@@ -104,9 +127,9 @@ public class impression {
         }};
 
         DOCXModifier docxModifier = new DOCXModifier(replacements);
-        docxModifier.replace("modbon");
-        // docxModules/"fileOf"/word/document.xml -> docxModules/modbon/word/document.xml
-        ToDOCX.zipFile("modbon", docxName, true);
+        docxModifier.replace(folderOf); // docxModules/"fileOf"/word/document.xml -> docxModules/modbon/word/document.xml
+
+        ToDOCX.zipFile(folderOf, docxName, true);
     }
 
 }
