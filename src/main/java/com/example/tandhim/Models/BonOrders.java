@@ -123,6 +123,20 @@ public class BonOrders extends BonNotification {
         notif.insert();
     }
 
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public String getNum_bon() {
+        return num_bon;
+    }
+
+    @Override
+    public int getPrix() {
+        return prix;
+    }
+
     public NotificationFidelite getNotificationFidelité(boolean b) {
         try {
             Connection bd = BDConnection.getConnection();

@@ -841,6 +841,7 @@ public class Controller implements Initializable {
                 EditComObligList.getItems().add(s);
                 EditComObligList.getSelectionModel().selectFirst();
             }
+            EditComObligList.setPromptText("قائمة الطالبين");
         }
         if (result.getService().equals("bon_seances")) {
             System.out.println(result.getBonData());
@@ -853,16 +854,29 @@ public class Controller implements Initializable {
             } else {
                 typeArea.setText("تكليف بالحضور لجلسة يوم " + bon.getDate_seance() + " والمؤجلة ليوم: " + bon.getDate_report() + " والمؤجلة ليوم: " + bon.getDate_report2() + " رقم: " + bon.getNum_seance() + " والتي ستعقد أمام: " + bon.getCommission());
             }
-
+        }
+        if (result.getService().equals("bon_orders")) {
+            if (result.isNotificationFidelité()){
+                BonOrders bon = result.getBonOrdersData();
+                NotificationFidelite notif = result.getNotificationFidelité();
+                typeArea.setText("تكليف بالوفاء بموجب : "+ bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate_order()+" والممهور بالصيغة التنفيذية رقم : "+notif.getNum()+" الصادرة بتاريخ : " +notif.getDate());
+            } else {
+            System.out.println(result.getBonData());
+            BonOrders bon = result.getBonOrdersData();
+            System.out.println(bon);
+            typeArea.setText("تبليغ " + bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate_order());
+            }
+        }
+        if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associationd"))) {
             Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
             comStatus.getItems().clear();
             comStatus.getItems().addAll("غير منجرة", "تم إرسال رسالة", "منجرة", "ملغاة");
             comStatus.getSelectionModel().select(obl.getStatus());
             statusArea.setText(obl.OblStatus());
-            comStatus.valueProperty().addListener(new ChangeListener <String>(){
+            comStatus.valueProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                    if ((newValue!= null)||(!newValue.equals(oldValue))) {
+                    if ((newValue != null) || (!newValue.equals(oldValue))) {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
                         try {
                             Parent p = (Parent) loader.load();
@@ -887,6 +901,7 @@ public class Controller implements Initializable {
         }
     }
 
+
     public void UpdateStatus() {
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
         Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
@@ -894,7 +909,6 @@ public class Controller implements Initializable {
         comStatus.getItems().addAll("غير منجزة", "تم إرسال رسالة", "منجرة", "ملغاة");
         comStatus.getSelectionModel().select(obl.getStatus());
         statusArea.setText(obl.OblStatus());
-
     }
     public void ChangeStatus() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
@@ -967,6 +981,7 @@ public class Controller implements Initializable {
         typeArea.clear();
         //editNumBon.clear();
         editBtnCreatePV.setDisable(true);
+        //ُEditComObligList.setPromptText("قائمة المطلوبين");
     }
 
     public void PrintPV() {

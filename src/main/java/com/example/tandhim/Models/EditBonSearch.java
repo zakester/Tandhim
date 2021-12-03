@@ -104,7 +104,7 @@ public class EditBonSearch {
 
             while (rs.next()) {
                 System.out.println("yes it found it");
-                BonOrders bon = new BonOrders(rs.getString("num_order"),rs.getString("date_order"),rs.getString("commission"),rs.getString("type"),rs.getString("num_bon"),rs.getInt("prix"),rs.getInt("somme"));
+                BonOrders bon = new BonOrders(rs.getString("num_order"),rs.getString("date_order"),rs.getString("commission"),rs.getString("type"),id,rs.getInt("prix"),rs.getInt("somme"));
                 return bon;
             }
         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class EditBonSearch {
 
             while (rs.next()) {
                 System.out.println("yes it found it");
-                BonMandat bon = new BonMandat(rs.getString("num_mandat"),rs.getString("type"),rs.getString("service"),rs.getString("commission"),rs.getString("date"),rs.getString("num_bon"),rs.getInt("prix"),rs.getInt("somme"));
+                BonMandat bon = new BonMandat(rs.getString("num_mandat"),rs.getString("type"),rs.getString("service"),rs.getString("commission"),rs.getString("date"),id,rs.getInt("prix"),rs.getInt("somme"));
                 return bon;
             }
         } catch (Exception e) {
@@ -144,7 +144,7 @@ public class EditBonSearch {
 
             while (rs.next()) {
                 System.out.println("yes it found it");
-                BonRqst bon = new BonRqst(rs.getString("num_rqst"),rs.getString("type"),rs.getString("commission"),rs.getString("date"),rs.getString("num_bon"),rs.getInt("prix"),rs.getInt("somme"));
+                BonRqst bon = new BonRqst(rs.getString("num_rqst"),rs.getString("type"),rs.getString("commission"),rs.getString("date"),id,rs.getInt("prix"),rs.getInt("somme"));
                 return bon;
             }
         } catch (Exception e) {
@@ -164,7 +164,7 @@ public class EditBonSearch {
 
             while (rs.next()) {
                 System.out.println("yes it found it");
-                BonProvisions bon = new BonProvisions(rs.getString("num_indice"),rs.getString("num_table"),rs.getString("date"),rs.getString("commission"),rs.getString("type"),rs.getString("spec"),rs.getString("num_bon"),rs.getInt("prix"),rs.getInt("somme"));
+                BonProvisions bon = new BonProvisions(rs.getString("num_indice"),rs.getString("num_table"),rs.getString("date"),rs.getString("commission"),rs.getString("type"),rs.getString("spec"),id,rs.getInt("prix"),rs.getInt("somme"));
                 return bon;
             }
         } catch (Exception e) {
@@ -184,7 +184,7 @@ public class EditBonSearch {
 
             while (rs.next()) {
                 System.out.println("yes it found it");
-                BonExcuses bon = new BonExcuses(rs.getString("date_marquage"),rs.getString("num_bon"),rs.getString("type"),rs.getInt("prix"),rs.getInt("somme"));
+                BonExcuses bon = new BonExcuses(rs.getString("date_marquage"),id,rs.getString("type"),rs.getInt("prix"),rs.getInt("somme"));
                 return bon;
             }
         } catch (Exception e) {
@@ -204,7 +204,7 @@ public class EditBonSearch {
 
             while (rs.next()) {
                 System.out.println("yes it found it");
-                BonActe bon = new BonActe(rs.getString("num_bon"),rs.getString("num"),rs.getString("nom_notaire"),rs.getString("type_acte"),rs.getString("date_acte"),rs.getInt("prix"),rs.getInt("somme"));
+                BonActe bon = new BonActe(id,rs.getString("num"),rs.getString("nom_notaire"),rs.getString("type_acte"),rs.getString("date_acte"),rs.getInt("prix"),rs.getInt("somme"));
                 return bon;
             }
         } catch (Exception e) {
@@ -234,7 +234,24 @@ public class EditBonSearch {
 
         return a;
     }
+    public NotificationFidelite getNotificationFidelité () {
+        String query = "SELECT num,date  FROM notification_fidelité WHERE id_provision='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
 
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                NotificationFidelite notif = new NotificationFidelite(rs.getString("num"),rs.getString("date"),id);
+                return notif;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public String getService() {
         return Service;
     }
