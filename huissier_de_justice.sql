@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 03 déc. 2021 à 14:22
+-- Généré le : ven. 10 déc. 2021 à 09:55
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -152,6 +152,13 @@ CREATE TABLE `bon_excuses` (
   `somme` int(11) NOT NULL DEFAULT 1870
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Déchargement des données de la table `bon_excuses`
+--
+
+INSERT INTO `bon_excuses` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `date_marquage`, `type`, `somme`) VALUES
+(8, '20/21', 0, '', NULL, '2021-12-04 17:45:43', '2021-12-03', 'إعذار', 2000);
+
 -- --------------------------------------------------------
 
 --
@@ -167,7 +174,7 @@ CREATE TABLE `bon_mandat` (
   `commission` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_nopad_ci NOT NULL,
   `date` date NOT NULL,
   `service` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` date NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
   `somme` int(11) NOT NULL DEFAULT 1500
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -245,7 +252,7 @@ CREATE TABLE `bon_rqst` (
   `type` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `commission` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_czech_ci NOT NULL,
   `date` date NOT NULL,
-  `created_at` date NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
   `somme` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -354,7 +361,9 @@ INSERT INTO `identif` (`id`, `year`) VALUES
 (15, 21),
 (16, 21),
 (17, 21),
-(18, 21);
+(18, 21),
+(19, 21),
+(20, 21);
 
 -- --------------------------------------------------------
 
@@ -718,7 +727,7 @@ ALTER TABLE `bon_autres`
 -- AUTO_INCREMENT pour la table `bon_excuses`
 --
 ALTER TABLE `bon_excuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `bon_mandat`
@@ -754,7 +763,7 @@ ALTER TABLE `bon_seances`
 -- AUTO_INCREMENT pour la table `demandeur`
 --
 ALTER TABLE `demandeur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 
 --
 -- AUTO_INCREMENT pour la table `logs`
@@ -772,7 +781,7 @@ ALTER TABLE `notification_fidelité`
 -- AUTO_INCREMENT pour la table `obligatoire`
 --
 ALTER TABLE `obligatoire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
 
 --
 -- AUTO_INCREMENT pour la table `rapports`

@@ -18,7 +18,24 @@ import javax.swing.JOptionPane;
  */
 public class BonExcuses extends BonNotification {
 
-    private String date_marquage, num_bon, type;
+    private String date_marquage;
+    private String num_bon;
+
+    @Override
+    public String getNum_bon() {
+        return num_bon;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public int getPrix() {
+        return prix;
+    }
+
+    private String type;
     private int somme, prix;
 
     public BonExcuses(String date_marquage, String num_bon, String type, int prix, int somme) {

@@ -142,7 +142,7 @@
          </children>
       </VBox>
       <StackPane fx:id="stackPane" layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
-         <Pane fx:id="pnlAdd" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+         <Pane fx:id="pnlAdd" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css">
             <children>
                <VBox layoutX="19.0" layoutY="149.0" prefHeight="382.0" prefWidth="754.0" spacing="15.0">
                   <children>
@@ -172,8 +172,8 @@
                      </HBox>
                      <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                         <children>
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ مذكرة" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ عريضة" />
+                           <Button fx:id="btnMandat" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ مذكرة" />
+                           <Button fx:id="btnRqst" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تبليغ عريضة" />
                            <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
                            <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
                            <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="Button" />
@@ -473,7 +473,7 @@
                </Label>
             </children>
          </Pane>
-         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
             <children>
                <Pane layoutX="37.0" layoutY="120.0" prefHeight="414.0" prefWidth="720.0">
                   <children>

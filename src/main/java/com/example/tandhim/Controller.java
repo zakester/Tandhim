@@ -31,6 +31,8 @@ public class Controller implements Initializable {
 
     CommissionController ComCtrl = null;
     CitationController CitationCtrl = null;
+    MandatController MandatCtrl = null;
+    RqstController RqstCtrl = null;
     JugementController JugementCtrl = null;
     ExcuseController ExcuseCtrl = null;
     OrdersController OrderCtrl = null;
@@ -66,7 +68,7 @@ public class Controller implements Initializable {
     private DatePicker datePickerFrom, datePickerTo, dateCitation, dateReport, dateReport2;
 
     @FXML
-    private Button btnAdd, btnDem, btnOblig, btnExcuse, btnEditBon, editBtnCreatePV, editBtnPrintPV, editBtnSearch, btnCreatePV, btnFormeJudiciere, btnFormeNonJudiciere;
+    private Button btnAdd, btnDem, btnOblig, btnExcuse, btnEditBon, editBtnCreatePV, editBtnPrintPV, editBtnSearch, btnCreatePV, btnFormeJudiciere, btnFormeNonJudiciere,btnMandat,btnRqst;
     @FXML
     private Button btnStatsBons2;
     @FXML
@@ -336,6 +338,35 @@ public class Controller implements Initializable {
             vboxFormePrincipale.getChildren().add(p1);
             ComCtrl = loader1.getController();
         }
+        if (e.getSource() == btnMandat) {
+            bonText.setText(btnMandat.getText());
+            pnlAdd2.toFront();
+            pnlAdd2.setVisible(true);
+            hboxOblig.setVisible(true);
+            hboxOblig2.setVisible(true);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("mandat.fxml"));
+            Parent p = (Parent) loader.load();
+            MandatCtrl = loader.getController();
+            vboxFormePrincipale.getChildren().add(p);
+            FXMLLoader loader1 = new FXMLLoader(getClass().getResource("commission.fxml"));
+            Parent p1 = (Parent) loader1.load();
+            vboxFormePrincipale.getChildren().add(p1);
+            ComCtrl = loader1.getController();
+        }if (e.getSource() == btnRqst) {
+            bonText.setText(btnRqst.getText());
+            pnlAdd2.toFront();
+            pnlAdd2.setVisible(true);
+            hboxOblig.setVisible(true);
+            hboxOblig2.setVisible(true);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("request.fxml"));
+            Parent p = (Parent) loader.load();
+            RqstCtrl = loader.getController();
+            vboxFormePrincipale.getChildren().add(p);
+            FXMLLoader loader1 = new FXMLLoader(getClass().getResource("commission.fxml"));
+            Parent p1 = (Parent) loader1.load();
+            vboxFormePrincipale.getChildren().add(p1);
+            ComCtrl = loader1.getController();
+        }
         if (e.getSource() == btnFormeJudiciere) {
             bonText.setText(btnFormeExecutif.getText() + " " + btnFormeJudiciere.getText());
             bonType = bonText.getText();
@@ -583,6 +614,74 @@ public class Controller implements Initializable {
             }
 
             BonSeances bon = new BonSeances(CitationCtrl.getNumCitation(), ComCtrl.getComType(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), CitationCtrl.getDateCitation(), CitationCtrl.getDateReport(), CitationCtrl.getDateReport2(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.insert();
+                id.increment();
+                for (int i = 0; i < demList.getItems().size(); i++) {
+                    String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                    Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                    d.insert();
+                    btnCreatePV.setDisable(false);
+
+                }
+
+                for (int i = 0; i < obligList.getItems().size(); i++) {
+                    String[] a = obligList.getItems().get(i).toString().split(" العنوان: ");
+                    Obligatoire d = new Obligatoire(a[0], a[1], num_bon.getText(), null, null, 0);
+                    d.insert();
+                }
+            }
+        }
+        if (bonType.equals("تبليغ مذكرة")) {
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonMandat bon = new BonMandat(MandatCtrl.getNumMandat(), MandatCtrl.getTypeMandat(), MandatCtrl.getService(),ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), MandatCtrl.getDateMandat(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.insert();
+                id.increment();
+                for (int i = 0; i < demList.getItems().size(); i++) {
+                    String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                    Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                    d.insert();
+                    btnCreatePV.setDisable(false);
+
+                }
+
+                for (int i = 0; i < obligList.getItems().size(); i++) {
+                    String[] a = obligList.getItems().get(i).toString().split(" العنوان: ");
+                    Obligatoire d = new Obligatoire(a[0], a[1], num_bon.getText(), null, null, 0);
+                    d.insert();
+                }
+            }
+        }
+        if (bonType.equals("تبليغ عريضة")) {
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonRqst bon = new BonRqst(RqstCtrl.getNumRqst(), RqstCtrl.getTypeRqst(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(),RqstCtrl.getDateRqst(), num_bon.getText(), prix, somme);
             if (bon.validate()) {
                 System.out.println(bon.validate());
                 bon.insert();
@@ -867,7 +966,27 @@ public class Controller implements Initializable {
             typeArea.setText("تبليغ " + bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate_order());
             }
         }
-        if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associationd"))) {
+        if (result.getService().equals("bon_provisions")) {
+            if (result.isNotificationFidelité()){
+                BonProvisions bon = result.getBonProvisionsData();
+                NotificationFidelite notif = result.getNotificationFidelité();
+                typeArea.setText("تكليف بالوفاء بموجب : "+ bon.getType() + " رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table() + " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate()+" والممهور بالصيغة التنفيذية رقم : "+notif.getNum()+" الصادرة بتاريخ : " +notif.getDate());
+            } else {
+            System.out.println(result.getBonData());
+            BonProvisions bon = result.getBonProvisionsData();
+            System.out.println(bon);
+            typeArea.setText("تبليغ " + bon.getType() +" رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table()+ " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate_order());
+            }
+        }
+        if (result.getService().equals("bon_excuses")) {
+                BonExcuses bon = result.getBonExcusesData();
+                typeArea.setText("تبليغ" + bon.getType() + " المؤشر بتاريخ: " + bon.getDate_marquage());
+        }
+        if (result.getService().equals("bon_excuses")) {
+                BonExcuses bon = result.getBonExcusesData();
+                typeArea.setText("تبليغ" + bon.getType() + " المؤشر بتاريخ: " + bon.getDate_marquage());
+        }
+            if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associationd"))) {
             Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
             comStatus.getItems().clear();
             comStatus.getItems().addAll("غير منجرة", "تم إرسال رسالة", "منجرة", "ملغاة");

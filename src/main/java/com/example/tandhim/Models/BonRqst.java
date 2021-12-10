@@ -5,6 +5,9 @@
  */
 package com.example.tandhim.Models;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
+
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,10 +54,48 @@ public class BonRqst extends BonNotification{
                     int id = preparedStmt.executeUpdate();
                       if (id>=1){return true;}
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
+                    ex.printStackTrace();
                 }
       
     return false;}
+    public boolean validate() {
+        String[] a = commission.split(" : ");
+        if (a.length == 1 || !ArabicChar(a[1])) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "اسم الهيئة خاطئ");
+            alert.showAndWait();
+            return false;
+        }if (date==null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "تاريخ العريضة غير مدرج");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean ArabicChar(String ar) {
+        char[] cs = ar.toCharArray();
+        String s = "ابتجحخدذرزسشصضطظعغفقكلمنهوي ةىءئؤأآإ";
+        for (Character c : cs) {
+            if (!s.contains(c.toString())) {
+                return false;
+            }
+        }
+        return true;
+    }
     public boolean update(){
         try {
             Connection bd = BDConnection.getConnection();
@@ -63,8 +104,8 @@ public class BonRqst extends BonNotification{
             int id = preparedStmt.executeUpdate();
             if (id>=1){return true;}
             } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
-                }
+                ex.printStackTrace();
+            }
       
     return false;}
     public void setNum_rqst(String num_rqst) {

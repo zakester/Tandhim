@@ -60,7 +60,7 @@ public class identif {
         try {
             Connection bd = BDConnection.getConnection();
             String query;
-            query = "INSERT INTO identif ('id','year') VALUES (?,?)";
+            query = "INSERT INTO `identif`(`id`, `year`) VALUES (?,?)";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             String [] id = this.getidentif().split("/");
             int i = Integer.parseInt(id[0]);

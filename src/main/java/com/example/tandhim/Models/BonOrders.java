@@ -68,7 +68,7 @@ public class BonOrders extends BonNotification {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             DialogPane dialogPane = alert.getDialogPane();
             dialogPane.getStylesheets().add(
-                    getClass().getResource("../home/style.css").toExternalForm());
+                    getClass().getResource("style.css").toExternalForm());
             dialogPane.getStyleClass().add("dialog-pane");
             alert.setTitle("خطأ في الإدخال");
             alert.setContentText(
@@ -79,7 +79,7 @@ public class BonOrders extends BonNotification {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             DialogPane dialogPane = alert.getDialogPane();
             dialogPane.getStylesheets().add(
-                    getClass().getResource("../home/style.css").toExternalForm());
+                    getClass().getResource("style.css").toExternalForm());
             dialogPane.getStyleClass().add("dialog-pane");
             alert.setTitle("خطأ في الإدخال");
             alert.setContentText(

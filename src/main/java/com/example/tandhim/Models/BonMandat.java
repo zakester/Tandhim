@@ -5,6 +5,9 @@
  */
 package com.example.tandhim.Models;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -62,7 +65,7 @@ public class BonMandat extends BonNotification{
         this.commission = commission;
         this.date = date;
         this.prix=prix;
-        this.prix=somme;
+        this.somme=somme;
     }
     public boolean insert(){
         try {
@@ -83,11 +86,49 @@ public class BonMandat extends BonNotification{
                     int id = preparedStmt.executeUpdate();
                       if (id>=1){return true;}
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
+                    ex.printStackTrace();
                 }
       
     return false;}
-    public boolean update(){
+    public boolean validate() {
+        String[] a = commission.split(" : ");
+        if (a.length == 1 || !ArabicChar(a[1])) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "اسم الهيئة خاطئ");
+            alert.showAndWait();
+            return false;
+        }if (date==null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "تاريخ المذكرة غير مدرج");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+
+        public boolean ArabicChar(String ar) {
+            char[] cs = ar.toCharArray();
+            String s = "ابتجحخدذرزسشصضطظعغفقكلمنهوي ةىءئؤأآإ";
+            for (Character c : cs) {
+                if (!s.contains(c.toString())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public boolean update(){
         try {
             Connection bd = BDConnection.getConnection();
             String query = "UPDATE bon_mandat SET prix = " +prix+ ",somme = " +somme+ ", num_mandat ='" + num_mandat + "',type ='" + type + "', commission='" + commission +  "', service='" + service +  "',date='" + date + "' WHERE num_bon='" + num_bon + "'";
