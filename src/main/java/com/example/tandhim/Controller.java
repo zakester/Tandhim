@@ -975,7 +975,7 @@ public class Controller implements Initializable {
             System.out.println(result.getBonData());
             BonProvisions bon = result.getBonProvisionsData();
             System.out.println(bon);
-            typeArea.setText("تبليغ " + bon.getType() +" رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table()+ " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate_order());
+            typeArea.setText("تبليغ " + bon.getType() +" رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table()+ " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate());
             }
         }
         if (result.getService().equals("bon_excuses")) {
