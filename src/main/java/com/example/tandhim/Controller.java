@@ -9,13 +9,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -51,15 +57,23 @@ public class Controller implements Initializable {
     @FXML
     private TableView<SearchBon> searchTable;
     @FXML
-    private TableView<BonStats.bonStatsRow> bonTable1, bonTable2;
+    private TableView<BonStats.bonStatsRow> bonTable1;
+    @FXML
+    private TableView<BonStats.bonStatsRow> bonTable2;
+    @FXML
+    private TableView<BonStats.bonStatsExeRow> bonTable3;
     @FXML
     private TableColumn<SearchBon, String> colNumBon, colNumAffaire, colDemandeur, colObligatoire, colType, colDate, colStatus, colFolder;
     @FXML
     private TableColumn<BonStats.bonStatsRow, String> bonTable1_colNumBon, bonTable1_colDemandeur, bonTable1_colObligatoire, bonTable1_colType, bonTable1_colDate, bonTable1_colStatus;
     @FXML
+    private TableColumn<BonStats.bonStatsRow, String> colNumBon1, colDemandeur1, colObligatoire1, colType1, colDate1, colStatus1;
+    @FXML
+    private TableColumn<BonStats.bonStatsExeRow, String> colNumBonExe, colCommissionExe, colObligatoireExe, colTypeExe, colCreatedAtExe, colStatusExe, colDateExe;
+    @FXML
     private Button btnNotif,btnEnableEdit;
     @FXML
-    private StackPane stpnlFormeExe, stpnlStatsBon;
+    private StackPane stpnlFormeExe, stpnlStatsBon,StackPaneStats;
     @FXML
     private HBox hboxOblig;
     @FXML
@@ -120,7 +134,7 @@ public class Controller implements Initializable {
     @FXML
     private Pane pnlStatsBons2;
     @FXML
-    private Pane pnlStatsBons1;
+    private Pane pnlStatsBons1,pnlStatsExe;
     @FXML
     private Pane pnlNotif;
     @FXML
@@ -186,6 +200,20 @@ public class Controller implements Initializable {
         bonTable1_colObligatoire.setCellValueFactory(cellData -> cellData.getValue().getObligatoireProperty());
         bonTable1_colStatus.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
         bonTable1_colType.setCellValueFactory(cellData -> cellData.getValue().getTypeProperty());
+        colNumBon1.setCellValueFactory(cellData -> cellData.getValue().getNum_bonProperty());
+        colDate1.setCellValueFactory(cellData -> cellData.getValue().getDateProperty());
+        colDemandeur1.setCellValueFactory(cellData -> cellData.getValue().getDemandeurProperty());
+        colObligatoire1.setCellValueFactory(cellData -> cellData.getValue().getObligatoireProperty());
+        colStatus1.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
+        colType1.setCellValueFactory(cellData -> cellData.getValue().getTypeProperty());
+        colNumBonExe.setCellValueFactory(cellData -> cellData.getValue().getNum_bonProperty());
+        colCommissionExe.setCellValueFactory(cellData -> cellData.getValue().getCommissionProperty());
+        colObligatoireExe.setCellValueFactory(cellData -> cellData.getValue().getObligatoireProperty());
+        colTypeExe.setCellValueFactory(cellData -> cellData.getValue().getTypeProperty());
+        colCreatedAtExe.setCellValueFactory(cellData -> cellData.getValue().getCreatedAtProperty());
+        colStatusExe.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
+        colDateExe.setCellValueFactory(cellData -> cellData.getValue().getDateProperty());
+        colDateExe.setCellValueFactory(cellData -> cellData.getValue().getDateProperty());
         ArrayList<SearchNotification> notificationListe = new ArrayList<SearchNotification>();
         Statement st;
         ResultSet rs;
@@ -905,8 +933,13 @@ public class Controller implements Initializable {
         if ((datePickerFrom.getValue() != null) && (datePickerTo.getValue() != null)) {
             BonStats b = new BonStats();
             ObservableList<BonStats.bonStatsRow> bonStatList = b.remp(datePickerFrom.getValue().toString(), datePickerTo.getValue().toString(), "id");
+            ObservableList<BonStats.bonStatsRow> bonStatList1 = b.remp1(datePickerFrom.getValue().toString(), datePickerTo.getValue().toString(), "id");
+            ObservableList<BonStats.bonStatsExeRow> bonStatExeList = b.rempStatsExe(datePickerFrom.getValue().toString(), datePickerTo.getValue().toString(), "id");
             System.out.println(bonStatList.get(0).getDate());
             bonTable1.setItems(bonStatList);
+            bonTable3.setItems(bonStatExeList);
+            System.out.println("ksqdjbfjlqsdbf"+bonStatList1.get(0).getNum_bon());
+            bonTable2.setItems(bonStatList1);
             ArrayList CountPrice = b.remp2(datePickerFrom.getValue().toString(), datePickerTo.getValue().toString());
             int paye = (int) CountPrice.get(0), nonPaye = (int) CountPrice.get(1), verse = (int) CountPrice.get(2), sommeTotale = (int) CountPrice.get(4), sommeExpected = (int) CountPrice.get(3);
             //lbSommeBon.setText("إجمالي القضايا = "+(paye+nonPaye+verse));
@@ -982,9 +1015,9 @@ public class Controller implements Initializable {
                 BonExcuses bon = result.getBonExcusesData();
                 typeArea.setText("تبليغ" + bon.getType() + " المؤشر بتاريخ: " + bon.getDate_marquage());
         }
-        if (result.getService().equals("bon_excuses")) {
-                BonExcuses bon = result.getBonExcusesData();
-                typeArea.setText("تبليغ" + bon.getType() + " المؤشر بتاريخ: " + bon.getDate_marquage());
+        if (result.getService().equals("bon_mandat")) {
+                BonMandat bon = result.getBonMandatData();
+                typeArea.setText("تبليغ مذكرة " + bon.getType() +" رقم : "+bon.getNum_mandat()+ " المسجلة بتاريخ: " + bon.getDate() + " لدى: " + bon.getService());
         }
             if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associationd"))) {
             Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
@@ -1123,6 +1156,11 @@ public class Controller implements Initializable {
         pane.toFront();
         pane.setVisible(true);
     }
+    public void clearContainer(ObservableList<Node> c) {
+        for (Node b:c){
+            b.setVisible(false);
+        }
+    }
 
     public void handleClicks(ActionEvent actionEvent) {
         /** hide all panes */
@@ -1157,7 +1195,7 @@ public class Controller implements Initializable {
         }
         if (actionEvent.getSource() == btnStatsBons1) {
             applyPressedStyle(btnStats);
-
+            clearContainer(StackPaneStats.getChildren());
             pnlStats.setVisible(true);
             pnlStatsBon.toFront();
             pnlStatsBon.setVisible(true);
@@ -1167,7 +1205,7 @@ public class Controller implements Initializable {
         }
         if (actionEvent.getSource() == btnStatsBons2) {
             applyPressedStyle(btnStats);
-
+            clearContainer(StackPaneStats.getChildren());
             pnlStats.setVisible(true);
             pnlStatsBon.toFront();
             pnlStatsBon.setVisible(true);
@@ -1177,7 +1215,7 @@ public class Controller implements Initializable {
         }
         if (actionEvent.getSource() == btnStatsFinance) {
             applyPressedStyle(btnStats);
-
+            clearContainer(StackPaneStats.getChildren());
             pnlStats.setVisible(true);
             pnlStatsFinance.toFront();
             pnlStatsFinance.setVisible(true);
@@ -1186,6 +1224,8 @@ public class Controller implements Initializable {
         }
         if (actionEvent.getSource() == btnStatsExe) {
             applyPressedStyle(btnStats);
+            clearContainer(StackPaneStats.getChildren());
+            pnlStatsExe.setVisible(true);
             pnlStats.setVisible(true);
         }
         if (actionEvent.getSource() == btnEdit) {

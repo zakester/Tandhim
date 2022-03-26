@@ -210,3 +210,16 @@
 	-fx-background-color : #05071F;
 
 }
+.chart-pie-label-line {
+    -fx-stroke: grey;
+    -fx-fill: grey;
+}
+
+.chart-pie-label { /*this is what you need for labels*/
+    -fx-fill: grey;
+    -fx-font-size: 1em;
+} 
+.chart-legend {
+   -fx-background-color: #02030A ;
+   -fx-stroke: #daa520;
+}

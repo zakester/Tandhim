@@ -109,6 +109,79 @@ public class BonStats {
             return new SimpleStringProperty(num_bon);
         }
     }
+    public class bonStatsExeRow {
+
+        private String num_bon, status, type, date, created_at,commission, obligatoire;
+
+        public bonStatsExeRow(String num_bon, String type, String obligatoire, String commission, String created_at,  String status,String date) {
+            this.num_bon = num_bon;
+            this.status = status;
+            this.date = date;
+            this.type = type;
+            this.commission = commission;
+            this.created_at = created_at;
+            this.obligatoire = obligatoire;
+        }
+
+        public String getCommission() {
+            return commission;
+        }
+
+        public StringProperty getObligatoireProperty() {
+            return new SimpleStringProperty(obligatoire);
+        }
+
+        public StringProperty getCommissionProperty() {
+
+            return new SimpleStringProperty(commission);
+        }
+
+        public String getObligatoire() {
+            return obligatoire;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public StringProperty getStatusProperty() {
+            return new SimpleStringProperty(status);
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public StringProperty getDateProperty() {
+            System.out.println(date);
+            String d=date;
+            return new SimpleStringProperty(d);
+        }
+        public String getCreatedAt() {
+            return created_at;
+        }
+
+        public StringProperty getCreatedAtProperty() {
+            String d=created_at.replaceAll(created_at.substring(10), "");
+            return new SimpleStringProperty(d);
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public StringProperty getTypeProperty() {
+            return new SimpleStringProperty(type);
+        }
+
+        public String getNum_bon() {
+            return num_bon;
+        }
+
+        public StringProperty getNum_bonProperty() {
+            return new SimpleStringProperty(num_bon);
+        }
+    }
 
     public ObservableList remp1(String date1, String date2, String order_by1) throws SQLException {
         ObservableList<bonStatsRow> bons = FXCollections.observableArrayList();
@@ -127,13 +200,14 @@ public class BonStats {
                 + "SELECT trim('معاينة'),num_bon,d.nom as dem,trim('////'),b.date_fin,b.status ,b.created_at from  demandeur d, bon_apercus b WHERE num_bon = d.id_bon and b.status='منجزة' union "
                 + "SELECT trim('معاينة بأمر'),num_bon,d.nom as dem,trim('////'),b.date_fin,b.status ,b.created_at from  demandeur d, bon_apercu_parorders b WHERE num_bon = d.id_bon and b.status='منجزة' union "
                 + "SELECT trim('جمعية عامة'),num_bon,d.nom as dem,trim('////'),b.date_fin,b.status ,b.created_at from  demandeur d, bon_associations b WHERE num_bon = d.id_bon and b.status='منجزة'";
-        String Qr1 = "SELECT type,num_bon,dem,nom,date,status from v1 WHERE created_at >= '" + date1 + "' AND created_at <= '" + date2 + "' order by " + order_by1;
+        String Qr1 = "SELECT type,num_bon,dem,nom,date,status from v1 WHERE created_at >= '" + date1 + "' AND created_at <= '" + date2 + "'";
         preparedStmt = bd.prepareStatement(Qr);
         preparedStmt.executeUpdate();
         st1 = bd.createStatement();
         rs1 = st1.executeQuery(Qr1);
         while (rs1.next()) {
-            bonStatsRow b = new bonStatsRow(rs1.getString("num_bon"), rs1.getString("dem"), rs1.getString("o.nom"), rs1.getString("type"), rs1.getString("o.date"), rs1.getString("o.status"));
+            System.out.println("date = "+rs1.getString("date"));
+            bonStatsRow b = new bonStatsRow(rs1.getString("num_bon"), rs1.getString("dem"), rs1.getString("nom"), rs1.getString("type"), rs1.getString("date"), rs1.getString("status"));
             bons.add(b);
         }
 
@@ -164,6 +238,31 @@ public class BonStats {
         rs1 = st1.executeQuery(Qr1);
         while (rs1.next()) {
             bonStatsRow b = new bonStatsRow(rs1.getString("num_bon"), rs1.getString("dem"), rs1.getString("nom"), rs1.getString("type"), rs1.getString("created_at"), rs1.getString("status"));
+            bons.add(b);
+        }
+        bd.close();
+        return bons;
+    }
+     public ObservableList rempStatsExe(String date1, String date2, String order_by2) throws SQLException {
+        ObservableList<bonStatsExeRow> bons = FXCollections.observableArrayList();
+        String Qr = "drop view if exists v2";
+        Connection bd = BDConnection.getConnection();
+        Statement st1, st2, st3;
+        ResultSet rs1, rs2, rs3;
+        PreparedStatement preparedStmt = bd.prepareStatement(Qr);
+        int id = preparedStmt.executeUpdate();
+        Qr = "CREATE VIEW v2 AS SELECT trim('تكليف بالوفاء/ حكم') as type,num_bon,o.nom,o.date,o.status ,b.created_at,b.commission,b.spec from  obligatoire o, bon_provisions b WHERE o.id_bon = num_bon and num_bon in (SELECT id_provision from notification_fidelité) and b.type='حكم' UNION "
+                + "SELECT trim('تكليف بالوفاء/ أمر') as type,num_bon,o.nom,o.date,o.status ,b.created_at,b.commission,b.type as spec from  obligatoire o, bon_orders b WHERE o.id_bon = num_bon and num_bon in (SELECT id_provision from notification_fidelité)  UNION "
+                + "SELECT trim('تكليف بالوفاء/ قرار') as type,num_bon,o.nom,o.date,o.status ,b.created_at,b.commission,b.spec from  obligatoire o, bon_provisions b WHERE o.id_bon = num_bon and num_bon in (SELECT id_provision from notification_fidelité) and b.type='قرار' UNION "
+                + "SELECT trim('تكليف بالوفاء/ عقد') as type,num_bon,o.nom,o.date,o.status,b.created_at,b.nom_notaire as commission,b.type_acte as spec from  obligatoire o, bon_acte b WHERE o.id_bon = num_bon ";
+        String Qr1 = "SELECT type,num_bon,nom,date,status,created_at,commission,spec from v2 WHERE created_at >= '" + date1 + "' AND created_at <= '" + date2 + "' ";
+        preparedStmt = bd.prepareStatement(Qr);
+        preparedStmt.executeUpdate();
+        st1 = bd.createStatement();
+        rs1 = st1.executeQuery(Qr1);
+        while (rs1.next()) {
+            System.out.println("date="+rs1.getString("date"));
+            bonStatsExeRow b = new bonStatsExeRow(rs1.getString("num_bon"), rs1.getString("commission"), rs1.getString("nom"), rs1.getString("type"),rs1.getString("created_at"), rs1.getString("status"),rs1.getString("date"));
             bons.add(b);
         }
         bd.close();

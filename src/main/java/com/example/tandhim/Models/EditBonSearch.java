@@ -42,6 +42,7 @@ public class EditBonSearch {
                 while (rs.next()) {
                     System.out.println(serv[i]);
                     Service = serv[i];
+                    System.out.println("service  ="+Service);
                     break;
                 }
                 if (Service.equals("bon_provisions")||Service.equals("bon_orders")) {
@@ -56,7 +57,6 @@ public class EditBonSearch {
                         } else if (!rs.getString("type").equals("قرار")) {
                             ProvisionsType = "حكم";
                         }
-
                     }
                     }
 
