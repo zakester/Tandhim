@@ -49,11 +49,11 @@ public class CitationController implements Initializable{
     }
 
     public void setDateReport(String dateReport) {
-        if ((dateReport!=null)||(!dateReport.equals("")))  this.dateReport.setValue(LOCAL_DATE(dateReport)); else this.dateReport.setValue(null);   
+        if ((dateReport!=null)&&(!dateReport.equals("")))  this.dateReport.setValue(LOCAL_DATE(dateReport)); else this.dateReport.setValue(null);
     }
 
     public void setDateReport2(String dateReport2) {
-        if ((dateReport2!=null)||(!dateReport2.equals("")))  this.dateReport2.setValue(LOCAL_DATE(dateReport2)); else this.dateReport2.setValue(null);   
+        if ((dateReport2!=null)&&(!dateReport2.equals("")))  this.dateReport2.setValue(LOCAL_DATE(dateReport2)); else this.dateReport2.setValue(null);
     }
 
     public String getDateCitation() {

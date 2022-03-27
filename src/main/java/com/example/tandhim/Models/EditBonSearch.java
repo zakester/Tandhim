@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 public class EditBonSearch {
 
     String id;
-    String Service, ProvisionsType;
+    String Service="", ProvisionsType;
     boolean NotificationFidelité = false;
     Connection bd = BDConnection.getConnection();
 
@@ -31,8 +31,9 @@ public class EditBonSearch {
         Statement st, st1;
         ResultSet rs, rs1;
         String s = "";
-        String[] serv = {"bon_seances", "bon_provisions", "bon_orders", "bon_excuses", "bon_autres", "bon_associations", "bon_apercu_parorders", "bon_apercus", "bon_mandat", "bon_rqst"};
+        String[] serv = {"bon_seances", "bon_provisions", "bon_orders", "bon_excuses", "bon_autres", "bon_associations", "bon_apercu_parorders", "bon_apercus", "bon_mandat", "bon_rqst","bon_acte"};
         for (int i = 0; i < serv.length; i++) {
+            System.out.println(i);
             String q = "SELECT id FROM " + serv[i] + " WHERE num_bon='" + input + "'";
             System.out.println(q);
             try {
@@ -45,6 +46,7 @@ public class EditBonSearch {
                     System.out.println("service  ="+Service);
                     break;
                 }
+
                 if (Service.equals("bon_provisions")||Service.equals("bon_orders")) {
                     if (Service.equals("bon_provisions")){
                     q = "SELECT type FROM bon_provisions WHERE num_bon='" + input + "'";
@@ -72,6 +74,10 @@ public class EditBonSearch {
                 ex.printStackTrace();
             }
         }
+        if (Service.equals("")){
+            JOptionPane op= new JOptionPane();
+            op.showMessageDialog(null,"رقم الوصل غير موجود");
+        }
     }
 
     public BonSeances getBonData() {
@@ -86,6 +92,25 @@ public class EditBonSearch {
                 while (rs.next()) {
                     System.out.println("yes it found it");
                     BonSeances bon = new BonSeances(rs.getString("num_seance"), rs.getString("type"), rs.getString("commission"), rs.getString("date_seance"), rs.getString("date_report"), rs.getString("date_report2"), id, rs.getInt("prix"), rs.getInt("somme"));
+                    return bon;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        return null;
+    }
+    public BonActe getBonActeData() {
+            System.out.println(Service);
+            String query = "SELECT nom_notaire,type_acte,date,prix,num,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
+            Statement st;
+            ResultSet rs;
+            try {
+                st = bd.createStatement();
+                rs = st.executeQuery(query);
+
+                while (rs.next()) {
+                    System.out.println("yes it found it");
+                    BonActe bon = new BonActe(id,rs.getString("num"),rs.getString("nom_notaire"), rs.getString("type_acte"), rs.getString("date"), rs.getInt("prix"), rs.getInt("somme"));
                     return bon;
                 }
             } catch (Exception e) {
@@ -155,7 +180,7 @@ public class EditBonSearch {
     }
     public BonProvisions getBonProvisionsData() {
         System.out.println(Service);
-        String query = "SELECT prix,num_indice,num_table,type,commission,date,spec,somme  FROM bon_seances WHERE num_bon='" + id + "'";
+        String query = "SELECT prix,num_indice,num_table,type,commission,date,spec,somme  FROM bon_provisions WHERE num_bon='" + id + "'";
         Statement st;
         ResultSet rs;
         try {

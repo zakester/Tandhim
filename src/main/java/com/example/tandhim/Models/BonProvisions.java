@@ -56,6 +56,20 @@ public class BonProvisions extends BonNotification {
         return true;
     }
 
+    @Override
+    public String getNum_bon() {
+        return num_bon;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    @Override
+    public int getPrix() {
+        return prix;
+    }
+
     public boolean ArabicChar(String ar) {
         char[] cs = ar.toCharArray();
         String s = "ابتجحخدذرزسشصضطظعغفقكلمنهوي ةىءئؤأآإ";

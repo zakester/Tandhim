@@ -6,8 +6,12 @@
 package com.example.tandhim;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -38,12 +42,29 @@ public class JugementController implements Initializable {
         return comTypeForme.getSelectionModel().getSelectedItem().toString();
     }
 
+    public void setNumTable(String numTable) {
+        this.numTable.setText(numTable);
+    }
+
+    public void setNumIndice(String numIndice) {
+        this.numTable.setText(numIndice);
+    }
+
+    public void setComTypeForme(ObservableList ComTypeForme,int selectedIndex) {
+        this.comTypeForme.getItems().addAll(ComTypeForme);
+        this.comTypeForme.getSelectionModel().select(selectedIndex);
+    }
+
+    public void setDateForme(String dateForme) {
+        this.dateForme.setValue(LOCAL_DATE(dateForme));
+    }
+
     @FXML
     private TextField numTable;
 
     @FXML
     private TextField numIndice;
-    
+
     @FXML
     public HBox hboxTypeJugement;
     @FXML
@@ -58,9 +79,16 @@ public class JugementController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
     public void setComTypeForme(String s) {
         comTypeForme.getItems().addAll(s);
         comTypeForme.getSelectionModel().selectFirst();
         comTypeForme.setEditable(false);
+    }
+
+    public static final LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
     }
 }

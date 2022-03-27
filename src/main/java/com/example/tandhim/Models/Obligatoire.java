@@ -5,6 +5,9 @@
  */
 package com.example.tandhim.Models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +33,24 @@ public class Obligatoire {
         this.en_suspens = en_suspens;
         this.status = status;
         this.date = date;
+    }
+    public int getObligatoireId() {
+        Connection bd = BDConnection.getConnection();
+        Statement st;
+        ResultSet rs;
+        String q1 = "SELECT id FROM obligatoire WHERE nom='" + nom + "' AND addr='" + addr + "' AND id_bon='" + id_bon + "'";
+        int id = 0;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(q1);
+            while (rs.next()) {
+                id = rs.getInt("id");
+                return id;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     public void insert() {
@@ -101,7 +122,7 @@ public class Obligatoire {
         return false;
     }
 
-    public boolean delete_susp() {
+    public boolean deleteLetter() {
         try {
             Connection bd = BDConnection.getConnection();
             Statement st;
@@ -114,7 +135,7 @@ public class Obligatoire {
                 id = rs.getInt("id");
             }
             System.out.println("id =" + id);
-            String query = "DELETE FROM suspension WHERE id_obligatoire=" + id;
+            String query = "DELETE FROM letter WHERE id_obligatoire=" + id;
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int idn = preparedStmt.executeUpdate();
             if (idn >= 1) {
@@ -159,7 +180,16 @@ public class Obligatoire {
             return status;
         }
     }
-
+    public void updateObligatoire () {
+        Connection bd = BDConnection.getConnection();
+        String query2 = "UPDATE obligatoire SET nom='"+getNom()+"', id_bon='"+getId_bon()+"', addr='"+getAddr()+"', status='"+getStatus()+"', date='"+getDate()+"' WHERE id="+getObligatoireId();
+        try {
+            PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
+            preparedStmt2.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Demandeur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void setStatus(String status) {
         this.status = status;
     }
@@ -183,7 +213,34 @@ public class Obligatoire {
     public String toString() {
         return nom + " العنوان: " + addr;
     }
-
+    public void addLetter (String numLetter,String date,String typePV) {
+        Letter letter= new Letter(id_bon,typePV,numLetter,date,getObligatoireId(),0);
+        letter.insert();
+    }
+    public ObservableList<Letter> getLetter(){
+        ObservableList<Letter> letter = FXCollections.observableArrayList();
+        try {
+            Connection bd = BDConnection.getConnection();
+            Statement st;
+            ResultSet rs;
+            String q1 = "SELECT type_rapport,num_lettre,date_lettre,id_obligatoire,publier FROM letter WHERE id_rapport='" + id_bon + "' and id_obligatoire'"+getObligatoireId()+"'";
+            int id = 0;
+            st = bd.createStatement();
+            rs = st.executeQuery(q1);
+            while (rs.next()) {
+                Letter l =new Letter(id_bon,rs.getString("num_lettre"),rs.getString("date_lettre"),rs.getString("type_rapport"),rs.getInt("id_obligatoire"),rs.getInt("publier"));
+                letter.add(l);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Obligatoire.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return letter;
+    }
+    public void publish () {
+        for (Letter l:this.getLetter()){
+            l.publish();
+        }
+    }
     public String OblStatus() {
         if (status == null || status.equals("")) {
             return "الإجراء الخاص بالمطلوب لم ينجز بعد";
@@ -192,7 +249,7 @@ public class Obligatoire {
                 Connection bd = BDConnection.getConnection();
                 Statement st;
                 ResultSet rs;
-                String q1 = "SELECT type_rapport,num_lettre,date_lettre,publier FROM suspension WHERE id_rapport='" + id_bon + "'";
+                String q1 = "SELECT type_rapport,num_lettre,date_lettre,publier FROM letter WHERE id_rapport='" + id_bon + "' and id_obligatoire='"+getObligatoireId()+"'";
                 int id = 0;
                 st = bd.createStatement();
                 rs = st.executeQuery(q1);
@@ -203,7 +260,7 @@ public class Obligatoire {
             } catch (SQLException ex) {
                 Logger.getLogger(Obligatoire.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (status.equals("منجزة") || status.equals("ملغاة")) {
+        } else if (status.equals("تم التبليغ") || status.equals("ملغاة") || status.equals("تم إشعاره(ا)")) {
             return status + " بتاريخ: " + date;
         }
         return "";

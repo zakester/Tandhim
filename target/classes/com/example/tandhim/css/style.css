@@ -66,6 +66,7 @@
 
 .combo-status {
     -fx-border-color: transparent !important ; /*linear-gradient(to right,#f5f5f5,#02030A, #02030A);*/
+    -fx-background-radius:2em;
 }
 .hbox-status {
     -fx-background-color:  transparent;
@@ -209,4 +210,17 @@
 .optionbar {
 	-fx-background-color : #05071F;
 
+}
+.chart-pie-label-line {
+    -fx-stroke: grey;
+    -fx-fill: grey;
+}
+
+.chart-pie-label { /*this is what you need for labels*/
+    -fx-fill: grey;
+    -fx-font-size: 1em;
+} 
+.chart-legend {
+   -fx-background-color: #02030A ;
+   -fx-stroke: #daa520;
 }

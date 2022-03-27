@@ -338,7 +338,7 @@
                </ScrollPane>
             </children>
          </Pane>
-         <Pane fx:id="pnlStats" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <Pane fx:id="pnlStats" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
             <children>
                <HBox layoutX="37.0" layoutY="83.0" prefHeight="76.0" prefWidth="720.0" spacing="5.0">
                   <children>
@@ -502,7 +502,7 @@
                </Label>
             </children>
          </Pane>
-         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
             <children>
                <Pane layoutX="37.0" layoutY="120.0" prefHeight="414.0" prefWidth="720.0">
                   <children>
@@ -511,8 +511,12 @@
                            <ComboBox fx:id="EditComObligList" onAction="#UpdateStatus" prefHeight="37.0" prefWidth="388.0" promptText="قائمة المطلوبين" stylesheets="@css/style.css" />
                            <HBox prefHeight="37.0" prefWidth="311.0" styleClass="hbox-status" stylesheets="@css/style.css">
                               <children>
-                                 <ComboBox fx:id="comStatus" disable="true" prefHeight="37.0" prefWidth="298.0" promptText="الحالة" styleClass="combo-status" stylesheets="@css/style.css" />
-                                 <Button fx:id="btnEnableEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#EnableEdit" prefHeight="37.0" prefWidth="43.0" stylesheets="@css/style%201.css">
+                                 <TextField fx:id="editBonStatus" editable="false" prefHeight="37.0" prefWidth="284.0" promptText="الحالة" styleClass="combo-status" stylesheets="@css/style.css">
+                                    <font>
+                                       <Font size="16.0" />
+                                    </font>
+                                 </TextField>
+                                 <Button fx:id="btnEnableEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#EnableEdit" prefHeight="37.0" prefWidth="44.0" stylesheets="@css/style%201.css">
                                     <graphic>
                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                           <image>
@@ -550,7 +554,7 @@
                      <Font name="Times New Roman" size="33.0" />
                   </font>
                </Label>
-               <TextField fx:id="editNumBon" layoutX="468.0" layoutY="37.0" prefHeight="23.0" prefWidth="225.0" promptText="رقم الوصل" stylesheets="@css/style.css">
+               <TextField fx:id="editNumBon" layoutX="468.0" layoutY="37.0" onKeyPressed="#okPressed" prefHeight="23.0" prefWidth="225.0" promptText="رقم الوصل" stylesheets="@css/style.css">
                   <font>
                      <Font size="16.0" />
                   </font>

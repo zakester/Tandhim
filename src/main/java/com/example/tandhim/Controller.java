@@ -18,6 +18,8 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -29,6 +31,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +47,7 @@ public class Controller implements Initializable {
     OrdersController OrderCtrl = null;
     FormeJudiciereController FormeJudiciereCtrl = null;
     ActeController ActeCtrl = null;
+    boolean searchResultExist;
     String bonType = null;
     int hov = 0;
     @FXML
@@ -51,7 +55,7 @@ public class Controller implements Initializable {
     @FXML
     private VBox vboxFormePrincipale;
     @FXML
-    private ComboBox Type, demList, obligList, comCommission, comType, EditComObligList, comStatus;
+    private ComboBox Type, demList, obligList, comCommission, comType, EditComObligList;
     @FXML
     private TextArea typeArea, statusArea;
     @FXML
@@ -98,7 +102,7 @@ public class Controller implements Initializable {
     @FXML
     private TextField demandeur, nomDem, adrDem, nomOblig, adrOblig, comNomCommission, num_bon, taxe_fixe, taxe_supp, prix, numCitation, editNumBon;
     @FXML
-    private TextField obligatoire;
+    private TextField obligatoire,editBonStatus;
     @FXML
     private TextField numBon;
 
@@ -959,107 +963,105 @@ public class Controller implements Initializable {
     }
 
     public void EditSearch() {
+        //clearText(pnlEdit.getChildren());
+
         ClearEditInterface();
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
-        if (result.getObligatoireList() != null) {
-            for (Obligatoire obl : result.getObligatoireList()) {
-                String s = obl.getNom() + " العنوان : " + obl.getAddr();
-                EditComObligList.getItems().add(s);
-                EditComObligList.getSelectionModel().selectFirst();
-            }
-        } else {
-            for (Demandeur dem : result.getDemandeurList()) {
-                String s = dem.getNom() + " العنوان : " + dem.getAddr();
-                EditComObligList.getItems().add(s);
-                EditComObligList.getSelectionModel().selectFirst();
-            }
-            EditComObligList.setPromptText("قائمة الطالبين");
-        }
-        if (result.getService().equals("bon_seances")) {
-            System.out.println(result.getBonData());
-            BonSeances bon = result.getBonData();
-            System.out.println(bon);
-            if (bon.getDate_report().equals("")) {
-                typeArea.setText("تكليف بالحضور لجلسة يوم " + bon.getDate_seance() + " رقم: " + bon.getNum_seance() + " والتي ستعقد أمام: " + bon.getCommission());
-            } else if (bon.getDate_report2().equals("")) {
-                typeArea.setText("تكليف بالحضور لجلسة يوم " + bon.getDate_seance() + " والمؤجلة ليوم: " + bon.getDate_report() + " رقم: " + bon.getNum_seance() + " والتي ستعقد أمام: " + bon.getCommission());
+        if (!result.getService().equals("")){
+            searchResultExist=true;
+            if (result.getObligatoireList() != null) {
+                for (Obligatoire obl : result.getObligatoireList()) {
+                    String s = obl.getNom() + " العنوان : " + obl.getAddr();
+                    EditComObligList.getItems().add(s);
+                    EditComObligList.getSelectionModel().selectFirst();
+                }
             } else {
-                typeArea.setText("تكليف بالحضور لجلسة يوم " + bon.getDate_seance() + " والمؤجلة ليوم: " + bon.getDate_report() + " والمؤجلة ليوم: " + bon.getDate_report2() + " رقم: " + bon.getNum_seance() + " والتي ستعقد أمام: " + bon.getCommission());
+                for (Demandeur dem : result.getDemandeurList()) {
+                    String s = dem.getNom() + " العنوان : " + dem.getAddr();
+                    EditComObligList.getItems().add(s);
+                    EditComObligList.getSelectionModel().selectFirst();
+                }
+                EditComObligList.setPromptText("قائمة الطالبين");
             }
-        }
-        if (result.getService().equals("bon_orders")) {
-            if (result.isNotificationFidelité()){
-                BonOrders bon = result.getBonOrdersData();
-                NotificationFidelite notif = result.getNotificationFidelité();
-                typeArea.setText("تكليف بالوفاء بموجب : "+ bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate_order()+" والممهور بالصيغة التنفيذية رقم : "+notif.getNum()+" الصادرة بتاريخ : " +notif.getDate());
-            } else {
-            System.out.println(result.getBonData());
-            BonOrders bon = result.getBonOrdersData();
-            System.out.println(bon);
-            typeArea.setText("تبليغ " + bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate_order());
+            if (result.getService().equals("bon_seances")) {
+                System.out.println(result.getBonData());
+                BonSeances bon = result.getBonData();
+                System.out.println(bon);
+                if (bon.getDate_report().equals("")) {
+                    typeArea.setText("تكليف بالحضور لجلسة يوم " + bon.getDate_seance() + " رقم: " + bon.getNum_seance() + " والتي ستعقد أمام: " + bon.getCommission());
+                } else if (bon.getDate_report2().equals("")) {
+                    typeArea.setText("تكليف بالحضور لجلسة يوم " + bon.getDate_seance() + " والمؤجلة ليوم: " + bon.getDate_report() + " رقم: " + bon.getNum_seance() + " والتي ستعقد أمام: " + bon.getCommission());
+                } else {
+                    typeArea.setText("تكليف بالحضور لجلسة يوم " + bon.getDate_seance() + " والمؤجلة ليوم: " + bon.getDate_report() + " والمؤجلة ليوم: " + bon.getDate_report2() + " رقم: " + bon.getNum_seance() + " والتي ستعقد أمام: " + bon.getCommission());
+                }
             }
-        }
-        if (result.getService().equals("bon_provisions")) {
-            if (result.isNotificationFidelité()){
-                BonProvisions bon = result.getBonProvisionsData();
-                NotificationFidelite notif = result.getNotificationFidelité();
-                typeArea.setText("تكليف بالوفاء بموجب : "+ bon.getType() + " رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table() + " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate()+" والممهور بالصيغة التنفيذية رقم : "+notif.getNum()+" الصادرة بتاريخ : " +notif.getDate());
-            } else {
-            System.out.println(result.getBonData());
-            BonProvisions bon = result.getBonProvisionsData();
-            System.out.println(bon);
-            typeArea.setText("تبليغ " + bon.getType() +" رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table()+ " الصادر عن: " + bon.getCommission()+" بتاريخ: "+bon.getDate());
+            if (result.getService().equals("bon_orders")) {
+                if (result.isNotificationFidelité()) {
+                    BonOrders bon = result.getBonOrdersData();
+                    NotificationFidelite notif = result.getNotificationFidelité();
+                    typeArea.setText("تكليف بالوفاء بموجب : " + bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission() + " بتاريخ: " + bon.getDate_order() + " والممهور بالصيغة التنفيذية رقم : " + notif.getNum() + " الصادرة بتاريخ : " + notif.getDate());
+                } else {
+                    System.out.println(result.getBonData());
+                    BonOrders bon = result.getBonOrdersData();
+                    System.out.println(bon);
+                    typeArea.setText("تبليغ " + bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission() + " بتاريخ: " + bon.getDate_order());
+                }
             }
-        }
-        if (result.getService().equals("bon_excuses")) {
+            if (result.getService().equals("bon_provisions")) {
+                if (result.isNotificationFidelité()) {
+                    BonProvisions bon = result.getBonProvisionsData();
+                    NotificationFidelite notif = result.getNotificationFidelité();
+                    System.out.println(notif);
+                    typeArea.setText("تكليف بالوفاء بموجب : " + bon.getType() + " رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table() + " الصادر عن: " + bon.getCommission() + " بتاريخ: " + bon.getDate() + " والممهور بالصيغة التنفيذية رقم : " + notif.getNum() + " الصادرة بتاريخ : " + notif.getDate());
+                } else {
+                    System.out.println(result.getBonData());
+                    BonProvisions bon = result.getBonProvisionsData();
+                    System.out.println(bon);
+                    typeArea.setText("تبليغ " + bon.getType() + " رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table() + " الصادر عن: " + bon.getCommission() + " بتاريخ: " + bon.getDate());
+                }
+            }
+            if (result.getService().equals("bon_excuses")) {
                 BonExcuses bon = result.getBonExcusesData();
                 typeArea.setText("تبليغ" + bon.getType() + " المؤشر بتاريخ: " + bon.getDate_marquage());
-        }
-        if (result.getService().equals("bon_mandat")) {
+            }
+            if (result.getService().equals("bon_mandat")) {
                 BonMandat bon = result.getBonMandatData();
-                typeArea.setText("تبليغ مذكرة " + bon.getType() +" رقم : "+bon.getNum_mandat()+ " المسجلة بتاريخ: " + bon.getDate() + " لدى: " + bon.getService());
-        }
+                typeArea.setText("تبليغ مذكرة " + bon.getType() + " رقم : " + bon.getNum_mandat() + " المسجلة بتاريخ: " + bon.getDate() + " لدى: " + bon.getService());
+            }
             if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associationd"))) {
-            Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
-            comStatus.getItems().clear();
-            comStatus.getItems().addAll("غير منجرة", "تم إرسال رسالة", "منجرة", "ملغاة");
-            comStatus.getSelectionModel().select(obl.getStatus());
-            statusArea.setText(obl.OblStatus());
-            comStatus.valueProperty().addListener(new ChangeListener<String>() {
-                @Override
-                public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                    if ((newValue != null) || (!newValue.equals(oldValue))) {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
-                        try {
-                            Parent p = (Parent) loader.load();
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                            DialogPane dialogPane = alert.getDialogPane();
-                            dialogPane.getStylesheets().add(
-                                    getClass().getResource("css/style.css").toExternalForm());
-                            dialogPane.getStyleClass().add("dialog-pane");
+                Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
+                editBonStatus.setText(obl.getStatus());
+                statusArea.setText(obl.OblStatus());
 
-                            dialogPane.setContent(p);
-                            alert.setTitle("خطأ في الإدخال");
-                            alert.setContentText(
-                                    "اسم الهيئة خاطئ");
-                            alert.showAndWait();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-            });
+            }
         }
     }
-
+    public void okPressed (KeyEvent key) {
+        if (key.getCode().equals(KeyCode.ENTER)) {
+            EditSearch();
+        }
+    }
+    public void clearText(ObservableList<Node> c){
+        for (Node n:c){
+            if (n instanceof TextField) {
+                ((TextField) n).clear();
+            }
+            if (n instanceof ComboBox) {
+                ((ComboBox) n).getItems().removeAll();
+            }
+            if (n instanceof TextArea) {
+                ((TextArea) n).clear();
+            }
+            if (n instanceof DatePicker) {
+                ((DatePicker) n).getEditor().clear();
+            }
+        }
+    }
 
     public void UpdateStatus() {
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
         Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
-        comStatus.getItems().clear();
-        comStatus.getItems().addAll("غير منجزة", "تم إرسال رسالة", "منجرة", "ملغاة");
-        comStatus.getSelectionModel().select(obl.getStatus());
+        editBonStatus.setText(obl.getStatus());
         statusArea.setText(obl.OblStatus());
     }
     public void ChangeStatus() {
@@ -1094,14 +1096,36 @@ public class Controller implements Initializable {
 
     public void FillEditBon() {
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
-        BonSeances bon = result.getBonData();
-        ActionEvent e = new ActionEvent(btnCitation, null);
-        try {
-            addBonInterface(e);
-        } catch (IOException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        ActionEvent e = null;
+        if (result.getService().equals("bon_seances"))
+        {
+            ActionEvent actionEvent = new ActionEvent(btnCitation, null);
+            e=actionEvent;
+            try {
+                addBonInterface(e);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            fillBonSceance(result);
         }
+        if (result.getService().equals("bon_provisions") && result.isNotificationFidelité())
+        {
+            e = new ActionEvent(btnFormeJudiciere, null);
+            try {
+                addBonInterface(e);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            fillBonProvisionExe(result);
+
+        }
+
+
+
+    }
+    public void fillBonSceance(EditBonSearch result) {
         ClearAddInterface();
+        BonSeances bon =result.getBonData();
         num_bon.setText(bon.getNum_bon());
         CitationCtrl.setNumCitation(bon.getNum_seance());
         obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
@@ -1110,12 +1134,37 @@ public class Controller implements Initializable {
         ComCtrl.setComType(bon.getType());
         CitationCtrl.setDateCitation(bon.getDate_seance());
         CitationCtrl.setDateReport(bon.getDate_report());
+        CitationCtrl.setDateReport2(bon.getDate_report2());
+        prix.setText("2000");
+        taxe_supp.setText("0");
+        taxe_fixe.setText("3000");
+    }
+    public void fillBonProvisionExe(EditBonSearch result) {
+        ClearAddInterface();
+        BonProvisions bon =result.getBonProvisionsData();
+        num_bon.setText(bon.getNum_bon());
+        System.out.println("there is notif here"+result.getNotificationFidelité().getNum());
+        System.out.println("there is ctrl here"+FormeJudiciereCtrl);
+        FormeJudiciereCtrl.setNumFomeExe(result.getNotificationFidelité().getNum());
+        FormeJudiciereCtrl.setDateFomeExe(result.getNotificationFidelité().getDate());
+        FormeJudiciereCtrl.setTypeFormeExe(bon.getType());
+        JugementCtrl.setNumTable(bon.getNum_table());
+        JugementCtrl.setDateForme(bon.getDate());
+        JugementCtrl.setNumIndice(bon.getNum_indice());
+        JugementCtrl.vboxJugement.getChildren().remove(JugementCtrl.hboxTypeJugement);
+        ComCtrl.setCom_NomCommission(bon.getCommission());
+        ComCtrl.setComType(bon.getSpec());
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        ComCtrl.setCom_NomCommission(bon.getCommission());
+        ComCtrl.setComType(bon.getType());
+       //CitationCtrl.setDateCitation(bon.getDate_seance());
+        //CitationCtrl.setDateReport(bon.getDate_report());
         //CitationCtrl.setDateReport2(bon.getDate_report2());
         prix.setText("2000");
         taxe_supp.setText("0");
         taxe_fixe.setText("3000");
     }
-
     public void PrintBon() {
         int somme = Numeric(taxe_fixe.getText()) + Numeric(taxe_supp.getText());
         int prix = Numeric(this.prix.getText());
@@ -1124,13 +1173,36 @@ public class Controller implements Initializable {
 
     }
     public void EnableEdit(){
-        comStatus.setDisable(false);
+    if (searchResultExist) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
+        try {
+            Parent p = (Parent) loader.load();
+            EditDialogueController ctrl = loader.getController();
+            System.out.println("num="+editNumBon.getText());
+            if (typeArea.getText().contains("بالوفاء"))
+            ctrl.setStatus(editNumBon.getText(), editBonStatus.getText(), true,EditComObligList.getSelectionModel().getSelectedIndex());
+            else ctrl.setStatus(editNumBon.getText(), editBonStatus.getText(), false,EditComObligList.getSelectionModel().getSelectedIndex());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("css/style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            dialogPane.setContent(p);
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "اسم الهيئة خاطئ");
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     }
     public void ClearEditInterface() {
-        comStatus.getItems().clear();
-        EditComObligList.getItems().clear();
+        searchResultExist=false;
+        EditComObligList.getItems().removeAll(EditComObligList.getItems());
         statusArea.clear();
         typeArea.clear();
+        editBonStatus.clear();
         //editNumBon.clear();
         editBtnCreatePV.setDisable(true);
         //ُEditComObligList.setPromptText("قائمة المطلوبين");
@@ -1229,6 +1301,8 @@ public class Controller implements Initializable {
             pnlStats.setVisible(true);
         }
         if (actionEvent.getSource() == btnEdit) {
+            ClearEditInterface();
+            searchResultExist = false;
             applyPressedStyle(btnEdit);
             showSelectedPane(pnlEdit);
         }

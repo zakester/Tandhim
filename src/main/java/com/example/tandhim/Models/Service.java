@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class Service {
 
     public String getService(String table, String id_bon) throws SQLException {
-        if (table.equals("bon_provisions")) {
+        if (table.equals("bon_provisions")||table.equals("bon_orders")) {
             try {
                 Connection bd = BDConnection.getConnection();
                 Statement st;
@@ -33,13 +33,15 @@ public class Service {
                 }
                 
                 if (id == 0) {
-                    q1 = "SELECT type FROM bon_provisions WHERE num_bon='" + id_bon + "' ";
-                    st = bd.createStatement();
-                    rs = st.executeQuery(q1);
-                    System.out.println(q1);
-                    while (rs.next()) {
-                        System.out.println("Models.Service.getService()");
-                        return "تبليغ "+rs.getString("type");
+                    if (table.equals("bon_provisions")) {
+                        q1 = "SELECT type FROM bon_provisions WHERE num_bon='" + id_bon + "' ";
+                        st = bd.createStatement();
+                        rs = st.executeQuery(q1);
+                        System.out.println(q1);
+                        while (rs.next()) {
+                            System.out.println("Models.Service.getService()");
+                            return "تبليغ " + rs.getString("type");
+                        }
                     }
                 } else return "تكليف بالوفاء";
             } catch (SQLException ex) {
@@ -51,6 +53,7 @@ public class Service {
         if (table.equals("bon_mandat")) return "تبليغ مذكرة";
         if (table.equals("bon_rqst")) return "تبليغ عريضة";
         if (table.equals("bon_orders")) return "تبليغ أمر";
+        if (table.equals("bon_acte")) return "تكليف بالوفاء";
         if (table.equals("bon_apercus")) return "معاينة";
         if (table.equals("bon_apercu_parorders")) return "معاينة بأمر";
         if (table.equals("bon_associations")) return "حضور جمعية عامة";

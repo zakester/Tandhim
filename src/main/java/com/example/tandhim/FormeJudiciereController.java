@@ -6,6 +6,8 @@
 package com.example.tandhim;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,6 +45,19 @@ public class FormeJudiciereController implements Initializable {
     public void setTypeFormeExe(String s) {
         typeFormeExe.getSelectionModel().select(s);
     }
+    public void setDateFomeExe(String s) {
+        dateFomeExe.setValue(LOCAL_DATE(s));
+    }
+    public void setNumFomeExe(String s) {
+        numFormeExe.setText(s);
+    }
+
+    public void setTypeFormeExe(ComboBox<String> typeFormeExe) {
+        this.typeFormeExe = typeFormeExe;
+    }
+    public void setTypeFormeExeChanged(String type) {
+        typeFormeExe.getSelectionModel().select(type);
+    }
     @FXML
     private DatePicker dateFomeExe;
     
@@ -57,6 +72,11 @@ public class FormeJudiciereController implements Initializable {
 
     public void typeFormeExeItemChanged() throws IOException {
         ctrl.typeFormeExeItemChanged1(typeFormeExe.getSelectionModel().getSelectedItem());
+    }
+    public static final LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
     }
     
 }
