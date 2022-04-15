@@ -1181,7 +1181,7 @@ public class Controller implements Initializable {
             }
             if (result.getService().equals("bon_excuses")) {
                 BonExcuses bon = result.getBonExcusesData();
-                typeArea.setText("تبليغ" + bon.getType() + " المؤشر بتاريخ: " + bon.getDate_marquage());
+                typeArea.setText("تبليغ " + bon.getType() + " المؤشر بتاريخ: " + bon.getDate_marquage());
             }
             if (result.getService().equals("bon_mandat")) {
                 BonMandat bon = result.getBonMandatData();
