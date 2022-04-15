@@ -21,17 +21,6 @@ public class NotificationFidelite {
 
     /**
      *
-     * @param num
-     * @param date
-     * @param num_indice
-     * @param num_table
-     * @param date
-     * @param commission
-     * @param type
-     * @param spec
-     * @param num_bon
-     * @param prix
-     * @param somme
      */
     public NotificationFidelite(String num, String date1, String num_bon) {
         this.num = num;
@@ -57,11 +46,10 @@ public class NotificationFidelite {
     public void update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE `notification_fidelité` SET id_provision= ?, num= ?, date = ?";
+            String query = "UPDATE `notification_fidelité` SET  num= ?, date = ? WHERE id_provision='"+num_bon+"'";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
-            preparedStmt.setString(1, num_bon);
-            preparedStmt.setString(2, num);
-            preparedStmt.setString(3, date);
+            preparedStmt.setString(1, num);
+            preparedStmt.setString(2, date);
             preparedStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(NotificationFidelite.class.getName()).log(Level.SEVERE, null, ex);

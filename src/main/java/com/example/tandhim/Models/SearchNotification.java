@@ -72,7 +72,7 @@ public class SearchNotification {
     }
     
     public static String SearchQuery(){
-        String query="SELECT num_bon,trim('لم تبلغ بعد') as type,trim('تبليغ جلسة') as type_service, nom  FROM `bon_seances` JOIN obligatoire ON id_bon=num_bon WHERE date_seance<= date_add(curdate(),interval 2 day) AND  date_seance>= curdate() UNION SELECT id_bon AS num_bon,trim('انتهاء الأجل القانوني') as type,trim('تكليف بالوفاء'),nom as type_service FROM obligatoire o JOIN notification_fidelité n ON id_bon=id_provision WHERE o.id NOT IN (SELECT id_oblig FROM action) AND o.status='منجزة' AND o.date <= date_add(curdate(),interval -17 day)";
+        String query="SELECT num_bon,trim('لم تبلغ بعد') as type,trim('تبليغ جلسة') as type_service, nom  FROM `bon_seances` JOIN obligatoire ON id_bon=num_bon WHERE date_seance<= date_add(curdate(),interval 2 day) AND  date_seance>= curdate() UNION SELECT id_bon AS num_bon,trim('انتهاء الأجل القانوني') as type,trim('تكليف بالوفاء'),nom as type_service FROM obligatoire o JOIN notification_fidelité n ON id_bon=id_provision WHERE o.id NOT IN (SELECT id_oblig FROM action) AND o.status='تم التبليغ' AND o.date <= date_add(curdate(),interval -17 day)";
         return query;
     }
     

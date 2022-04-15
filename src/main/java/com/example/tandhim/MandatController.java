@@ -7,6 +7,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class MandatController implements Initializable {
@@ -41,5 +43,26 @@ public class MandatController implements Initializable {
 
     public String getTypeMandat() {
         return typeMandat.getSelectionModel().getSelectedItem();
+    }
+
+    public void setNumMandat(String numMandat) {
+        this.numMandat.setText(numMandat);
+    }
+
+    public void setDateMandat(String dateMandat) {
+        this.dateMandat.setValue(LOCAL_DATE(dateMandat));
+    }
+
+    public void setService(String service) {
+        Service.setText(service);
+    }
+
+    public void setTypeMandat(String typeMandat) {
+        this.typeMandat.getSelectionModel().select(typeMandat);
+    }
+    public static final LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
     }
 }

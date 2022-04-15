@@ -141,6 +141,7 @@ public class EditBonSearch {
     public BonMandat getBonMandatData() {
         System.out.println(Service);
         String query = "SELECT prix,num_mandat,type,commission,date,service,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
+        System.out.println(query);
         Statement st;
         ResultSet rs;
         try {
@@ -200,7 +201,7 @@ public class EditBonSearch {
     }
     public BonExcuses getBonExcusesData() {
         System.out.println(Service);
-        String query = "SELECT prix,type,date_marquage,somme  FROM bon_seances WHERE num_bon='" + id + "'";
+        String query = "SELECT prix,type,date_marquage,somme  FROM bon_excuses WHERE num_bon='" + id + "'";
         Statement st;
         ResultSet rs;
         try {
@@ -220,7 +221,7 @@ public class EditBonSearch {
     }
     public BonActe getBonActData() {
         System.out.println(Service);
-        String query = "SELECT prix,type_acte,date_acte,nom_notaire,num,somme  FROM bon_seances WHERE num_bon='" + id + "'";
+        String query = "SELECT prix,type_acte,date_acte,nom_notaire,num,somme  FROM bon_acte WHERE num_bon='" + id + "'";
         Statement st;
         ResultSet rs;
         try {
@@ -230,6 +231,73 @@ public class EditBonSearch {
             while (rs.next()) {
                 System.out.println("yes it found it");
                 BonActe bon = new BonActe(id,rs.getString("num"),rs.getString("nom_notaire"),rs.getString("type_acte"),rs.getString("date_acte"),rs.getInt("prix"),rs.getInt("somme"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public BonApercus getBonApercuData() {
+        System.out.println(Service);
+        String query = "SELECT prix,status,date_fin,somme  FROM bon_apercus WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonApercus bon = new BonApercus(id,rs.getInt("prix"),rs.getInt("somme"));
+                bon.setStatus(rs.getString("status"));
+                bon.setDate_fin(rs.getString("date_fin"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public BonAssociations getBonAssociation() {
+        System.out.println(Service);
+        String query = "SELECT prix,status,date_fin,somme  FROM bon_associations WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonAssociations bon = new BonAssociations(id,rs.getInt("prix"),rs.getInt("somme"));
+                bon.setStatus(rs.getString("status"));
+                bon.setDate_fin(rs.getString("date_fin"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public BonApercuParOrders getBonApercuParOrdersData() {
+        System.out.println(Service);
+        String query = "SELECT prix,status,date_fin,somme,num_order,date_order,commission  FROM bon_apercu_parorders WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonApercuParOrders bon = new BonApercuParOrders(rs.getString("num_order"),rs.getString("commission"),rs.getString("date_order"),id,rs.getInt("prix"),rs.getInt("somme"));
+                bon.setStatus(rs.getString("status"));
+                bon.setDate_fin(rs.getString("date_fin"));
                 return bon;
             }
         } catch (Exception e) {

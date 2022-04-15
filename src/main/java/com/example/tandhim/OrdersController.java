@@ -6,6 +6,8 @@
 package com.example.tandhim;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,7 +33,7 @@ public class OrdersController implements Initializable{
     public HBox hboxTypeOrder;
 
     @FXML
-    private ComboBox<String> comTypeOrder;
+    public ComboBox<String> comTypeOrder;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,6 +44,18 @@ public class OrdersController implements Initializable{
         return numOrder.getText();
     }
 
+    public void setNumOrder(String numOrder) {
+        this.numOrder.setText(numOrder);
+    }
+
+    public void setDateOrder(String dateOrder) {
+        this.dateOrder.setValue(LOCAL_DATE(dateOrder));
+    }
+
+    public void setComTypeOrder(String comTypeOrder) {
+        this.comTypeOrder.getSelectionModel().select(comTypeOrder);
+    }
+
     public String getDateOrder() {
         return dateOrder.getValue().toString();
     }
@@ -49,4 +63,10 @@ public class OrdersController implements Initializable{
     public String getComTypeOrder() {
         return comTypeOrder.getSelectionModel().getSelectedItem().toString();
     }
+    public static final LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
+    }
 }
+

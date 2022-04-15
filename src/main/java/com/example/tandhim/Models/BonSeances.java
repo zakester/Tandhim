@@ -74,8 +74,11 @@ public class BonSeances extends BonNotification {
     public boolean insert() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`, `date_report`, `date_report2`, `somme`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-            String sDate = date_seance;
+            String query ="";
+            if (date_report!=null && date_report2!=null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`,  `somme`,`date_report`, `date_report2`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            if (date_report!=null && date_report2==null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`, `somme`, `date_report`) VALUES (?,?,?,?,?,?,?,?,?)";
+            if (date_report==null && date_report2==null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`, `somme`) VALUES (?,?,?,?,?,?,?,?)";
+            String sDate1,sDate = date_seance;
             java.sql.Date date1 = java.sql.Date.valueOf(sDate);
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             preparedStmt.setString(1, num_bon);
@@ -85,14 +88,19 @@ public class BonSeances extends BonNotification {
             preparedStmt.setString(5, type);
             preparedStmt.setString(6, commission);
             preparedStmt.setDate(7, date1);
+            preparedStmt.setInt(8, somme);
             sDate = date_report;
-            date1 = java.sql.Date.valueOf(sDate);
-            preparedStmt.setDate(8, date1);
-            sDate = date_report2;
-            date1 = java.sql.Date.valueOf(sDate);
-            preparedStmt.setDate(9, date1);
-            preparedStmt.setInt(10, somme);
-
+            sDate1 = date_report2;
+            if (date_report!=null && date_report2!=null) {
+                date1 = java.sql.Date.valueOf(sDate);
+                preparedStmt.setDate(8, date1);
+                date1 = java.sql.Date.valueOf(sDate1);
+                preparedStmt.setDate(9, date1);
+            }
+            if (date_report!=null && date_report2==null){
+                date1 = java.sql.Date.valueOf(sDate);
+                preparedStmt.setDate(8, date1);
+            }
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {
                 return true;
@@ -104,17 +112,26 @@ public class BonSeances extends BonNotification {
         return false;
     }
 
+    @Override
+    public int getPrix() {
+        return prix;
+    }
+
+    public int getSomme() {
+        return somme;
+    }
+
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_seances SET prix = " + prix + ", somme = " + somme + ", num_seance ='" + num_seance + "',type ='" + type + "', commission='" + commission + "',date_seance='" + date_seance + "',date_report='" + date_report + "',date_report2='" + date_report2 + "' WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_seances SET prix = " + prix + ", somme = " + somme + ", num_seance ='" + num_seance + "',type ='" + type + "', commission='" + commission + "',date_seance='" + date_seance + "',date_report=" + getDateReportSQL() + ",date_report2=" + getDateReport2SQL() + " WHERE num_bon='" + num_bon + "'";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {
                 return true;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
+            ex.printStackTrace();
         }
 
         return false;
@@ -131,7 +148,12 @@ public class BonSeances extends BonNotification {
     public String getType() {
         return type;
     }
-
+    public String getDateReportSQL(){
+        return (date_report!=null)? "'"+date_report+"'" :"null";
+    }
+    public String getDateReport2SQL(){
+        return (date_report2!=null)? "'"+date_report2+"'" :"null";
+    }
     public void setType(String type) {
         this.type = type;
     }

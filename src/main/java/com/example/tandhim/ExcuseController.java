@@ -6,6 +6,8 @@
 package com.example.tandhim;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +26,14 @@ public class ExcuseController implements Initializable{
         return dateMarquage.getValue().toString();
     }
 
+    public void setDateMarquage(String dateMarquage) {
+        this.dateMarquage.setValue(LOCAL_DATE(dateMarquage));
+    }
+
+    public void setComTypeExcuse(String comTypeExcuse) {
+        this.comTypeExcuse.getSelectionModel().select(comTypeExcuse);
+    }
+
     public String getComTypeExcuse() {
         return comTypeExcuse.getSelectionModel().getSelectedItem().toString();
     }
@@ -36,5 +46,9 @@ public class ExcuseController implements Initializable{
         comTypeExcuse.getItems().addAll("إعذار", "رد على إعذار", "طلب", "رد على طلب", "استدعاء", "رد على استدعاء", "عرض وفاء","رد على عرض وفاء","ارسالية","رد على ارسالية");
         comTypeExcuse.getSelectionModel().selectFirst();
     }
-    
+    public static final LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
+    }
 }

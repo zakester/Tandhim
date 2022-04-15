@@ -57,6 +57,11 @@ public class FormeJudiciereController implements Initializable {
     }
     public void setTypeFormeExeChanged(String type) {
         typeFormeExe.getSelectionModel().select(type);
+        try {
+            ctrl.typeFormeExeItemChanged1(typeFormeExe.getSelectionModel().getSelectedItem());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     private DatePicker dateFomeExe;
@@ -64,6 +69,7 @@ public class FormeJudiciereController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         typeFormeExe.getItems().addAll("حكم", "قرار", "أمر");
+
     }
 
     public void setParentCtrl(Controller ctrl) {

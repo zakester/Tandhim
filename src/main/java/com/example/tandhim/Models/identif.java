@@ -55,7 +55,26 @@ public class identif {
         }
         return id;
     }
+    public boolean NumBonExist(String numBon){
+        String [] dy= numBon.split("/");
+        Connection bd = BDConnection.getConnection();
+        String query;
+        query = "SELECT id,year FROM identif WHERE year=" + dy[1]+" AND id="+dy[0];
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+            return true;
+            }
+            bd.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return false;
+    }
     public void increment() {
         try {
             Connection bd = BDConnection.getConnection();

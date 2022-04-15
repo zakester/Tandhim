@@ -1,9 +1,6 @@
 package com.example.tandhim;
 
-import com.example.tandhim.Models.EditBonSearch;
-import com.example.tandhim.Models.Letter;
-import com.example.tandhim.Models.Obligatoire;
-import com.example.tandhim.Models.Service;
+import com.example.tandhim.Models.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,45 +60,72 @@ public class EditDialogueController implements Initializable {
     }
     public void SaveEdit(){
         System.out.println(b.getText());
+        if ((result.getService().equals("bon_apercus")) || (result.getService().equals("bon_apercu_parorders")) || (result.getService().equals("bon_associations")))
+        {
+            if (b.getText().equals("تم التبليغ")) {
+                if (dateDone.getValue() != null) {
+                    System.out.println("i'm here my freind"+ dateDone.getValue());
+                    if (result.getService().equals("bon_apercu_parorders")) {
+                        BonApercuParOrders bon = result.getBonApercuParOrdersData();
+                        bon.setStatus("منجزة");
+                        bon.setDate_fin(dateDone.getValue().toString());
+                        bon.update();
+                    }
+                    if (result.getService().equals("bon_apercus")) {
+                        BonApercus bon = result.getBonApercuData();
+                        bon.setStatus("منجزة");
+                        bon.setDate_fin(dateDone.getValue().toString());
+                        bon.update();
+                    }
+                    if (result.getService().equals("bon_associations")) {
+                        BonAssociations bon = result.getBonAssociation();
+                        bon.setStatus("منجزة");
+                        bon.setDate_fin(dateDone.getValue().toString());
+                        bon.update();
+                    }
+                } else {
+                    JOptionPane op = new JOptionPane();
+                    op.showMessageDialog(null, "عليك ملئ جميع الخانات");
+                }
+            }
+        }
+        else {
             if (b.getText().equals("تم إشعاره(ا)")) {
-                if(dateConvoqued.getValue()!=null){
+                if (dateConvoqued.getValue() != null) {
                     oblig.setStatus("تم إشعاره(ا)");
                     oblig.setDate(dateConvoqued.getValue().toString());
                     oblig.updateObligatoire();
-                }
-                else {
+                } else {
                     JOptionPane op = new JOptionPane();
-                    op.showMessageDialog(null,"عليك ملئ جميع الخانات");
+                    op.showMessageDialog(null, "عليك ملئ جميع الخانات");
                 }
 
             }
             if (b.getText().equals("تم التبليغ")) {
-                if(dateDone.getValue()!=null){
+                if (dateDone.getValue() != null) {
                     oblig.setStatus("تم التبليغ");
                     oblig.setDate(dateDone.getValue().toString());
                     oblig.updateObligatoire();
-                }
-                else {
+                } else {
                     JOptionPane op = new JOptionPane();
-                    op.showMessageDialog(null,"عليك ملئ جميع الخانات");
+                    op.showMessageDialog(null, "عليك ملئ جميع الخانات");
                 }
             }
             if (b.getText().equals("غير منجزة")) {
-                if(dateDone.getValue()!=null){
+                if (dateDone.getValue() != null) {
                     oblig.setStatus("غير منجزة");
                     oblig.setDate(null);
                     oblig.updateObligatoire();
-                }
-                else {
+                } else {
                     JOptionPane op = new JOptionPane();
-                    op.showMessageDialog(null,"عليك ملئ جميع الخانات");
+                    op.showMessageDialog(null, "عليك ملئ جميع الخانات");
                 }
 
             }
             if (b.getText().equals("تم إرسال رسالة")) {
-                if(!Execution){
+                if (!Execution) {
                     System.out.println("not executif");
-                    if (dateLetter.getValue()!=null &&  numLetter.getText()!=null && !numLetter.getText().equals("")){
+                    if (dateLetter.getValue() != null && numLetter.getText() != null && !numLetter.getText().equals("")) {
                         oblig.setStatus("تم إرسال رسالة");
                         oblig.updateObligatoire();
                         try {
@@ -111,17 +135,16 @@ public class EditDialogueController implements Initializable {
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-                    }
-                    else {
+                    } else {
                         System.out.println(dateLetter.getValue());
                         System.out.println(numLetter.getText());
                         JOptionPane op = new JOptionPane();
-                        op.showMessageDialog(null,"عليك ملئ جميع الخانات");
+                        op.showMessageDialog(null, "عليك ملئ جميع الخانات");
                     }
                 } else {
-                    if (dateLetter1.getValue()!=null &&  numLetter1.getText()!=null && !numLetter1.getText().equals("") &&
-                        dateLetter2.getValue()!=null &&  numLetter2.getText()!=null && !numLetter2.getText().equals("") &&
-                        dateLetter3.getValue()!=null &&  numLetter3.getText()!=null && !numLetter3.getText().equals("")) {
+                    if (dateLetter1.getValue() != null && numLetter1.getText() != null && !numLetter1.getText().equals("") &&
+                            dateLetter2.getValue() != null && numLetter2.getText() != null && !numLetter2.getText().equals("") &&
+                            dateLetter3.getValue() != null && numLetter3.getText() != null && !numLetter3.getText().equals("")) {
                         oblig.setStatus("تم إرسال رسالة");
                         oblig.updateObligatoire();
                         try {
@@ -147,15 +170,16 @@ public class EditDialogueController implements Initializable {
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-                    }
-                    else {
+                    } else {
                         JOptionPane op = new JOptionPane();
-                        op.showMessageDialog(null,"عليك ملئ جميع الخانات");
+                        op.showMessageDialog(null, "عليك ملئ جميع الخانات");
                     }
                 }
             }
-
+        }
     }
+
+
     private void showSelectedPane(Pane pane) {
         pane.toFront();
         pane.setVisible(true);
@@ -175,7 +199,14 @@ public class EditDialogueController implements Initializable {
         }
     }
         result = new EditBonSearch(num_bon);
-        oblig =result.getObligatoireList().get(obligIndex);
+    if ((result.getService().equals("bon_apercus")) || (result.getService().equals("bon_apercu_parorders")) || (result.getService().equals("bon_associations")))
+    {
+        System.out.println("i'm here dude");
+        btnConvoqued.setDisable(true);
+        btnLetter.setDisable(true);
+    }
+    else {
+        oblig = result.getObligatoireList().get(obligIndex);
         if (oblig.getStatus().equals("تم التبليغ")) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate localDate = LocalDate.parse(oblig.getDate(), formatter);
@@ -187,13 +218,13 @@ public class EditDialogueController implements Initializable {
             dateConvoqued.setValue(localDate);
         }
         if (oblig.getStatus().equals("تم إرسال رسالة")) {
-            if (oblig.getLetter().size()==1) {
+            if (oblig.getLetter().size() == 1) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String date = oblig.getLetter().get(0).getDateLetter();
                 LocalDate localDate = LocalDate.parse(date, formatter);
                 dateLetter.setValue(localDate);
                 numLetter.setText(oblig.getLetter().get(0).getNumLetter());
-            }   else {
+            } else {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String date = oblig.getLetter().get(0).getDateLetter();
                 LocalDate localDate = LocalDate.parse(date, formatter);
@@ -211,7 +242,7 @@ public class EditDialogueController implements Initializable {
                 numLetter3.setText(oblig.getLetter().get(2).getNumLetter());
             }
         }
-
+    }
     }
 
     public void clearContainer(ObservableList<Node> n){

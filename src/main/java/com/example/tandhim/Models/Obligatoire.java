@@ -87,10 +87,12 @@ public class Obligatoire {
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {
+                delete_action();
+                deleteLetter();
                 return true;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
+            ex.printStackTrace();
         }
 
         return false;
@@ -99,24 +101,14 @@ public class Obligatoire {
     public boolean delete_action() {
         try {
             Connection bd = BDConnection.getConnection();
-            Statement st;
-            ResultSet rs;
-            String q1 = "SELECT id FROM obligatoire WHERE nom='" + nom + "' AND addr='" + addr + "' AND id_bon='" + id_bon + "'";
-            int id = 0;
-            st = bd.createStatement();
-            rs = st.executeQuery(q1);
-            while (rs.next()) {
-                id = rs.getInt("id");
-            }
-            System.out.println(id);
-            String query = "DELETE FROM action WHERE id_oblig=" + id;
+            String query = "DELETE FROM action WHERE id_oblig=" + getObligatoireId();
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int idn = preparedStmt.executeUpdate();
             if (idn >= 1) {
                 return true;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
+            ex.printStackTrace();
         }
 
         return false;
@@ -142,7 +134,7 @@ public class Obligatoire {
                 return true;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "عليك ملئ جميع المعلومات لضمان تخزين الوصل");
+            ex.printStackTrace();
         }
 
         return false;
@@ -182,20 +174,26 @@ public class Obligatoire {
     }
     public void updateObligatoire () {
         Connection bd = BDConnection.getConnection();
-        String query2 = "UPDATE obligatoire SET nom='"+getNom()+"', id_bon='"+getId_bon()+"', addr='"+getAddr()+"', status='"+getStatus()+"', date='"+getDate()+"' WHERE id="+getObligatoireId();
+        String query2 = "UPDATE obligatoire SET nom='"+getNom()+"', id_bon='"+getId_bon()+"', addr='"+getAddr()+"', status='"+getStatus()+"', date="+getDateSQL()+" WHERE id="+getObligatoireId();
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Demandeur.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
     public void setStatus(String status) {
         this.status = status;
+        System.out.println(this.status);
     }
 
     public String getDate() {
         return date;
+    }
+
+    public String getDateSQL() {
+        return (date!=null)? "'"+date+"'":null;
     }
 
     public void setDate(String date) {
@@ -223,7 +221,7 @@ public class Obligatoire {
             Connection bd = BDConnection.getConnection();
             Statement st;
             ResultSet rs;
-            String q1 = "SELECT type_rapport,num_lettre,date_lettre,id_obligatoire,publier FROM letter WHERE id_rapport='" + id_bon + "' and id_obligatoire'"+getObligatoireId()+"'";
+            String q1 = "SELECT type_rapport,num_lettre,date_lettre,id_obligatoire,publier FROM letter WHERE id_rapport='" + id_bon + "' and id_obligatoire="+getObligatoireId()+"";
             int id = 0;
             st = bd.createStatement();
             rs = st.executeQuery(q1);

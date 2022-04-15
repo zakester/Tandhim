@@ -69,6 +69,32 @@ public class BonActe extends BonNotification{
 
         return false;
     }
+
+    public String getNum() {
+        return num;
+    }
+
+    public String getNomNotaire() {
+        return nomNotaire;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public int getPrix() {
+        return prix;
+    }
+
+    public int getSomme() {
+        return somme;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     public boolean validate() {
         if (!ArabicChar(nomNotaire)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

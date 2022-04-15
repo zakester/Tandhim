@@ -6,6 +6,8 @@
 package com.example.tandhim;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,11 +45,32 @@ public class ActeController implements Initializable{
         return dateActe.getValue().toString();
     }
 
+    public void setNumActe(String numActe) {
+        this.numActe.setText(numActe);
+    }
+
+    public void setNomNotaire(String nomNotaire) {
+        this.nomNotaire.setText(nomNotaire);
+    }
+
+    public void setTypeActe(String typeActe) {
+        this.typeActe.setText(typeActe);
+    }
+
+    public void setDateActe(String dateActe) {
+        this.dateActe.setValue(LOCAL_DATE(dateActe));
+    }
+
     @FXML
     private DatePicker dateActe;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+    public static final LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
     }
     
 }

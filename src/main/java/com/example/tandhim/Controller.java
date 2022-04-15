@@ -23,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -79,7 +80,7 @@ public class Controller implements Initializable {
     @FXML
     private StackPane stpnlFormeExe, stpnlStatsBon,StackPaneStats;
     @FXML
-    private HBox hboxOblig;
+    private HBox hboxOblig,hboxEditBon,hboxAddBon;
     @FXML
     private HBox hboxOblig2;
     @FXML
@@ -356,6 +357,8 @@ public class Controller implements Initializable {
         bonType = ((Button) e.getSource()).getText();
         vboxFormePrincipale.getChildren().clear();
         if (e.getSource() == btnCitation) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnCitation.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -371,6 +374,8 @@ public class Controller implements Initializable {
             ComCtrl = loader1.getController();
         }
         if (e.getSource() == btnMandat) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnMandat.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -400,6 +405,8 @@ public class Controller implements Initializable {
             ComCtrl = loader1.getController();
         }
         if (e.getSource() == btnFormeJudiciere) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnFormeExecutif.getText() + " " + btnFormeJudiciere.getText());
             bonType = bonText.getText();
             System.out.println(bonText.getText());
@@ -414,6 +421,8 @@ public class Controller implements Initializable {
             vboxFormePrincipale.getChildren().add(p);
         }
         if (e.getSource() == btnFormeNonJudiciere) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnFormeExecutif.getText() + " " + btnFormeNonJudiciere.getText());
             bonType = bonText.getText();
             System.out.println(bonText.getText());
@@ -427,6 +436,8 @@ public class Controller implements Initializable {
             vboxFormePrincipale.getChildren().add(p);
         }
         if (e.getSource() == btnOrder) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnOrder.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -442,6 +453,8 @@ public class Controller implements Initializable {
             vboxFormePrincipale.getChildren().add(p1);
         }
         if (e.getSource() == btnJugement) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnJugement.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -458,6 +471,8 @@ public class Controller implements Initializable {
             vboxFormePrincipale.getChildren().add(p1);
         }
         if (e.getSource() == btnJugement1) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnJugement1.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -474,6 +489,8 @@ public class Controller implements Initializable {
             vboxFormePrincipale.getChildren().add(p1);
         }
         if (e.getSource() == btnExcuse) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnExcuse.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -486,6 +503,8 @@ public class Controller implements Initializable {
 
         }
         if (e.getSource() == btnInspection) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnInspection.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -493,6 +512,8 @@ public class Controller implements Initializable {
             hboxOblig2.setVisible(false);
         }
         if (e.getSource() == btnInspectionOrder) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnInspectionOrder.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -508,6 +529,8 @@ public class Controller implements Initializable {
             vboxFormePrincipale.getChildren().add(p1);
         }
         if (e.getSource() == btnAssociation) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnAssociation.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -515,6 +538,8 @@ public class Controller implements Initializable {
             hboxOblig2.setVisible(false);
         }
         if (e.getSource() == btnJard) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
             bonText.setText(btnJard.getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
@@ -533,6 +558,7 @@ public class Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("jugement.fxml"));
             Parent p = (Parent) loader.load();
             JugementCtrl = loader.getController();
+            System.out.println("the controller exists");
             JugementCtrl.vboxJugement.getChildren().remove(JugementCtrl.hboxTypeJugement);
             vboxFormePrincipale.getChildren().add(p);
             System.out.println(vboxFormePrincipale.getChildren().size());
@@ -584,11 +610,110 @@ public class Controller implements Initializable {
     public void addToComboBoxList(ActionEvent e) {
         String nomAdr;
         if (e.getSource() == btnDem) {
-            nomAdr = nomDem.getText() + " العنوان: " + adrDem.getText();
-            demList.getItems().add(nomAdr);
-        } else {
-            nomAdr = nomOblig.getText() + " العنوان: " + adrOblig.getText();
-            obligList.getItems().add(nomAdr);
+            System.out.println("demlist =" + demList+ " size = "+ demList.getItems().size() );
+            if (demList.getItems().size()>0){
+                for (Object object : demList.getItems()) {
+                    if (object.toString().contains(nomDem.getText())) {
+                        JOptionPane.showMessageDialog(null, "هذا الإسم قد تمت إضافته سلفا !");
+                        break;
+                    } else {
+                        for (Demandeur dem : demToDelete) {
+                            if (object.toString().equals(dem.getNom())) {
+                                int confirm = JOptionPane.showConfirmDialog(null, "هذا الإسم قد تم حذفه للتو، هل ترغب بإعادته ؟");
+                                if (confirm == 1) {
+                                    demToDelete.remove(dem);
+                                    nomAdr = dem.getNom() + " العنوان: " + dem.getAddr();
+                                    demList.getItems().add(nomAdr);
+                                    return;
+                                }
+                            } else {
+                                nomAdr = nomDem.getText() + " العنوان: " + adrDem.getText();
+                                demList.getItems().add(nomAdr);
+                                demToAdd.add(new Demandeur(nomDem.getText(), adrDem.getText(), num_bon.getText()));
+                                return;
+                            }
+                        }
+                        nomAdr = nomDem.getText() + " العنوان: " + adrDem.getText();
+                        demList.getItems().add(nomAdr);
+                        demToAdd.add(new Demandeur(nomDem.getText(), adrDem.getText(), num_bon.getText()));
+                        return;
+                    }
+                }
+            }else    {
+                for (Demandeur dem : demToDelete) {
+                    if (nomDem.getText().equals(dem.getNom())) {
+                        int confirm = JOptionPane.showConfirmDialog(null, "هذا الإسم قد تم حذفه للتو، هل ترغب بإعادته ؟");
+                        if (confirm == 1) {
+                            demToDelete.remove(dem);
+                            nomAdr = dem.getNom() + " العنوان: " + dem.getAddr();
+                            demList.getItems().add(nomAdr);
+                            return;
+                        }
+                    } else {
+                        nomAdr = nomDem.getText() + " العنوان: " + adrDem.getText();
+                        demList.getItems().add(nomAdr);
+                        demToAdd.add(new Demandeur(nomDem.getText(), adrDem.getText(), num_bon.getText()));
+                        return;
+                    }
+                }
+                nomAdr = nomDem.getText() + " العنوان: " + adrDem.getText();
+                demList.getItems().add(nomAdr);
+                demToAdd.add(new Demandeur(nomDem.getText(), adrDem.getText(), num_bon.getText()));
+            }
+        }
+        else {
+            if (obligList.getItems().size()>0){
+                ObservableList objectList = obligList.getItems();
+                for (Object object : objectList) {
+                    if (object.toString().contains(nomOblig.getText())) {
+                        JOptionPane.showMessageDialog(null, "هذا الإسم قد تمت إضافته سلفا !");
+                        break;
+                    } else {
+                        for (Obligatoire obl : obligToDelete) {
+                            if (object.toString().equals(obl.getNom())) {
+                                int confirm = JOptionPane.showConfirmDialog(null, "هذا الإسم قد تم حذفه للتو، هل ترغب بإعادته ؟");
+                                if (confirm == 0) {
+                                    System.out.println(obl.getAddr());
+                                    nomAdr = obl.getNom() + " العنوان: " + obl.getAddr();
+                                    obligList.getItems().add(nomAdr);
+                                    obligToDelete.remove(obl);
+                                    return;
+                                }
+                            } else {
+                                nomAdr = nomOblig.getText() + " العنوان: " + adrOblig.getText();
+                                obligList.getItems().add(nomAdr);
+                                obligToAdd.add(new Obligatoire(nomOblig.getText(), adrOblig.getText(), num_bon.getText(),"غير منجزة",null,0));
+                                return;
+                            }
+                        }
+                        nomAdr = nomOblig.getText() + " العنوان: " + adrOblig.getText();
+                        obligList.getItems().add(nomAdr);
+                        obligToAdd.add(new Obligatoire(nomOblig.getText(), adrOblig.getText(), num_bon.getText(),"غير منجزة",null,0));
+                        return;
+                    }
+                }
+            } else    {
+                for (Obligatoire obl : obligToDelete) {
+                    if (nomOblig.getText().equals(obl.getNom())) {
+                        int confirm = JOptionPane.showConfirmDialog(null, "هذا الإسم قد تم حذفه للتو، هل ترغب بإعادته ؟");
+                        if (confirm == 0) {
+                            obligToDelete.remove(obl);
+                            nomAdr = obl.getNom() + " العنوان: " + obl.getAddr();
+                            obligList.getItems().add(nomAdr);
+                            return;
+                        }
+                    } else {
+                        nomAdr = nomOblig.getText() + " العنوان: " + adrOblig.getText();
+                        obligList.getItems().add(nomAdr);
+                        obligToAdd.add(new Obligatoire(nomOblig.getText(), adrOblig.getText(), num_bon.getText(),"غير منجزة",null,0));
+                        return;
+                    }
+                }
+                nomAdr = nomOblig.getText() + " العنوان: " + adrOblig.getText();
+                obligList.getItems().add(nomAdr);
+                obligToAdd.add(new Obligatoire(nomOblig.getText(), adrOblig.getText(), num_bon.getText(),"غير منجزة",null,0));
+            }
+
         }
     }
 
@@ -916,6 +1041,46 @@ public class Controller implements Initializable {
             }
 
         }
+        if (bonType.equals("معاينة بأمر")) {
+            BonApercuParOrders bon = new BonApercuParOrders(OrderCtrl.getNumOrder(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), OrderCtrl.getDateOrder(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.insert();
+                id.increment();
+                for (int i = 0; i < demList.getItems().size(); i++) {
+                    String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                    Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                    d.insert();
+                    btnCreatePV.setDisable(false);
+
+                }
+            }
+        }
+        if (bonType.equals("معاينة")) {
+            BonApercus bon = new BonApercus(num_bon.getText(), prix, somme);
+                bon.insert();
+                id.increment();
+                for (int i = 0; i < demList.getItems().size(); i++) {
+                    String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                    Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                    d.insert();
+                    btnCreatePV.setDisable(false);
+
+                }
+        }
+        if (bonType.equals("حضور جمعية عامة")) {
+            BonAssociations bon = new BonAssociations(num_bon.getText(), prix, somme);
+                bon.insert();
+                id.increment();
+                for (int i = 0; i < demList.getItems().size(); i++) {
+                    String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                    Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                    d.insert();
+                    btnCreatePV.setDisable(false);
+
+                }
+        }
+
 
     }
 
@@ -975,14 +1140,8 @@ public class Controller implements Initializable {
                     EditComObligList.getItems().add(s);
                     EditComObligList.getSelectionModel().selectFirst();
                 }
-            } else {
-                for (Demandeur dem : result.getDemandeurList()) {
-                    String s = dem.getNom() + " العنوان : " + dem.getAddr();
-                    EditComObligList.getItems().add(s);
-                    EditComObligList.getSelectionModel().selectFirst();
-                }
-                EditComObligList.setPromptText("قائمة الطالبين");
             }
+
             if (result.getService().equals("bon_seances")) {
                 System.out.println(result.getBonData());
                 BonSeances bon = result.getBonData();
@@ -1028,11 +1187,62 @@ public class Controller implements Initializable {
                 BonMandat bon = result.getBonMandatData();
                 typeArea.setText("تبليغ مذكرة " + bon.getType() + " رقم : " + bon.getNum_mandat() + " المسجلة بتاريخ: " + bon.getDate() + " لدى: " + bon.getService());
             }
-            if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associationd"))) {
+            if (result.getService().equals("bon_rqst")) {
+                BonRqst bon = result.getBonRqstData();
+                typeArea.setText("تبليغ عريضة " + bon.getType() + " رقم : " + bon.getNum_rqst() + " المسجلة بتاريخ: " + bon.getDate() + " لدى: " + bon.getCommission());
+            }
+            if (result.getService().equals("bon_acte")) {
+                BonActe bon = result.getBonActeData();
+                typeArea.setText("تكليف بالوفاء بموجب : " + bon.getType() + " رقم : " + bon.getNum() + " بتاريخ: " + bon.getDate() + " لدى: " + bon.getNomNotaire());
+            }
+            if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associations"))) {
                 Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
                 editBonStatus.setText(obl.getStatus());
                 statusArea.setText(obl.OblStatus());
 
+            }
+            else
+            {
+                System.out.println("demendeur list");
+                for (Demandeur dem : result.getDemandeurList()) {
+                    String s = dem.getNom() + " العنوان : " + dem.getAddr();
+                    EditComObligList.getItems().add(s);
+                    EditComObligList.getSelectionModel().selectFirst();
+                }
+                EditComObligList.setPromptText("قائمة الطالبين");
+                Service s= new Service();
+                if (result.getService().equals("bon_apercus")) {
+                    BonApercus bon=result.getBonApercuData();
+                    statusArea.setText(bon.getStatus()+" بتاريخ : "+bon.getDate_fin());
+                    editBonStatus.setText(bon.getStatus());
+                    try {
+                        typeArea.setText(s.getService(result.getService(),bon.getNum_bon()) );
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (result.getService().equals("bon_associations")) {
+                    BonAssociations bon=result.getBonAssociation();
+                    System.out.println(bon);
+                    statusArea.setText(bon.getStatus()+" بتاريخ : "+bon.getDate_fin());
+                    editBonStatus.setText(bon.getStatus());
+                    try {
+                        typeArea.setText(s.getService(result.getService(),bon.getNum_bon()) );
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            if (result.getService().equals("bon_apercu_parorders")) {
+                    BonApercuParOrders bon=result.getBonApercuParOrdersData();
+                    statusArea.setText(bon.getStatus()+" بتاريخ : "+bon.getDate_fin());
+                    editBonStatus.setText(bon.getStatus());
+                    try {
+                        typeArea.setText(s.getService(result.getService(),bon.getNum_bon()) );
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
@@ -1060,9 +1270,11 @@ public class Controller implements Initializable {
 
     public void UpdateStatus() {
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
-        Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
-        editBonStatus.setText(obl.getStatus());
-        statusArea.setText(obl.OblStatus());
+        if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associations"))) {
+            Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
+            editBonStatus.setText(obl.getStatus());
+            statusArea.setText(obl.OblStatus());
+        }
     }
     public void ChangeStatus() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
@@ -1103,6 +1315,8 @@ public class Controller implements Initializable {
             e=actionEvent;
             try {
                 addBonInterface(e);
+                hboxEditBon.setVisible(true);
+                hboxAddBon.setVisible(false);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -1113,12 +1327,145 @@ public class Controller implements Initializable {
             e = new ActionEvent(btnFormeJudiciere, null);
             try {
                 addBonInterface(e);
+                hboxEditBon.setVisible(true);
+                hboxAddBon.setVisible(false);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
             fillBonProvisionExe(result);
 
         }
+        if (result.getService().equals("bon_provisions") && !result.isNotificationFidelité())
+        {
+            if (result.getBonProvisionsData().getType().equals("حكم")) e = new ActionEvent(btnJugement, null);
+            else e = new ActionEvent(btnJugement1, null);
+            try {
+                addBonInterface(e);
+                hboxEditBon.setVisible(true);
+                hboxAddBon.setVisible(false);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            fillBonProvision(result);
+
+        }
+        if (result.getService().equals("bon_orders") && result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnFormeJudiciere, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonOrderExe(result);
+
+                }
+        if (result.getService().equals("bon_orders") && !result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnOrder, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonOrder(result);
+
+                }
+        if (result.getService().equals("bon_acte") && !result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnFormeNonJudiciere, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonActe(result);
+
+                }
+        if (result.getService().equals("bon_excuses") && !result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnExcuse, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonExcuse(result);
+
+                }
+        if (result.getService().equals("bon_rqst") && !result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnRqst, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonRqst(result);
+
+                }
+        if (result.getService().equals("bon_mandat") && !result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnMandat, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonMandat(result);
+
+                }
+        if (result.getService().equals("bon_apercus") && !result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnInspection, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonApercu(result);
+
+                }
+        if (result.getService().equals("bon_apercu_parorders") && !result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnInspectionOrder, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonApercuParOrder(result);
+
+                }
+        if (result.getService().equals("bon_associations") && !result.isNotificationFidelité())
+                {
+                    e = new ActionEvent(btnInspection, null);
+                    try {
+                        addBonInterface(e);
+                        hboxEditBon.setVisible(true);
+                        hboxAddBon.setVisible(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    fillBonAssociation(result);
+
+                }
 
 
 
@@ -1135,9 +1482,9 @@ public class Controller implements Initializable {
         CitationCtrl.setDateCitation(bon.getDate_seance());
         CitationCtrl.setDateReport(bon.getDate_report());
         CitationCtrl.setDateReport2(bon.getDate_report2());
-        prix.setText("2000");
+        prix.setText(""+bon.getSomme());
         taxe_supp.setText("0");
-        taxe_fixe.setText("3000");
+        taxe_fixe.setText(""+bon.getPrix());
     }
     public void fillBonProvisionExe(EditBonSearch result) {
         ClearAddInterface();
@@ -1145,6 +1492,7 @@ public class Controller implements Initializable {
         num_bon.setText(bon.getNum_bon());
         System.out.println("there is notif here"+result.getNotificationFidelité().getNum());
         System.out.println("there is ctrl here"+FormeJudiciereCtrl);
+        FormeJudiciereCtrl.setTypeFormeExeChanged(bon.getType());
         FormeJudiciereCtrl.setNumFomeExe(result.getNotificationFidelité().getNum());
         FormeJudiciereCtrl.setDateFomeExe(result.getNotificationFidelité().getDate());
         FormeJudiciereCtrl.setTypeFormeExe(bon.getType());
@@ -1156,14 +1504,156 @@ public class Controller implements Initializable {
         ComCtrl.setComType(bon.getSpec());
         obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
         demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonProvision(EditBonSearch result) {
+        ClearAddInterface();
+        BonProvisions bon =result.getBonProvisionsData();
+        num_bon.setText(bon.getNum_bon());
+        JugementCtrl.setNumTable(bon.getNum_table());
+        JugementCtrl.setDateForme(bon.getDate());
+        JugementCtrl.setNumIndice(bon.getNum_indice());
+        JugementCtrl.vboxJugement.getChildren().remove(JugementCtrl.hboxTypeJugement);
+        ComCtrl.setCom_NomCommission(bon.getCommission());
+        ComCtrl.setComType(bon.getSpec());
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonOrderExe(EditBonSearch result) {
+        ClearAddInterface();
+        BonOrders bon =result.getBonOrdersData();
+        num_bon.setText(bon.getNum_bon());
+        System.out.println("there is notif here"+result.getNotificationFidelité().getNum());
+        System.out.println("there is ctrl here"+FormeJudiciereCtrl);
+        FormeJudiciereCtrl.setTypeFormeExeChanged("أمر");
+        FormeJudiciereCtrl.setNumFomeExe(result.getNotificationFidelité().getNum());
+        FormeJudiciereCtrl.setDateFomeExe(result.getNotificationFidelité().getDate());
+        FormeJudiciereCtrl.setTypeFormeExe(bon.getType());
+        OrderCtrl.setComTypeOrder("أمر");
+        OrderCtrl.setNumOrder(bon.getNum_order());
+        OrderCtrl.setDateOrder(bon.getDate_order());
+        OrderCtrl.vboxOrders.getChildren().remove(OrderCtrl.hboxTypeOrder);
         ComCtrl.setCom_NomCommission(bon.getCommission());
         ComCtrl.setComType(bon.getType());
-       //CitationCtrl.setDateCitation(bon.getDate_seance());
-        //CitationCtrl.setDateReport(bon.getDate_report());
-        //CitationCtrl.setDateReport2(bon.getDate_report2());
-        prix.setText("2000");
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
         taxe_supp.setText("0");
-        taxe_fixe.setText("3000");
+        taxe_fixe.setText(""+bon.getPrix());
+
+    }
+    public void fillBonOrder(EditBonSearch result) {
+        ClearAddInterface();
+        BonOrders bon =result.getBonOrdersData();
+        num_bon.setText(bon.getNum_bon());
+        OrderCtrl.setComTypeOrder(bon.getType());
+        OrderCtrl.setNumOrder(bon.getNum_order());
+        OrderCtrl.setDateOrder(bon.getDate_order());
+        ComCtrl.setCom_NomCommission(bon.getCommission());
+        ComCtrl.setComType("");
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonActe(EditBonSearch result) {
+        ClearAddInterface();
+        BonActe bon =result.getBonActeData();
+        num_bon.setText(bon.getNum_bon());
+        ActeCtrl.setDateActe(bon.getDate());
+        ActeCtrl.setNumActe(bon.getNum());
+        ActeCtrl.setNomNotaire(bon.getNomNotaire());
+        ActeCtrl.setDateActe(bon.getType());
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonExcuse(EditBonSearch result) {
+        ClearAddInterface();
+        BonExcuses bon =result.getBonExcusesData();
+        num_bon.setText(bon.getNum_bon());
+        ExcuseCtrl.setComTypeExcuse(bon.getType());
+        ExcuseCtrl.setDateMarquage(bon.getDate_marquage());
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonRqst(EditBonSearch result) {
+        ClearAddInterface();
+        BonRqst bon =result.getBonRqstData();
+        num_bon.setText(bon.getNum_bon());
+        RqstCtrl.setTypeRqst(bon.getType());
+        RqstCtrl.setDateRqst(bon.getDate());
+        RqstCtrl.setNumRqst(bon.getNum_rqst());
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        ComCtrl.setCom_NomCommission(bon.getCommission());
+        ComCtrl.setComType("");
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonMandat(EditBonSearch result) {
+        ClearAddInterface();
+        BonMandat bon =result.getBonMandatData();
+        num_bon.setText(bon.getNum_bon());
+        MandatCtrl.setTypeMandat(bon.getType());
+        MandatCtrl.setDateMandat(bon.getDate());
+        MandatCtrl.setNumMandat(bon.getNum_mandat());
+        MandatCtrl.setService(bon.getService());
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        ComCtrl.setCom_NomCommission(bon.getCommission());
+        ComCtrl.setComType("");
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonApercuParOrder(EditBonSearch result) {
+        ClearAddInterface();
+        BonApercuParOrders bon =result.getBonApercuParOrdersData();
+        num_bon.setText(bon.getNum_bon());
+        OrderCtrl.setComTypeOrder("أمر بإثبات حالة");
+        OrderCtrl.comTypeOrder.setDisable(true);
+        OrderCtrl.setNumOrder(bon.getNum_order());
+        OrderCtrl.setDateOrder(bon.getDate_order());
+        ComCtrl.setCom_NomCommission(bon.getCommission());
+        ComCtrl.setComType("");
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonApercu(EditBonSearch result) {
+        ClearAddInterface();
+        BonApercus bon =result.getBonApercuData();
+        num_bon.setText(bon.getNum_bon());
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
+    }
+    public void fillBonAssociation(EditBonSearch result) {
+        ClearAddInterface();
+        BonAssociations bon =result.getBonAssociation();
+        num_bon.setText(bon.getNum_bon());
+        obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
     }
     public void PrintBon() {
         int somme = Numeric(taxe_fixe.getText()) + Numeric(taxe_supp.getText());
@@ -1196,6 +1686,436 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+    }
+    ArrayList<Demandeur> demToDelete=new ArrayList<>();
+    ArrayList<Demandeur> demToAdd=new ArrayList<>();
+    ArrayList<Obligatoire> obligToDelete=new ArrayList<>();
+    ArrayList<Obligatoire> obligToAdd=new ArrayList<>();
+    public void DeleteDemendeur() {
+        String [] nom_adr = demList.getSelectionModel().getSelectedItem().toString().split(" العنوان: ");
+        int n =JOptionPane.showConfirmDialog(null,"هل ترغب حقا بحذف الطالب : "+ nom_adr[0]);
+        if ((n==0) && new identif().NumBonExist(num_bon.getText())){
+            if (demList.getSelectionModel().getSelectedItem() != null) {
+                EditBonSearch result = new EditBonSearch(num_bon.getText());
+                for (Demandeur dem : result.getDemandeurList()) {
+                    if (dem.getNom().equals(nom_adr[0])) {
+                        demToDelete.add(dem);
+                        demList.getItems().remove(demList.getSelectionModel().getSelectedItem());
+                        demList.getSelectionModel().selectFirst();
+                    }
+                }
+            }
+        }
+        else if (!new identif().NumBonExist(num_bon.getText())) {
+            demList.getItems().remove(demList.getSelectionModel().getSelectedItem());
+        }
+    }
+    public void DeleteObligatoire(){
+        String [] nom_adr = obligList.getSelectionModel().getSelectedItem().toString().split(" العنوان: ");
+        int n =JOptionPane.showConfirmDialog(null,"هل ترغب حقا بحذف الطالب : "+ nom_adr[0]);
+        if ((n==0) && new identif().NumBonExist(num_bon.getText())){
+            if (obligList.getSelectionModel().getSelectedItem() != null) {
+                EditBonSearch result = new EditBonSearch(num_bon.getText());
+                for (Obligatoire obl : result.getObligatoireList()) {
+                    if (obl.getNom().equals(nom_adr[0])) {
+                        System.out.println(obl.getNom()+" العنوان : "+obl.getAddr());
+                        obligToDelete.add(obl);
+                        obligList.getItems().remove(obligList.getSelectionModel().getSelectedItem());
+                        obligList.getSelectionModel().selectFirst();
+                    }
+                }
+            }
+        }
+        else if (!new identif().NumBonExist(num_bon.getText())) {
+            obligList.getItems().remove(obligList.getSelectionModel().getSelectedItem());
+        }
+
+    }
+    public void SaveEdit(){
+        EditBonSearch result = new EditBonSearch(num_bon.getText());
+        if (Numeric(taxe_fixe.getText()) <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "الأتعاب غير مدرجة بطريقة صحيحة ");
+            alert.showAndWait();
+            return;
+        }
+        if ((Numeric(taxe_supp.getText()) < 0) && (Numeric(this.prix.getText()) < 0)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "الأتعاب غير مدرجة بطريقة صحيحة ");
+            alert.showAndWait();
+            return;
+        }
+        int somme = Numeric(taxe_fixe.getText()) + Numeric(taxe_supp.getText());
+        int prix = Numeric(this.prix.getText());
+        if (demList.getItems().size() < 1) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "قائمة الطالبين فارغة");
+            alert.showAndWait();
+            return;
+        }
+        if (result.getService().equals("bon_seances")){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonSeances bon = new BonSeances(CitationCtrl.getNumCitation(), ComCtrl.getComType(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), CitationCtrl.getDateCitation(), CitationCtrl.getDateReport(), CitationCtrl.getDateReport2(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_provisions")&& !result.isNotificationFidelité()){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonProvisions bon = new BonProvisions(JugementCtrl.getNumIndice(), JugementCtrl.getNumTable(), JugementCtrl.getDateForme(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), JugementCtrl.getComTypeForme(), ComCtrl.getComType(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_orders")&& !result.isNotificationFidelité()){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonOrders bon = new BonOrders(OrderCtrl.getNumOrder(), OrderCtrl.getDateOrder(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), OrderCtrl.getComTypeOrder(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_excuses")){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonExcuses bon = new BonExcuses(ExcuseCtrl.getDateMarquage(), num_bon.getText(), ExcuseCtrl.getComTypeExcuse(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_mandat")){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonMandat bon = new BonMandat(MandatCtrl.getNumMandat(), MandatCtrl.getTypeMandat(), MandatCtrl.getService(),ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), MandatCtrl.getDateMandat(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_rqst")){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonRqst bon = new BonRqst(RqstCtrl.getNumRqst(), RqstCtrl.getTypeRqst(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(),RqstCtrl.getDateRqst(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_acte")){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonRqst bon = new BonRqst(RqstCtrl.getNumRqst(), RqstCtrl.getTypeRqst(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(),RqstCtrl.getDateRqst(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_provisions") && result.isNotificationFidelité()){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonProvisions bon = new BonProvisions(JugementCtrl.getNumIndice(), JugementCtrl.getNumTable(), JugementCtrl.getDateForme(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), JugementCtrl.getComTypeForme(), ComCtrl.getComType(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                NotificationFidelite notif = bon.getNotificationFidelité(true);
+                notif.setNum(FormeJudiciereCtrl.getNumForme());
+                notif.setDate(FormeJudiciereCtrl.getDateFomeExe());
+                notif.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_orders") && result.isNotificationFidelité()){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonOrders bon = new BonOrders(OrderCtrl.getNumOrder(), OrderCtrl.getDateOrder(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), OrderCtrl.getComTypeOrder(), num_bon.getText(), prix, somme);
+            if (bon.validate()) {
+                System.out.println(bon.validate());
+                bon.update();
+                NotificationFidelite notif = bon.getNotificationFidelité(true);
+                notif.setNum(FormeJudiciereCtrl.getNumForme());
+                notif.setDate(FormeJudiciereCtrl.getDateFomeExe());
+                notif.update();
+                for (Demandeur dem :demToAdd) {
+                    dem.insert();
+                }
+                for (Obligatoire obl:obligToAdd) {
+                    obl.insert();
+                }
+                for (Demandeur dem :demToDelete) {
+                    dem.delete();
+                }
+                for (Obligatoire obl:obligToDelete) {
+                    obl.delete();
+                }
+
+            }
+        }
+        if (result.getService().equals("bon_apercus")){
+            BonApercus bon = result.getBonApercuData();
+            bon.setPrix(prix);
+            bon.setSomme(somme);
+            bon.update();
+            for (Demandeur dem :demToAdd) {
+                dem.insert();
+            }
+            for (Demandeur dem :demToDelete) {
+                dem.delete();
+            }
+        }
+        if (result.getService().equals("bon_apercu_parorders")){
+            BonApercuParOrders bon = result.getBonApercuParOrdersData();
+            bon.setPrix(prix);
+            bon.setSomme(somme);
+            bon.setNum_order(OrderCtrl.getNumOrder());
+            bon.setDate_order(OrderCtrl.getDateOrder());
+            bon.setCommission(ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission());
+            bon.update();
+            for (Demandeur dem :demToAdd) {
+                dem.insert();
+            }
+            for (Demandeur dem :demToDelete) {
+                dem.delete();
+            }
+        }
+        if (result.getService().equals("bon_associations")){
+            BonAssociations bon = result.getBonAssociation();
+            bon.setPrix(prix);
+            bon.setSomme(somme);
+            bon.update();
+            for (Demandeur dem :demToAdd) {
+                dem.insert();
+            }
+            for (Demandeur dem :demToDelete) {
+                dem.delete();
+            }
+        }
+
     }
     public void ClearEditInterface() {
         searchResultExist=false;
