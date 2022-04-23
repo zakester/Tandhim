@@ -504,7 +504,7 @@
          </Pane>
          <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
             <children>
-               <Pane layoutX="37.0" layoutY="120.0" prefHeight="414.0" prefWidth="720.0">
+               <Pane layoutX="37.0" layoutY="120.0" prefHeight="340.0" prefWidth="720.0">
                   <children>
                      <HBox prefHeight="37.0" prefWidth="720.0" spacing="20.0">
                         <children>
@@ -533,18 +533,69 @@
                            </HBox>
                         </children>
                      </HBox>
-                     <HBox layoutY="48.0" spacing="20.0">
+                     <HBox layoutY="48.0" prefHeight="290.0" prefWidth="723.0" spacing="20.0">
                         <children>
-                           <TextArea fx:id="typeArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="388.0" stylesheets="@css/style.css" wrapText="true">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </TextArea>
-                           <TextArea fx:id="statusArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="315.0" stylesheets="@css/style.css" wrapText="true">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </TextArea>
+                           <VBox styleClass="hbox-status" stylesheets="@css/style.css">
+                              <children>
+                                 <TextArea fx:id="typeArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="388.0" styleClass="textarea1" stylesheets="@css/style.css" wrapText="true">
+                                    <font>
+                                       <Font size="18.0" />
+                                    </font>
+                                 </TextArea>
+                              </children>
+                              <HBox.margin>
+                                 <Insets />
+                              </HBox.margin>
+                              <padding>
+                                 <Insets bottom="12.0" top="12.0" />
+                              </padding>
+                           </VBox>
+                           <VBox styleClass="hbox-status" stylesheets="@css/style.css">
+                              <children>
+                                 <TextArea fx:id="statusArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="315.0" styleClass="textarea1" stylesheets="@css/style.css" wrapText="true">
+                                    <font>
+                                       <Font size="18.0" />
+                                    </font>
+                                 </TextArea>
+                                 <VBox fx:id="vboxPubExe" alignment="CENTER" styleClass="combo-status" stylesheets="@css/style.css">
+                                    <children>
+                                       <Button fx:id="btnPublish" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PublishAction" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: transparent;" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="إجراء التعليق" textAlignment="CENTER" textFill="#e7e5e5">
+                                          <graphic>
+                                             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                   <Image url="@img/publish.png" />
+                                                </image>
+                                             </ImageView>
+                                          </graphic>
+                                          <opaqueInsets>
+                                             <Insets />
+                                          </opaqueInsets>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </Button>
+                                       <Button fx:id="btnExeNonExe" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: transparent;" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="إجراء التنفيذ/امتناع" textAlignment="CENTER" textFill="#e7e5e5">
+                                          <graphic>
+                                             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                   <Image url="@img/create.png" />
+                                                </image>
+                                             </ImageView>
+                                          </graphic>
+                                          <opaqueInsets>
+                                             <Insets />
+                                          </opaqueInsets>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </Button>
+                                    </children>
+                                 </VBox>
+                              </children>
+                              <padding>
+                                 <Insets top="12.0" />
+                              </padding>
+                           </VBox>
                         </children>
                      </HBox>
                   </children>
@@ -619,6 +670,11 @@
                         </font>
                      </Button>
                   </children>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </HBox>
+               <HBox layoutX="495.0" layoutY="455.0" minHeight="37.0" prefHeight="37.0" prefWidth="206.0" spacing="30.0">
                   <opaqueInsets>
                      <Insets />
                   </opaqueInsets>

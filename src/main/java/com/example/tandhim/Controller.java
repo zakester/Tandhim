@@ -54,7 +54,7 @@ public class Controller implements Initializable {
     @FXML
     private VBox pnItems = null;
     @FXML
-    private VBox vboxFormePrincipale;
+    private VBox vboxFormePrincipale,vboxPubExe;
     @FXML
     private ComboBox Type, demList, obligList, comCommission, comType, EditComObligList;
     @FXML
@@ -89,7 +89,7 @@ public class Controller implements Initializable {
     @FXML
     private Button btnAdd, btnDem, btnOblig, btnExcuse, btnEditBon, editBtnCreatePV, editBtnPrintPV, editBtnSearch, btnCreatePV, btnFormeJudiciere, btnFormeNonJudiciere,btnMandat,btnRqst;
     @FXML
-    private Button btnStatsBons2;
+    private Button btnStatsBons2,btnPublish,btnExeNonExe;
     @FXML
     private Button btnStatsBons1;
     @FXML
@@ -176,6 +176,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        HidePublishExe();
         pnlNotif.setVisible(true);
         btnNotif.getStyleClass().clear();
         btnNotif.getStyleClass().add("button1-pressed");
@@ -258,7 +259,11 @@ public class Controller implements Initializable {
         //comCommission.getItems().addAll("محكمة","مجلس قضاء" ,"المحكمة الإدارية");
 
     }
-
+    public void HidePublishExe() {
+        vboxPubExe.setVisible(false);
+        btnPublish.setDisable(true);
+        btnExeNonExe.setDisable(true);
+    }
     public void Search(ActionEvent e) {
         try {
             ObservableList<SearchBon> bons = FXCollections.observableArrayList();
@@ -1275,6 +1280,27 @@ public class Controller implements Initializable {
             editBonStatus.setText(obl.getStatus());
             statusArea.setText(obl.OblStatus());
         }
+        if (result.isNotificationFidelité() || result.getService().equals("bon_acte")){
+            if (editBonStatus.getText().equals("تم التبليغ") || editBonStatus.getText().equals("معلقة")) {
+                vboxPubExe.setVisible(true);
+                btnExeNonExe.setDisable(false);
+            }
+            if (editBonStatus.getText().equals("تم إرسال رسالة")) {
+                btnPublish.setDisable(false);
+            }
+        } else
+        {
+            if (editBonStatus.getText().equals("تم إرسال رسالة")) {
+                vboxPubExe.setVisible(true);
+                btnPublish.setDisable(false);
+            } else HidePublishExe();
+        }
+    }
+    public void ActiveDesactive(){
+
+    }
+    public void PublishAction() {
+
     }
     public void ChangeStatus() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
@@ -2118,6 +2144,7 @@ public class Controller implements Initializable {
 
     }
     public void ClearEditInterface() {
+        HidePublishExe();
         searchResultExist=false;
         EditComObligList.getItems().removeAll(EditComObligList.getItems());
         statusArea.clear();

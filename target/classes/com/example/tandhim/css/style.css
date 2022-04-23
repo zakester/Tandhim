@@ -196,6 +196,13 @@
     -fx-border-radius: 2em;
     -fx-text-fill: white;
  }
+.textarea1 .content {
+    -fx-background-color: text-area-background ;
+    -fx-border-color: transparent !important;
+    -fx-border-radius: 2em;
+    -fx-text-fill: white;
+ }
+
  .Anchor {
     -fx-background-color: #02030A ;
  }
