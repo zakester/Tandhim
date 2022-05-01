@@ -87,7 +87,7 @@ public class Controller implements Initializable {
     private DatePicker datePickerFrom, datePickerTo, dateCitation, dateReport, dateReport2;
 
     @FXML
-    private Button btnAdd, btnDem, btnOblig, btnExcuse, btnEditBon, editBtnCreatePV, editBtnPrintPV, editBtnSearch, btnCreatePV, btnFormeJudiciere, btnFormeNonJudiciere,btnMandat,btnRqst;
+    private Button btnAdd, btnDem, btnOblig, btnExcuse, btnEditBon, editBtnPrintPV, editBtnSearch, btnCreatePV, btnFormeJudiciere, btnFormeNonJudiciere,btnMandat,btnRqst;
     @FXML
     private Button btnStatsBons2,btnPublish,btnExeNonExe;
     @FXML
@@ -1300,23 +1300,41 @@ public class Controller implements Initializable {
 
     }
     public void PublishAction() {
+        EditBonSearch result = new EditBonSearch(editNumBon.getText());
+        String[] options = new String[] {"إجراء التعليق", "طباعة التعليق السابق", "الغاء"};
+        int response = JOptionPane.showOptionDialog(null, "اجراء التعليق الخاص بالمطلوب : "+EditComObligList.getSelectionModel().getSelectedItem().toString(), "التعليق",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, options, options[0]);
+        if (response==0) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("publish.fxml"));
+            try {
+                Parent p = (Parent) loader.load();
+                PublishController ctrl = loader.getController();
+                Alert alert = new Alert(Alert.AlertType.NONE);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(
+                        getClass().getResource("css/style.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog-pane");
+                dialogPane.setContent(p);
+                Service s= new Service();
+                String service="";
+                try {
+                     service=s.getService(result.getService(),editNumBon.getText());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
+                System.out.println("ksjdjfbgqjsdlkbf qqskjdb "+obl.getNom());
+                ctrl.setValues(service,obl,result);
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "اسم الهيئة خاطئ");
+                alert.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-    }
-    public void ChangeStatus() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDialogue.fxml"));
-        try {
-            Parent p = (Parent) loader.load();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.setContent(p);
-            alert.setTitle("خطأ في الإدخال");
-            alert.setContentText(
-                    "اسم الهيئة خاطئ");
-            alert.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
     }
     public void UpdateBon() {
 
@@ -1698,7 +1716,7 @@ public class Controller implements Initializable {
             if (typeArea.getText().contains("بالوفاء"))
             ctrl.setStatus(editNumBon.getText(), editBonStatus.getText(), true,EditComObligList.getSelectionModel().getSelectedIndex());
             else ctrl.setStatus(editNumBon.getText(), editBonStatus.getText(), false,EditComObligList.getSelectionModel().getSelectedIndex());
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.NONE);
             DialogPane dialogPane = alert.getDialogPane();
             dialogPane.getStylesheets().add(
                     getClass().getResource("css/style.css").toExternalForm());
@@ -2151,7 +2169,6 @@ public class Controller implements Initializable {
         typeArea.clear();
         editBonStatus.clear();
         //editNumBon.clear();
-        editBtnCreatePV.setDisable(true);
         //ُEditComObligList.setPromptText("قائمة المطلوبين");
     }
 

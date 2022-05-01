@@ -5,6 +5,7 @@
  */
 package com.example.tandhim.Models;
 
+import com.example.tandhim.Models.Impression.publish;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -131,6 +132,8 @@ public class Obligatoire {
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int idn = preparedStmt.executeUpdate();
             if (idn >= 1) {
+                publish publish =new publish(id_bon ,this.getObligatoireId(), "");
+                publish.delete();
                 return true;
             }
         } catch (SQLException ex) {
@@ -177,7 +180,16 @@ public class Obligatoire {
         String query2 = "UPDATE obligatoire SET nom='"+getNom()+"', id_bon='"+getId_bon()+"', addr='"+getAddr()+"', status='"+getStatus()+"', date="+getDateSQL()+" WHERE id="+getObligatoireId();
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
-            preparedStmt2.executeUpdate();
+            int ok = preparedStmt2.executeUpdate();
+            if (ok==1) {
+                if (!(status.equals("تم إرسال رسالة")||status.equals("تم التعليق") || status.equals("تعليق (غير مبلغ)"))) {
+                    if (this.getLetter().size()>0){
+                        deleteLetter();
+                    }if (this.getPublish()!=null){
+                        getPublish().delete();
+                    }
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Demandeur.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
@@ -239,6 +251,28 @@ public class Obligatoire {
             l.publish();
         }
     }
+    public publish getPublish(){
+        try {
+            Connection bd = BDConnection.getConnection();
+            Statement st;
+            ResultSet rs;
+            String q1 = "SELECT * FROM publish WHERE num_bon='" + id_bon + "' and id_oblig="+getObligatoireId()+"";
+            int id = 0;
+            st = bd.createStatement();
+            rs = st.executeQuery(q1);
+            while (rs.next()) {
+                publish pub = new publish(id_bon,getObligatoireId(),rs.getString("type_pv"));
+                pub.setResponse(rs.getString("response"));
+                pub.setAdressed(rs.getString("adressed"));
+                pub.setTypeRqst(rs.getString("type_rqst"));
+                pub.setDateFinCommune(rs.getString("date_fin_commune"));
+                pub.setDateFineTribunal(rs.getString("date_fin_tribunal"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Obligatoire.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public String OblStatus() {
         if (status == null || status.equals("")) {
             return "الإجراء الخاص بالمطلوب لم ينجز بعد";
@@ -260,6 +294,11 @@ public class Obligatoire {
             }
         } else if (status.equals("تم التبليغ") || status.equals("ملغاة") || status.equals("تم إشعاره(ا)")) {
             return status + " بتاريخ: " + date;
+        } else if (status.equals("تعليق (غير مبلغ)")) {
+            return status ;
+        }else if (status.equals("تم التعليق")) {
+            publish pub = this.getPublish();
+            return status + " في المحكمة بتاريخ: " + pub.getDateFineTribunal()+" وفي البلدية بتاريخ: " + pub.getDateFinCommune();
         }
         return "";
     }

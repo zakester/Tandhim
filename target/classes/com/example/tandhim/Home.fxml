@@ -639,7 +639,7 @@
                            <Insets />
                         </HBox.margin>
                      </Button>
-                     <Button fx:id="editBtnCreatePV" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
+                     <Button fx:id="btnActiveDesactive" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#ActiveDesactive" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="إلغاء/تنشيط الوصل" textAlignment="CENTER" textFill="#e7e5e5">
                         <graphic>
                            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                               <image>
