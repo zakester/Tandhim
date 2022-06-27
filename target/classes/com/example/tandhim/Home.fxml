@@ -574,7 +574,7 @@
                                              <Font size="18.0" />
                                           </font>
                                        </Button>
-                                       <Button fx:id="btnExeNonExe" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: transparent;" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="إجراء التنفيذ/امتناع" textAlignment="CENTER" textFill="#e7e5e5">
+                                       <Button fx:id="btnExeNonExe" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#ExeNonExeAction" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: transparent;" styleClass="transparent-button2" stylesheets="@css/style%201.css" text="إجراء التنفيذ/امتناع" textAlignment="CENTER" textFill="#e7e5e5">
                                           <graphic>
                                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>

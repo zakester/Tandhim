@@ -1299,6 +1299,9 @@ public class Controller implements Initializable {
     public void ActiveDesactive(){
 
     }
+    public void ExeNonExeAction() {
+
+    }
     public void PublishAction() {
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
         String[] options = new String[] {"إجراء التعليق", "طباعة التعليق السابق", "الغاء"};
@@ -2288,5 +2291,4 @@ public class Controller implements Initializable {
         Stage stage = (Stage) btnExit.getScene().getWindow();
         stage.close();
     }
-
 }
