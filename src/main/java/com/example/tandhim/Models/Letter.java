@@ -102,7 +102,7 @@ public class Letter {
     }
     public void updateLetter(){
         Connection bd = BDConnection.getConnection();
-        String query2 = "UPDATE obligatoire SET id_rapport='"+id_bon+"', type_rapport='"+typePV+"', num_lettre='"+numLetter+"', date_lattre='"+dateLetter+"', id_obligatoire='"+idObligatoire+"' WHERE id="+getLetterId();
+        String query2 = "UPDATE letter SET id_rapport='"+id_bon+"', type_rapport='"+typePV+"', num_lettre='"+numLetter+"', date_lettre='"+dateLetter+"', id_obligatoire='"+idObligatoire+"' WHERE id="+getLetterId();
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.executeUpdate();

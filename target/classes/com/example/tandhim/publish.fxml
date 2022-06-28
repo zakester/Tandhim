@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="458.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.EditDialogueController">
+<VBox prefHeight="458.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.PublishController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="لاستكمال إجراء التعليق الرجاء ملء المعلومات اللازمة" textOverrun="CENTER_ELLIPSIS" />
       <Label fx:id="typePV" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="تعليق محضر" textOverrun="CENTER_ELLIPSIS" />
@@ -27,18 +27,18 @@
                <children>
                   <VBox layoutX="85.0" layoutY="4.0" prefHeight="166.0" prefWidth="225.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="adreessing" alignment="CENTER_RIGHT" onKeyPressed="#okPressed" prefHeight="23.0" prefWidth="225.0" promptText="مخاطبا" stylesheets="@css/style.css">
+                        <TextField fx:id="adreessing" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="225.0" promptText="مخاطبا" stylesheets="@css/style.css">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="response" alignment="CENTER_RIGHT" onKeyPressed="#okPressed" prefHeight="23.0" prefWidth="225.0" promptText="والذي أجاب(ت)نا" stylesheets="@css/style.css">
+                        <TextField fx:id="response" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="225.0" promptText="والذي أجاب(ت)نا" stylesheets="@css/style.css">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </TextField>
                         <DatePicker fx:id="date" editable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="256.0" promptText="بتاريخ" stylesheets="@css/style.css" />
-                        <TextField fx:id="typeRqst" alignment="CENTER_RIGHT" onKeyPressed="#okPressed" prefHeight="23.0" prefWidth="225.0" promptText="نوع العريضة" stylesheets="@css/style.css">
+                        <TextField fx:id="typeRqst" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="225.0" promptText="نوع العريضة" stylesheets="@css/style.css">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -61,7 +61,7 @@
          <children>
             <HBox fx:id="hboxStatus1" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="395.0" spacing="40.0">
                <children>
-                  <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SaveEdit" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="اضغط هنا لحفظ المعلومات" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                  <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SavePublish" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="اضغط هنا لحفظ المعلومات" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -72,7 +72,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btnSave1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SaveEdit" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="طباعة محضر التعليق" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                  <Button fx:id="btnSave1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#PrintPublish" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="طباعة محضر التعليق" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

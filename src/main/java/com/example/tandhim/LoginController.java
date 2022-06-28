@@ -24,6 +24,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 public class LoginController implements Initializable {
 
     @FXML
@@ -42,6 +44,13 @@ public class LoginController implements Initializable {
     }
 
     public void Login(ActionEvent e) throws IOException {
+        if (userName.getText().equals("") || password.getText().equals("")){
+            JOptionPane op = new JOptionPane();
+            op.showMessageDialog(null, "إسم المستخدم أو كلمة المرور خاطئة2222");
+            return ;
+        }
+        BDConnection.findMySqlServer();
+
         Connection bd = BDConnection.getConnection();
         String query = "SELECT * FROM users WHERE username='" + userName.getText() + "' AND password='"+ password.getText() +"'";
         Statement st;
@@ -53,22 +62,26 @@ public class LoginController implements Initializable {
             if (rs.next()){
                 FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("Home.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
+                Controller controller2 = fxmlLoader.getController();
+                controller2.setUserType(rs.getString("type"));
+                controller2.setUserName(rs.getString("nom")+" "+rs.getString("prenom"));
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
             }else{
-                System.out.println("not know");
+                JOptionPane op = new JOptionPane();
+                op.showMessageDialog(null, "إسم المستخدم أو كلمة المرور خاطئة");
             }
         } catch (Exception exp) {
             exp.printStackTrace();
         }
 
-
+/*
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
         primaryStage.close();
         Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
         primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        primaryStage.show();*/
 
 
     }

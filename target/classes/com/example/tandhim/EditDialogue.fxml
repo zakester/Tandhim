@@ -51,6 +51,11 @@
                         <Insets />
                      </HBox.margin>
                   </Button>
+                  <Button fx:id="btnPublished" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClicks" prefHeight="75.0" prefWidth="99.0" styleClass="button2" stylesheets="@css/style.css" text="معلق" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
                </children>
             </HBox>
          </children>
@@ -115,6 +120,16 @@
             <Pane fx:id="pnlConvoqued" prefHeight="54.0" prefWidth="395.0" visible="false">
                <children>
                   <DatePicker fx:id="dateConvoqued" layoutX="72.0" layoutY="28.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="252.0" promptText="تاريخ الإشعار" stylesheets="@css/style.css" />
+               </children>
+            </Pane>
+            <Pane fx:id="pnlPublished" prefHeight="54.0" prefWidth="395.0" visible="false">
+               <children>
+                  <VBox layoutX="72.0" layoutY="6.0" spacing="10.0">
+                     <children>
+                        <DatePicker fx:id="datePubTribunal" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="252.0" promptText="تاريخ التبليغ بالمحكمة" stylesheets="@css/style.css" />
+                        <DatePicker fx:id="datePubCommune" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="252.0" promptText="تاريخ التبليغ بالبلدية" stylesheets="@css/style.css" />
+                     </children>
+                  </VBox>
                </children>
             </Pane>
          </children>

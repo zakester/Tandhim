@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 29 mars 2022 à 15:32
+-- Généré le : lun. 27 juin 2022 à 15:04
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -84,6 +84,13 @@ CREATE TABLE `bon_apercus` (
   `somme` int(11) NOT NULL DEFAULT 4500
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Déchargement des données de la table `bon_apercus`
+--
+
+INSERT INTO `bon_apercus` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `somme`) VALUES
+(3, '5/22', 1500, 'غير منجزة', NULL, '2022-03-30 08:40:14', 4000);
+
 -- --------------------------------------------------------
 
 --
@@ -108,7 +115,8 @@ CREATE TABLE `bon_apercu_parorders` (
 --
 
 INSERT INTO `bon_apercu_parorders` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `num_order`, `date_order`, `commission`, `somme`) VALUES
-(1, '12/21', 4500, 'منجزة', '2022-03-29', '2022-03-28 12:01:29', '234', '2021-03-20', 'محكمة : البليدة', 4500);
+(1, '12/21', 4500, '', '2022-03-29', '2022-04-23 12:23:05', '234', '2021-03-20', 'محكمة : البليدة', 4500),
+(2, '6/22', 4500, 'منجزة', '2022-03-30', '2022-03-30 09:32:16', '43/22', '2022-03-16', 'محكمة : البليدة', 4500);
 
 -- --------------------------------------------------------
 
@@ -125,6 +133,13 @@ CREATE TABLE `bon_associations` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `somme` int(11) NOT NULL DEFAULT 4500
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `bon_associations`
+--
+
+INSERT INTO `bon_associations` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `somme`) VALUES
+(3, '7/22', 5000, 'منجزة', '2022-03-31', '2022-03-30 09:31:48', 7000);
 
 -- --------------------------------------------------------
 
@@ -220,7 +235,8 @@ CREATE TABLE `bon_orders` (
 
 INSERT INTO `bon_orders` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `num_order`, `date_order`, `commission`, `somme`, `type`) VALUES
 (6, '19/21', 6780, '', NULL, '2021-11-16 16:01:53', '2359/21', '2021-11-07', 'المحكمة الإدارية : البليدة', 6780, 'أمر إستعجالي'),
-(8, '1/22', 2000, '', NULL, '2022-03-25 10:49:09', '12/22', '2022-03-11', 'محكمة : البليدة', 3000, 'أمر إستعجالي');
+(8, '1/22', 2000, '', NULL, '2022-03-25 10:49:09', '12/22', '2022-03-11', 'محكمة : البليدة', 3000, 'أمر إستعجالي'),
+(9, '8/22', 1500, '', NULL, '2022-03-31 16:54:39', '78/22', '2022-03-31', 'مجلس قضاء : البليدة', 1500, 'أمر إستعجالي');
 
 -- --------------------------------------------------------
 
@@ -308,10 +324,11 @@ CREATE TABLE `bon_seances` (
 
 INSERT INTO `bon_seances` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `num_seance`, `type`, `commission`, `date_seance`, `date_report`, `date_report2`, `somme`) VALUES
 (53, '8/21', 3000, 'منجزة', '2021-03-16', '2022-03-28 20:25:34', '1234567', 'القسم المدني', 'محكمة : البليدة', '2021-03-27', '0000-00-00', '0000-00-00', 3000),
-(54, '15/21', 6000, 'تم إرسال رسالة', '2021-04-21', '2022-03-28 20:26:03', '554/21', 'القسم المدني', 'مجلس قضاء : البليدة', '2021-04-22', NULL, NULL, 6000),
+(54, '15/21', 6000, 'تم إرسال رسالة', '2021-04-21', '2022-03-29 13:52:10', '786/21', 'القسم المدني', 'مجلس قضاء : البليدة', '2021-04-22', NULL, NULL, 6000),
 (64, '17/21', 0, '', NULL, '2021-09-30 14:01:02', '2353/21', 'القسم المدني', 'محكمة : البليدة', '2021-09-23', NULL, NULL, 3000),
 (66, '18/21', 1000, '', NULL, '2021-10-09 10:46:22', '3224/21', 'القسم الاجتماعي', 'محكمة : البليدة', '2021-10-01', '2021-10-09', '2021-10-22', 3000),
-(72, '19/21', 3000, '', NULL, '2021-11-19 17:34:04', '1234/21', 'القسم المدني', 'محكمة : البليدة', '2021-11-06', '2021-11-12', NULL, 3000);
+(72, '19/21', 3000, '', NULL, '2021-11-19 17:34:04', '1234/21', 'القسم المدني', 'محكمة : البليدة', '2021-11-06', '2021-11-12', NULL, 3000),
+(73, '9/22', 1500, '', NULL, '2022-03-31 17:01:05', '434/22', 'القسم المدني', 'محكمة : البليدة', '2022-04-01', NULL, NULL, 3000);
 
 -- --------------------------------------------------------
 
@@ -355,7 +372,12 @@ INSERT INTO `demandeur` (`id`, `nom`, `addr`, `type_bon`, `id_bon`) VALUES
 (241, 'كسنيةبكسنية', 'كسمةيبكمة', NULL, '1/22'),
 (242, 'سشيبشيسب', 'كسمةيبكمة', NULL, '2/22'),
 (243, 'صشيسبشسي', 'كسمةيبكمة', NULL, '3/22'),
-(244, 'مبروكي حسام', 'بوسعادة ولاية المسيلة', NULL, '4/22');
+(244, 'مبروكي حسام', 'بوسعادة ولاية المسيلة', NULL, '4/22'),
+(247, 'لطفي بوجلال', 'حي النخيل رقم 40 البليدة', NULL, '5/22'),
+(248, 'علي عليوات', 'حي الموز رقم 34 البليدة', NULL, '6/22'),
+(249, 'محفوظ عليوات', 'حي الموز رقم 34 البليدة', NULL, '7/22'),
+(250, 'بشير بشيري', 'حي النخيل البليدة', NULL, '8/22'),
+(251, 'عبد القادر عمر', 'حي سيدي عبد القادر البليدة', NULL, '9/22');
 
 -- --------------------------------------------------------
 
@@ -382,10 +404,14 @@ INSERT INTO `identif` (`id`, `year`) VALUES
 (4, 21),
 (4, 22),
 (5, 21),
-(6, 21),
+(5, 22),
+(6, 22),
 (7, 21),
+(7, 22),
 (8, 21),
+(8, 22),
 (9, 21),
+(9, 22),
 (10, 21),
 (11, 21),
 (12, 21),
@@ -423,9 +449,11 @@ INSERT INTO `letter` (`id`, `id_rapport`, `type_rapport`, `id_obligatoire`, `num
 (35, '2/21', 'تكليف بالوفاء : محضر تكليف', 116, '234567324', '2021-03-18', 1),
 (36, '2/21', 'تكليف بالوفاء : محضر تبليغ التكليف', 116, '23456765', '2021-04-17', 1),
 (37, '2/21', 'تكليف بالوفاء : محضر تبليغ السند', 116, '2345678', '2021-03-13', 1),
-(72, '15/21', 'تبليغ جلسة', 142, 'R00723444509', '2022-03-27', 0),
 (73, '15/21', 'تبليغ جلسة', 206, 'ٌR00849833409', '2022-03-28', 0),
-(76, '15/21', 'تبليغ جلسة', 206, 'R00932452309', '2022-03-28', 0);
+(76, '15/21', 'تبليغ جلسة', 206, 'R00932452309', '2022-03-28', 0),
+(77, '9/22', 'تبليغ جلسة', 208, 'R00835597809', '2022-04-12', 0),
+(78, '16/21', 'تبليغ حكم', 163, 'R00834566709', '2022-04-16', 0),
+(79, '15/21', 'تبليغ جلسة', 142, 'R00734567709', '2022-06-27', 0);
 
 -- --------------------------------------------------------
 
@@ -497,8 +525,8 @@ INSERT INTO `obligatoire` (`id`, `nom`, `addr`, `status`, `date`, `en_suspens`, 
 (125, 'رلاىرؤ', 'نهتع', NULL, NULL, 0, '14/21'),
 (126, 'شلقبيشلشيب', 'سيبلابلي', 'تم التبليغ', '2021-02-16', 0, '8/21'),
 (141, 'مراد بن ثامر', 'قرواو', NULL, NULL, 0, '9/21'),
-(142, 'محمد السعيد بوعلام الله', 'الجزائر', 'تم إرسال رسالة', '2022-03-27', 0, '15/21'),
-(163, 'سيد أحمد', 'حسين داي', NULL, NULL, 0, '16/21'),
+(142, 'محمد السعيد بوعلام الله', 'الجزائر', 'تعليق (غير مبلغ)', '2022-05-21', 0, '15/21'),
+(163, 'سيد أحمد', 'حسين داي', 'تم التبليغ', '2022-04-22', 0, '16/21'),
 (164, 'شصثبقصثص', 'ثفلاللل', NULL, NULL, 0, '17/21'),
 (174, 'فيصل بوبكري', 'حي طريق الحبس البليدة', NULL, NULL, 0, '18/21'),
 (175, 'الطيب شيبوب', 'العفرون', NULL, NULL, 0, '18/21'),
@@ -508,9 +536,36 @@ INSERT INTO `obligatoire` (`id`, `nom`, `addr`, `status`, `date`, `en_suspens`, 
 (198, 'حسين بد عيادة', 'وادي العلايق', NULL, NULL, 0, '21/21'),
 (199, 'شيسمنبناسمني', 'سيبيشسب', NULL, NULL, 0, '1/22'),
 (200, 'سيبشسيب', 'سيبيشسب', NULL, NULL, 0, '2/22'),
-(201, 'شسيبيسشب', 'سيبيشسب', NULL, NULL, 0, '3/22'),
+(201, 'شسيبيسشب', 'سيبيشسب', 'تم إشعاره(ا)', '2022-04-23', 0, '3/22'),
 (202, 'محمد علي مام', 'حي بونعامة الجيلالي ع 10 رقم 12 البليدة', 'تم التبليغ', '2022-03-28', 0, '4/22'),
-(206, 'حمزاوي حمزة', 'حي الحماليت البليدة', 'تم إشعاره(ا)', '2022-03-28', 0, '15/21');
+(207, 'عبد الوهاب زبيري', 'حي الموز البليدة', 'تم التبليغ', '2022-03-31', 0, '8/22'),
+(208, 'عميمر سيد احمد', 'شارع 11 ديسمبر 1960 البليدة', 'تم إرسال رسالة', NULL, 0, '9/22');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `publish`
+--
+
+CREATE TABLE `publish` (
+  `id` int(11) NOT NULL,
+  `num_bon` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `type_pv` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `id_oblig` int(11) NOT NULL,
+  `adressed` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `response` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `type_rqst` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `date_fin_commune` date DEFAULT NULL,
+  `date_fin_tribunal` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `publish`
+--
+
+INSERT INTO `publish` (`id`, `num_bon`, `type_pv`, `id_oblig`, `adressed`, `response`, `type_rqst`, `created_at`, `date_fin_commune`, `date_fin_tribunal`) VALUES
+(2, '15/21', 'تبليغ جلسة', 142, 'أمه', 'تمثامتيسخنبسشكنىةنمى صىثسيمنبىس', NULL, '2022-04-23', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -743,6 +798,12 @@ ALTER TABLE `obligatoire`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `publish`
+--
+ALTER TABLE `publish`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `rapports`
 --
 ALTER TABLE `rapports`
@@ -780,19 +841,19 @@ ALTER TABLE `bon_acte`
 -- AUTO_INCREMENT pour la table `bon_apercus`
 --
 ALTER TABLE `bon_apercus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `bon_apercu_parorders`
 --
 ALTER TABLE `bon_apercu_parorders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `bon_associations`
 --
 ALTER TABLE `bon_associations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `bon_autres`
@@ -816,7 +877,7 @@ ALTER TABLE `bon_mandat`
 -- AUTO_INCREMENT pour la table `bon_orders`
 --
 ALTER TABLE `bon_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `bon_provisions`
@@ -834,19 +895,19 @@ ALTER TABLE `bon_rqst`
 -- AUTO_INCREMENT pour la table `bon_seances`
 --
 ALTER TABLE `bon_seances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT pour la table `demandeur`
 --
 ALTER TABLE `demandeur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
 -- AUTO_INCREMENT pour la table `letter`
 --
 ALTER TABLE `letter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT pour la table `logs`
@@ -864,7 +925,13 @@ ALTER TABLE `notification_fidelité`
 -- AUTO_INCREMENT pour la table `obligatoire`
 --
 ALTER TABLE `obligatoire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+
+--
+-- AUTO_INCREMENT pour la table `publish`
+--
+ALTER TABLE `publish`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `rapports`

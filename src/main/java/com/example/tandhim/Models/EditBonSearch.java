@@ -80,6 +80,10 @@ public class EditBonSearch {
         }
     }
 
+    public String getId() {
+        return id;
+    }
+
     public BonSeances getBonData() {
             System.out.println(Service);
             String query = "SELECT prix,num_seance,type,commission,date_seance,date_report,date_report2,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
