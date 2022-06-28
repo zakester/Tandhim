@@ -142,7 +142,16 @@ public class EditDialogueController implements Initializable {
                             try {
                                 Letter l = new Letter(oblig.getId_bon(), numLetter.getText(), dateLetter.getValue().toString(), new Service().getService(result.getService(), num_bon), oblig.getObligatoireId(), 0);
                                 if (status.equals("تم إرسال رسالة")) l.updateLetter();
-                                else l.insert();
+                                else {
+                                    if (oblig.getLetter()!=null) {
+                                        oblig.deleteLetter();
+                                    }
+                                    l.insert();
+                                    if (oblig.getPublish()!=null) {
+                                        oblig.getPublish().delete();
+                                    }
+
+                                }
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
@@ -171,15 +180,24 @@ public class EditDialogueController implements Initializable {
                                     l2.setNumLetter(dateLetter2.getValue().toString());
                                     l3.setNumLetter(numLetter3.getText());
                                     l3.setNumLetter(dateLetter3.getValue().toString());
-
-                                } else {
+                                    l1.updateLetter();
+                                    l2.updateLetter();
+                                    l3.updateLetter();
+                                    if (oblig.getPublish()!=null) {
+                                        oblig.getPublish().delete();
+                                    }                                } else {
+                                    if(oblig.getLetter()!=null) {
+                                        oblig.deleteLetter();
+                                    }
                                     Letter l1 = new Letter(oblig.getId_bon(), numLetter.getText(), dateLetter.getValue().toString(), new Service().getService(result.getService(), num_bon) + " : محضر تكليف", oblig.getObligatoireId(), 0);
                                     Letter l2 = new Letter(oblig.getId_bon(), numLetter.getText(), dateLetter.getValue().toString(), new Service().getService(result.getService(), num_bon) + " : محضر تبليغ التكليف", oblig.getObligatoireId(), 0);
                                     Letter l3 = new Letter(oblig.getId_bon(), numLetter.getText(), dateLetter.getValue().toString(), new Service().getService(result.getService(), num_bon) + " : محضر تبليغ السند", oblig.getObligatoireId(), 0);
                                     l1.insert();
                                     l2.insert();
                                     l3.insert();
-                                }
+                                    if (oblig.getPublish()!=null) {
+                                        oblig.getPublish().delete();
+                                    }                                }
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
@@ -195,8 +213,8 @@ public class EditDialogueController implements Initializable {
                     if (datePubCommune.getValue() != null && datePubTribunal.getValue() != null) {
                         oblig.setStatus("تم التعليق");
                         publish pub = oblig.getPublish();
-                        ((publish) pub).setDateFinCommune(datePubCommune.getValue().toString());
-                        ((publish) pub).setDateFineTribunal(datePubTribunal.getValue().toString());
+                        pub.setDateFineTribunal(datePubTribunal.getValue().toString());
+                        pub.setDateFinCommune(datePubCommune.getValue().toString());
                         pub.update();
                         oblig.updateObligatoire();
                         Stage stage = (Stage) btnDone.getScene().getWindow();

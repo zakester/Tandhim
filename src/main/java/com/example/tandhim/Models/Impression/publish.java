@@ -19,7 +19,7 @@ public class publish {
     }
     public void insert() {
         Connection bd = BDConnection.getConnection();
-        String query2 = "INSERT INTO `publish`(`num_bon`, `type_pv`, `id_oblig`, `adressed`, `response`, `typerqst`) VALUES (?,?,?,?,?,?)";
+        String query2 = "INSERT INTO `publish`(`num_bon`, `type_pv`, `id_oblig`, `adressed`, `response`, `type_rqst`) VALUES (?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.setString(1, numBon);
@@ -36,7 +36,7 @@ public class publish {
     public boolean delete() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "DELETE FROM publish WHERE id_bon='" + numBon + "' AND id_oblig='" + id_oblig + "'";
+            String query = "DELETE FROM publish WHERE num_bon='" + numBon + "' AND id_oblig='" + id_oblig + "'";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
         } catch (SQLException ex) {
@@ -47,7 +47,7 @@ public class publish {
     }
     public void update () {
         Connection bd = BDConnection.getConnection();
-        String query2 = "UPDATE publish SET type_pv='"+typePv+"', type_rqst='"+typeRqst+"', adressed="+adressed+" , response='"+response+"' , date_fin_commune='"+getDateFinCommuneSQL()+"' , date_fin_tribunal='"+getDateFineTribunalSQL()+"' WHERE num_bon='"+numBon+"' AND id_oblig="+id_oblig;
+        String query2 = "UPDATE publish SET type_pv='"+typePv+"', type_rqst='"+typeRqst+"', adressed='"+adressed+"' , response='"+response+"' , date_fin_commune= "+getDateFinCommuneSQL()+" , date_fin_tribunal="+getDateFineTribunalSQL()+" WHERE num_bon='"+numBon+"' AND id_oblig="+id_oblig;
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.executeUpdate();

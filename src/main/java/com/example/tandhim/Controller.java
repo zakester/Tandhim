@@ -1281,7 +1281,7 @@ public class Controller implements Initializable {
             statusArea.setText(obl.OblStatus());
         }
         if (result.isNotificationFidelité() || result.getService().equals("bon_acte")){
-            if (editBonStatus.getText().equals("تم التبليغ") || editBonStatus.getText().equals("معلقة")) {
+            if (editBonStatus.getText().equals("تم التبليغ") || editBonStatus.getText().equals("تم إرسال رسالة")|| editBonStatus.getText().equals("تم التعليق")) {
                 vboxPubExe.setVisible(true);
                 btnExeNonExe.setDisable(false);
             }

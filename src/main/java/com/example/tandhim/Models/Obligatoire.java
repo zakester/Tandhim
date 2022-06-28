@@ -267,6 +267,7 @@ public class Obligatoire {
                 pub.setTypeRqst(rs.getString("type_rqst"));
                 pub.setDateFinCommune(rs.getString("date_fin_commune"));
                 pub.setDateFineTribunal(rs.getString("date_fin_tribunal"));
+                return pub;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Obligatoire.class.getName()).log(Level.SEVERE, null, ex);
