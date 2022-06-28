@@ -36,6 +36,13 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
 public class Controller implements Initializable {
 
@@ -152,7 +159,7 @@ public class Controller implements Initializable {
     private Pane pnlAdd, pnlEdit, pnlSettings;
 
     @FXML
-    private Label labelStats, bonText, lbSommeExpected, lbSommeBon;
+    private Label labelStats, bonText, lbSommeExpected, lbSommeBon, userNameLabel;
     @FXML
     private Pane pnlAdd2;
     @FXML
@@ -173,6 +180,22 @@ public class Controller implements Initializable {
     /** Right menu */
     @FXML
     private VBox rightMenu;
+
+    private String userType;
+    private String userName;
+
+    public void setUserType(String s){
+        this.userType = s;
+        if(!userType.equals("admin")) {
+            btnStats.setVisible(false);
+            btnSettings.setVisible(false);
+        }
+    }
+
+    public void setUserName(String s){
+        this.userName = s;
+        userNameLabel.setText(s);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -2284,6 +2307,55 @@ public class Controller implements Initializable {
         if (actionEvent.getSource() == btnExit) {
             Stage stage = (Stage) btnExit.getScene().getWindow();
             stage.close();
+        }
+    }
+
+    public void push(){
+        try {
+            //Public API:
+            //https://www.metaweather.com/api/location/search/?query=<CITY>
+            //https://www.metaweather.com/api/location/44418/
+
+            URL url = new URL("https://www.metaweather.com/api/location/search/?query=London");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            //Check if connect is made
+            int responseCode = conn.getResponseCode();
+
+            // 200 OK
+            if (responseCode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            } else {
+
+                StringBuilder informationString = new StringBuilder();
+                Scanner scanner = new Scanner(url.openStream());
+
+                while (scanner.hasNext()) {
+                    informationString.append(scanner.nextLine());
+                }
+                //Close the scanner
+                scanner.close();
+
+                System.out.println(informationString);
+
+
+                //JSON simple library Setup with Maven is used to convert strings to JSON
+                JSONParser parse = new JSONParser();
+                JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(informationString));
+
+                //Get the first JSON object in the JSON array
+                System.out.println(dataObject.get(0));
+
+                JSONObject countryData = (JSONObject) dataObject.get(0);
+
+                System.out.println(countryData.get("woeid"));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

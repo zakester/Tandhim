@@ -36,7 +36,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin></ImageView>
-            <Label text="الأستاذ بن ثامر دحمان" textFill="WHITE">
+            <Label text="الأستاذ بن ثامر دحمان" fx:id="userNameLabel" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
@@ -171,8 +171,8 @@
                            <StackPane fx:id="stpnlFormeExe" onMouseExited="#exitHover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style.css">
                               <children>
                                  <Button fx:id="btnFormeExecutif" mnemonicParsing="false" onMouseEntered="#hover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style%201.css" text="تكليف بالوفاء" />
-                                 <Button fx:id="btnFormeJudiciere" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="بموجب سند قضائي" visible="false" StackPane.alignment="TOP_CENTER" />
-                                 <Button fx:id="btnFormeNonJudiciere" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style 1.css" text="بموجب سند غير قضائي" visible="false" StackPane.alignment="BOTTOM_CENTER" />
+                                 <Button fx:id="btnFormeJudiciere" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="بموجب سند قضائي" visible="false" StackPane.alignment="TOP_CENTER" />
+                                 <Button fx:id="btnFormeNonJudiciere" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="بموجب سند غير قضائي" visible="false" StackPane.alignment="BOTTOM_CENTER" />
                               </children>
                            </StackPane>
                         </children>

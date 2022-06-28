@@ -12,6 +12,7 @@ module com.example.tandhim {
     requires poi.ooxml.schemas;
     requires com.google.zxing;
     requires jfreesvg;
+    requires json.simple;
 
     opens com.example.tandhim to javafx.fxml;
     exports com.example.tandhim;

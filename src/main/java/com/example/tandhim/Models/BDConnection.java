@@ -7,18 +7,18 @@
 package com.example.tandhim.Models;
 
 
-import java.awt.Component;
+
 import java.util.*;
 import java.io.*;
 import java.net.*;
 import java.lang.Math;
-import java.lang.Exception;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class BDConnection {
 
-    static String host = "localhost";
+    public static String host = "127.0.0.1";
     static String DB_URL
             = "jdbc:mysql://" + host + ":3306/huissier_de_justice?useUnicode=yes&characterEncoding=UTF-8";
     static final String DB_DRV
@@ -185,12 +185,16 @@ public class BDConnection {
     }
 
     public static boolean thereIsMySqlServer(String host) {
-        Socket Skt;
+        Socket Skt = null;
         try {
             Skt = new Socket(host, 3306);
             System.out.println("Models.BDConnection.thereIsMySqlServer() " + host);
+
+            Skt.close();
             return true;
         } catch (IOException ex) {
+
+
             return false;
         }
 
@@ -201,6 +205,7 @@ public class BDConnection {
     }
 
     public static void findMySqlServer() {
+
         if (thereIsMySqlServer("localhost")) {
             host = "localhost";
         } else {
@@ -268,13 +273,19 @@ public class BDConnection {
         return 0;}
 
     private static Connection isConnectionpossibele(String host) {
+
         if (thereIsMySqlServer(host)) {
             Connection connection = null;
+
             try {
+                Class.forName("com.mysql.jdbc.Driver");
                 DB_URL
                         = "jdbc:mysql://" + host + ":3306/huissier_de_justice?useUnicode=yes&characterEncoding=UTF-8";
                 connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
             BDConnection.host = host;
             return connection;

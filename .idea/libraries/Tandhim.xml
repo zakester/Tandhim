@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Tandhim">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/poi-3.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/poi-examples-3.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/xmlbeans-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/poi-scratchpad-3.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/aspose.pdf-21.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/poi-excelant-3.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/poi-ooxml-schemas-3.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/poi-ooxml-3.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/aspose.pdf-21.10-javadoc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
