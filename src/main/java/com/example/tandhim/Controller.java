@@ -25,12 +25,12 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -2310,48 +2310,222 @@ public class Controller implements Initializable {
         }
     }
 
-    public void push(){
+    static double v=0;
+    ProgressBar p;
+    private void increaseProgress(){
+        v += 0.1;
+        p.setProgress(v);
+    }
+
+    public void push(ActionEvent actionEvent){
         try {
             //Public API:
             //https://www.metaweather.com/api/location/search/?query=<CITY>
             //https://www.metaweather.com/api/location/44418/
 
-            URL url = new URL("https://www.metaweather.com/api/location/search/?query=London");
+            URL url = new URL("http://localhost:8000/api/bons/");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+
+
+            String sqlUpdate = "SELECT \"تكليف بالوفاء\" as type,num_bon,somme as versement,prix as rest FROM bon_acte WHERE last_updated=1\n" +
+                    "UNION SELECT \"BonApercus\" as type,num_bon,somme as versement,prix as rest FROM bon_apercus WHERE last_updated=1\n" +
+                    "UNION SELECT \"BonApercusParOrders\" as type,num_bon,somme as versement,prix as rest FROM bon_apercu_parorders WHERE last_updated=1\n" +
+                    "UNION SELECT \"BonAssociations\" as type,num_bon,somme as versement,prix as rest FROM bon_associations WHERE last_updated=1\n" +
+                    "UNION SELECT \"اخرى\" as type,num_bon,somme as versement,prix as rest FROM bon_autres WHERE last_updated=1\n" +
+                    "UNION SELECT \"تبليغ اعذار /ارسالية/طلب\" as type,num_bon,somme as versement,prix as rest FROM bon_excuses WHERE last_updated=1\n" +
+                    "UNION SELECT \"تبليغ مذكرة\" as type,num_bon,somme as versement,prix as rest FROM bon_mandat WHERE last_updated=1\n" +
+                    "UNION SELECT \"تكليف بالوفاء\" as type,num_bon,somme as versement,prix as rest FROM bon_orders WHERE last_updated=1 AND num_bon IN (SELECT id_provision FROM notification_fidelité)\n" +
+                    "UNION SELECT \"تبليغ امر\" as type,num_bon,somme as versement,prix as rest FROM bon_orders WHERE last_updated=1 AND num_bon NOT IN (SELECT id_provision FROM notification_fidelité)\n" +
+                    "UNION SELECT \"تكليف بالوفاء\" as type,num_bon,somme as versement,prix as rest FROM bon_provisions WHERE last_updated=1 AND num_bon IN (SELECT id_provision FROM notification_fidelité)\n" +
+                    "UNION SELECT \"تبليغ حكم/قرار\" as type,num_bon,somme as versement,prix as rest FROM bon_provisions WHERE last_updated=1 AND num_bon NOT IN (SELECT id_provision FROM notification_fidelité)\n" +
+                    "UNION SELECT \"تبليغ عريضة\" as type,num_bon,somme as versement,prix as rest FROM bon_rqst WHERE last_updated=1\n" +
+                    "UNION SELECT \"تكليف بالحضور لجلسة\" as type,num_bon,somme as versement,prix as rest FROM bon_seances WHERE last_updated=1;";
+            String sqlInsert="SELECT \"تكليف بالوفاء\" as type,num_bon,somme as versement,prix as rest FROM bon_acte WHERE last_updated=0\n" +
+                    "UNION SELECT \"BonApercus\" as type,num_bon,somme as versement,prix as rest FROM bon_apercus WHERE last_updated=0\n" +
+                    "UNION SELECT \"BonApercusParOrders\" as type,num_bon,somme as versement,prix as rest FROM bon_apercu_parorders WHERE last_updated=0\n" +
+                    "UNION SELECT \"BonAssociations\" as type,num_bon,somme as versement,prix as rest FROM bon_associations WHERE last_updated=0\n" +
+                    "UNION SELECT \"اخرى\" as type,num_bon,somme as versement,prix as rest FROM bon_autres WHERE last_updated=0\n" +
+                    "UNION SELECT \"تبليغ اعذار /ارسالية/طلب\" as type,num_bon,somme as versement,prix as rest FROM bon_excuses WHERE last_updated=0\n" +
+                    "UNION SELECT \"تبليغ مذكرة\" as type,num_bon,somme as versement,prix as rest FROM bon_mandat WHERE last_updated=0\n" +
+                    "UNION SELECT \"تكليف بالوفاء\" as type,num_bon,somme as versement,prix as rest FROM bon_orders WHERE last_updated=0 AND num_bon IN (SELECT id_provision FROM notification_fidelité)\n" +
+                    "UNION SELECT \"تبليغ امر\" as type,num_bon,somme as versement,prix as rest FROM bon_orders WHERE last_updated=0 AND num_bon NOT IN (SELECT id_provision FROM notification_fidelité)\n" +
+                    "UNION SELECT \"تكليف بالوفاء\" as type,num_bon,somme as versement,prix as rest FROM bon_provisions WHERE last_updated=0 AND num_bon IN (SELECT id_provision FROM notification_fidelité)\n" +
+                    "UNION SELECT \"تبليغ حكم/قرار\" as type,num_bon,somme as versement,prix as rest FROM bon_provisions WHERE last_updated=0 AND num_bon NOT IN (SELECT id_provision FROM notification_fidelité)\n" +
+                    "UNION SELECT \"تبليغ عريضة\" as type,num_bon,somme as versement,prix as rest FROM bon_rqst WHERE last_updated=0\n" +
+                    "UNION SELECT \"تكليف بالحضور لجلسة\" as type,num_bon,somme as versement,prix as rest FROM bon_seances WHERE last_updated=0\n";
+
+            p = new ProgressBar(0);
+            increaseProgress();
+            Connection bd = BDConnection.getConnection();
+            Statement st;
+            ResultSet rs;
+            String jsonInputString = "{\n" +
+                    "    \"update\":[\n";
+            st = bd.createStatement();
+            rs = st.executeQuery(sqlUpdate);
+            int j=0;
+            while (rs.next()){
+                if(j!=0)
+                    jsonInputString = jsonInputString + ",";
+               jsonInputString = jsonInputString + "    {\n" +
+                       "    \"num_bon\":\"" + rs.getString("num_bon") + "\",\n" +
+                       "    \"type\":\"" + rs.getString("type") + "\",\n" +
+                       "    \"rest\":" + rs.getDouble("rest") + ",\n" +
+                       "    \"versement\":" + rs.getDouble("versement") + ",\n" +
+                       "    \"demandeurs\":[\n"
+               ;
+                //TODO: add demandeur
+                String sqlDemandeur="SELECT nom FROM demandeur WHERE id_bon = \""+ rs.getString("num_bon")+"\"";
+                Statement st1;
+                ResultSet rs1;
+                st1 = bd.createStatement();
+                rs1 = st1.executeQuery(sqlDemandeur);
+                int i=0;
+                while(rs1.next()){
+                    if(i!=0)
+                        jsonInputString = jsonInputString + ",";
+                    jsonInputString = jsonInputString + "\"" + rs1.getString("nom") + "\"";
+                    i++;
+                }
+                jsonInputString = jsonInputString + "\n";
+               jsonInputString = jsonInputString + "    ],\n" +
+                       "    \"obligatoires\":[\n";
+                //TODO: add oblig
+                sqlDemandeur="SELECT o.nom as nom,o.status as status,l.date_lettre as date_lettre,l.num_lettre as num_lettre FROM obligatoire o LEFT JOIN letter l ON o.id = l.id_obligatoire AND o.id_bon = l.id_rapport  WHERE o.id_bon = \""+ rs.getString("num_bon")+"\"";
+
+                st1 = bd.createStatement();
+                rs1 = st1.executeQuery(sqlDemandeur);
+                i=0;
+                while(rs1.next()){
+                    if(i!=0)
+                        jsonInputString = jsonInputString + ",";
+                    jsonInputString = jsonInputString + "    {\n" +
+                            "    \"nom\":\"" + rs1.getString("nom") + "\",\n" +
+                            "    \"status\":\"" + rs1.getString("status") + "\",\n" +
+                            "    \"date\":\"" + rs1.getString("date_lettre") + "\",\n" +
+                            "    \"num_lettre\":\"" + rs1.getString("num_lettre") + "\"\n" +
+                            "}\n";
+                    i++;
+                }
+               jsonInputString = jsonInputString + "    ]\n";
+
+               jsonInputString = jsonInputString + "}\n";
+               j++;
+                increaseProgress();
+            }
+            jsonInputString = jsonInputString + "],\n";
+            //TODO: input json
+            jsonInputString = jsonInputString +
+                    "    \"insert\":[\n";
+            st = bd.createStatement();
+            rs = st.executeQuery(sqlInsert);
+            j=0;
+            while (rs.next()){
+                if(j!=0)
+                    jsonInputString = jsonInputString + ",";
+                jsonInputString = jsonInputString + "    {\n" +
+                        "    \"num_bon\":\"" + rs.getString("num_bon") + "\",\n" +
+                        "    \"type\":\"" + rs.getString("type") + "\",\n" +
+                        "    \"rest\":" + rs.getDouble("rest") + ",\n" +
+                        "    \"versement\":" + rs.getDouble("versement") + ",\n" +
+                        "    \"demandeurs\":[\n"
+                ;
+                //TODO: add demandeur
+                String sqlDemandeur="SELECT nom FROM demandeur WHERE id_bon = \""+ rs.getString("num_bon")+"\"";
+                System.out.println(sqlDemandeur);
+                Statement st1;
+                ResultSet rs1;
+                st1 = bd.createStatement();
+                rs1 = st1.executeQuery(sqlDemandeur);
+                int i=0;
+                while(rs1.next()){
+                    if(i!=0)
+                        jsonInputString = jsonInputString + ",";
+                    jsonInputString = jsonInputString + "\"" + rs1.getString("nom") + "\"";
+                    i++;
+                }
+                jsonInputString = jsonInputString + "\n";
+                jsonInputString = jsonInputString + "    ],\n" +
+                        "    \"obligatoires\":[\n";
+                //TODO: add oblig
+                sqlDemandeur= "SELECT o.nom as nom,o.status as status,l.date_lettre as date_lettre,l.num_lettre as num_lettre FROM obligatoire o LEFT JOIN letter l ON o.id = l.id_obligatoire AND o.id_bon = l.id_rapport  WHERE o.id_bon = \""+ rs.getString("num_bon")+"\"";
+
+
+                st1 = bd.createStatement();
+                rs1 = st1.executeQuery(sqlDemandeur);
+                i=0;
+                while(rs1.next()){
+                    if(i!=0)
+                        jsonInputString = jsonInputString + ",";
+                    jsonInputString = jsonInputString + "    {\n" +
+                            "    \"nom\":\"" + rs1.getString("nom") + "\",\n" +
+                            "    \"status\":\"" + rs1.getString("status") + "\",\n" +
+                            "    \"date\":\"" + rs1.getString("date_lettre") + "\",\n" +
+                            "    \"num_lettre\":\"" + rs1.getString("num_lettre") + "\"\n" +
+                            "}\n";
+                    i++;
+                }
+                jsonInputString = jsonInputString + "    ]\n";
+
+                jsonInputString = jsonInputString + "}\n";
+                j++;
+                increaseProgress();
+            }
+            jsonInputString = jsonInputString + "]\n";
+
+            jsonInputString = jsonInputString + "}\n";
+
+            try(OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+
             conn.connect();
 
             //Check if connect is made
             int responseCode = conn.getResponseCode();
 
             // 200 OK
-            if (responseCode != 200) {
+            if (responseCode != 200 && responseCode != 201) {
                 throw new RuntimeException("HttpResponseCode: " + responseCode);
             } else {
 
-                StringBuilder informationString = new StringBuilder();
-                Scanner scanner = new Scanner(url.openStream());
+                try(BufferedReader br = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine = null;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    increaseProgress();
+                    if(response.toString().equals("The informations have been added successfully")){
+                        String query = "UPDATE bon_acte SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_apercus SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_apercu_parorders SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_associations SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_autres SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_excuses SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_mandat SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_orders SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_provisions SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_rqst SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
+                                "UPDATE bon_seances SET last_updated=2 WHERE last_updated=1 OR last_updated=0;";
+                        PreparedStatement preparedStmt = bd.prepareStatement(query);
+                        int id = preparedStmt.executeUpdate();
+                        if (id >= 1) {
+                            System.out.println(response.toString());
+                            JOptionPane op = new JOptionPane();
+                            op.showMessageDialog(null, response.toString());
+                        }
+                    }
 
-                while (scanner.hasNext()) {
-                    informationString.append(scanner.nextLine());
                 }
-                //Close the scanner
-                scanner.close();
-
-                System.out.println(informationString);
-
-
-                //JSON simple library Setup with Maven is used to convert strings to JSON
-                JSONParser parse = new JSONParser();
-                JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(informationString));
-
-                //Get the first JSON object in the JSON array
-                System.out.println(dataObject.get(0));
-
-                JSONObject countryData = (JSONObject) dataObject.get(0);
-
-                System.out.println(countryData.get("woeid"));
 
             }
         } catch (Exception e) {
