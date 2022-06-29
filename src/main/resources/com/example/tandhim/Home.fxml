@@ -218,10 +218,10 @@
                      </HBox>
                      <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                         <children>
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" wrapText="true" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" wrapText="true" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" wrapText="true" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على منقول" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على ما للمدين لدى الغير" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على عقار" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" wrapText="true" />
                            <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" wrapText="true" />
                         </children>
                      </HBox>
@@ -523,7 +523,7 @@
                </Label>
             </children>
          </Pane>
-         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
             <children>
                <Pane layoutX="37.0" layoutY="120.0" prefHeight="340.0" prefWidth="720.0">
                   <children>

@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class BonActe extends BonNotification{
     private String num_bon,num,nomNotaire,type,date;
-    private int prix,somme;
+    private int prix,somme,last_Apdated;
     public BonActe (String num_bon,String num,String nomNotaire,String type,String date, int prix, int somme) {
     super(num_bon, prix);
     this.num= num;
@@ -57,7 +57,7 @@ public class BonActe extends BonNotification{
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_acte SET prix = " + prix + ", somme = " + somme + ", num ='" + num + "', date='" + date + "',type_acte='" + type + "' , nom_notaire='" + nomNotaire + "' WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_acte SET prix = " + prix + ", somme = " + somme + ", last_apdated = " + 1 + ", num ='" + num + "', date='" + date + "',type_acte='" + type + "' , nom_notaire='" + nomNotaire + "' WHERE num_bon='" + num_bon + "'";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {

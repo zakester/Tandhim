@@ -113,7 +113,7 @@ public class BonProvisions extends BonNotification {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_provision SET prix = " + prix + ", somme = " + somme + ", num_indice ='" + num_indice + "',num_table ='" + num_table + "', commission='" + commission + "',date='" + date + "',type='" + type + "' , spec='" + spec + "' WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_provision SET prix = " + prix + ", somme = " + somme + ", last_apdated = " + 1 + ", num_indice ='" + num_indice + "',num_table ='" + num_table + "', commission='" + commission + "',date='" + date + "',type='" + type + "' , spec='" + spec + "' WHERE num_bon='" + num_bon + "'";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {

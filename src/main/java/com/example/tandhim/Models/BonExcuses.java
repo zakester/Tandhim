@@ -92,7 +92,7 @@ public class BonExcuses extends BonNotification {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-                    String query = "UPDATE bon_excuses SET prix=" + prix + ", somme=" + somme + ",  date_marquage='" + date_marquage + "' ,  type='" + type + "' WHERE num_bon='" + num_bon + "'";
+                    String query = "UPDATE bon_excuses SET prix=" + prix + ", somme=" + somme + ",  last_apdated = " + 1 + ", date_marquage='" + date_marquage + "' ,  type='" + type + "' WHERE num_bon='" + num_bon + "'";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {
