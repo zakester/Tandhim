@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -18,6 +19,8 @@ public class ProgressBarController implements Initializable {
 
     @FXML
     private Label progressInfo;
+    @FXML
+    private VBox mainVbox;
 
     @FXML
     private Button btnClose;

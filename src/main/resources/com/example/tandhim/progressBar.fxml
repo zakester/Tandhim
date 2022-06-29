@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="BOTTOM_CENTER" prefHeight="202.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.ProgressBarController">
+<VBox fx:id="mainVbox" alignment="BOTTOM_CENTER" prefHeight="202.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.ProgressBarController">
    <children>
       <Label fx:id="progressInfo" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" style="-fx-font-size: 13;" text="progress infos" textFill="#ff0c0c" textOverrun="CENTER_ELLIPSIS">
          <font>
