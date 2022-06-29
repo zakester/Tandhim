@@ -19,7 +19,7 @@
             <ComboBox fx:id="comTypeExcuse" nodeOrientation="RIGHT_TO_LEFT" onAction="#updateType" prefHeight="37.0" prefWidth="443.0" promptText="النوع" stylesheets="@css/style.css" />
          </children>
       </HBox>
-      <TextField fx:id="type" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="225.0" promptText="النوع" stylesheets="@css/style.css">
+      <TextField fx:id="type" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="225.0" promptText="النوع" stylesheets="@css/style.css" visible="false">
          <font>
             <Font size="16.0" />
          </font>

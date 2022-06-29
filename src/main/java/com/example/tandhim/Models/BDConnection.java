@@ -279,8 +279,9 @@ public class BDConnection {
 
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
+                //TODO iin the next update remove it for securite
                 DB_URL
-                        = "jdbc:mysql://" + host + ":3306/huissier_de_justice?useUnicode=yes&characterEncoding=UTF-8";
+                        = "jdbc:mysql://" + host + ":3306/huissier_de_justice?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true";
                 connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
