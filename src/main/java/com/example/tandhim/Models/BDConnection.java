@@ -278,7 +278,7 @@ public class BDConnection {
             Connection connection = null;
 
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 DB_URL
                         = "jdbc:mysql://" + host + ":3306/huissier_de_justice?useUnicode=yes&characterEncoding=UTF-8";
                 connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
