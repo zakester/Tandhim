@@ -13,7 +13,11 @@
             <Font size="10.0" />
          </font>
       </Label>
+<<<<<<< HEAD
       <Button fx:id="btnClose" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#closeStage" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="إلغاء" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+=======
+      <Button fx:id="btnClose" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#close" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="إلغاء" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+>>>>>>> a4ab8ba1d25048591ade33184d9ed799d9f1be53
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
