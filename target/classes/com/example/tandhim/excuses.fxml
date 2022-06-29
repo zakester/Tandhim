@@ -2,8 +2,10 @@
 
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox spacing="30.0" styleClass="Anchor" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.ExcuseController">
    <children>
@@ -14,8 +16,13 @@
       </HBox>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
          <children>
-            <ComboBox fx:id="comTypeExcuse" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="443.0" promptText="النوع" stylesheets="@css/style.css" />
+            <ComboBox fx:id="comTypeExcuse" nodeOrientation="RIGHT_TO_LEFT" onAction="#updateType" prefHeight="37.0" prefWidth="443.0" promptText="النوع" stylesheets="@css/style.css" />
          </children>
       </HBox>
+      <TextField fx:id="type" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="225.0" promptText="النوع" stylesheets="@css/style.css">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
    </children>
 </VBox>

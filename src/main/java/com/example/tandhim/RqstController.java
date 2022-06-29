@@ -48,7 +48,7 @@ public class RqstController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        typeRqst.getItems().addAll("إفتتاحية", "إدخال في الخصومة", "إعتراض على إدخال الغير في الخصومة", "رجوع بعد خبرة", "استئناف");
+        typeRqst.getItems().addAll("إفتتاحية", "إدخال في الخصومة", "إعتراض على إدخال الغير في الخصومة","إعتراض الغير الخارج عن الخصومة", "رجوع بعد خبرة", "استئناف");
     }
     public static final LocalDate LOCAL_DATE(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

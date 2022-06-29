@@ -29,6 +29,9 @@
 .btn-forget:hover {
 	-fx-text-fill : #B7C3D7;
 }
+.piechart {
+
+}
 .transparent-button1 {
 -fx-background-color:transparent;
     -fx-border-color: null;
