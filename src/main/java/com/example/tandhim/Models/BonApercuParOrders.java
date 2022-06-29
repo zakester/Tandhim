@@ -151,7 +151,7 @@ public class BonApercuParOrders extends Bon {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_apercu_parorders SET prix=" + prix + ", somme=" + somme + ",  num_order='" + num_order + "', date_order='" + date_order + "' , status='" + status + "', date_fin=" + getDateSQL() + ", commission='" + commission + "' WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_apercu_parorders SET prix=" + prix + ", somme=" + somme + ", last_apdated = " + 1 + ",  num_order='" + num_order + "', date_order='" + date_order + "' , status='" + status + "', date_fin=" + getDateSQL() + ", commission='" + commission + "' WHERE num_bon='" + num_bon + "'";
             System.out.println(query);
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();

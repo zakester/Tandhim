@@ -83,7 +83,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<BonStats.bonStatsExeRow, String> colNumBonExe, colCommissionExe, colObligatoireExe, colTypeExe, colCreatedAtExe, colStatusExe, colDateExe;
     @FXML
-    private Button btnNotif,btnEnableEdit;
+    private Button btnNotif,btnEnableEdit,btnCalculeIndiv,btnCalculeCollect,btnCalcule;
     @FXML
     private StackPane stpnlFormeExe, stpnlStatsBon,StackPaneStats;
     @FXML
@@ -628,6 +628,17 @@ public class Controller implements Initializable {
         btnStatsBons1.setVisible(false);
         btnStatsBons2.setVisible(false);
     }
+    public void hover2() {
+        btnCalcule.setVisible(false);
+        btnCalculeIndiv.setVisible(true);
+        btnCalculeCollect.setVisible(true);
+    }
+
+    public void exitHover2() {
+        btnCalcule.setVisible(true);
+        btnCalculeIndiv.setVisible(false);
+        btnCalculeCollect.setVisible(false);
+    }
 
     public void exitHover1() {
         btnFormeExecutif.setVisible(true);
@@ -746,12 +757,19 @@ public class Controller implements Initializable {
     }
 
     public void addBon() {
+        if (id.NumBonExist(num_bon.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = alert.getDialogPane();
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "لقد تم إدراج هذا الرقم مسبقا");
+            alert.showAndWait();
+            return;
+        }
         if (Numeric(taxe_fixe.getText()) <= 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(
-                    getClass().getResource("style.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog-pane");
             alert.setTitle("خطأ في الإدخال");
             alert.setContentText(
                     "الأتعاب غير مدرجة بطريقة صحيحة ");
@@ -761,10 +779,7 @@ public class Controller implements Initializable {
         if ((Numeric(taxe_supp.getText()) < 0) && (Numeric(this.prix.getText()) < 0)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(
-                    getClass().getResource("style.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog-pane");
-            alert.setTitle("خطأ في الإدخال");
+             alert.setTitle("خطأ في الإدخال");
             alert.setContentText(
                     "الأتعاب غير مدرجة بطريقة صحيحة ");
             alert.showAndWait();
@@ -775,10 +790,7 @@ public class Controller implements Initializable {
         if (demList.getItems().size() < 1) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(
-                    getClass().getResource("style.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog-pane");
-            alert.setTitle("خطأ في الإدخال");
+             alert.setTitle("خطأ في الإدخال");
             alert.setContentText(
                     "قائمة الطالبين فارغة");
             alert.showAndWait();
@@ -788,10 +800,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -822,10 +831,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -856,10 +862,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -890,10 +893,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -922,10 +922,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -956,10 +953,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -976,7 +970,6 @@ public class Controller implements Initializable {
                     Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
                     d.insert();
                     btnCreatePV.setDisable(false);
-
                 }
 
                 for (int i = 0; i < obligList.getItems().size(); i++) {
@@ -992,10 +985,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -1038,10 +1028,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -1806,9 +1793,6 @@ public class Controller implements Initializable {
         if (Numeric(taxe_fixe.getText()) <= 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(
-                    getClass().getResource("style.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog-pane");
             alert.setTitle("خطأ في الإدخال");
             alert.setContentText(
                     "الأتعاب غير مدرجة بطريقة صحيحة ");
@@ -1818,10 +1802,7 @@ public class Controller implements Initializable {
         if ((Numeric(taxe_supp.getText()) < 0) && (Numeric(this.prix.getText()) < 0)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(
-                    getClass().getResource("style.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog-pane");
-            alert.setTitle("خطأ في الإدخال");
+             alert.setTitle("خطأ في الإدخال");
             alert.setContentText(
                     "الأتعاب غير مدرجة بطريقة صحيحة ");
             alert.showAndWait();
@@ -1832,10 +1813,7 @@ public class Controller implements Initializable {
         if (demList.getItems().size() < 1) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(
-                    getClass().getResource("style.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog-pane");
-            alert.setTitle("خطأ في الإدخال");
+             alert.setTitle("خطأ في الإدخال");
             alert.setContentText(
                     "قائمة الطالبين فارغة");
             alert.showAndWait();
@@ -1845,10 +1823,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -1878,10 +1853,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -1911,10 +1883,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -1944,10 +1913,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -1977,10 +1943,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -2010,10 +1973,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -2043,10 +2003,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -2076,10 +2033,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -2113,10 +2067,7 @@ public class Controller implements Initializable {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(
-                        getClass().getResource("style.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog-pane");
-                alert.setTitle("خطأ في الإدخال");
+                  alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();

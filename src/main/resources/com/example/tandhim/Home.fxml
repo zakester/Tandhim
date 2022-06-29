@@ -173,19 +173,19 @@
          </children>
       </VBox>
       <StackPane fx:id="stackPane" layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
-         <Pane fx:id="pnlAdd" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+         <Pane fx:id="pnlAdd" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css">
             <children>
                <VBox layoutX="19.0" layoutY="149.0" prefHeight="382.0" prefWidth="754.0" spacing="15.0">
                   <children>
                      <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                         <children>
-                           <Button fx:id="btnCitation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تكليف بالحضور لجلسة" />
-                           <Button fx:id="btnOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ أمر" />
-                           <Button fx:id="btnJugement" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ حكم" />
-                           <Button fx:id="btnJugement1" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ قرار " />
+                           <Button fx:id="btnCitation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تكليف بالحضور لجلسة" wrapText="true" />
+                           <Button fx:id="btnOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ أمر" wrapText="true" />
+                           <Button fx:id="btnJugement" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ حكم" wrapText="true" />
+                           <Button fx:id="btnJugement1" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ قرار " wrapText="true" />
                            <StackPane fx:id="stpnlFormeExe" onMouseExited="#exitHover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style.css">
                               <children>
-                                 <Button fx:id="btnFormeExecutif" mnemonicParsing="false" onMouseEntered="#hover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تكليف بالوفاء" />
+                                 <Button fx:id="btnFormeExecutif" mnemonicParsing="false" onMouseEntered="#hover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تكليف بالوفاء" wrapText="true" />
                                  <Button fx:id="btnFormeJudiciere" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="بموجب سند قضائي" visible="false" StackPane.alignment="TOP_CENTER" />
                                  <Button fx:id="btnFormeNonJudiciere" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="بموجب سند غير قضائي" visible="false" StackPane.alignment="BOTTOM_CENTER" />
                               </children>
@@ -194,29 +194,35 @@
                      </HBox>
                      <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                         <children>
-                           <Button fx:id="btnExcuse" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ إرسالية / طلب / إعذار" />
-                           <Button fx:id="btnInspection" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="معاينة" />
-                           <Button fx:id="btnInspectionOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="معاينة بأمر" />
-                           <Button fx:id="btnAssociation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حضور جمعية عامة" />
-                           <Button fx:id="btnJard" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="الجرد" />
+                           <Button fx:id="btnMandat" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ مذكرة" wrapText="true" />
+                           <Button fx:id="btnRqst" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ عريضة" wrapText="true" />
+                           <Button fx:id="btnExcuse" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ إرسالية / طلب / إعذار" wrapText="true" />
+                           <Button fx:id="btnInspection" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="معاينة" wrapText="true" />
+                           <Button fx:id="btnInspectionOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="معاينة بأمر" wrapText="true" />
                         </children>
                      </HBox>
                      <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                         <children>
-                           <Button fx:id="btnMandat" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ مذكرة" />
-                           <Button fx:id="btnRqst" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ عريضة" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" />
+                           <Button fx:id="btnAssociation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حضور جمعية عامة" wrapText="true" />
+                           <Button fx:id="btnJard" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="الجرد" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="إشهاد" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="إثبات الحالة (أخرى)" wrapText="true" />
+                           <StackPane onMouseExited="#exitHover2">
+                              <children>
+                                 <Button fx:id="btnCalcule" mnemonicParsing="false" onMouseEntered="#hover2" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="الحساب" wrapText="true" />
+                                 <Button fx:id="btnCalculeIndiv" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="فردي" visible="false" StackPane.alignment="TOP_CENTER" />
+                                 <Button fx:id="btnCalculeCollect" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="مشترك" visible="false" StackPane.alignment="BOTTOM_CENTER" />
+                              </children>
+                           </StackPane>
                         </children>
                      </HBox>
                      <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
                         <children>
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" />
-                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على منقول" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على ما للمدين لدى الغير" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على عقار" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" wrapText="true" />
                         </children>
                      </HBox>
                   </children>

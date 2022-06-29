@@ -99,7 +99,7 @@ public class BonRqst extends BonNotification{
     public boolean update(){
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_rqst SET prix = " +prix+ " ,somme= " +somme+ ", num_rqst ='" + num_rqst + "',type ='" + type + "', commission='" + commission +  "', date='" + date + "' WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_rqst SET prix = " +prix+ " ,somme= " +somme+ ", last_apdated = " + 1 + ", num_rqst ='" + num_rqst + "',type ='" + type + "', commission='" + commission +  "', date='" + date + "' WHERE num_bon='" + num_bon + "'";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id>=1){return true;}
