@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.example.tandhim.Models;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Hashtable;
+package com.example.tandhim.Models.Impression;
 
 import com.example.tandhim.DOCXModifier.DOCXModifier;
 import com.example.tandhim.DOCXModifier.ToDOCX;
@@ -18,22 +8,58 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import org.jfree.graphics2d.svg.SVGGraphics2D;
-import org.jfree.graphics2d.svg.ViewBox;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Hashtable;
 
-public class impression {
+public class Print2Word {
+    DOCXModels docxModels;
+    HashMap<String, String> marginInformation;
+    HashMap<String, String> modelInformation;
 
-    /**
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
+    int obligRank;
 
+    private final String qrCodePath;
+    private final String docxName;
+    private final String numBon;
+
+    public Print2Word(DOCXModels docxModels, HashMap<String, String> marginInformation, HashMap<String, String> modelInformation, int obligRank) throws IOException {
+        this.docxModels = docxModels;
+        this.marginInformation = marginInformation;
+        this.modelInformation = modelInformation;
+        this.obligRank = obligRank;
+        qrCodePath = generateQRCodePath();
+        docxName = generateDOCXName();
+        numBon = getNumBon();
+        generateQRCode();
+        cleanMedia(docxModels.toString());
+    }
+    private String generateQRCodePath() {
+        return String.format("docxModules/%s/word/media/image1.png", docxModels.toString().toLowerCase());
     }
 
-    public static BufferedImage getQRCode(String targetUrl, int width,
+    private String generateDOCXName() {
+        String[] splitNumBon = numBon.split("/");
+
+        return String.format("%s-%s-%s-%d", docxModels.toString().toLowerCase().split("-")[0], splitNumBon[0], splitNumBon[1], obligRank);
+    }
+
+    private String getNumBon() {
+        return marginInformation.get("num_bon");
+    }
+
+    private void generateQRCode() throws IOException {
+        File outQRCode = new File(qrCodePath);
+        BufferedImage bufferedQRCode = getQRCode(numBon, 150, 150);
+        ImageIO.write(bufferedQRCode, "png", outQRCode);
+    }
+
+    private BufferedImage getQRCode(String targetUrl, int width,
                                           int height) {
         try {
             Hashtable<EncodeHintType, Object> hintMap = new Hashtable<>();
@@ -69,28 +95,9 @@ public class impression {
 
     }
 
-    public static String getQRCodeSvg(String targetUrl, int width, int height, boolean withViewBox) {
-        SVGGraphics2D g2 = new SVGGraphics2D(width, height);
-        BufferedImage qrCodeImage = getQRCode(targetUrl, width, height);
-        g2.drawImage(qrCodeImage, 0, 0, width, height, null);
-
-        ViewBox viewBox = null;
-        if (withViewBox) {
-            viewBox = new ViewBox(0, 0, width, height);
-        }
-
-        return g2.getSVGElement(null, true, viewBox, null, null);
-    }
-
-    /** Create png QR code */
-    public static void QRCodePNG(String output, String data, int width, int height) throws IOException {
-        File outQRCode = new File(output);
-        BufferedImage bufferedQRCode = getQRCode(data, width, height);
-        ImageIO.write(bufferedQRCode, "png", outQRCode);
-    }
 
     /** sometimes when generating QRCode it creates new files in media folder, so we clean this folder from any unnecessary files */
-    public void cleanMedia(String folderOf) {
+    private void cleanMedia(String folderOf) {
         String path = String.format("docxModules/%s/word/media/", folderOf);
         File mediaFolder = new File(path);
 
@@ -106,30 +113,16 @@ public class impression {
         }
 
     }
-    
-    public void PrintBon(String requester, String wanted, String service, String price, String bonNumber) throws IOException {
-        bonNumber = bonNumber.replace("/", "-");
-        String docxName = "bon" + bonNumber + "";
-        String folderOf = "modbon";
 
-
-        QRCodePNG("docxModules/modbon/word/media/image1.png", "mashi some data", 150, 150);
-
-        // clean media folder before zipping
-        cleanMedia(/* folderOf */folderOf);
-
-        HashMap<String, String> replacements = new HashMap<>() {{
-            put("@requester", requester);
-            put("@wanted", wanted);
-            put("@service", service);
-            put("@price", price);
-            put("@rest", "11DA");
-        }};
+    public void replaceParameters() throws IOException {
+        HashMap<String, String> replacements = new HashMap<>();
+        replacements.putAll(marginInformation);
+        replacements.putAll(modelInformation);
 
         DOCXModifier docxModifier = new DOCXModifier(replacements);
-        docxModifier.replace(folderOf); // docxModules/"fileOf"/word/document.xml -> docxModules/modbon/word/document.xml
+        docxModifier.replace(docxModifier.toString()); // docxModules/"fileOf"/word/document.xml -> docxModules/modbon/word/document.xml
 
-        ToDOCX.zipFile(folderOf, docxName, true);
+        ToDOCX.zipFile(docxModifier.toString(), docxName, true);
     }
 
 }

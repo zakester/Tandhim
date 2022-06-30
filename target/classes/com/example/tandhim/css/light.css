@@ -120,7 +120,7 @@
 }
 .combo-box .list-cell:selected{
 
--fx-background-color:transparent; 
+-fx-background-color:transparent;
 
 }
 .combo-box .list-cell:hover{
@@ -131,7 +131,7 @@
 }
  .combo-box{
 
--fx-background-color:transparent; 
+-fx-background-color:transparent;
  }
  .combo-box .text-field{
     -fx-background-color: transparent;
