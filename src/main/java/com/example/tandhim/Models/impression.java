@@ -109,7 +109,7 @@ public class impression {
     
     public void PrintBon(String requester, String wanted, String service, String price, String bonNumber) throws IOException {
         bonNumber = bonNumber.replace("/", "-");
-        String docxName = "bon" + bonNumber + ".zip";
+        String docxName = "bon" + bonNumber + "";
         String folderOf = "modbon";
 
 

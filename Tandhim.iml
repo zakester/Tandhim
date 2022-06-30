@@ -91,13 +91,13 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.29" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.19.4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18-ea+7" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:18-ea+7" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:linux:18-ea+7" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18-ea+7" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:18-ea+7" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:linux:18-ea+7" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18-ea+7" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:18-ea+7" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:18-ea+7" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:11.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:11.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:11.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:11.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.dlsc.formsfx:formsfx-core:11.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0" level="project" />
@@ -107,12 +107,12 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0-b170201.1204" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.0-b170127.1453" level="project" />
-    <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-core:2.3.0-b170127.1453" level="project" />
-    <orderEntry type="library" name="Maven: org.glassfish.jaxb:txw2:2.3.0-b170127.1453" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:3.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-core:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:txw2:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:3.0.5" level="project" />
     <orderEntry type="library" name="Maven: org.jvnet.staxex:stax-ex:1.7.8" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.13" level="project" />
     <orderEntry type="library" name="Maven: com.google.zxing:javase:3.4.1" level="project" />

@@ -1,4 +1,6 @@
 package com.example.tandhim.Models;
+import com.example.tandhim.Controller;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -102,7 +104,7 @@ public class Letter {
     }
     public void updateLetter(){
         Connection bd = BDConnection.getConnection();
-        String query2 = "UPDATE letter SET id_rapport='"+id_bon+"', type_rapport='"+typePV+"', num_lettre='"+numLetter+"', date_lettre='"+dateLetter+"', id_obligatoire='"+idObligatoire+"' WHERE id="+getLetterId();
+        String query2 = "UPDATE letter SET id_rapport='"+id_bon+"', type_rapport='"+typePV+"', num_lettre='"+numLetter+"', date_lettre='"+dateLetter+"', id_obligatoire='"+idObligatoire+"' WHERE id="+getLetterId()+";log_update("+ Controller.getUserID()+",'letter','"+getLetterId()+"');";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.executeUpdate();
@@ -112,7 +114,7 @@ public class Letter {
     }
     public int publish() {
         Connection bd = BDConnection.getConnection();
-        String query2 = "UPDATE letter SET publier=1 WHERE id_rapport='"+id_bon+"'";
+        String query2 = "UPDATE letter SET publier=1 WHERE id_rapport='"+id_bon+"';log_update("+ Controller.getUserID()+",'letter','"+id_bon+"');";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             return preparedStmt2.executeUpdate();

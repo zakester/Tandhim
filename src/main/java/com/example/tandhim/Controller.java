@@ -184,6 +184,7 @@ public class Controller implements Initializable {
     @FXML
     private VBox rightMenu;
 
+    public static int userID=0;
     private String userType;
     private String userName;
 
@@ -195,6 +196,12 @@ public class Controller implements Initializable {
         }
     }
 
+    public static void setUserID(int id){
+        userID=id;
+    }
+    public static int getUserID(){
+        return userID;
+    }
     public void setUserName(String s){
         this.userName = s;
         userNameLabel.setText(s);
@@ -2264,12 +2271,7 @@ public class Controller implements Initializable {
         }
     }
 
-    static double v=0;
-    ProgressBar p;
-    private void increaseProgress(){
-        v += 0.1;
-        p.setProgress(v);
-    }
+
 
     public void push(ActionEvent actionEvent){
         FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("progressBar.fxml"));
@@ -2284,6 +2286,7 @@ public class Controller implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
+        stage.toFront();
         try {
             //Public API:
             //https://www.metaweather.com/api/location/search/?query=<CITY>
@@ -2325,8 +2328,7 @@ public class Controller implements Initializable {
                     "UNION SELECT \"تبليغ عريضة\" as type,num_bon,somme as versement,prix as rest FROM bon_rqst WHERE last_updated=0\n" +
                     "UNION SELECT \"تكليف بالحضور لجلسة\" as type,num_bon,somme as versement,prix as rest FROM bon_seances WHERE last_updated=0\n";
 
-            p = new ProgressBar(0);
-            increaseProgress();
+
             Connection bd = BDConnection.getConnection();
             Statement st;
             ResultSet rs;
@@ -2382,7 +2384,6 @@ public class Controller implements Initializable {
 
                jsonInputString = jsonInputString + "}\n";
                j++;
-                increaseProgress();
             }
             jsonInputString = jsonInputString + "],\n";
             //TODO: input json
@@ -2440,7 +2441,7 @@ public class Controller implements Initializable {
 
                 jsonInputString = jsonInputString + "}\n";
                 j++;
-                increaseProgress();
+
             }
             jsonInputString = jsonInputString + "]\n";
 
@@ -2469,8 +2470,8 @@ public class Controller implements Initializable {
                     while ((responseLine = br.readLine()) != null) {
                         response.append(responseLine.trim());
                     }
-                    increaseProgress();
-                    if(response.toString().equals("The informations have been added successfully")){
+                    System.out.println(response.toString()+" "+response.toString().equals("\"The informations have been added successfully\""));
+                    if(response.toString().equals("\"The informations have been added successfully\"") || response.toString().equals("\"The informations have been added and updated successfully\"") || response.toString().equals("\"The informations have been updated successfully\"")){
                         String query = "UPDATE bon_acte SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
                                 "UPDATE bon_apercus SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
                                 "UPDATE bon_apercu_parorders SET last_updated=2 WHERE last_updated=1 OR last_updated=0;" +
@@ -2485,6 +2486,7 @@ public class Controller implements Initializable {
                         PreparedStatement preparedStmt = bd.prepareStatement(query);
                         int id = preparedStmt.executeUpdate();
                         if (id >= 1) {
+                            controller.closeStage();
                             System.out.println(response.toString());
                             JOptionPane op = new JOptionPane();
                             op.showMessageDialog(null, response.toString());
@@ -2497,6 +2499,8 @@ public class Controller implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        controller.closeStage();
+
     }
 
     public void Close() {

@@ -35,7 +35,6 @@ public class DOCXModifier {
             String line;
 
             while ((line = br.readLine()) != null) {
-
                 for (HashMap.Entry<String, String> entry : replacements.entrySet()) {
                     String key = entry.getKey();
                     String value = entry.getValue();
@@ -47,6 +46,7 @@ public class DOCXModifier {
                 bw.write(line);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return;
         }
         removeTmpFile(pathXML, tmpXMLPath); // after modification delete replace old XML with new XML
