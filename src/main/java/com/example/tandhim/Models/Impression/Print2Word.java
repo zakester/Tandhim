@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 
 public class Print2Word {
-    DOCXModels docxModels;
+    String docxModels;
     HashMap<String, String> marginInformation;
     HashMap<String, String> modelInformation;
 
@@ -28,14 +28,14 @@ public class Print2Word {
     private final String docxName;
     private final String numBon;
 
-    public Print2Word(DOCXModels docxModels, HashMap<String, String> marginInformation, HashMap<String, String> modelInformation, int obligRank) throws IOException {
+    public Print2Word(String docxModels, HashMap<String, String> marginInformation, HashMap<String, String> modelInformation, int obligRank) throws IOException {
         this.docxModels = docxModels;
         this.marginInformation = marginInformation;
         this.modelInformation = modelInformation;
         this.obligRank = obligRank;
+        this.numBon = getNumBon();
         qrCodePath = generateQRCodePath();
         docxName = generateDOCXName();
-        numBon = getNumBon();
         generateQRCode();
         cleanMedia(docxModels.toString());
     }
@@ -44,13 +44,13 @@ public class Print2Word {
     }
 
     private String generateDOCXName() {
-        String[] splitNumBon = numBon.split("/");
+        String[] splitNumBon = this.numBon.split("/");
 
-        return String.format("%s-%s-%s-%d", docxModels.toString().toLowerCase().split("-")[0], splitNumBon[0], splitNumBon[1], obligRank);
+        return String.format("%s_%s_%s_%d", docxModels.toString().toLowerCase().split("_")[0], splitNumBon[0], splitNumBon[1], obligRank);
     }
 
     private String getNumBon() {
-        return marginInformation.get("num_bon");
+        return modelInformation.get("@num_bon");
     }
 
     private void generateQRCode() throws IOException {
@@ -114,15 +114,22 @@ public class Print2Word {
 
     }
 
-    public void replaceParameters() throws IOException {
+
+
+    public void replaceParameters() {
         HashMap<String, String> replacements = new HashMap<>();
         replacements.putAll(marginInformation);
         replacements.putAll(modelInformation);
 
         DOCXModifier docxModifier = new DOCXModifier(replacements);
-        docxModifier.replace(docxModifier.toString()); // docxModules/"fileOf"/word/document.xml -> docxModules/modbon/word/document.xml
+        docxModifier.replace(docxModels); // docxModules/"fileOf"/word/document.xml _> docxModules/modbon/word/document.xml
 
-        ToDOCX.zipFile(docxModifier.toString(), docxName, true);
+        try {
+            ToDOCX.zipFile(docxModels, docxName, true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
 }

@@ -1,33 +1,34 @@
 package com.example.tandhim.Models.Impression;
 
-public enum DOCXModels {
-    DECISION_1_1,
-    DECISION_1,
-    DECISION_2_1,
-    DECISION_2,
-    DECISION_3_1,
-    DECISION_3,
-    JUGEMENT_1_1,
-    JUGEMENT_1_2,
-    JUGEMENT_1,
-    JUGEMENT_2_1,
-    JUGEMENT_2,
-    JUGEMENT_3_1,
-    JUGEMENT_3,
-    JUGEMENT_4_1,
-    JUGEMENT_4,
-    JUGEMENT_5_1,
-    JUGEMENT_5,
-    JUGEMENT_6_1,
-    JUGEMENT_6,
-    ORDER_1_1,
-    ORDER_1,
-    ORDER_2_1,
-    ORDER_2,
-    ORDER_3_1,
-    ORDER_3,
-    ORDER_4_1,
-    ORDER_4,
-    ORDER_5_1,
-    ORDER_5
+public final class DOCXModels {
+    public static final String decision_1_1 = "decision_1_1";
+    public static final String decision_1 = "decision_1";
+    public static final String decision_2_1 = "decision_2_1";
+    public static final String decision_2 = "decision_2";
+    public static final String decision_3_1 = "decision_3_1";
+    public static final String decision_3 = "decision_3";
+    public static final String jugement_1_1 = "jugement_1_1";
+    public static final String jugement_1_2 = "jugement_1_2";
+    public static final String jugement_1 = "jugement_1";
+    public static final String jugement_2_1 = "jugement_2_1";
+    public static final String jugement_2 = "jugement_2";
+    public static final String jugement_3_1 = "jugement_3_1";
+    public static final String jugement_3 = "jugement_3";
+    public static final String jugement_4_1 = "jugement_4_1";
+    public static final String jugement_4 = "jugement_4";
+    public static final String jugement_5_1 = "jugement_5_1";
+    public static final String jugement_5 = "jugement_5";
+    public static final String jugement_6_1 = "jugement_6_1";
+    public static final String jugement_6 = "jugement_6";
+    public static final String order_1_1 = "order_1_1";
+    public static final String order_1 = "order_1";
+    public static final String order_2_1 = "order_2_1";
+    public static final String order_2 = "order_2";
+    public static final String order_3_1 = "order_3_1";
+    public static final String order_3 = "order_3";
+    public static final String order_4_1 = "order_4_1";
+    public static final String order_4 = "order_4";
+    public static final String order_5_1 = "order_5_1";
+    public static final String order_5 = "order_5";
+
 }
