@@ -1,0 +1,69 @@
+<changelist name="Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]" date="1656584158199" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 30/06/2022 11:15 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonAssociations.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonAssociations.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonAssociations.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonApercus.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonApercus.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonApercus.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonRqst.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonRqst.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonRqst.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonSeances.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonSeances.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonSeances.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonApercuParOrders.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonApercuParOrders.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonApercuParOrders.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/img/Thumbs.db" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/img/Thumbs.db" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/Thumbs.db" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Controller.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Controller.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/Controller.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonExcuses.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonExcuses.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonExcuses.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonActe.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonActe.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonActe.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonOrders.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonOrders.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonOrders.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Thumbs.db" />
+    <option name="AFTER_PATH" value="Thumbs.db" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/Thumbs1.db" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonMandat.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonMandat.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonMandat.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/tandhim/Models/BonProvisions.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/tandhim/Models/BonProvisions.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_06_2022_11_15_[Changes]/BonProvisions.class" />
+  </binary>
+</changelist>
