@@ -44,7 +44,7 @@
     Unix-based operating systems (Linux, Solaris and Mac OS X)
       tar zxvf apache-maven-3.x.y.tar.gz
     Windows
-      unzip apache-maven-3.x.y.zip
+      unzip apache-maven-3.x.y
 
   2) A directory called "apache-maven-3.x.y" will be created.
 

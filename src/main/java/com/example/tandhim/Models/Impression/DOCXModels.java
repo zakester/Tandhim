@@ -1,0 +1,33 @@
+package com.example.tandhim.Models.Impression;
+
+public enum DOCXModels {
+    DECISION_1_1,
+    DECISION_1,
+    DECISION_2_1,
+    DECISION_2,
+    DECISION_3_1,
+    DECISION_3,
+    JUGEMENT_1_1,
+    JUGEMENT_1_2,
+    JUGEMENT_1,
+    JUGEMENT_2_1,
+    JUGEMENT_2,
+    JUGEMENT_3_1,
+    JUGEMENT_3,
+    JUGEMENT_4_1,
+    JUGEMENT_4,
+    JUGEMENT_5_1,
+    JUGEMENT_5,
+    JUGEMENT_6_1,
+    JUGEMENT_6,
+    ORDER_1_1,
+    ORDER_1,
+    ORDER_2_1,
+    ORDER_2,
+    ORDER_3_1,
+    ORDER_3,
+    ORDER_4_1,
+    ORDER_4,
+    ORDER_5_1,
+    ORDER_5
+}

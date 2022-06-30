@@ -24,7 +24,7 @@ public class ToDOCX {
      * @param excludeContainingFolder if true then zip without root folder
      *
      *
-     *                                example:  zipFile("modbon", "demo.zip", true);
+     *                                example:  zipFile("modbon", "demo", true);
      *
      * */
     static public void zipFile(String folderOf, String zipFile, boolean excludeContainingFolder) throws IOException {
@@ -44,7 +44,7 @@ public class ToDOCX {
         zipOut.close();
 
         System.out.println("Successfully created " + zipFile);
-        toDOCX(zipFile); // change extension form .zip to .docx
+        toDOCX(zipFile); // change extension form  to .docx
         copyOriginal(folderOf); // copy document.xml from "original" folder to to /docxModules/folderOf/word/
     }
 
