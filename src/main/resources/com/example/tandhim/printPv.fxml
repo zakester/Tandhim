@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="489.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.EditDialogueController">
+   <children>
+      <Label fx:id="typePv" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="محضر" textOverrun="CENTER_ELLIPSIS" />
+      <Label fx:id="labelOblig" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="المطلوب ضده :" textOverrun="CENTER_ELLIPSIS" />
+      <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+         <children>
+            <TextField fx:id="avocat" prefHeight="37.0" prefWidth="230.0" promptText="محامي الطالب إن وجد" stylesheets="@css/style.css">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+         <children>
+            <CheckBox fx:id="checkTypePhysique" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="شخص طبيعي" />
+            <CheckBox fx:id="checkTypeMorale" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="شخص معنوي" />
+         </children>
+      </HBox>
+      <StackPane fx:id="stackpane" prefHeight="184.0" prefWidth="395.0">
+         <children>
+            <VBox fx:id="vboxCitation" prefHeight="176.0" prefWidth="395.0" visible="false">
+               <children>
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="typeReq" prefHeight="37.0" prefWidth="230.0" promptText="إسم الطالب" stylesheets="@css/style.css" text="نوع العريضة">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="محضر التكليف" />
+                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="محضر تبليغ التكلي" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="vboxJugement" prefHeight="176.0" prefWidth="395.0" visible="false">
+               <children>
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <ComboBox fx:id="comTypeJug" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="230.0" promptText="نوع الحكم" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hboxTypeJugement" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="typeJug" prefHeight="37.0" prefWidth="230.0" promptText="نوع الحكم" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <CheckBox fx:id="arcticle329_336" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 336، 329" />
+                              <CheckBox fx:id="arcticle336" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 336 " />
+                              <CheckBox fx:id="arcticle349_354" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 349، 354" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <CheckBox fx:id="arcticle950" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 950" />
+                              <CheckBox fx:id="arcticle329_349_354" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 329، 349، 354" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="vboxOrder" prefHeight="176.0" prefWidth="395.0" visible="false">
+               <children>
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <ComboBox fx:id="comTypeOrder" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="230.0" promptText="نوع الأمر" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hboxTypeOrder" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="typeJug1" prefHeight="37.0" prefWidth="230.0" promptText="نوع الأمر" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="vboxJugement1" prefHeight="176.0" prefWidth="395.0">
+               <children>
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <ComboBox fx:id="comTypeDecision" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="230.0" promptText="نوع القرار" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hboxTypeJugement1" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="typeDecision" prefHeight="37.0" prefWidth="230.0" promptText="نوع القرار" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hboxDecisionArticle" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                     <children>
+                        <CheckBox fx:id="article354" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 354" />
+                        <CheckBox fx:id="article329_355_354" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 329، 355، 354" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" style="-fx-font-size: 13;" text="تنبيه : في حالة تعديل الحالة سيتم محو كل ما يخص الحالة السابقة نهائيا" textFill="#ff0c0c" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Pane prefHeight="62.0" prefWidth="395.0">
+         <children>
+            <HBox fx:id="hboxStatus1" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="395.0">
+               <children>
+                  <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SaveEdit" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="اضغط هنا لحفظ التعديلات" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="40.0" right="40.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+</VBox>
