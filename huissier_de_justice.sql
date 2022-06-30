@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 30, 2022 at 02:46 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Hôte : 127.0.0.1
+-- Généré le : jeu. 30 juin 2022 à 17:25
+-- Version du serveur :  10.4.17-MariaDB
+-- Version de PHP : 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,19 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `huissier_de_justice`
+-- Base de données : `huissier_de_justice`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Procédures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `log_insert` (IN `user` INT, IN `nomtable` VARCHAR(60), IN `id` INT)  BEGIN
-INSERT INTO logs (user_id,operation,table_name,table_id) VALUES (user, "insert",nomtable,id);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `log_insert` (IN `user` INT, IN `nomtable` VARCHAR(60), IN `id` VARCHAR(10), IN `details` VARCHAR(30))  BEGIN
+INSERT INTO logs (user_id,operation,table_name,id_table,details) VALUES (user, "insert",nomtable,id,details);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `log_update` (IN `user` INT, IN `nomtable` VARCHAR(60), IN `id` INT)  BEGIN
-INSERT INTO logs (user_id,operation,table_name,table_id) VALUES (user, "update", nomtable , id);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `log_login` (IN `user` INT, IN `details` VARCHAR(100))  BEGIN
+INSERT INTO logs (user_id,operation,table_name,id_table,details) VALUES (user, "login","#","#",details);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `log_update` (IN `user` INT, IN `nomtable` VARCHAR(60), IN `id` VARCHAR(10), IN `details` VARCHAR(30))  BEGIN
+INSERT INTO logs (user_id,operation,table_name,id_table,details) VALUES (user, "update", nomtable , id,details);
 END$$
 
 DELIMITER ;
@@ -38,7 +42,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `action`
+-- Structure de la table `action`
 --
 
 CREATE TABLE `action` (
@@ -50,7 +54,7 @@ CREATE TABLE `action` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `action`
+-- Déchargement des données de la table `action`
 --
 
 INSERT INTO `action` (`id`, `type`, `id_notification`, `date`, `id_oblig`) VALUES
@@ -60,7 +64,7 @@ INSERT INTO `action` (`id`, `type`, `id_notification`, `date`, `id_oblig`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_acte`
+-- Structure de la table `bon_acte`
 --
 
 CREATE TABLE `bon_acte` (
@@ -77,7 +81,7 @@ CREATE TABLE `bon_acte` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `bon_acte`
+-- Déchargement des données de la table `bon_acte`
 --
 
 INSERT INTO `bon_acte` (`num_bon`, `nom_notaire`, `type_acte`, `date`, `created_at`, `prix`, `somme`, `num`, `id`, `last_updated`) VALUES
@@ -87,7 +91,7 @@ INSERT INTO `bon_acte` (`num_bon`, `nom_notaire`, `type_acte`, `date`, `created_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_apercus`
+-- Structure de la table `bon_apercus`
 --
 
 CREATE TABLE `bon_apercus` (
@@ -102,7 +106,7 @@ CREATE TABLE `bon_apercus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bon_apercus`
+-- Déchargement des données de la table `bon_apercus`
 --
 
 INSERT INTO `bon_apercus` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `somme`, `last_updated`) VALUES
@@ -112,7 +116,7 @@ INSERT INTO `bon_apercus` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `creat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_apercu_parorders`
+-- Structure de la table `bon_apercu_parorders`
 --
 
 CREATE TABLE `bon_apercu_parorders` (
@@ -130,7 +134,7 @@ CREATE TABLE `bon_apercu_parorders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bon_apercu_parorders`
+-- Déchargement des données de la table `bon_apercu_parorders`
 --
 
 INSERT INTO `bon_apercu_parorders` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `num_order`, `date_order`, `commission`, `somme`, `last_updated`) VALUES
@@ -140,7 +144,7 @@ INSERT INTO `bon_apercu_parorders` (`id`, `num_bon`, `prix`, `status`, `date_fin
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_associations`
+-- Structure de la table `bon_associations`
 --
 
 CREATE TABLE `bon_associations` (
@@ -155,7 +159,7 @@ CREATE TABLE `bon_associations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bon_associations`
+-- Déchargement des données de la table `bon_associations`
 --
 
 INSERT INTO `bon_associations` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `somme`, `last_updated`) VALUES
@@ -164,7 +168,7 @@ INSERT INTO `bon_associations` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_autres`
+-- Structure de la table `bon_autres`
 --
 
 CREATE TABLE `bon_autres` (
@@ -181,7 +185,7 @@ CREATE TABLE `bon_autres` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_excuses`
+-- Structure de la table `bon_excuses`
 --
 
 CREATE TABLE `bon_excuses` (
@@ -198,7 +202,7 @@ CREATE TABLE `bon_excuses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bon_excuses`
+-- Déchargement des données de la table `bon_excuses`
 --
 
 INSERT INTO `bon_excuses` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `date_marquage`, `type`, `somme`, `last_updated`) VALUES
@@ -208,7 +212,7 @@ INSERT INTO `bon_excuses` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `creat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_mandat`
+-- Structure de la table `bon_mandat`
 --
 
 CREATE TABLE `bon_mandat` (
@@ -226,7 +230,7 @@ CREATE TABLE `bon_mandat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `bon_mandat`
+-- Déchargement des données de la table `bon_mandat`
 --
 
 INSERT INTO `bon_mandat` (`num_bon`, `prix`, `id`, `num_mandat`, `type`, `commission`, `date`, `service`, `created_at`, `somme`, `last_updated`) VALUES
@@ -235,7 +239,7 @@ INSERT INTO `bon_mandat` (`num_bon`, `prix`, `id`, `num_mandat`, `type`, `commis
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_orders`
+-- Structure de la table `bon_orders`
 --
 
 CREATE TABLE `bon_orders` (
@@ -254,7 +258,7 @@ CREATE TABLE `bon_orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bon_orders`
+-- Déchargement des données de la table `bon_orders`
 --
 
 INSERT INTO `bon_orders` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `num_order`, `date_order`, `commission`, `somme`, `type`, `last_updated`) VALUES
@@ -264,7 +268,7 @@ INSERT INTO `bon_orders` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `create
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_provisions`
+-- Structure de la table `bon_provisions`
 --
 
 CREATE TABLE `bon_provisions` (
@@ -285,12 +289,12 @@ CREATE TABLE `bon_provisions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bon_provisions`
+-- Déchargement des données de la table `bon_provisions`
 --
 
 INSERT INTO `bon_provisions` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `num_indice`, `num_table`, `date`, `commission`, `type`, `spec`, `somme`, `last_updated`) VALUES
 (22, '1/21', 13560, 'منجزة', '2021-03-10', '2022-06-29 15:55:19', '123/21', '56/21', '2021-03-11', 'مجلس قضاء : البليدة', 'حكم', 'الغرفة المدنية', 13560, 2),
-(23, '2/21', 6780, 'تم إرسال رسالة', NULL, '2022-06-29 15:55:19', '23/21', '443/21', '2021-03-11', 'محكمة : البليدة', 'حكم', 'القسم الاجتماعي', 6780, 2),
+(23, '2/21', 6780, 'تم إرسال رسالة', NULL, '2022-06-30 08:33:10', '23/21', '443/21', '2021-03-11', 'محكمة : البليدة', 'حكم', 'القسم الاجتماعي', 6780, 1),
 (24, '3/21', 20340, '', NULL, '2022-06-29 15:55:19', '324/21', '45/21', '2021-03-06', 'محكمة : بوفاريك', 'حكم', 'القسم المدني', 25000, 2),
 (25, '4/21', 6780, '', NULL, '2022-06-29 15:55:19', '23/21', '366/21', '2021-03-18', 'محكمة : بوفاريك', 'حكم', 'القسم المدني', 6780, 2),
 (28, '16/21', 1500, '', NULL, '2022-06-29 15:55:19', '232/21', '1234/21', '2021-09-24', 'محكمة : حسين داي', 'حكم', 'القسم المدني', 1500, 2);
@@ -298,7 +302,7 @@ INSERT INTO `bon_provisions` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `cr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_rqst`
+-- Structure de la table `bon_rqst`
 --
 
 CREATE TABLE `bon_rqst` (
@@ -315,7 +319,7 @@ CREATE TABLE `bon_rqst` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `bon_rqst`
+-- Déchargement des données de la table `bon_rqst`
 --
 
 INSERT INTO `bon_rqst` (`id`, `num_bon`, `prix`, `num_rqst`, `type`, `commission`, `date`, `created_at`, `somme`, `last_updated`) VALUES
@@ -324,7 +328,7 @@ INSERT INTO `bon_rqst` (`id`, `num_bon`, `prix`, `num_rqst`, `type`, `commission
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bon_seances`
+-- Structure de la table `bon_seances`
 --
 
 CREATE TABLE `bon_seances` (
@@ -345,12 +349,12 @@ CREATE TABLE `bon_seances` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bon_seances`
+-- Déchargement des données de la table `bon_seances`
 --
 
 INSERT INTO `bon_seances` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `created_at`, `num_seance`, `type`, `commission`, `date_seance`, `date_report`, `date_report2`, `somme`, `last_updated`) VALUES
 (53, '8/21', 3000, 'منجزة', '2021-03-16', '2022-06-29 15:55:20', '1234567', 'القسم المدني', 'محكمة : البليدة', '2021-03-27', '0000-00-00', '0000-00-00', 3000, 2),
-(54, '15/21', 6000, 'تم إرسال رسالة', '2021-04-21', '2022-06-29 15:55:20', '786/21', 'القسم المدني', 'مجلس قضاء : البليدة', '2021-04-22', NULL, NULL, 6000, 2),
+(54, '15/21', 7200, 'تم إرسال رسالة', '2021-04-21', '2022-06-30 08:55:46', '786/21', 'القسم المدني', 'مجلس قضاء : البليدة', '2021-04-22', NULL, NULL, 19200, 1),
 (64, '17/21', 0, '', NULL, '2022-06-29 15:55:20', '2353/21', 'القسم المدني', 'محكمة : البليدة', '2021-09-23', NULL, NULL, 3000, 2),
 (66, '18/21', 1000, '', NULL, '2022-06-29 15:55:20', '3224/21', 'القسم الاجتماعي', 'محكمة : البليدة', '2021-10-01', '2021-10-09', '2021-10-22', 3000, 2),
 (72, '19/21', 3000, '', NULL, '2022-06-29 15:55:20', '1234/21', 'القسم المدني', 'محكمة : البليدة', '2021-11-06', '2021-11-12', NULL, 3000, 2),
@@ -359,7 +363,7 @@ INSERT INTO `bon_seances` (`id`, `num_bon`, `prix`, `status`, `date_fin`, `creat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandeur`
+-- Structure de la table `demandeur`
 --
 
 CREATE TABLE `demandeur` (
@@ -371,7 +375,7 @@ CREATE TABLE `demandeur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `demandeur`
+-- Déchargement des données de la table `demandeur`
 --
 
 INSERT INTO `demandeur` (`id`, `nom`, `addr`, `type_bon`, `id_bon`) VALUES
@@ -408,7 +412,7 @@ INSERT INTO `demandeur` (`id`, `nom`, `addr`, `type_bon`, `id_bon`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `identif`
+-- Structure de la table `identif`
 --
 
 CREATE TABLE `identif` (
@@ -417,7 +421,7 @@ CREATE TABLE `identif` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `identif`
+-- Déchargement des données de la table `identif`
 --
 
 INSERT INTO `identif` (`id`, `year`) VALUES
@@ -454,7 +458,7 @@ INSERT INTO `identif` (`id`, `year`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `letter`
+-- Structure de la table `letter`
 --
 
 CREATE TABLE `letter` (
@@ -468,7 +472,7 @@ CREATE TABLE `letter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `letter`
+-- Déchargement des données de la table `letter`
 --
 
 INSERT INTO `letter` (`id`, `id_rapport`, `type_rapport`, `id_obligatoire`, `num_lettre`, `date_lettre`, `publier`) VALUES
@@ -482,7 +486,7 @@ INSERT INTO `letter` (`id`, `id_rapport`, `type_rapport`, `id_obligatoire`, `num
 (79, '15/21', 'تبليغ جلسة', 142, 'R00734567709', '2022-06-27', 0);
 
 --
--- Triggers `letter`
+-- Déclencheurs `letter`
 --
 DELIMITER $$
 CREATE TRIGGER `update_rapport_bon` AFTER UPDATE ON `letter` FOR EACH ROW BEGIN
@@ -516,7 +520,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs`
+-- Structure de la table `logs`
 --
 
 CREATE TABLE `logs` (
@@ -525,20 +529,24 @@ CREATE TABLE `logs` (
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `operation` varchar(150) NOT NULL,
   `table_name` varchar(60) NOT NULL,
-  `id_table` int(11) NOT NULL
+  `id_table` varchar(10) NOT NULL,
+  `details` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `logs`
+-- Déchargement des données de la table `logs`
 --
 
-INSERT INTO `logs` (`id`, `user_id`, `time`, `operation`, `table_name`, `id_table`) VALUES
-(1, 12, '2022-06-29 17:55:06', 'hgjh', '', 0);
+INSERT INTO `logs` (`id`, `user_id`, `time`, `operation`, `table_name`, `id_table`, `details`) VALUES
+(1, 12, '2022-06-29 17:55:06', 'hgjh', '', '0', ''),
+(2, 1, '2022-06-30 08:55:47', 'update', 'bon_seances', '15/21', ''),
+(3, 12, '2022-06-30 15:22:27', 'login', '#', '#', '0'),
+(4, 1, '2022-06-30 15:24:02', 'login', '#', '#', ' ');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notification_fidelité`
+-- Structure de la table `notification_fidelité`
 --
 
 CREATE TABLE `notification_fidelité` (
@@ -549,7 +557,7 @@ CREATE TABLE `notification_fidelité` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `notification_fidelité`
+-- Déchargement des données de la table `notification_fidelité`
 --
 
 INSERT INTO `notification_fidelité` (`id_provision`, `num`, `date`, `id`) VALUES
@@ -562,7 +570,7 @@ INSERT INTO `notification_fidelité` (`id_provision`, `num`, `date`, `id`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `obligatoire`
+-- Structure de la table `obligatoire`
 --
 
 CREATE TABLE `obligatoire` (
@@ -576,13 +584,13 @@ CREATE TABLE `obligatoire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `obligatoire`
+-- Déchargement des données de la table `obligatoire`
 --
 
 INSERT INTO `obligatoire` (`id`, `nom`, `addr`, `status`, `date`, `en_suspens`, `id_bon`) VALUES
 (114, 'طهاري نور الدين', 'حي مجدوفة قرواو', 'تم التبليغ', '2022-03-27', 0, '1/21'),
 (115, 'جيجي جعفر', 'حي الحوارش رقم 123 قرواو', 'تم إشعاره(ا)', '2022-03-27', 0, '1/21'),
-(116, 'بلخلفة بلال', 'حي 1000 مسكن أولاد يعيش البليدة', 'تم إرسال رسالة', '2021-02-26', 1, '2/21'),
+(116, 'بلخلفة بلال', 'حي 1000 مسكن أولاد يعيش البليدة', 'تعليق (غير مبلغ)', '2021-02-26', 1, '2/21'),
 (117, 'دريوش محمد فريد', 'حي 13 ماي البليدة', 'تم التبليغ', '2021-02-21', 0, '3/21'),
 (118, 'بن قولال رمزي وسيم', 'حي 13 ماي البليدة', NULL, NULL, 0, '3/21'),
 (120, 'فليسي الياس', 'حي بريان أمام مسجد ابن الأثير بلدية قرواو', NULL, NULL, 0, '4/21'),
@@ -609,7 +617,7 @@ INSERT INTO `obligatoire` (`id`, `nom`, `addr`, `status`, `date`, `en_suspens`, 
 (208, 'عميمر سيد احمد', 'شارع 11 ديسمبر 1960 البليدة', 'تم إرسال رسالة', NULL, 0, '9/22');
 
 --
--- Triggers `obligatoire`
+-- Déclencheurs `obligatoire`
 --
 DELIMITER $$
 CREATE TRIGGER `update_oblig_bon` AFTER UPDATE ON `obligatoire` FOR EACH ROW BEGIN
@@ -643,7 +651,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `publish`
+-- Structure de la table `publish`
 --
 
 CREATE TABLE `publish` (
@@ -660,15 +668,16 @@ CREATE TABLE `publish` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `publish`
+-- Déchargement des données de la table `publish`
 --
 
 INSERT INTO `publish` (`id`, `num_bon`, `type_pv`, `id_oblig`, `adressed`, `response`, `type_rqst`, `created_at`, `date_fin_commune`, `date_fin_tribunal`) VALUES
 (2, '15/21', 'تبليغ جلسة', 142, 'أمه', 'تمثامتيسخنبسشكنىةنمى صىثسيمنبىس', NULL, '2022-04-23', NULL, NULL),
-(3, '15/21', 'تكليف بالحضور لجلسة', 142, 'محمد', 'يبنلمانبلك', 'كيبكمانبل', '2022-03-27', '2022-06-29', '2022-06-29');
+(3, '15/21', 'تكليف بالحضور لجلسة', 142, 'محمد', 'يبنلمانبلك', 'كيبكمانبل', '2022-03-27', '2022-06-29', '2022-06-29'),
+(4, '2/21', 'تكليف بالوفاء', 116, 'زوجته', 'رفضت التوقيع والاستلام بدله', NULL, '2022-06-30', NULL, NULL);
 
 --
--- Triggers `publish`
+-- Déclencheurs `publish`
 --
 DELIMITER $$
 CREATE TRIGGER `update_publish_bon` AFTER UPDATE ON `publish` FOR EACH ROW BEGIN
@@ -702,7 +711,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rapports`
+-- Structure de la table `rapports`
 --
 
 CREATE TABLE `rapports` (
@@ -714,7 +723,7 @@ CREATE TABLE `rapports` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `record`
+-- Structure de la table `record`
 --
 
 CREATE TABLE `record` (
@@ -728,32 +737,33 @@ CREATE TABLE `record` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
-  `username` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `nom` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `prenom` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` char(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL
+  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `username` varchar(60) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`username`, `nom`, `prenom`, `password`, `address`, `phone`, `type`) VALUES
-('karim', 'karim', 'remmide', 'test', 'gjdlgj', '025224180', 'admin'),
-('moh', 'moh', 'elfi', 'test012', 'sdlfk', '025221448', 'assit');
+INSERT INTO `users` (`nom`, `prenom`, `password`, `address`, `phone`, `type`, `id`, `username`) VALUES
+('karim', 'remmide', 'test', 'gjdlgj', '025224180', 'admin', 1, 'karim'),
+('moh', 'elfi', 'test012', 'sdlfk', '025221448', 'assit', 2, 'moh');
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v1`
--- (See below for the actual view)
+-- Doublure de structure pour la vue `v1`
+-- (Voir ci-dessous la vue réelle)
 --
 CREATE TABLE `v1` (
 `type` varchar(10)
@@ -768,8 +778,8 @@ CREATE TABLE `v1` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v2`
--- (See below for the actual view)
+-- Doublure de structure pour la vue `v2`
+-- (Voir ci-dessous la vue réelle)
 --
 CREATE TABLE `v2` (
 `type` varchar(18)
@@ -785,8 +795,8 @@ CREATE TABLE `v2` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v3`
--- (See below for the actual view)
+-- Doublure de structure pour la vue `v3`
+-- (Voir ci-dessous la vue réelle)
 --
 CREATE TABLE `v3` (
 `type` varchar(10)
@@ -801,7 +811,7 @@ CREATE TABLE `v3` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `v1`
+-- Structure de la vue `v1`
 --
 DROP TABLE IF EXISTS `v1`;
 
@@ -810,7 +820,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v2`
+-- Structure de la vue `v2`
 --
 DROP TABLE IF EXISTS `v2`;
 
@@ -819,271 +829,277 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v3`
+-- Structure de la vue `v3`
 --
 DROP TABLE IF EXISTS `v3`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v3`  AS SELECT trim('تبليغ جلسة') AS `type`, `b`.`num_bon` AS `num_bon`, `d`.`nom` AS `dem`, `o`.`nom` AS `nom`, `o`.`date` AS `date`, `o`.`status` AS `status`, `b`.`created_at` AS `created_at` FROM ((`demandeur` `d` join `obligatoire` `o`) join `bon_seances` `b`) WHERE `o`.`id_bon` = `b`.`num_bon` AND `b`.`num_bon` = `d`.`id_bon` AND (`o`.`status` = 'منجزة' OR `o`.`status` = 'تم إرسال رسالة') ;
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `action`
+-- Index pour la table `action`
 --
 ALTER TABLE `action`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_acte`
+-- Index pour la table `bon_acte`
 --
 ALTER TABLE `bon_acte`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_apercus`
+-- Index pour la table `bon_apercus`
 --
 ALTER TABLE `bon_apercus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_apercu_parorders`
+-- Index pour la table `bon_apercu_parorders`
 --
 ALTER TABLE `bon_apercu_parorders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_associations`
+-- Index pour la table `bon_associations`
 --
 ALTER TABLE `bon_associations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_autres`
+-- Index pour la table `bon_autres`
 --
 ALTER TABLE `bon_autres`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_excuses`
+-- Index pour la table `bon_excuses`
 --
 ALTER TABLE `bon_excuses`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_mandat`
+-- Index pour la table `bon_mandat`
 --
 ALTER TABLE `bon_mandat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_orders`
+-- Index pour la table `bon_orders`
 --
 ALTER TABLE `bon_orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_provisions`
+-- Index pour la table `bon_provisions`
 --
 ALTER TABLE `bon_provisions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_rqst`
+-- Index pour la table `bon_rqst`
 --
 ALTER TABLE `bon_rqst`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bon_seances`
+-- Index pour la table `bon_seances`
 --
 ALTER TABLE `bon_seances`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `demandeur`
+-- Index pour la table `demandeur`
 --
 ALTER TABLE `demandeur`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `identif`
+-- Index pour la table `identif`
 --
 ALTER TABLE `identif`
   ADD PRIMARY KEY (`id`,`year`);
 
 --
--- Indexes for table `letter`
+-- Index pour la table `letter`
 --
 ALTER TABLE `letter`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `logs`
+-- Index pour la table `logs`
 --
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `notification_fidelité`
+-- Index pour la table `notification_fidelité`
 --
 ALTER TABLE `notification_fidelité`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `obligatoire`
+-- Index pour la table `obligatoire`
 --
 ALTER TABLE `obligatoire`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `publish`
+-- Index pour la table `publish`
 --
 ALTER TABLE `publish`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rapports`
+-- Index pour la table `rapports`
 --
 ALTER TABLE `rapports`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `record`
+-- Index pour la table `record`
 --
 ALTER TABLE `record`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`username`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `action`
+-- AUTO_INCREMENT pour la table `action`
 --
 ALTER TABLE `action`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `bon_acte`
+-- AUTO_INCREMENT pour la table `bon_acte`
 --
 ALTER TABLE `bon_acte`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `bon_apercus`
+-- AUTO_INCREMENT pour la table `bon_apercus`
 --
 ALTER TABLE `bon_apercus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `bon_apercu_parorders`
+-- AUTO_INCREMENT pour la table `bon_apercu_parorders`
 --
 ALTER TABLE `bon_apercu_parorders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `bon_associations`
+-- AUTO_INCREMENT pour la table `bon_associations`
 --
 ALTER TABLE `bon_associations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `bon_autres`
+-- AUTO_INCREMENT pour la table `bon_autres`
 --
 ALTER TABLE `bon_autres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bon_excuses`
+-- AUTO_INCREMENT pour la table `bon_excuses`
 --
 ALTER TABLE `bon_excuses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `bon_mandat`
+-- AUTO_INCREMENT pour la table `bon_mandat`
 --
 ALTER TABLE `bon_mandat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `bon_orders`
+-- AUTO_INCREMENT pour la table `bon_orders`
 --
 ALTER TABLE `bon_orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `bon_provisions`
+-- AUTO_INCREMENT pour la table `bon_provisions`
 --
 ALTER TABLE `bon_provisions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `bon_rqst`
+-- AUTO_INCREMENT pour la table `bon_rqst`
 --
 ALTER TABLE `bon_rqst`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `bon_seances`
+-- AUTO_INCREMENT pour la table `bon_seances`
 --
 ALTER TABLE `bon_seances`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
--- AUTO_INCREMENT for table `demandeur`
+-- AUTO_INCREMENT pour la table `demandeur`
 --
 ALTER TABLE `demandeur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
--- AUTO_INCREMENT for table `letter`
+-- AUTO_INCREMENT pour la table `letter`
 --
 ALTER TABLE `letter`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
--- AUTO_INCREMENT for table `logs`
+-- AUTO_INCREMENT pour la table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `notification_fidelité`
+-- AUTO_INCREMENT pour la table `notification_fidelité`
 --
 ALTER TABLE `notification_fidelité`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `obligatoire`
+-- AUTO_INCREMENT pour la table `obligatoire`
 --
 ALTER TABLE `obligatoire`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
--- AUTO_INCREMENT for table `publish`
+-- AUTO_INCREMENT pour la table `publish`
 --
 ALTER TABLE `publish`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `rapports`
+-- AUTO_INCREMENT pour la table `rapports`
 --
 ALTER TABLE `rapports`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `record`
+-- AUTO_INCREMENT pour la table `record`
 --
 ALTER TABLE `record`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

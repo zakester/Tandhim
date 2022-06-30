@@ -87,6 +87,7 @@ public class ToDOCX {
             while ((len = in.read(buffer)) != -1) {
                 zipOut.write(buffer, 0, len);
             }
+            in.close();
         }
     }
 }
