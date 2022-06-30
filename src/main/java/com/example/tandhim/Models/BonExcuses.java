@@ -8,6 +8,8 @@ package com.example.tandhim.Models;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import com.example.tandhim.Controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javax.swing.JOptionPane;
@@ -92,7 +94,7 @@ public class BonExcuses extends BonNotification {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-                    String query = "UPDATE bon_excuses SET prix=" + prix + ", somme=" + somme + ",  last_apdated = " + 1 + ", date_marquage='" + date_marquage + "' ,  type='" + type + "' WHERE num_bon='" + num_bon + "'";
+                    String query = "UPDATE bon_excuses SET prix=" + prix + ", somme=" + somme + ",  last_apdated = " + 1 + ", date_marquage='" + date_marquage + "' ,  type='" + type + "' WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_excuses','"+num_bon+"');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {

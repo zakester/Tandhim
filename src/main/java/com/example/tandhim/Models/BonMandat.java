@@ -5,6 +5,7 @@
  */
 package com.example.tandhim.Models;
 
+import com.example.tandhim.Controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 
@@ -131,7 +132,7 @@ public class BonMandat extends BonNotification{
         public boolean update(){
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_mandat SET prix = " +prix+ ",somme = " +somme+ ", last_apdated = " + 1 + ", num_mandat ='" + num_mandat + "',type ='" + type + "', commission='" + commission +  "', service='" + service +  "',date='" + date + "' WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_mandat SET prix = " +prix+ ",somme = " +somme+ ", last_apdated = " + 1 + ", num_mandat ='" + num_mandat + "',type ='" + type + "', commission='" + commission +  "', service='" + service +  "',date='" + date + "' WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_mondat','"+num_bon+"');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id>=1){return true;}

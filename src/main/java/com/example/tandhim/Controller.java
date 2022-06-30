@@ -184,6 +184,7 @@ public class Controller implements Initializable {
     @FXML
     private VBox rightMenu;
 
+    public static int userID=0;
     private String userType;
     private String userName;
 
@@ -195,6 +196,12 @@ public class Controller implements Initializable {
         }
     }
 
+    public static void setUserID(int id){
+        userID=id;
+    }
+    public static int getUserID(){
+        return userID;
+    }
     public void setUserName(String s){
         this.userName = s;
         userNameLabel.setText(s);

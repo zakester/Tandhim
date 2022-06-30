@@ -6,6 +6,8 @@
 package com.example.tandhim.Models;
 
 
+import com.example.tandhim.Controller;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -105,7 +107,7 @@ public class BonAssociations extends Bon {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_associations SET prix=" + prix + " ,status='" + status + "', date_fin=" + getDateSQL() + ", somme=" + somme + ", last_apdated = " + 1 + " WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_associations SET prix=" + prix + " ,status='" + status + "', date_fin=" + getDateSQL() + ", somme=" + somme + ", last_apdated = " + 1 + " WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_associations','"+num_bon+"');";
             System.out.println(query);
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();

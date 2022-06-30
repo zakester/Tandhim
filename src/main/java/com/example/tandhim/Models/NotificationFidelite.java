@@ -5,6 +5,8 @@
  */
 package com.example.tandhim.Models;
 
+import com.example.tandhim.Controller;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -46,7 +48,7 @@ public class NotificationFidelite {
     public void update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE `notification_fidelité` SET  num= ?, date = ? WHERE id_provision='"+num_bon+"'";
+            String query = "UPDATE `notification_fidelité` SET  num= ?, date = ? WHERE id_provision='"+num_bon+"';log_update("+ Controller.getUserID()+",'notification_fidelite','"+num_bon+"');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             preparedStmt.setString(1, num);
             preparedStmt.setString(2, date);

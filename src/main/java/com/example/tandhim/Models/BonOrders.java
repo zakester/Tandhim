@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.example.tandhim.Controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javax.swing.JOptionPane;
@@ -105,7 +107,7 @@ public class BonOrders extends BonNotification {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_orders SET prix=" + prix + ", somme=" + somme + ", last_apdated = " + 1 + ", num_order='" + num_order + "', date_order='" + date_order + "', commission='" + commission + "' WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_orders SET prix=" + prix + ", somme=" + somme + ", last_apdated = " + 1 + ", num_order='" + num_order + "', date_order='" + date_order + "', commission='" + commission + "' WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_orders','"+num_bon+"');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {
