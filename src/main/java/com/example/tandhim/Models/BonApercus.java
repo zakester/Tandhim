@@ -81,7 +81,7 @@ public class BonApercus extends Bon{
     public boolean insert() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "INSERT INTO `bon_apercus`(`num_bon`, `prix`, `status`,`somme`)  VALUES (?,?,?,?)";
+            String query = "INSERT INTO `bon_apercus`(`num_bon`, `prix`, `status`,`somme`)  VALUES (?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'bon_apercus','"+num_bon+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             preparedStmt.setString(1, num_bon);
             preparedStmt.setInt(2, prix);
@@ -103,7 +103,7 @@ public class BonApercus extends Bon{
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_apercus SET prix=" + prix + " ,status='" + status + "', date_fin=" + getDateSQL() + ", somme=" + somme + ", last_apdated = " + 1 + " WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_apercus','"+num_bon+"');";
+            String query = "UPDATE bon_apercus SET prix=" + prix + " ,status='" + status + "', date_fin=" + getDateSQL() + ", somme=" + somme + ", last_updated = " + 1 + " WHERE num_bon='" + num_bon + "';CALL log_update("+ Controller.getUserID()+",'bon_apercus','"+num_bon+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {

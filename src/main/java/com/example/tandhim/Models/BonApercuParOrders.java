@@ -128,7 +128,7 @@ public class BonApercuParOrders extends Bon {
     public boolean insert() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "INSERT INTO `bon_apercu_parorders`(`num_bon`, `prix`, `status`, `num_order`, `date_order`, `commission`, `somme`) VALUES (?,?,?,?,?,?,?)";
+            String query = "INSERT INTO `bon_apercu_parorders`(`num_bon`, `prix`, `status`, `num_order`, `date_order`, `commission`, `somme`) VALUES (?,?,?,?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'bon_apercu_par_orders','"+num_bon+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             preparedStmt.setString(1, num_bon);
             preparedStmt.setInt(2, prix);
@@ -152,7 +152,7 @@ public class BonApercuParOrders extends Bon {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_apercu_parorders SET prix=" + prix + ", somme=" + somme + ", last_apdated = " + 1 + ",  num_order='" + num_order + "', date_order='" + date_order + "' , status='" + status + "', date_fin=" + getDateSQL() + ", commission='" + commission + "' WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_apercu_par_order','"+num_bon+"');";
+            String query = "UPDATE bon_apercu_parorders SET prix=" + prix + ", somme=" + somme + ", last_updated = " + 1 + ",  num_order='" + num_order + "', date_order='" + date_order + "' , status='" + status + "', date_fin=" + getDateSQL() + ", commission='" + commission + "' WHERE num_bon='" + num_bon + "';CALL log_update("+ Controller.getUserID()+",'bon_apercu_par_order','"+num_bon+"',' ');";
             System.out.println(query);
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();

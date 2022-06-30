@@ -8,6 +8,7 @@ package com.example.tandhim;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -66,6 +67,10 @@ public class LoginController implements Initializable {
                 controller2.setUserID(rs.getInt("id"));
                 controller2.setUserType(rs.getString("type"));
                 controller2.setUserName(rs.getString("nom")+" "+rs.getString("prenom"));
+                String logQuery="CALL log_login("+ Controller.getUserID()+",' ');";
+                PreparedStatement preparedStmt = bd.prepareStatement(logQuery);
+                int idn = preparedStmt.executeUpdate();
+
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();

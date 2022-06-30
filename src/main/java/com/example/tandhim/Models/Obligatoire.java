@@ -57,7 +57,7 @@ public class Obligatoire {
 
     public void insert() {
         Connection bd = BDConnection.getConnection();
-        String query2 = "INSERT INTO `Obligatoire`(`nom`, `id_bon`, `addr`, `status`, `date`) VALUES (?,?,?,?,?)";
+        String query2 = "INSERT INTO `Obligatoire`(`nom`, `id_bon`, `addr`, `status`, `date`) VALUES (?,?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'obliatoire',LAST_INSERT_ID(),' ');";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.setString(1, nom);
@@ -85,7 +85,7 @@ public class Obligatoire {
     public boolean delete() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "DELETE FROM obligatoire WHERE id_bon='" + id_bon + "' AND nom='" + nom + "' AND addr='" + addr + "'";
+            String query = "DELETE FROM obligatoire WHERE id_bon='" + id_bon + "' AND nom='" + nom + "' AND addr='" + addr + "';CALL log_update("+ Controller.getUserID()+",'ogligatoire','"+getObligatoireId()+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {
@@ -103,7 +103,7 @@ public class Obligatoire {
     public boolean delete_action() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "DELETE FROM action WHERE id_oblig=" + getObligatoireId();
+            String query = "DELETE FROM action WHERE id_oblig=" + getObligatoireId()+";CALL log_update("+ Controller.getUserID()+",'action','"+getObligatoireId()+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int idn = preparedStmt.executeUpdate();
             if (idn >= 1) {
@@ -129,7 +129,7 @@ public class Obligatoire {
                 id = rs.getInt("id");
             }
             System.out.println("id =" + id);
-            String query = "DELETE FROM letter WHERE id_obligatoire=" + id;
+            String query = "DELETE FROM letter WHERE id_obligatoire=" + id+";CALL log_update("+ Controller.getUserID()+",'letter','"+getObligatoireId()+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int idn = preparedStmt.executeUpdate();
             if (idn >= 1) {
@@ -178,7 +178,7 @@ public class Obligatoire {
     }
     public void updateObligatoire () {
         Connection bd = BDConnection.getConnection();
-        String query2 = "UPDATE obligatoire SET nom='"+getNom()+"', id_bon='"+getId_bon()+"', addr='"+getAddr()+"', status='"+getStatus()+"', date="+getDateSQL()+" WHERE id="+getObligatoireId()+";log_update("+ Controller.getUserID()+",'ogligatoire','"+getObligatoireId()+"');";
+        String query2 = "UPDATE obligatoire SET nom='"+getNom()+"', id_bon='"+getId_bon()+"', addr='"+getAddr()+"', status='"+getStatus()+"', date="+getDateSQL()+" WHERE id="+getObligatoireId()+";CALL log_update("+ Controller.getUserID()+",'ogligatoire','"+getObligatoireId()+"',' ');";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             int ok = preparedStmt2.executeUpdate();

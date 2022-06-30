@@ -33,7 +33,7 @@ public class NotificationFidelite {
     public void insert() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "INSERT INTO `notification_fidelité`(`id_provision`, `num`, `date`) VALUES (?,?,?)";
+            String query = "INSERT INTO `notification_fidelité`(`id_provision`, `num`, `date`) VALUES (?,?,?);CALL log_insert("+ Controller.getUserID()+",'notification_fidelite',LAST_INSERT_ID(),' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             preparedStmt.setString(1, num_bon);
             preparedStmt.setString(2, num);
@@ -48,7 +48,7 @@ public class NotificationFidelite {
     public void update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE `notification_fidelité` SET  num= ?, date = ? WHERE id_provision='"+num_bon+"';log_update("+ Controller.getUserID()+",'notification_fidelite','"+num_bon+"');";
+            String query = "UPDATE `notification_fidelité` SET  num= ?, date = ? WHERE id_provision='"+num_bon+"';CALL log_update("+ Controller.getUserID()+",'notification_fidelite','"+num_bon+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             preparedStmt.setString(1, num);
             preparedStmt.setString(2, date);

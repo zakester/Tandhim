@@ -76,9 +76,9 @@ public class BonSeances extends BonNotification {
         try {
             Connection bd = BDConnection.getConnection();
             String query ="";
-            if (date_report!=null && date_report2!=null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`,  `somme`,`date_report`, `date_report2`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-            if (date_report!=null && date_report2==null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`, `somme`, `date_report`) VALUES (?,?,?,?,?,?,?,?,?)";
-            if (date_report==null && date_report2==null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`, `somme`) VALUES (?,?,?,?,?,?,?,?)";
+            if (date_report!=null && date_report2!=null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`,  `somme`,`date_report`, `date_report2`) VALUES (?,?,?,?,?,?,?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'bon_seances','"+num_bon+"',' ');";
+            if (date_report!=null && date_report2==null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`, `somme`, `date_report`) VALUES (?,?,?,?,?,?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'bon_rqst','"+num_bon+"',' ');";
+            if (date_report==null && date_report2==null)  query = "INSERT INTO `bon_seances`( `num_bon`, `prix`, `status`, `num_seance`, `type`, `commission`, `date_seance`, `somme`) VALUES (?,?,?,?,?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'bon_rqst','"+num_bon+"',' ');";
             String sDate1,sDate = date_seance;
             java.sql.Date date1 = java.sql.Date.valueOf(sDate);
             PreparedStatement preparedStmt = bd.prepareStatement(query);
@@ -125,7 +125,8 @@ public class BonSeances extends BonNotification {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_seances SET prix = " + prix + ", somme = " + somme + ", last_apdated = " + 1 + ", num_seance ='" + num_seance + "',type ='" + type + "', commission='" + commission + "',date_seance='" + date_seance + "',date_report=" + getDateReportSQL() + ",date_report2=" + getDateReport2SQL() + " WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_seances','"+num_bon+"');";
+            String query = "UPDATE bon_seances SET prix = " + prix + ", somme = " + somme + ", last_updated = " + 1 + ", num_seance ='" + num_seance + "',type ='" + type + "', commission='" + commission + "',date_seance='" + date_seance + "',date_report=" + getDateReportSQL() + ",date_report2=" + getDateReport2SQL() + " WHERE num_bon='" + num_bon + "';CALL log_update("+ Controller.getUserID()+",'bon_seances','"+num_bon+"',' ');";
+            System.out.println(query);
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {

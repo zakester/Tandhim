@@ -5,6 +5,8 @@
  */
 package com.example.tandhim.Models;
 
+import com.example.tandhim.Controller;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -20,7 +22,7 @@ public class Demandeur {
     private String nom,addr,type,id_bon;
     public void insert(){
     Connection bd = BDConnection.getConnection();
-    String query2 = "INSERT INTO `demandeur`(`nom`, `id_bon`, `addr`) VALUES (?,?,?)";
+    String query2 = "INSERT INTO `demandeur`(`nom`, `id_bon`, `addr`) VALUES (?,?,?);CALL log_insert("+ Controller.getUserID()+",'demandeur',LAST_INSERT_ID(),' ');";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.setString(1, nom);
@@ -34,7 +36,7 @@ public class Demandeur {
     public boolean delete(){
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "DELETE FROM demandeur WHERE id_bon='" + id_bon + "' AND nom='"+nom+"' AND addr='"+addr+"'";
+            String query = "DELETE FROM demandeur WHERE id_bon='" + id_bon + "' AND nom='"+nom+"' AND addr='"+addr+"';CALL log_update("+ Controller.getUserID()+",'demandeur','"+id_bon+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id>=1){return true;}

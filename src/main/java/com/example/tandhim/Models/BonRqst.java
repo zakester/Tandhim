@@ -41,7 +41,7 @@ public class BonRqst extends BonNotification{
     public boolean insert(){
         try {
                     Connection bd = BDConnection.getConnection();
-                    String query = "INSERT INTO `bon_rqst`( `num_bon`, `prix`, `num_rqst`, `type`, `commission`, `date`, `somme`) VALUES (?,?,?,?,?,?,?)";
+                    String query = "INSERT INTO `bon_rqst`( `num_bon`, `prix`, `num_rqst`, `type`, `commission`, `date`, `somme`) VALUES (?,?,?,?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'bon_rqst','"+num_bon+"',' ');";
                     String sDate = date;
                     java.sql.Date date1 = java.sql.Date.valueOf(sDate);
                     PreparedStatement preparedStmt = bd.prepareStatement(query);
@@ -100,7 +100,7 @@ public class BonRqst extends BonNotification{
     public boolean update(){
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_rqst SET prix = " +prix+ " ,somme= " +somme+ ", last_apdated = " + 1 + ", num_rqst ='" + num_rqst + "',type ='" + type + "', commission='" + commission +  "', date='" + date + "' WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_rqst','"+num_bon+"');";
+            String query = "UPDATE bon_rqst SET prix = " +prix+ " ,somme= " +somme+ ", last_updated = " + 1 + ", num_rqst ='" + num_rqst + "',type ='" + type + "', commission='" + commission +  "', date='" + date + "' WHERE num_bon='" + num_bon + "';CALL log_update("+ Controller.getUserID()+",'bon_rqst','"+num_bon+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id>=1){return true;}

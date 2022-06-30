@@ -68,7 +68,7 @@ public class Letter {
 
     public int insert() {
         Connection bd = BDConnection.getConnection();
-        String query2 = "INSERT INTO `letter`(`id_rapport`, `type_rapport`, `num_lettre`, `date_lettre`,`id_obligatoire`, `publier`) VALUES (?,?,?,?,?,?)";
+        String query2 = "INSERT INTO `letter`(`id_rapport`, `type_rapport`, `num_lettre`, `date_lettre`,`id_obligatoire`, `publier`) VALUES (?,?,?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'letter','"+numLetter+"',' ');";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.setString(1, id_bon);
@@ -104,7 +104,7 @@ public class Letter {
     }
     public void updateLetter(){
         Connection bd = BDConnection.getConnection();
-        String query2 = "UPDATE letter SET id_rapport='"+id_bon+"', type_rapport='"+typePV+"', num_lettre='"+numLetter+"', date_lettre='"+dateLetter+"', id_obligatoire='"+idObligatoire+"' WHERE id="+getLetterId()+";log_update("+ Controller.getUserID()+",'letter','"+getLetterId()+"');";
+        String query2 = "UPDATE letter SET id_rapport='"+id_bon+"', type_rapport='"+typePV+"', num_lettre='"+numLetter+"', date_lettre='"+dateLetter+"', id_obligatoire='"+idObligatoire+"' WHERE id="+getLetterId()+";CALL log_update("+ Controller.getUserID()+",'letter','"+getLetterId()+"',' ');";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             preparedStmt2.executeUpdate();

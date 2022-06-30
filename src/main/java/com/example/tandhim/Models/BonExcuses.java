@@ -69,7 +69,7 @@ public class BonExcuses extends BonNotification {
     public boolean insert() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "INSERT INTO `bon_excuses`(`num_bon`, `prix`, `status`, `date_marquage`, `type`, `somme`)  VALUES (?,?,?,?,?,?)";
+            String query = "INSERT INTO `bon_excuses`(`num_bon`, `prix`, `status`, `date_marquage`, `type`, `somme`)  VALUES (?,?,?,?,?,?);CALL log_insert("+ Controller.getUserID()+",'bon_excuses','"+num_bon+"',' ');";
 
             java.sql.Date date = java.sql.Date.valueOf(date_marquage);
 
@@ -94,7 +94,7 @@ public class BonExcuses extends BonNotification {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-                    String query = "UPDATE bon_excuses SET prix=" + prix + ", somme=" + somme + ",  last_apdated = " + 1 + ", date_marquage='" + date_marquage + "' ,  type='" + type + "' WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_excuses','"+num_bon+"');";
+                    String query = "UPDATE bon_excuses SET prix=" + prix + ", somme=" + somme + ",  last_updated = " + 1 + ", date_marquage='" + date_marquage + "' ,  type='" + type + "' WHERE num_bon='" + num_bon + "';CALL log_update("+ Controller.getUserID()+",'bon_excuses','"+num_bon+"',' ');";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {
