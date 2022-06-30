@@ -63,6 +63,7 @@ public class LoginController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("Home.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Controller controller2 = fxmlLoader.getController();
+                controller2.setUserID(rs.getInt("id"));
                 controller2.setUserType(rs.getString("type"));
                 controller2.setUserName(rs.getString("nom")+" "+rs.getString("prenom"));
                 Stage stage = (Stage) btnLogin.getScene().getWindow();

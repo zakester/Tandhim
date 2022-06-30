@@ -5,6 +5,7 @@
  */
 package com.example.tandhim.Models;
 
+import com.example.tandhim.Controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 
@@ -151,7 +152,7 @@ public class BonApercuParOrders extends Bon {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE bon_apercu_parorders SET prix=" + prix + ", somme=" + somme + ", last_apdated = " + 1 + ",  num_order='" + num_order + "', date_order='" + date_order + "' , status='" + status + "', date_fin=" + getDateSQL() + ", commission='" + commission + "' WHERE num_bon='" + num_bon + "'";
+            String query = "UPDATE bon_apercu_parorders SET prix=" + prix + ", somme=" + somme + ", last_apdated = " + 1 + ",  num_order='" + num_order + "', date_order='" + date_order + "' , status='" + status + "', date_fin=" + getDateSQL() + ", commission='" + commission + "' WHERE num_bon='" + num_bon + "';log_update("+ Controller.getUserID()+",'bon_apercu_par_order','"+num_bon+"');";
             System.out.println(query);
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();

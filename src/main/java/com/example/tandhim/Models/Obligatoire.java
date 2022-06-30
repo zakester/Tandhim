@@ -5,6 +5,7 @@
  */
 package com.example.tandhim.Models;
 
+import com.example.tandhim.Controller;
 import com.example.tandhim.Models.Impression.publish;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -177,7 +178,7 @@ public class Obligatoire {
     }
     public void updateObligatoire () {
         Connection bd = BDConnection.getConnection();
-        String query2 = "UPDATE obligatoire SET nom='"+getNom()+"', id_bon='"+getId_bon()+"', addr='"+getAddr()+"', status='"+getStatus()+"', date="+getDateSQL()+" WHERE id="+getObligatoireId();
+        String query2 = "UPDATE obligatoire SET nom='"+getNom()+"', id_bon='"+getId_bon()+"', addr='"+getAddr()+"', status='"+getStatus()+"', date="+getDateSQL()+" WHERE id="+getObligatoireId()+";log_update("+ Controller.getUserID()+",'ogligatoire','"+getObligatoireId()+"');";
         try {
             PreparedStatement preparedStmt2 = bd.prepareStatement(query2);
             int ok = preparedStmt2.executeUpdate();
