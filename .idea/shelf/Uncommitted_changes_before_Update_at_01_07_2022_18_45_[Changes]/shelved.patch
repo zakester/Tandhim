@@ -1,0 +1,210 @@
+Index: target/classes/com/example/tandhim/printPv.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.geometry.Insets?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.CheckBox?>\r\n<?import javafx.scene.control.ComboBox?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.layout.HBox?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.layout.StackPane?>\r\n<?import javafx.scene.layout.VBox?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<VBox prefHeight=\"489.0\" prefWidth=\"395.0\" spacing=\"10.0\" styleClass=\"dialog\" stylesheets=\"@css/style.css\" xmlns=\"http://javafx.com/javafx/16\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"com.example.tandhim.EditDialogueController\">\r\n   <children>\r\n      <Label fx:id=\"typePv\" alignment=\"CENTER\" contentDisplay=\"CENTER\" prefHeight=\"0.0\" prefWidth=\"395.0\" stylesheets=\"@css/style.css\" text=\"محضر\" textOverrun=\"CENTER_ELLIPSIS\" />\r\n      <Label fx:id=\"labelOblig\" alignment=\"CENTER\" contentDisplay=\"CENTER\" prefHeight=\"0.0\" prefWidth=\"395.0\" stylesheets=\"@css/style.css\" text=\"المطلوب ضده :\" textOverrun=\"CENTER_ELLIPSIS\" />\r\n      <HBox alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n         <children>\r\n            <TextField fx:id=\"avocat\" prefHeight=\"37.0\" prefWidth=\"230.0\" promptText=\"محامي الطالب إن وجد\" stylesheets=\"@css/style.css\">\r\n               <font>\r\n                  <Font size=\"16.0\" />\r\n               </font>\r\n            </TextField>\r\n         </children>\r\n      </HBox>\r\n      <HBox alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n         <children>\r\n            <CheckBox fx:id=\"checkTypePhysique\" mnemonicParsing=\"false\" selected=\"true\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"شخص طبيعي\" />\r\n            <CheckBox fx:id=\"checkTypeMorale\" mnemonicParsing=\"false\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"شخص معنوي\" />\r\n         </children>\r\n      </HBox>\r\n      <StackPane fx:id=\"stackpane\" prefHeight=\"184.0\" prefWidth=\"395.0\">\r\n         <children>\r\n            <VBox fx:id=\"vboxCitation\" prefHeight=\"176.0\" prefWidth=\"395.0\" visible=\"false\">\r\n               <children>\r\n                  <HBox alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <TextField fx:id=\"typeReq\" prefHeight=\"37.0\" prefWidth=\"230.0\" promptText=\"إسم الطالب\" stylesheets=\"@css/style.css\" text=\"نوع العريضة\">\r\n                           <font>\r\n                              <Font size=\"16.0\" />\r\n                           </font>\r\n                        </TextField>\r\n                     </children>\r\n                  </HBox>\r\n                  <HBox alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <CheckBox fx:id=\"checkCitationPv1\" mnemonicParsing=\"false\" selected=\"true\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"محضر التكليف\" />\r\n                        <CheckBox fx:id=\"checkCitationPv1\" mnemonicParsing=\"false\" selected=\"true\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"محضر تبليغ التكلي\" />\r\n                     </children>\r\n                  </HBox>\r\n               </children>\r\n            </VBox>\r\n            <VBox fx:id=\"vboxJugement\" prefHeight=\"176.0\" prefWidth=\"395.0\" visible=\"false\">\r\n               <children>\r\n                  <HBox alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <ComboBox fx:id=\"comTypeJug\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"37.0\" prefWidth=\"230.0\" promptText=\"نوع الحكم\" style=\"-fx-text-fill: white; -fx-font-size: 16px;\" stylesheets=\"@css/style.css\" />\r\n                     </children>\r\n                  </HBox>\r\n                  <HBox fx:id=\"hboxTypeJugement\" alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <TextField fx:id=\"typeJug\" prefHeight=\"37.0\" prefWidth=\"230.0\" promptText=\"نوع الحكم\" stylesheets=\"@css/style.css\">\r\n                           <font>\r\n                              <Font size=\"16.0\" />\r\n                           </font>\r\n                        </TextField>\r\n                     </children>\r\n                  </HBox>\r\n                  <HBox alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <VBox>\r\n                           <children>\r\n                              <CheckBox fx:id=\"arcticle329_336\" mnemonicParsing=\"false\" selected=\"true\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"طبقا لنص المادة 336، 329\" />\r\n                              <CheckBox fx:id=\"arcticle336\" mnemonicParsing=\"false\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"طبقا لنص المادة 336 \" />\r\n                              <CheckBox fx:id=\"arcticle349_354\" mnemonicParsing=\"false\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"طبقا لنص المادة 349، 354\" />\r\n                           </children>\r\n                        </VBox>\r\n                        <VBox>\r\n                           <children>\r\n                              <CheckBox fx:id=\"arcticle950\" mnemonicParsing=\"false\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"طبقا لنص المادة 950\" />\r\n                              <CheckBox fx:id=\"arcticle329_349_354\" mnemonicParsing=\"false\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"طبقا لنص المادة 329، 349، 354\" />\r\n                           </children>\r\n                        </VBox>\r\n                     </children>\r\n                  </HBox>\r\n               </children>\r\n            </VBox>\r\n            <VBox fx:id=\"vboxOrder\" prefHeight=\"176.0\" prefWidth=\"395.0\" visible=\"false\">\r\n               <children>\r\n                  <HBox alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <ComboBox fx:id=\"comTypeOrder\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"37.0\" prefWidth=\"230.0\" promptText=\"نوع الأمر\" style=\"-fx-text-fill: white; -fx-font-size: 16px;\" stylesheets=\"@css/style.css\" />\r\n                     </children>\r\n                  </HBox>\r\n                  <HBox fx:id=\"hboxTypeOrder\" alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <TextField fx:id=\"typeJug1\" prefHeight=\"37.0\" prefWidth=\"230.0\" promptText=\"نوع الأمر\" stylesheets=\"@css/style.css\">\r\n                           <font>\r\n                              <Font size=\"16.0\" />\r\n                           </font>\r\n                        </TextField>\r\n                     </children>\r\n                  </HBox>\r\n               </children>\r\n            </VBox>\r\n            <VBox fx:id=\"vboxJugement1\" prefHeight=\"176.0\" prefWidth=\"395.0\">\r\n               <children>\r\n                  <HBox alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <ComboBox fx:id=\"comTypeDecision\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"37.0\" prefWidth=\"230.0\" promptText=\"نوع القرار\" style=\"-fx-text-fill: white; -fx-font-size: 16px;\" stylesheets=\"@css/style.css\" />\r\n                     </children>\r\n                  </HBox>\r\n                  <HBox fx:id=\"hboxTypeJugement1\" alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <TextField fx:id=\"typeDecision\" prefHeight=\"37.0\" prefWidth=\"230.0\" promptText=\"نوع القرار\" stylesheets=\"@css/style.css\">\r\n                           <font>\r\n                              <Font size=\"16.0\" />\r\n                           </font>\r\n                        </TextField>\r\n                     </children>\r\n                  </HBox>\r\n                  <HBox fx:id=\"hboxDecisionArticle\" alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"53.0\" prefWidth=\"395.0\" spacing=\"30.0\">\r\n                     <children>\r\n                        <CheckBox fx:id=\"article354\" mnemonicParsing=\"false\" selected=\"true\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"طبقا لنص المادة 354\" />\r\n                        <CheckBox fx:id=\"article329_355_354\" mnemonicParsing=\"false\" styleClass=\"button1-pressed\" stylesheets=\"@css/style.css\" text=\"طبقا لنص المادة 329، 355، 354\" />\r\n                     </children>\r\n                  </HBox>\r\n               </children>\r\n            </VBox>\r\n         </children>\r\n      </StackPane>\r\n      <Label alignment=\"CENTER\" contentDisplay=\"CENTER\" prefHeight=\"0.0\" prefWidth=\"395.0\" style=\"-fx-font-size: 13;\" text=\"تنبيه : في حالة تعديل الحالة سيتم محو كل ما يخص الحالة السابقة نهائيا\" textFill=\"#ff0c0c\" textOverrun=\"CENTER_ELLIPSIS\">\r\n         <font>\r\n            <Font size=\"10.0\" />\r\n         </font>\r\n      </Label>\r\n      <Pane prefHeight=\"62.0\" prefWidth=\"395.0\">\r\n         <children>\r\n            <HBox fx:id=\"hboxStatus1\" alignment=\"CENTER\" nodeOrientation=\"RIGHT_TO_LEFT\" prefHeight=\"48.0\" prefWidth=\"395.0\">\r\n               <children>\r\n                  <Button fx:id=\"btnSave\" alignment=\"CENTER\" contentDisplay=\"CENTER\" graphicTextGap=\"22.0\" mnemonicParsing=\"false\" nodeOrientation=\"RIGHT_TO_LEFT\" onAction=\"#SaveEdit\" prefHeight=\"16.0\" prefWidth=\"154.0\" styleClass=\"button2\" stylesheets=\"@css/style.css\" text=\"اضغط هنا لحفظ التعديلات\" textAlignment=\"CENTER\" textFill=\"#e7e5e5\" textOverrun=\"CENTER_WORD_ELLIPSIS\" wrapText=\"true\">\r\n                     <opaqueInsets>\r\n                        <Insets />\r\n                     </opaqueInsets>\r\n                     <HBox.margin>\r\n                        <Insets left=\"40.0\" right=\"40.0\" />\r\n                     </HBox.margin>\r\n                     <padding>\r\n                        <Insets bottom=\"10.0\" top=\"10.0\" />\r\n                     </padding>\r\n                  </Button>\r\n               </children>\r\n            </HBox>\r\n         </children>\r\n      </Pane>\r\n   </children>\r\n   <padding>\r\n      <Insets top=\"20.0\" />\r\n   </padding>\r\n</VBox>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/target/classes/com/example/tandhim/printPv.fxml b/target/classes/com/example/tandhim/printPv.fxml
+--- a/target/classes/com/example/tandhim/printPv.fxml	(revision e7ae16e48410e8be887877c768391e9fca5bc67f)
++++ b/target/classes/com/example/tandhim/printPv.fxml	(date 1656693681197)
+@@ -5,6 +5,7 @@
+ <?import javafx.scene.control.CheckBox?>
+ <?import javafx.scene.control.ComboBox?>
+ <?import javafx.scene.control.Label?>
++<?import javafx.scene.control.TextArea?>
+ <?import javafx.scene.control.TextField?>
+ <?import javafx.scene.layout.HBox?>
+ <?import javafx.scene.layout.Pane?>
+@@ -12,11 +13,11 @@
+ <?import javafx.scene.layout.VBox?>
+ <?import javafx.scene.text.Font?>
+ 
+-<VBox prefHeight="489.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.EditDialogueController">
++<VBox prefHeight="489.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.PrintPvController">
+    <children>
+       <Label fx:id="typePv" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="محضر" textOverrun="CENTER_ELLIPSIS" />
+-      <Label fx:id="labelOblig" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="المطلوب ضده :" textOverrun="CENTER_ELLIPSIS" />
+-      <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
++      <Label fx:id="labelOblig" alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="395.0" stylesheets="@css/style.css" text="المطلوب ضده :" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
++      <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="395.0" spacing="30.0">
+          <children>
+             <TextField fx:id="avocat" prefHeight="37.0" prefWidth="230.0" promptText="محامي الطالب إن وجد" stylesheets="@css/style.css">
+                <font>
+@@ -25,10 +26,10 @@
+             </TextField>
+          </children>
+       </HBox>
+-      <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
++      <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="31.0" prefWidth="395.0" spacing="30.0">
+          <children>
+-            <CheckBox fx:id="checkTypePhysique" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="شخص طبيعي" />
+-            <CheckBox fx:id="checkTypeMorale" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="شخص معنوي" />
++            <CheckBox fx:id="checkTypePhysique" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="شخص طبيعي" />
++            <CheckBox fx:id="checkTypeMorale" mnemonicParsing="false" onAction="#checkSelection" styleClass="button1-pressed" stylesheets="@css/style.css" text="شخص معنوي" />
+          </children>
+       </HBox>
+       <StackPane fx:id="stackpane" prefHeight="184.0" prefWidth="395.0">
+@@ -46,17 +47,17 @@
+                   </HBox>
+                   <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                      <children>
+-                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="محضر التكليف" />
+-                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="محضر تبليغ التكلي" />
++                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="محضر التكليف" />
++                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="محضر تبليغ التكلي" />
+                      </children>
+                   </HBox>
+                </children>
+             </VBox>
+-            <VBox fx:id="vboxJugement" prefHeight="176.0" prefWidth="395.0" visible="false">
++            <VBox fx:id="vboxJugement" prefHeight="176.0" prefWidth="395.0">
+                <children>
+                   <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                      <children>
+-                        <ComboBox fx:id="comTypeJug" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="230.0" promptText="نوع الحكم" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
++                        <ComboBox fx:id="comTypeJug" nodeOrientation="RIGHT_TO_LEFT" onAction="#changeType" prefHeight="37.0" prefWidth="230.0" promptText="نوع الحكم" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
+                      </children>
+                   </HBox>
+                   <HBox fx:id="hboxTypeJugement" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+@@ -68,19 +69,19 @@
+                         </TextField>
+                      </children>
+                   </HBox>
+-                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
++                  <HBox fx:id="hboxArticleJug" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                      <children>
+                         <VBox>
+                            <children>
+-                              <CheckBox fx:id="arcticle329_336" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 336، 329" />
+-                              <CheckBox fx:id="arcticle336" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 336 " />
+-                              <CheckBox fx:id="arcticle349_354" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 349، 354" />
++                              <CheckBox fx:id="arcticle329_336" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 336، 329" />
++                              <CheckBox fx:id="arcticle336" mnemonicParsing="false" onAction="#checkSelection" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 336 " />
++                              <CheckBox fx:id="arcticle349_354" mnemonicParsing="false" onAction="#checkSelection" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 349، 354" />
+                            </children>
+                         </VBox>
+                         <VBox>
+                            <children>
+-                              <CheckBox fx:id="arcticle950" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 950" />
+-                              <CheckBox fx:id="arcticle329_349_354" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 329، 349، 354" />
++                              <CheckBox fx:id="arcticle950" mnemonicParsing="false" onAction="#checkSelection" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 950" />
++                              <CheckBox fx:id="arcticle329_349_354" mnemonicParsing="false" onAction="#checkSelection" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 329، 349، 354" />
+                            </children>
+                         </VBox>
+                      </children>
+@@ -91,25 +92,31 @@
+                <children>
+                   <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                      <children>
+-                        <ComboBox fx:id="comTypeOrder" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="230.0" promptText="نوع الأمر" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
++                        <ComboBox fx:id="comTypeOrder" nodeOrientation="RIGHT_TO_LEFT" onAction="#changeType" prefHeight="37.0" prefWidth="230.0" promptText="نوع الأمر" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
+                      </children>
+                   </HBox>
+                   <HBox fx:id="hboxTypeOrder" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                      <children>
+-                        <TextField fx:id="typeJug1" prefHeight="37.0" prefWidth="230.0" promptText="نوع الأمر" stylesheets="@css/style.css">
++                        <TextField fx:id="typeOrder" prefHeight="37.0" prefWidth="230.0" promptText="نوع الأمر" stylesheets="@css/style.css">
+                            <font>
+                               <Font size="16.0" />
+                            </font>
+                         </TextField>
+                      </children>
+                   </HBox>
++                  <HBox fx:id="hboxOrderArticle" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
++                     <children>
++                        <CheckBox fx:id="sansDelai" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="أمر بدون أجل" />
++                        <CheckBox fx:id="avecDelai" mnemonicParsing="false" onAction="#checkSelection" styleClass="button1-pressed" stylesheets="@css/style.css" text="أمر بأجل 15 يوم" />
++                     </children>
++                  </HBox>
+                </children>
+             </VBox>
+-            <VBox fx:id="vboxJugement1" prefHeight="176.0" prefWidth="395.0">
++            <VBox fx:id="vboxDecision" prefHeight="176.0" prefWidth="395.0" visible="false">
+                <children>
+                   <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                      <children>
+-                        <ComboBox fx:id="comTypeDecision" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="230.0" promptText="نوع القرار" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
++                        <ComboBox fx:id="comTypeDecision" nodeOrientation="RIGHT_TO_LEFT" onAction="#changeType" prefHeight="37.0" prefWidth="230.0" promptText="نوع القرار" style="-fx-text-fill: white; -fx-font-size: 16px;" stylesheets="@css/style.css" />
+                      </children>
+                   </HBox>
+                   <HBox fx:id="hboxTypeJugement1" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+@@ -123,8 +130,67 @@
+                   </HBox>
+                   <HBox fx:id="hboxDecisionArticle" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                      <children>
+-                        <CheckBox fx:id="article354" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 354" />
+-                        <CheckBox fx:id="article329_355_354" mnemonicParsing="false" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 329، 355، 354" />
++                        <CheckBox fx:id="article354" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 354" />
++                        <CheckBox fx:id="article329_355_354" mnemonicParsing="false" onAction="#checkSelection" styleClass="button1-pressed" stylesheets="@css/style.css" text="طبقا لنص المادة 329، 355، 354" />
++                     </children>
++                  </HBox>
++               </children>
++            </VBox>
++            <VBox fx:id="vboxExcuse" prefHeight="176.0" prefWidth="395.0" visible="false">
++               <children>
++                  <HBox fx:id="hboxTypeJugement11" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
++                     <children>
++                        <TextField fx:id="langueExcuse" prefHeight="37.0" prefWidth="230.0" promptText="لغة الملحق" stylesheets="@css/style.css">
++                           <font>
++                              <Font size="16.0" />
++                           </font>
++                        </TextField>
++                     </children>
++                  </HBox>
++                  <HBox fx:id="hboxDecisionArticle2" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="27.0" prefWidth="395.0" spacing="30.0">
++                     <children>
++                        <CheckBox fx:id="article3541" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="إضافة مرفقات" />
++                     </children>
++                  </HBox>
++                  <HBox fx:id="hboxTypeJugement111" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0">
++                     <children>
++                        <TextField fx:id="nbrPages" prefHeight="37.0" prefWidth="230.0" promptText="عدد صفحات المرفق" stylesheets="@css/style.css">
++                           <font>
++                              <Font size="16.0" />
++                           </font>
++                        </TextField>
++                     </children>
++                  </HBox>
++               </children>
++            </VBox>
++            <VBox fx:id="vboxِConstat" prefHeight="176.0" prefWidth="395.0" visible="false">
++               <children>
++                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="167.0" prefWidth="395.0" spacing="30.0">
++                     <children>
++                        <TextArea fx:id="contentArea" prefHeight="167.0" prefWidth="391.0" promptText="الرجاء إدخال مضمون الطلب أو الأمر هنا" />
++                     </children></HBox>
++               </children>
++            </VBox>
++            <VBox fx:id="vboxِObligation" prefHeight="176.0" prefWidth="395.0" visible="false">
++               <children>
++                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="187.0" prefWidth="395.0" spacing="5.0">
++                     <children>
++                        <VBox alignment="CENTER">
++                           <children>
++                              <TextArea fx:id="contentExeArea" prefHeight="167.0" prefWidth="209.0" promptText="الرجاء إدخال منطوق السند" wrapText="true" />
++                              <CheckBox fx:id="checkContent" mnemonicParsing="false" onAction="#checkSelection" prefHeight="17.0" prefWidth="82.0" styleClass="button1-pressed" stylesheets="@css/style.css" text="التزام بمنطوق" />
++                              <CheckBox fx:id="checkMontant" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="تسديد مبالغ     " />
++                           </children>
++                        </VBox>
++                        <VBox prefHeight="197.0" prefWidth="173.0">
++                           <children>
++                              <TextField fx:id="montant" onAction="#calculePropo" onKeyPressed="#calculePropo" onKeyReleased="#calculePropo" onKeyTyped="#calculePropo" prefHeight="25.0" prefWidth="230.0" promptText="المبلغ المحكوم به" stylesheets="@css/style.css" />
++                              <TextField fx:id="charge" onAction="#calculePropo" onKeyPressed="#calculePropo" onKeyReleased="#calculePropo" onKeyTyped="#calculePropo" prefHeight="25.0" prefWidth="230.0" promptText="مصاريف التنفيذ" stylesheets="@css/style.css" />
++                              <TextField fx:id="droitPropo" editable="false" prefHeight="25.0" prefWidth="230.0" promptText="الحق التناسبي" stylesheets="@css/style.css" />
++                              <TextField fx:id="totale" editable="false" prefHeight="25.0" prefWidth="230.0" promptText="المبلغ الإجمالي" stylesheets="@css/style.css" />
++                              <TextArea fx:id="ObligationArea" disable="true" prefHeight="167.0" prefWidth="209.0" promptText="الرجاء إدخال منطوق الإلتزام" wrapText="true" />
++                           </children>
++                        </VBox>
+                      </children>
+                   </HBox>
+                </children>
+@@ -140,7 +206,7 @@
+          <children>
+             <HBox fx:id="hboxStatus1" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="395.0">
+                <children>
+-                  <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SaveEdit" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="اضغط هنا لحفظ التعديلات" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
++                  <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#wordView" prefHeight="37.0" prefWidth="225.0" styleClass="button2" stylesheets="@css/style.css" text="اضغط هنا لعرض المحضر على Word" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                      <opaqueInsets>
+                         <Insets />
+                      </opaqueInsets>

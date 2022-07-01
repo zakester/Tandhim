@@ -558,10 +558,14 @@
                         <children>
                            <VBox styleClass="hbox-status" stylesheets="@css/style.css">
                               <children>
-                                 <TextArea fx:id="typeArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="388.0" styleClass="textarea1" stylesheets="@css/style.css" wrapText="true">
+                                 <TextArea fx:id="typeArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="388.0" stylesheets="@css/style.css" wrapText="true">
                                     <font>
                                        <Font size="18.0" />
                                     </font>
+                                    <styleClass>
+                                       <String fx:value="textarea" />
+                                       <String fx:value="area" />
+                                    </styleClass>
                                  </TextArea>
                               </children>
                               <HBox.margin>
@@ -573,7 +577,7 @@
                            </VBox>
                            <VBox styleClass="hbox-status" stylesheets="@css/style.css">
                               <children>
-                                 <TextArea fx:id="statusArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="315.0" styleClass="textarea1" stylesheets="@css/style.css" wrapText="true">
+                                 <TextArea fx:id="statusArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="315.0" styleClass="textarea" stylesheets="@css/style.css" wrapText="true">
                                     <font>
                                        <Font size="18.0" />
                                     </font>
