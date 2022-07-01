@@ -1,0 +1,78 @@
+.button
+{
+-fx-background-color : #cbcbcb;
+-fx-text-fill : black;
+}
+.button:hover{
+-fx-background-color : #f5f5f5;
+}
+.button:pressed
+{
+-fx-background-color : #cbcbcb;
+}
+
+.transparent-button {
+    -fx-background-color : transparent;
+        -fx-border-color:#B7C3D7;
+        -fx-border-radius: 2em;
+}
+.transparent-button:hover {
+    -fx-text-fill : black;
+    -fx-background-color : #cbcbcb !important;
+    -fx-border-radius:2em;
+    -fx-border-color : transparent;
+    -fx-background-radius : 2em;
+    
+}
+.btn-forget:hover {
+	-fx-text-fill : #B7C3D7;
+}
+.transparent-button1 {
+	-fx-background-color:#f5f5f5;
+    -fx-border-color: null;
+    -fx-border-radius:2em;
+    -fx-text-fill:black;
+}
+.transparent-button1:hover {
+    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #cbcbcb,transparent, transparent);
+    -fx-border-color: null;
+    -fx-border-radius:2em;
+    -fx-text-fill:black;
+}
+.transparent-button1:pressed {
+    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , red,transparent, transparent);
+    -fx-border-color: null;
+    -fx-border-radius:2em;
+    -fx-text-fill:black;
+}
+.transparent-button1-login {
+	-fx-background-color:transparent;
+    -fx-border-color: null;
+    -fx-border-radius:2em;
+    -fx-text-fill:black;
+}
+.transparent-button1-login:hover {
+    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #f5f5f5,transparent, transparent);
+    -fx-border-color: null;
+    -fx-border-radius:2em;
+    -fx-text-fill:black;
+}
+.transparent-button1-login:pressed {
+    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , red,transparent, transparent);
+    -fx-border-color: null;
+    -fx-border-radius:2em;
+    -fx-text-fill:black;
+}
+.transparent-button2 {
+	-fx-background-color : transparent;
+	-fx-border-color:  #f5f5f5;
+	-fx-border-radius: 2em;
+}
+.transparent-button2:hover {
+	-fx-text-fill : black;
+	-fx-background-color : #cbcbcb !important;
+	-fx-border-radius:2em;
+	-fx-border-color : transparent;
+	-fx-background-radius : 2em;
+	
+}
