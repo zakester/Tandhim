@@ -39,7 +39,7 @@
     -fx-text-fill:black;
 }
 .transparent-button1:hover {
-    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , red,transparent, transparent);
+    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , transparent,red, red);
     -fx-border-color: null;
     -fx-border-radius:2em;
     -fx-text-fill:black;
