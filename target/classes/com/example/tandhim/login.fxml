@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="620.0" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="620.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="620.0" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="620.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.LoginController">
    <effect>
       <DropShadow color="#1b1eeb" />
    </effect>
    <StackPane layoutX="525.0" minHeight="620.0" prefHeight="620.0" prefWidth="526.0" styleClass="login-right" stylesheets="@css/style.css">
-      <ImageView fitHeight="525.0" fitWidth="477.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@img/tandhim.png" />
-      </ImageView>
+      <children>
+         <ImageView fitHeight="639.0" fitWidth="958.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@img/bg.jpg" />
+            </image>
+            <StackPane.margin>
+               <Insets left="-190.0" right="210.0" />
+            </StackPane.margin>
+         </ImageView>
+         <Pane opacity="0.3" prefHeight="200.0" prefWidth="200.0" styleClass="fade" stylesheets="@css/style.css" />
+      </children>
    </StackPane>
    <VBox alignment="TOP_CENTER" minHeight="620.0" prefHeight="620.0" prefWidth="525.0" styleClass="login-left" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
       <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">

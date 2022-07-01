@@ -1,6 +1,15 @@
+.nothinghere{
+    -fx-background-color :#261a33;
+    -fx-background-color :#241731;
+    -fx-background-color : #3e3865;
+    -fx-background-color :  #8c77dd;
+-fx-background-color: #b6b5ed;
+-fx-background-color : #c277ee;
+}
+
 .button1
 {
--fx-background-color : #05071F;
+-fx-background-color : #1f132b;
 -fx-text-fill : #e7e5e5;
 }
 .button1:hover{
@@ -70,9 +79,10 @@
     -fx-background-color:transparent !important;
 }
 .hbox-status {
-    -fx-background-color:  transparent;
+    -fx-background-color:  #241731;
     -fx-border-color:  #B7C3D7;
     -fx-border-radius: 2em;
+    -fx-background-radius: 2em;
 }
 
 .combo-box-base {
@@ -161,6 +171,9 @@
     -fx-background-radius: 2 0 0 2;
     -fx-font-size :16px;
 }
+.fade{
+	-fx-background-color : #241731;
+}
 .date-picker > .arrow-button {
     -fx-background-color:#05071F;
     -fx-background-radius: 2em;
@@ -169,7 +182,7 @@
 	-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 25% ,white, #B7C3D7, #02030A);
 }
 .login-left {
-	-fx-background-color : #05071F;
+	-fx-background-color : #241731;
 }
 .dialog-pane .button{
  	-fx-border-color: lightgrey;
@@ -188,26 +201,32 @@
     -fx-font-size: 2em;
 }
  .text-area {
-    text-area-background: #02030A ;
+    text-area-background: #241731 ;
+    -fx-border-color: #2d203a;
+
+}
+.othertext-area {
+    -fx-background-color: #1f132b ;
 }
  .text-area .content {
     -fx-background-color: text-area-background ;
- 	-fx-border-color: lightgrey;
-    -fx-border-radius: 2em;
-    -fx-text-fill: white;
- }
-.textarea1 .content {
-    -fx-background-color: text-area-background ;
-    -fx-border-color: transparent !important;
-    -fx-border-radius: 2em;
     -fx-text-fill: white;
  }
 
+.textarea1 .content {
+    -fx-background-color: text-area-background ;
+    -fx-border-color: #2d203a;
+    -fx-border-radius: 0;
+    -fx-text-fill: white;
+
+    -fx-background-radius: 2em;
+ }
+
  .Anchor {
-    -fx-background-color: #02030A ;
+    -fx-background-color: #2d203a ;
  }
  .text-field{
--fx-background-color : #02030A;
+-fx-background-color : #2d203a;
 -fx-border-color: #B7C3D7;
 -fx-border-radius:2em;
 -fx-text-fill:white;
@@ -216,7 +235,7 @@
     -fx-text-fill:white;
 }
 .optionbar {
-	-fx-background-color : #05071F;
+	-fx-background-color : #241731;
 
 }
 .chart-pie-label-line {
