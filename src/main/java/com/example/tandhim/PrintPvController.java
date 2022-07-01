@@ -4,7 +4,16 @@
 
 package com.example.tandhim;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+
+import com.example.tandhim.Models.BonProvisions;
+import com.example.tandhim.Models.Demandeur;
+import com.example.tandhim.Models.Impression.DOCXModels;
+import com.example.tandhim.Models.Impression.Print2Word;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import java.util.ResourceBundle;
 import java.net.URL;
@@ -75,7 +84,7 @@ public class PrintPvController implements Initializable
     @FXML
     private CheckBox sansDelai;
     @FXML
-    private CheckBox avecDelai;
+    private CheckBox avecDelai,checkAttached;
     @FXML
     private VBox vboxDecision;
     @FXML
@@ -166,29 +175,60 @@ public class PrintPvController implements Initializable
     
     @FXML
     void wordView() {
+
         final EditBonSearch result = new EditBonSearch(this.numBon);
-        if (this.typePv.equals("\u0645\u062d\u0636\u0631 \u062a\u0643\u0644\u064a\u0641 \u0628\u0627\u0644\u0648\u0641\u0627\u0621 \u0628\u0645\u0648\u062c\u0628 \u0633\u0646\u062f \u0642\u0636\u0627\u0626\u064a")) {
+        if (typePv.getText().equals("محضر تكليف بالوفاء بموجب سند قضائي")) {
             this.vboxObligation.setVisible(true);
         }
-        if (this.typePv.equals("\u0645\u062d\u0636\u0631 \u062a\u0643\u0644\u064a\u0641 \u0628\u0627\u0644\u062d\u0636\u0648\u0631 \u0644\u062c\u0644\u0633\u0629")) {
+        if (typePv.getText().equals("محضر تكليف بالحضور لجلسة")) {
             this.vboxCitation.setVisible(true);
         }
-        if (this.typePv.equals("\u0645\u062d\u0636\u0631 \u062a\u0628\u0644\u064a\u063a \u0623\u0645\u0631")) {
+        if (typePv.getText().equals("محضر تبليغ أمر")) {
             this.vboxOrder.setVisible(true);
         }
-        if (this.typePv.equals("\u0645\u062d\u0636\u0631 \u062a\u0628\u0644\u064a\u063a \u062d\u0643\u0645")) {
-            this.vboxJugement.setVisible(true);
+        if (typePv.getText().equals("محضر تبليغ حكم")) {
+            System.out.println("yeah im here");
+            String oblig =labelOblig.getText().replace("المطلوب ضده :","");
+            String [] obl = oblig.split(" العنوان: ");
+            HashMap<String, String> marginInformation = new HashMap<>() {{
+                put("@huiss", "بن ثامر دحمان");
+                put("@wilaya", "البليدة");
+                put("@adrHuiss", "شارع 11 ديسمبر 1960 البليدة )مقابل مجلس قضاء البليدة(");
+            }};
+            BonProvisions bon = result.getBonProvisionsData();
+            ArrayList<Demandeur> dem = result.getDemandeurList();
+            String demandeur = "";
+            int i=1;
+            for (Demandeur d:dem) {
+                demandeur +=i+"/ "+ d.getNom()+" العنوان: "+d.getAddr()+" ";
+            }
+            String finalDemandeur = demandeur;
+            HashMap<String, String> modelInformation = new HashMap<>() {{
+                put("@demandeur", finalDemandeur);
+                put("@commission", bon.getCommission());
+                put("@spec", bon.getSpec());
+                put("@year", "اثنان وعشرون");
+                put("@type", comTypeJug.getSelectionModel().getSelectedItem());
+                put("@table", bon.getNum_table());
+                put("@indice", bon.getNum_indice());
+                put("@obligatoire", obl[0]);
+                put("@address", obl[1]);
+                put("@num_bon", numBon);
+                put("@date", bon.getDate());
+            }};
+            Print2Word print2Word = null;
+            try {
+                print2Word = new Print2Word(DOCXModels.jugement_1, marginInformation, modelInformation, 0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            print2Word.replaceParameters();
         }
-        if (this.typePv.equals("\u0645\u062d\u0636\u0631 \u062a\u0628\u0644\u064a\u063a \u0642\u0631\u0627\u0631")) {
+        if (typePv.getText().equals("محضر تبليغ قرار")) {
             this.vboxDecision.setVisible(true);
         }
-        if (this.typePv.equals("\u0645\u062d\u0636\u0631 \u062a\u0628\u0644\u064a\u063a \u0625\u0631\u0633\u0627\u0644\u064a\u0629 / \u0637\u0644\u0628 / \u0625\u0639\u0630\u0627\u0631")) {
+        if (typePv.getText().equals("محضر تبليغ إرسالية / طلب / إعذار")) {
             this.vboxExcuse.setVisible(true);
-        }
-        if (this.typePv.equals("\u0645\u062d\u0636\u0631 \u0645\u0639\u0627\u064a\u0646\u0629") || this.typePv.equals("\u0645\u062d\u0636\u0631 \u0645\u0639\u0627\u064a\u0646\u0629 \u0628\u0623\u0645\u0631") || this.typePv.equals("\u0645\u062d\u0636\u0631 \u062d\u0636\u0648\u0631 \u062c\u0645\u0639\u064a\u0629 \u0639\u0627\u0645\u0629")) {
-            this.vboxConstat.setVisible(true);
-            this.checkTypeMorale.setDisable(true);
-            this.checkTypePhysique.setDisable(true);
         }
         ((Stage)this.btnSave.getScene().getWindow()).close();
     }

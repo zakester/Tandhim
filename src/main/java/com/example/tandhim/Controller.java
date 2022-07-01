@@ -1185,7 +1185,6 @@ public class Controller implements Initializable {
                     NotificationFidelite notif = result.getNotificationFidelité();
                     typeArea.setText("تكليف بالوفاء بموجب : " + bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission() + " بتاريخ: " + bon.getDate_order() + " والممهور بالصيغة التنفيذية رقم : " + notif.getNum() + " الصادرة بتاريخ : " + notif.getDate());
                 } else {
-                    System.out.println(result.getBonData());
                     BonOrders bon = result.getBonOrdersData();
                     System.out.println(bon);
                     typeArea.setText("تبليغ " + bon.getType() + " رقم: " + bon.getNum_order() + " الصادر عن: " + bon.getCommission() + " بتاريخ: " + bon.getDate_order());
@@ -1198,7 +1197,6 @@ public class Controller implements Initializable {
                     System.out.println(notif);
                     typeArea.setText("تكليف بالوفاء بموجب : " + bon.getType() + " رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table() + " الصادر عن: " + bon.getCommission() + " بتاريخ: " + bon.getDate() + " والممهور بالصيغة التنفيذية رقم : " + notif.getNum() + " الصادرة بتاريخ : " + notif.getDate());
                 } else {
-                    System.out.println(result.getBonData());
                     BonProvisions bon = result.getBonProvisionsData();
                     System.out.println(bon);
                     typeArea.setText("تبليغ " + bon.getType() + " رقم الفهرس: " + bon.getNum_indice() + " رقم الجدول: " + bon.getNum_table() + " الصادر عن: " + bon.getCommission() + " بتاريخ: " + bon.getDate());
@@ -2160,9 +2158,34 @@ public class Controller implements Initializable {
     }
 
     public void PrintPV() {
-        PrintPV newPV = new PrintPV();
-        String oblAdr[] = obligList.getSelectionModel().getSelectedItem().toString().split(" العنوان: ");
-        newPV.PrintPVSeance(demList.getItems(), oblAdr[0], oblAdr[1], "افتتاحية", "////", CitationCtrl.getNumCitation(), num_bon.getText(), CitationCtrl.getDateCitation(), CitationCtrl.getDateReport(), CitationCtrl.getDateReport2(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), ComCtrl.getComType(), "03", "01", "09:00", obligList.getSelectionModel().getSelectedIndex() + 1, 1);
+        String typePv = "محضر "+ bonText.getText();
+        String oblig = demList.getItems().get(0).toString();
+        if (demList.getItems().size()>1) oblig+=" ومن معه";
+        if (hboxOblig2.isVisible()){
+            if (obligList.getSelectionModel().getSelectedItem()==null){
+                JOptionPane.showMessageDialog(null,"عليك تحديد المطلوب من قائمة المطلوبين");
+                return;
+            }
+            else oblig= obligList.getSelectionModel().getSelectedItem().toString();
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PrintPv.fxml"));
+        try {
+            Parent p = (Parent) loader.load();
+            PrintPvController ctrl = loader.getController();
+            ctrl.bonData(num_bon.getText(),typePv,oblig);
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("css/style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            dialogPane.setContent(p);
+            alert.setTitle("خطأ في الإدخال");
+            alert.setContentText(
+                    "اسم الهيئة خاطئ");
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /** Add new account to the database */

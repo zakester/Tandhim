@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="620.0" prefWidth="1050.0" styleClass="Anchor" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="620.0" prefWidth="1050.0" styleClass="Anchor" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.Controller">
    <children>
       <VBox fx:id="rightMenu" alignment="TOP_CENTER" prefHeight="620.0" prefWidth="256.0" styleClass="optionbar" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -558,14 +558,10 @@
                         <children>
                            <VBox styleClass="hbox-status" stylesheets="@css/style.css">
                               <children>
-                                 <TextArea fx:id="typeArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="388.0" stylesheets="@css/style.css" wrapText="true">
+                                 <TextArea fx:id="typeArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="388.0" styleClass="textarea" stylesheets="@css/style.css" wrapText="true">
                                     <font>
                                        <Font size="18.0" />
                                     </font>
-                                    <styleClass>
-                                       <String fx:value="textarea" />
-                                       <String fx:value="area" />
-                                    </styleClass>
                                  </TextArea>
                               </children>
                               <HBox.margin>
@@ -630,7 +626,7 @@
                      <Font name="Times New Roman" size="33.0" />
                   </font>
                </Label>
-               <TextField fx:id="editNumBon" layoutX="468.0" layoutY="37.0" onKeyPressed="#okPressed" prefHeight="23.0" prefWidth="225.0" promptText="رقم الوصل" styleClass=".othertext-area" stylesheets="@css/style.css">
+               <TextField fx:id="editNumBon" layoutX="468.0" layoutY="37.0" onKeyPressed="#okPressed" prefHeight="23.0" prefWidth="225.0" promptText="رقم الوصل" stylesheets="@css/style.css">
                   <font>
                      <Font size="16.0" />
                   </font>
@@ -1008,7 +1004,7 @@
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnCreatePV1" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintPV" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
+                  <Button fx:id="btnCreatePV1" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintPV" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -1045,7 +1041,7 @@
             </HBox>
          </Pane>
       </StackPane>
-      <Button fx:id="bntClose" layoutX="1007.0" minWidth="45.0" mnemonicParsing="false" onAction="#Close" prefHeight="37.0" prefWidth="39.0" styleClass="transparent-button1-login" stylesheets="@css/style1.css">
+      <Button fx:id="bntClose" layoutX="1007.0" minWidth="45.0" mnemonicParsing="false" onAction="#Close" prefHeight="37.0" prefWidth="39.0" styleClass="transparent-button1" stylesheets="@css/style1.css">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
