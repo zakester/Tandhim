@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="620.0" prefWidth="1050.0" styleClass="Anchor" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.Controller">
+   <children>
+      <VBox fx:id="rightMenu" alignment="TOP_CENTER" prefHeight="620.0" prefWidth="256.0" styleClass="optionbar" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/jimmy-fallon.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="50.0" />
+               </VBox.margin></ImageView>
+            <Label fx:id="userNameLabel" text="الأستاذ بن ثامر دحمان" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnNotif" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="button1" stylesheets="@css/style.css" text="التنبيهات" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/notif.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAdd" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="button1" stylesheets="@css/style.css" text="إضافة وصل">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/addpv.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEdit" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="button1" stylesheets="@css/style.css" text="تعديل وصل">
+               <graphic>
+                  <ImageView fitHeight="21.0" fitWidth="23.0" opacity="0.83" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/editpv.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSearch" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="button1" stylesheets="@css/style.css" text="البحث">
+               <graphic>
+                  <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnStats" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="button1" stylesheets="@css/style.css" text="الإحصائيات">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/stats.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="button1" stylesheets="@css/style.css" text="الإعدادات">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/icons8_Slider__32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnPush" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#push" prefHeight="42.0" prefWidth="259.0" styleClass="button1" stylesheets="@css/style.css" text="تحديث للخادم">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/update.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnExit" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="button1" stylesheets="@css/style.css" text="تسجيل الخروج">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/icons8_Sign_Out_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <StackPane fx:id="stackPane" layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <Pane fx:id="pnlAdd" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css">
+            <children>
+               <VBox layoutX="19.0" layoutY="149.0" prefHeight="382.0" prefWidth="754.0" spacing="15.0">
+                  <children>
+                     <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
+                        <children>
+                           <Button fx:id="btnCitation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تكليف بالحضور لجلسة" wrapText="true" />
+                           <Button fx:id="btnOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ أمر" wrapText="true" />
+                           <Button fx:id="btnJugement" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ حكم" wrapText="true" />
+                           <Button fx:id="btnJugement1" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ قرار " wrapText="true" />
+                           <StackPane fx:id="stpnlFormeExe" onMouseExited="#exitHover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style.css">
+                              <children>
+                                 <Button fx:id="btnFormeExecutif" mnemonicParsing="false" onMouseEntered="#hover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تكليف بالوفاء" wrapText="true" />
+                                 <Button fx:id="btnFormeJudiciere" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="بموجب سند قضائي" visible="false" StackPane.alignment="TOP_CENTER" />
+                                 <Button fx:id="btnFormeNonJudiciere" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="بموجب سند غير قضائي" visible="false" StackPane.alignment="BOTTOM_CENTER" />
+                              </children>
+                           </StackPane>
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
+                        <children>
+                           <Button fx:id="btnMandat" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ مذكرة" wrapText="true" />
+                           <Button fx:id="btnRqst" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ عريضة" wrapText="true" />
+                           <Button fx:id="btnExcuse" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ إرسالية / طلب / إعذار" wrapText="true" />
+                           <Button fx:id="btnInspection" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="معاينة" wrapText="true" />
+                           <Button fx:id="btnInspectionOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="معاينة بأمر" wrapText="true" />
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
+                        <children>
+                           <Button fx:id="btnAssociation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حضور جمعية عامة" wrapText="true" />
+                           <Button fx:id="btnJard" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="الجرد" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="إشهاد" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="إثبات الحالة (أخرى)" wrapText="true" />
+                           <StackPane onMouseExited="#exitHover2">
+                              <children>
+                                 <Button fx:id="btnCalcule" mnemonicParsing="false" onMouseEntered="#hover2" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="الحساب" wrapText="true" />
+                                 <Button fx:id="btnCalculeIndiv" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="فردي" visible="false" StackPane.alignment="TOP_CENTER" />
+                                 <Button fx:id="btnCalculeCollect" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="39.0" prefWidth="140.0" stylesheets="@css/style1.css" text="مشترك" visible="false" StackPane.alignment="BOTTOM_CENTER" />
+                              </children>
+                           </StackPane>
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="79.0" prefWidth="754.0" spacing="15.0">
+                        <children>
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على منقول" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على ما للمدين لدى الغير" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="حجز على عقار" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" wrapText="true" />
+                           <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="Button" wrapText="true" />
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+               <Label layoutX="37.0" layoutY="37.0" prefHeight="38.0" prefWidth="135.0" stylesheets="@css/style.css" text="إضافة وصل" textFill="#f2eded">
+                  <font>
+                     <Font name="Times New Roman" size="33.0" />
+                  </font>
+               </Label>
+               <Label layoutX="37.0" layoutY="110.0" prefHeight="27.0" prefWidth="177.0" stylesheets="@css/style.css" text="الرجاء إختيار نوع القضية" textFill="#f2eded">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </Label>
+            </children>
+         </Pane>
+         <Pane fx:id="pnlNotif" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+            <children>
+               <Label layoutX="37.0" layoutY="37.0" stylesheets="@css/style.css" text="التنبيهات" textFill="WHITE">
+                  <font>
+                     <Font name="Times New Roman" size="34.0" />
+                  </font>
+                  <padding>
+                     <Insets left="20.0" top="20.0" />
+                  </padding>
+               </Label>
+               <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="145.0" prefHeight="42.0" prefWidth="744.0" spacing="60.0" stylesheets="@css/style.css">
+                  <children>
+                     <Label prefWidth="66.0" stylesheets="@css/style.css" text="رقم الوصل" textFill="#e7e5e5">
+                        <HBox.margin>
+                           <Insets left="15.0" />
+                        </HBox.margin>
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Label prefWidth="75.0" stylesheets="@css/style.css" text="نوع القضية" textFill="#e7e5e5">
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Label prefWidth="120.0" stylesheets="@css/style.css" text="إسم المطلوب" textFill="#e7e5e5">
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Label prefWidth="100.0" stylesheets="@css/style.css" text="نوع التنبيه" textFill="#e7e5e5">
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Label prefWidth="90.0" stylesheets="@css/style.css" text="الإجراء" textFill="#e7e5e5">
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               <ScrollPane layoutX="14.0" layoutY="200.0" prefHeight="340.0" prefWidth="746.0" styleClass="Anchor" stylesheets="@css/style.css">
+                  <content>
+                     <VBox fx:id="pnItems" prefHeight="338.0" prefWidth="744.0" spacing="5.0" styleClass="Anchor" stylesheets="@css/style.css">
+                        <padding>
+                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        </padding>
+                     </VBox>
+                  </content>
+               </ScrollPane>
+            </children>
+         </Pane>
+         <Pane fx:id="pnlSearch" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+            <children>
+               <ComboBox fx:id="Type" layoutX="151.0" layoutY="125.0" prefHeight="37.0" prefWidth="225.0" stylesheets="@css/style.css" />
+               <TextField fx:id="demandeur" layoutX="448.0" layoutY="125.0" prefHeight="23.0" prefWidth="225.0" promptText="إسم الطالب" stylesheets="@css/style.css">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </TextField>
+               <Label layoutX="62.0" layoutY="128.0" stylesheets="@css/style.css" text="نوع القضية" textFill="#f2eded">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </Label>
+               <Label layoutX="37.0" layoutY="37.0" prefHeight="21.0" prefWidth="236.0" stylesheets="@css/style.css" text="البحث" textFill="#f2eded">
+                  <font>
+                     <Font name="Times New Roman" size="33.0" />
+                  </font>
+               </Label>
+               <TextField fx:id="numBon" layoutX="151.0" layoutY="173.0" prefHeight="23.0" prefWidth="225.0" promptText="رقم الوصل" stylesheets="@css/style.css">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="obligatoire" layoutX="448.0" layoutY="172.0" prefHeight="23.0" prefWidth="225.0" promptText="إسم المطلوب" stylesheets="@css/style.css">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </TextField>
+               <Button alignment="BASELINE_LEFT" layoutX="706.0" layoutY="150.0" mnemonicParsing="false" onAction="#Search" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style1.css">
+                  <graphic>
+                     <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@img/icons8_Search_52px.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <ScrollPane layoutX="20.0" layoutY="235.0" prefHeight="310.0" prefWidth="746.0" stylesheets="@css/style.css">
+                  <content>
+                     <TableView fx:id="searchTable" prefHeight="308.0" prefWidth="744.0" stylesheets="@css/style.css">
+                        <columns>
+                           <TableColumn fx:id="colNumBon" prefWidth="61.0" resizable="false" text="رقم الوصل" />
+                           <TableColumn fx:id="colNumAffaire" prefWidth="58.0" resizable="false" text="رقم القضية" />
+                           <TableColumn fx:id="colDemandeur" prefWidth="130.99993896484375" resizable="false" text="إسم الطالب" />
+                           <TableColumn fx:id="colObligatoire" prefWidth="127.00006103515625" resizable="false" text="إسم المطلوب" />
+                           <TableColumn fx:id="colType" minWidth="0.0" prefWidth="90.6666259765625" resizable="false" text="نوع القضية" />
+                           <TableColumn fx:id="colDate" prefWidth="75.3333740234375" resizable="false" text="تاريخ التسجيل" />
+                           <TableColumn fx:id="colStatus" prefWidth="92.00006103515625" resizable="false" text="الحالة" />
+                           <TableColumn fx:id="colFolder" minWidth="0.0" prefWidth="109.0" resizable="false" text="الملف" />
+                        </columns>
+                     </TableView>
+                  </content>
+               </ScrollPane>
+            </children>
+         </Pane>
+         <Pane fx:id="pnlStats" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+            <children>
+               <HBox layoutX="37.0" layoutY="83.0" prefHeight="76.0" prefWidth="720.0" spacing="5.0">
+                  <children>
+                     <Button fx:id="btnStatsExe" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="75.0" prefWidth="235.0" styleClass="button2" stylesheets="@css/style.css" text="إحصائيات التنفيذ" textFill="#e7e5e5">
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <padding>
+                           <Insets left="50.0" />
+                        </padding>
+                        <font>
+                           <Font size="22.0" />
+                        </font>
+                     </Button>
+                     <StackPane fx:id="stpnlStatsBon" alignment="TOP_CENTER" onMouseExited="#exitHover" prefHeight="150.0" prefWidth="235.0">
+                        <children>
+                           <Button fx:id="btnStatsBons" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseEntered="#hover" prefHeight="75.0" prefWidth="235.0" styleClass="button2" stylesheets="@css/style.css" text="إحصائيات التبليغ" textFill="#e7e5e5">
+                              <opaqueInsets>
+                                 <Insets />
+                              </opaqueInsets>
+                              <padding>
+                                 <Insets left="50.0" />
+                              </padding>
+                              <font>
+                                 <Font size="22.0" />
+                              </font>
+                           </Button>
+                           <Button fx:id="btnStatsBons1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="235.0" styleClass="button2" stylesheets="@css/style.css" text="سجل العقود" textAlignment="CENTER" textFill="#e7e5e5" visible="false">
+                              <opaqueInsets>
+                                 <Insets />
+                              </opaqueInsets>
+                              <font>
+                                 <Font size="18.0" />
+                              </font>
+                              <StackPane.margin>
+                                 <Insets />
+                              </StackPane.margin>
+                           </Button>
+                           <Button fx:id="btnStatsBons2" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" maxHeight="37.0" minHeight="37.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="33.0" prefWidth="235.0" styleClass="button2" stylesheets="@css/style.css" text="سجل الوصولات" textAlignment="CENTER" textFill="#e7e5e5" visible="false" StackPane.alignment="BOTTOM_CENTER">
+                              <opaqueInsets>
+                                 <Insets />
+                              </opaqueInsets>
+                              <font>
+                                 <Font size="18.0" />
+                              </font>
+                           </Button>
+                        </children>
+                     </StackPane>
+                     <Button fx:id="btnStatsFinance" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="75.0" prefWidth="235.0" styleClass="button2" stylesheets="@css/style.css" text="إحصائيات مالية" textFill="#e7e5e5">
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <padding>
+                           <Insets left="50.0" />
+                        </padding>
+                        <font>
+                           <Font size="22.0" />
+                        </font>
+                     </Button>
+                  </children>
+               </HBox>
+               <StackPane fx:id="StackPaneStats" layoutX="14.0" layoutY="227.0" prefHeight="310.0" prefWidth="745.0">
+                  <children>
+                     <Pane fx:id="pnlStatsExe" prefHeight="200.0" prefWidth="200.0">
+                        <children>
+                           <TableView fx:id="bonTable3" prefHeight="308.0" prefWidth="744.0" style="-fx-background-color: #02030A;" stylesheets="@css/style.css">
+                              <columns>
+                                 <TableColumn fx:id="colNumBonExe" prefWidth="67.0" resizable="false" text="رقم الوصل" />
+                                 <TableColumn fx:id="colCommissionExe" prefWidth="106.0" resizable="false" text="نوع التنفيذ" />
+                                 <TableColumn fx:id="colObligatoireExe" prefWidth="146.0" resizable="false" text="المنفذ ضده" />
+                                 <TableColumn fx:id="colTypeExe" minWidth="0.0" prefWidth="123.0" resizable="false" text="الهيئة" />
+                                 <TableColumn fx:id="colCreatedAtExe" prefWidth="91.0" resizable="false" text="تاريخ التسجيل" />
+                                 <TableColumn fx:id="colStatusExe" prefWidth="88.0" resizable="false" text="الحالة" />
+                                 <TableColumn fx:id="colDateExe" prefWidth="121.0" resizable="false" text="تاريخ التنفيذ/الإمتناع" />
+                              </columns>
+                           </TableView>
+                        </children></Pane>
+                     <Pane fx:id="pnlStatsBon">
+                        <children>
+                           <StackPane>
+                              <children>
+                                 <Pane fx:id="pnlStatsBons2" prefHeight="310.0" prefWidth="746.0">
+                                    <children>
+                                       <ScrollPane prefHeight="310.0" prefWidth="746.0" style="-fx-background-color: #02030A;" stylesheets="@css/style.css">
+                                          <content>
+                                             <TableView fx:id="bonTable2" prefHeight="308.0" prefWidth="744.0" stylesheets="@css/style.css">
+                                                <columns>
+                                                   <TableColumn fx:id="colNumBon1" prefWidth="65.0" resizable="false" text="رقم الوصل" />
+                                                   <TableColumn fx:id="colDemandeur1" prefWidth="150.0" resizable="false" text="إسم الطالب" />
+                                                   <TableColumn fx:id="colObligatoire1" prefWidth="144.0" resizable="false" text="إسم المطلوب" />
+                                                   <TableColumn fx:id="colType1" minWidth="0.0" prefWidth="149.333251953125" resizable="false" text="نوع الخدمة" />
+                                                   <TableColumn fx:id="colDate1" prefWidth="122.6666259765625" resizable="false" text="تاريخ التسجيل" />
+                                                   <TableColumn fx:id="colStatus1" prefWidth="114.66668701171875" resizable="false" text="الحالة" />
+                                                </columns>
+                                             </TableView>
+                                          </content>
+                                       </ScrollPane>
+                                    </children>
+                                 </Pane>
+                                 <Pane fx:id="pnlStatsBons1" prefHeight="310.0" prefWidth="746.0">
+                                    <children>
+                                       <ScrollPane prefHeight="310.0" prefWidth="746.0" style="-fx-background-color: #02030A;" stylesheets="@css/style.css">
+                                          <content>
+                                             <TableView fx:id="bonTable1" prefHeight="308.0" prefWidth="744.0" style="-fx-background-color: #02030A;" stylesheets="@css/style.css">
+                                                <columns>
+                                                   <TableColumn fx:id="bonTable1_colNumBon" prefWidth="61.0" resizable="false" text="رقم الوصل" />
+                                                   <TableColumn fx:id="bonTable1_colDemandeur" prefWidth="147.0" resizable="false" text="إسم الطالب" />
+                                                   <TableColumn fx:id="bonTable1_colObligatoire" prefWidth="151.0" resizable="false" text="إسم المطلوب" />
+                                                   <TableColumn fx:id="bonTable1_colType" minWidth="0.0" prefWidth="149.333251953125" resizable="false" text="نوع الخدمة" />
+                                                   <TableColumn fx:id="bonTable1_colDate" prefWidth="122.6666259765625" resizable="false" text="تاريخ الإنجاز" />
+                                                   <TableColumn fx:id="bonTable1_colStatus" prefWidth="114.66668701171875" resizable="false" text="الحالة" />
+                                                </columns>
+                                             </TableView>
+                                          </content>
+                                       </ScrollPane>
+                                    </children>
+                                 </Pane>
+                              </children>
+                           </StackPane>
+                        </children>
+                     </Pane>
+                     <Pane fx:id="pnlStatsFinance" prefHeight="200.0" prefWidth="200.0">
+                        <children>
+                           <PieChart fx:id="pieChartPrice" prefHeight="310.0" prefWidth="382.0" stylesheets="@css/style.css" />
+                           <PieChart fx:id="pieChartCount" layoutX="400.0" prefHeight="310.0" prefWidth="310.0" stylesheets="@css/style.css" />
+                           <HBox layoutX="21.0" prefHeight="38.0" prefWidth="700.0">
+                              <children>
+                                 <Label fx:id="lbSommeExpected" alignment="CENTER" prefHeight="38.0" prefWidth="520.0" stylesheets="@css/style.css" text="إجمالي المداخيل" textAlignment="CENTER" textFill="#f2eded">
+                                    <font>
+                                       <Font size="22.0" />
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="lbSommeBon" alignment="CENTER" prefHeight="38.0" prefWidth="520.0" stylesheets="@css/style.css" text="إجمالي القضايا" textAlignment="CENTER" textFill="#f2eded">
+                                    <font>
+                                       <Font size="22.0" />
+                                    </font>
+                                 </Label>
+                              </children>
+                           </HBox>
+                        </children>
+                     </Pane>
+                  </children>
+               </StackPane>
+               <HBox layoutX="37.0" layoutY="171.0" prefHeight="44.0" prefWidth="720.0" spacing="70.0">
+                  <children>
+                     <DatePicker fx:id="datePickerFrom" editable="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#datePickerAction" prefHeight="40.0" prefWidth="256.0" promptText="من تاريخ" stylesheets="@css/style.css">
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                     </DatePicker>
+                     <DatePicker fx:id="datePickerTo" editable="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#datePickerAction" prefHeight="40.0" prefWidth="256.0" promptText="إلى تاريخ" stylesheets="@css/style.css" />
+                  </children>
+                  <padding>
+                     <Insets left="60.0" right="35.0" />
+                  </padding>
+               </HBox>
+               <Label fx:id="labelStats" layoutX="37.0" layoutY="37.0" prefHeight="38.0" prefWidth="520.0" text="الإحصائيات" textFill="#f2eded">
+                  <font>
+                     <Font name="Times New Roman" size="33.0" />
+                  </font>
+               </Label>
+            </children>
+         </Pane>
+         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
+            <children>
+               <Pane layoutX="37.0" layoutY="120.0" prefHeight="340.0" prefWidth="720.0">
+                  <children>
+                     <HBox prefHeight="37.0" prefWidth="720.0" spacing="20.0">
+                        <children>
+                           <ComboBox fx:id="EditComObligList" onAction="#UpdateStatus" prefHeight="37.0" prefWidth="388.0" promptText="قائمة المطلوبين" stylesheets="@css/style.css" />
+                           <HBox prefHeight="37.0" prefWidth="311.0" styleClass="hbox-status" stylesheets="@css/style.css">
+                              <children>
+                                 <TextField fx:id="editBonStatus" editable="false" prefHeight="37.0" prefWidth="284.0" promptText="الحالة" styleClass="combo-status" stylesheets="@css/style.css">
+                                    <font>
+                                       <Font size="16.0" />
+                                    </font>
+                                 </TextField>
+                                 <Button fx:id="btnEnableEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#EnableEdit" prefHeight="37.0" prefWidth="44.0" stylesheets="@css/style1.css">
+                                    <graphic>
+                                       <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@img/Edit.png" />
+                                          </image>
+                                       </ImageView>
+                                    </graphic>
+                                    <styleClass>
+                                       <String fx:value="transparent-button" />
+                                       <String fx:value="combo-status" />
+                                    </styleClass>
+                                 </Button>
+                              </children>
+                           </HBox>
+                        </children>
+                     </HBox>
+                     <HBox layoutY="48.0" prefHeight="290.0" prefWidth="723.0" spacing="20.0">
+                        <children>
+                           <VBox styleClass="hbox-status" stylesheets="@css/style.css">
+                              <children>
+                                 <TextArea fx:id="typeArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="388.0" stylesheets="@css/style.css" wrapText="true">
+                                    <font>
+                                       <Font size="18.0" />
+                                    </font>
+                                    <styleClass>
+                                       <String fx:value="textarea" />
+                                       <String fx:value="area" />
+                                    </styleClass>
+                                 </TextArea>
+                              </children>
+                              <HBox.margin>
+                                 <Insets />
+                              </HBox.margin>
+                              <padding>
+                                 <Insets bottom="12.0" top="12.0" />
+                              </padding>
+                           </VBox>
+                           <VBox styleClass="hbox-status" stylesheets="@css/style.css">
+                              <children>
+                                 <TextArea fx:id="statusArea" editable="false" mouseTransparent="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="347.0" prefWidth="315.0" styleClass="textarea" stylesheets="@css/style.css" wrapText="true">
+                                    <font>
+                                       <Font size="18.0" />
+                                    </font>
+                                 </TextArea>
+                                 <VBox fx:id="vboxPubExe" alignment="CENTER" styleClass="combo-status" stylesheets="@css/style.css">
+                                    <children>
+                                       <Button fx:id="btnPublish" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PublishAction" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: transparent;" styleClass="transparent-button2" stylesheets="@css/style1.css" text="إجراء التعليق" textAlignment="CENTER" textFill="#e7e5e5">
+                                          <graphic>
+                                             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                   <Image url="@img/publish.png" />
+                                                </image>
+                                             </ImageView>
+                                          </graphic>
+                                          <opaqueInsets>
+                                             <Insets />
+                                          </opaqueInsets>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </Button>
+                                       <Button fx:id="btnExeNonExe" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#ExeNonExeAction" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: transparent;" styleClass="transparent-button2" stylesheets="@css/style1.css" text="إجراء التنفيذ/امتناع" textAlignment="CENTER" textFill="#e7e5e5">
+                                          <graphic>
+                                             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                   <Image url="@img/create.png" />
+                                                </image>
+                                             </ImageView>
+                                          </graphic>
+                                          <opaqueInsets>
+                                             <Insets />
+                                          </opaqueInsets>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </Button>
+                                    </children>
+                                 </VBox>
+                              </children>
+                              <padding>
+                                 <Insets top="12.0" />
+                              </padding>
+                           </VBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </Pane>
+               <Label layoutX="37.0" layoutY="37.0" prefHeight="38.0" prefWidth="135.0" text="تعديل وصل" textFill="#f2eded">
+                  <font>
+                     <Font name="Times New Roman" size="33.0" />
+                  </font>
+               </Label>
+               <TextField fx:id="editNumBon" layoutX="468.0" layoutY="37.0" onKeyPressed="#okPressed" prefHeight="23.0" prefWidth="225.0" promptText="رقم الوصل" styleClass=".othertext-area" stylesheets="@css/style.css">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </TextField>
+               <Button fx:id="editBtnSearch" alignment="BASELINE_LEFT" layoutX="707.0" layoutY="37.0" mnemonicParsing="false" onAction="#EditSearch" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style1.css">
+                  <graphic>
+                     <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@img/icons8_Search_52px.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <HBox layoutX="115.0" layoutY="555.0" minHeight="37.0" prefHeight="37.0" prefWidth="666.0" spacing="30.0">
+                  <children>
+                     <Button fx:id="btnEditBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#FillEditBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="واجهة التعديل" textAlignment="CENTER" textFill="#e7e5e5">
+                        <graphic>
+                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@img/create.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                     </Button>
+                     <Button fx:id="btnActiveDesactive" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#ActiveDesactive" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="إلغاء/تنشيط الوصل" textAlignment="CENTER" textFill="#e7e5e5">
+                        <graphic>
+                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@img/create.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Button>
+                     <Button fx:id="editBtnPrintPV" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="طباعة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
+                        <graphic>
+                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@img/create.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Button>
+                  </children>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </HBox>
+               <HBox layoutX="495.0" layoutY="455.0" minHeight="37.0" prefHeight="37.0" prefWidth="206.0" spacing="30.0">
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </HBox>
+            </children>
+         </Pane>
+         <Pane fx:id="pnlSettings" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+            <children>
+               <VBox minHeight="620.0" minWidth="793.0">
+                  <children>
+
+                     <!-- Dark/Light Mode -->
+                     <HBox minWidth="793.0" spacing="100.0">
+                        <children>
+                           <Label text="مظهر الجهاز" textFill="WHITE" />
+                           <RadioButton fx:id="darkMode" mnemonicParsing="false" selected="true" text="المظهر الداكن">
+                              <toggleGroup>
+                                 <ToggleGroup fx:id="modeTheme" />
+                              </toggleGroup>
+                           </RadioButton>
+                           <RadioButton fx:id="lightMode" layoutX="78.0" layoutY="10.0" mnemonicParsing="false" text="المظهر الفاتح" toggleGroup="$modeTheme">
+                              <opaqueInsets>
+                                 <Insets />
+                              </opaqueInsets>
+                           </RadioButton>
+                        </children>
+                        <padding>
+                           <Insets left="30.0" top="50.0" />
+                        </padding>
+                     </HBox>
+
+                     <!-- Add Accounts -->
+                     <VBox>
+                        <children>
+                           <Label text="إضافة حساب" textFill="WHITE">
+                              <font>
+                                 <Font name="System Bold" size="24.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets left="20.0" />
+                              </VBox.margin>
+                           </Label>
+                           <HBox spacing="25.0">
+                              <children>
+                                 <TextField fx:id="username" prefHeight="37.0" prefWidth="225.0" promptText="اسم المستخدم" />
+                                 <PasswordField fx:id="password" prefHeight="37.0" prefWidth="225.0" promptText="كلمة السر" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets left="15.0" top="40.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox layoutX="10.0" layoutY="80.0" spacing="25.0">
+                              <children>
+                                 <TextField fx:id="firstName" prefHeight="37.0" prefWidth="225.0" promptText="الاسم" />
+                                 <TextField fx:id="lastName" layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="225.0" promptText="اللقب" />
+                              </children>
+                              <opaqueInsets>
+                                 <Insets />
+                              </opaqueInsets>
+                              <VBox.margin>
+                                 <Insets left="15.0" top="20.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                              <children>
+                                 <TextField fx:id="address" prefHeight="37.0" prefWidth="225.0" promptText="عنوان السكن" />
+                                 <TextField fx:id="phone" prefHeight="37.0" prefWidth="225.0" promptText="رقم الهاتف" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets left="15.0" top="20.0" />
+                              </VBox.margin>
+                           </HBox>
+                        </children>
+                        <VBox.margin>
+                           <Insets top="30.0" />
+                        </VBox.margin>
+                     </VBox>
+                     <HBox alignment="TOP_RIGHT" minWidth="793.0" spacing="20">
+                        <children>
+                           <Button mnemonicParsing="false" text="الغاء" />
+                           <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addAccount" text="إضاقة الحساب">
+                              <HBox.margin>
+                                 <Insets right="20.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                        <VBox.margin>
+                           <Insets top="20.0" />
+                        </VBox.margin>
+                     </HBox>
+                  </children>
+               </VBox>
+
+            </children>
+         </Pane>
+         <Pane fx:id="pnlAdd2" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+            <VBox layoutX="27.0" layoutY="110.0" spacing="25.0">
+               <children>
+                  <HBox prefHeight="37.0" prefWidth="443.0" spacing="15.0">
+                     <children>
+                        <Label prefWidth="109.0" text="وصل رقم" textFill="#f2eded">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="num_bon" prefHeight="37.0" prefWidth="95.0" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <Label prefWidth="96.0" text="الأتعاب الثابتة" textFill="#f2eded">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="taxe_fixe" prefHeight="37.0" prefWidth="95.0" promptText="دج" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="37.0" prefWidth="443.0" spacing="15.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="109.0" text="الأتعاب الإضافية" textFill="#f2eded">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="taxe_supp" prefHeight="37.0" prefWidth="95.0" promptText="دج" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <Label prefWidth="96.0" text="المبلغ المسدد" textFill="#f2eded">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="prix" prefHeight="37.0" prefWidth="95.0" promptText="دج" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="37.0" spacing="20.0">
+                     <children>
+                        <TextField fx:id="nomDem" prefHeight="37.0" prefWidth="180.0" promptText="إسم الطالب" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="adrDem" prefHeight="37.0" prefWidth="180.0" promptText="العنوان" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="btnDem" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#addToComboBoxList" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style1.css">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="37.0" prefWidth="445.0" styleClass="hbox-status">
+                     <children>
+                        <ComboBox fx:id="demList" prefHeight="37.0" prefWidth="443.0" promptText="قائمة الطالبين" style="-fx-text-fill: white;" styleClass="combo-status" stylesheets="@css/style.css" />
+                        <Button fx:id="btnDeleteDem" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#DeleteDemendeur" prefHeight="37.0" prefWidth="30.0" styleClass="combo-status" stylesheets="@css/style1.css">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/output-onlinepngtools (10).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hboxOblig2" prefHeight="37.0" spacing="20.0">
+                     <children>
+                        <TextField fx:id="nomOblig" prefHeight="37.0" prefWidth="180.0" promptText="إسم المطلوب" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="adrOblig" prefHeight="37.0" prefWidth="180.0" promptText="العنوان" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="btnOblig" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#addToComboBoxList" prefHeight="37.0" prefWidth="43.0" styleClass="transparent-button" stylesheets="@css/style1.css">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hboxOblig" prefHeight="37.0" prefWidth="445.0" styleClass="hbox-status">
+                     <children>
+                        <ComboBox fx:id="obligList" prefHeight="37.0" prefWidth="443.0" promptText="قائمة المطلوبين" style="-fx-text-fill: white;" styleClass="combo-status" stylesheets="@css/style.css" />
+                        <Button fx:id="btnDeleteOblig" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#DeleteObligatoire" prefHeight="37.0" prefWidth="43.0" styleClass="combo-status" stylesheets="@css/style1.css">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/output-onlinepngtools (10).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label layoutX="37.0" layoutY="37.0" prefHeight="38.0" prefWidth="135.0" text="إضافة وصل" textFill="#f2eded">
+               <font>
+                  <Font name="Times New Roman" size="33.0" />
+               </font>
+            </Label>
+            <VBox fx:id="vboxFormePrincipale" layoutX="510.0" layoutY="110.0" prefHeight="377.0" prefWidth="257.0" spacing="28.0" />
+            <HBox fx:id="hboxAddBon" layoutX="115.0" layoutY="555.0" minHeight="37.0" prefHeight="37.0" prefWidth="666.0" spacing="30.0">
+               <children>
+                  <Button fx:id="btnAddBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#addBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="إضافة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/create.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnCreatePV" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintPV" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/create.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCreateBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="طباعة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/create.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <Label fx:id="bonText" layoutX="220.0" layoutY="37.0" prefHeight="38.0" prefWidth="526.0" textFill="#f2eded">
+               <font>
+                  <Font name="Times New Roman" size="33.0" />
+               </font>
+            </Label>
+            <HBox fx:id="hboxEditBon" layoutX="115.0" layoutY="555.0" minHeight="37.0" prefHeight="37.0" prefWidth="666.0" spacing="30.0" visible="false">
+               <children>
+                  <Button fx:id="btnEditBon" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#SaveEdit" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="حفظ التعديلات" textAlignment="CENTER" textFill="#e7e5e5">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/create.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnCreatePV1" alignment="CENTER" disable="true" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintPV" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="تحرير محضر" textAlignment="CENTER" textFill="#e7e5e5">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/create.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCreateBon1" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrintBon" prefHeight="37.0" prefWidth="200.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="طباعة الوصل" textAlignment="CENTER" textFill="#e7e5e5">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/create.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </Pane>
+      </StackPane>
+      <Button fx:id="bntClose" layoutX="1007.0" minWidth="45.0" mnemonicParsing="false" onAction="#Close" prefHeight="37.0" prefWidth="39.0" styleClass="transparent-button1-login" stylesheets="@css/style1.css">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/close.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
+</AnchorPane>

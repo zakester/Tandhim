@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="330.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.EditDialogueController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="لتعديل حالة المطلوب الرجاء ملء المعلومات اللازمة" textOverrun="CENTER_ELLIPSIS" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="الحالة الحالية :" textOverrun="CENTER_ELLIPSIS" />
+      <Pane prefHeight="62.0" prefWidth="395.0">
+         <children>
+            <HBox fx:id="hboxStatus" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0">
+               <children>
+                  <Button fx:id="bntNotDone" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClicks" prefHeight="75.0" prefWidth="99.0" styleClass="button2" stylesheets="@css/style.css" text="غير منجزة" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnConvoqued" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClicks" prefHeight="75.0" prefWidth="99.0" styleClass="button2" stylesheets="@css/style.css" text="تم إشعاره(ا)" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnLetter" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClicks" prefHeight="53.0" prefWidth="99.0" styleClass="button2" stylesheets="@css/style.css" text="تم إرسال رسالة" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnDone" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClicks" prefHeight="75.0" prefWidth="99.0" styleClass="button2" stylesheets="@css/style.css" text="تم التبليغ" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnPublished" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClicks" prefHeight="75.0" prefWidth="99.0" styleClass="button2" stylesheets="@css/style.css" text="معلق" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <StackPane fx:id="stackpane" prefHeight="103.0" prefWidth="395.0">
+         <children>
+            <Pane fx:id="pnlLetter" prefHeight="91.0" prefWidth="395.0" visible="false" StackPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" layoutX="80.0" layoutY="1.0" maxWidth="395.0" prefHeight="93.0" prefWidth="236.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="numLetter" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="252.0" promptText="رقم الرسالة" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <DatePicker fx:id="dateLetter" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="398.0" promptText="تاريخ الرسالة" stylesheets="@css/style.css" />
+                     </children>
+                  </VBox>
+               </children></Pane>
+            <Pane fx:id="pnlLetterExe" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <VBox alignment="CENTER" maxWidth="395.0" prefHeight="93.0" prefWidth="132.0" spacing="10.0" styleClass="hbox-status">
+                           <children>
+                              <TextField fx:id="numLetter3" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="252.0" promptText="رقم رسالة ت.السند" styleClass="combo-status" stylesheets="@css/style.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <DatePicker fx:id="dateLetter3" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="398.0" promptText="تاريخ الرسالة" styleClass="combo-status" stylesheets="@css/style.css" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" maxWidth="395.0" prefHeight="93.0" prefWidth="132.0" spacing="10.0" styleClass="hbox-status">
+                           <children>
+                              <TextField fx:id="numLetter2" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="252.0" promptText="رقم رسالة ت.التكليف" styleClass="combo-status" stylesheets="@css/style.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <DatePicker fx:id="dateLetter2" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="398.0" promptText="تاريخ الرسالة" styleClass="combo-status" stylesheets="@css/style.css" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" maxWidth="395.0" prefHeight="93.0" prefWidth="132.0" spacing="10.0" styleClass="hbox-status">
+                           <children>
+                              <TextField fx:id="numLetter1" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="252.0" promptText="رقم رسالة التكليف" styleClass="combo-status" stylesheets="@css/style.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <DatePicker fx:id="dateLetter1" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="398.0" promptText="تاريخ الرسالة" styleClass="combo-status" stylesheets="@css/style.css" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children></Pane>
+            <Pane fx:id="pnlDone" prefHeight="54.0" prefWidth="395.0" visible="false">
+               <children>
+                  <DatePicker fx:id="dateDone" layoutX="72.0" layoutY="28.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="252.0" promptText="تاريخ التبليغ" stylesheets="@css/style.css" />
+               </children>
+            </Pane>
+            <Pane fx:id="pnlConvoqued" prefHeight="54.0" prefWidth="395.0" visible="false">
+               <children>
+                  <DatePicker fx:id="dateConvoqued" layoutX="72.0" layoutY="28.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="252.0" promptText="تاريخ الإشعار" stylesheets="@css/style.css" />
+               </children>
+            </Pane>
+            <Pane fx:id="pnlPublished" prefHeight="54.0" prefWidth="395.0" visible="false">
+               <children>
+                  <VBox layoutX="72.0" layoutY="6.0" spacing="10.0">
+                     <children>
+                        <DatePicker fx:id="datePubTribunal" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="252.0" promptText="تاريخ التبليغ بالمحكمة" stylesheets="@css/style.css" />
+                        <DatePicker fx:id="datePubCommune" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="252.0" promptText="تاريخ التبليغ بالبلدية" stylesheets="@css/style.css" />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" style="-fx-font-size: 13;" text="تنبيه : في حالة تعديل الحالة سيتم محو كل ما يخص الحالة السابقة نهائيا" textFill="#ff0c0c" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Pane prefHeight="62.0" prefWidth="395.0">
+         <children>
+            <HBox fx:id="hboxStatus1" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="395.0">
+               <children>
+                  <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SaveEdit" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="اضغط هنا لحفظ التعديلات" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="40.0" right="40.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+</VBox>

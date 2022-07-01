@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="vboxJugement" spacing="25.0" styleClass="Anchor" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.JugementController">
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <TextField fx:id="numTable" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="257.0" promptText="رقم الجدول" stylesheets="@css/style.css">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="numIndice" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="257.0" promptText="رقم الفهرس" stylesheets="@css/style.css">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <DatePicker fx:id="dateForme" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="256.0" promptText="تاريخ السند" stylesheets="@css/style.css" />
+         </children>
+      </HBox>
+      <HBox fx:id="hboxTypeJugement" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <children>
+            <ComboBox fx:id="comTypeForme" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="443.0" promptText="نوع السند" stylesheets="@css/style.css" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

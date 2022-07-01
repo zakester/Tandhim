@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="407.0" prefWidth="395.0" spacing="10.0" styleClass="dialog" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.ExeController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="لتعديل حالة المطلوب الرجاء ملء المعلومات اللازمة" textOverrun="CENTER_ELLIPSIS" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" stylesheets="@css/style.css" text="الحالة الحالية :" textOverrun="CENTER_ELLIPSIS" />
+      <Pane prefHeight="62.0" prefWidth="395.0">
+         <children>
+            <HBox fx:id="hboxStatus" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0">
+               <children>
+                  <Button fx:id="btnExe" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClicks" prefHeight="75.0" prefWidth="150.0" styleClass="button2" stylesheets="@css/style.css" text="تنفيذ" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnNonExe" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClicks" prefHeight="75.0" prefWidth="150.0" styleClass="button2" stylesheets="@css/style.css" text="عدم الإمتثال" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <StackPane fx:id="stackpane" prefHeight="118.0" prefWidth="395.0">
+         <children>
+            <Pane fx:id="pnlExe" prefHeight="123.0" prefWidth="395.0" StackPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" layoutX="80.0" layoutY="1.0" maxWidth="395.0" prefHeight="117.0" prefWidth="236.0" spacing="20.0">
+                     <children>
+                        <DatePicker fx:id="dateExe" nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="398.0" promptText="تاريخ التنفيذ/عدم الإمتثال" stylesheets="@css/style.css" />
+                     </children>
+                  </VBox>
+               </children></Pane>
+         </children>
+      </StackPane>
+      <Button fx:id="editBtnPrintPV" alignment="CENTER" graphicTextGap="22.0" minHeight="37.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="250.0" styleClass="transparent-button2" stylesheets="@css/style1.css" text="تحرير/سحب المحضر" textAlignment="CENTER" textFill="#e7e5e5">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/create.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="395.0" style="-fx-font-size: 13;" text="تنبيه : في حالة تعديل الحالة سيتم محو كل ما يخص الحالة السابقة نهائيا" textFill="#ff0c0c" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SaveEdit" prefHeight="16.0" prefWidth="154.0" styleClass="button2" stylesheets="@css/style.css" text="اضغط هنا لحفظ التعديلات" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </Button>
+   </children>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+</VBox>

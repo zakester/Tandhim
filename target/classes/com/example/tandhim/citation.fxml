@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="25.0" styleClass="Anchor" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.CitationController">
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0">
+         <children>
+            <TextField fx:id="numCitation" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="257.0" promptText="رقم الجلسة" stylesheets="@css/style.css">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0">
+         <children>
+            <DatePicker fx:id="dateCitation" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="256.0" promptText="تاريخ الجلسة" stylesheets="@css/style.css" />
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0">
+         <children>
+            <DatePicker fx:id="dateReport" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="256.0" promptText="التأجيل 1" stylesheets="@css/style.css" />
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="257.0">
+         <children>
+            <DatePicker fx:id="dateReport2" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="256.0" promptText="التأجيل 2" stylesheets="@css/style.css" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
