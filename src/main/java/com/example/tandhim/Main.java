@@ -45,24 +45,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws IOException {
-        HashMap<String, String> marginInformation = new HashMap<>() {{
-           put("@huiss", "حمزة حاج عمار");
-           put("@wilaya", "البليدة");
-           put("@adrHuiss", "غير لتم");
-        }};
-        HashMap<String, String> modelInformation = new HashMap<>() {{
-            put("@demandeur", "كريم رميد");
-            put("@commission", "عن مجلس كاش عفسة");
-            put("@table", "02");
-            put("@indice", "02");
-            put("@obligatoire", "مراد بن ثامر");
-            put("@address", "كاش بلاصة");
-            put("@num_bon", "18/21");
-            put("@date", "2000-12-12");
-        }};
-        Print2Word print2Word = new Print2Word(DOCXModels.decision_1, marginInformation, modelInformation, 0);
-        print2Word.replaceParameters();
+    public static void main(String[] args) {
         launch(args);
     }
 

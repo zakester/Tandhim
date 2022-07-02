@@ -1,0 +1,65 @@
+Index: src/main/java/com/example/tandhim/Models/Impression/Print2Word.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tandhim.Models.Impression;\n\nimport com.example.tandhim.DOCXModifier.DOCXModifier;\nimport com.example.tandhim.DOCXModifier.ToDOCX;\nimport com.google.zxing.BarcodeFormat;\nimport com.google.zxing.EncodeHintType;\nimport com.google.zxing.WriterException;\nimport com.google.zxing.common.BitMatrix;\nimport com.google.zxing.qrcode.QRCodeWriter;\nimport com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;\n\nimport javax.imageio.ImageIO;\nimport java.awt.*;\nimport java.awt.image.BufferedImage;\nimport java.io.File;\nimport java.io.IOException;\nimport java.util.HashMap;\nimport java.util.Hashtable;\n\npublic class Print2Word {\n    String docxModels;\n    HashMap<String, String> marginInformation;\n    HashMap<String, String> modelInformation;\n\n    int obligRank;\n\n    private final String qrCodePath;\n    private final String docxName;\n    private final String numBon;\n\n    public Print2Word(String docxModels, HashMap<String, String> marginInformation, HashMap<String, String> modelInformation, int obligRank) throws IOException {\n        this.docxModels = docxModels;\n        this.marginInformation = marginInformation;\n        this.modelInformation = modelInformation;\n        this.obligRank = obligRank;\n        this.numBon = getNumBon();\n        qrCodePath = generateQRCodePath();\n        docxName = generateDOCXName();\n        generateQRCode();\n        cleanMedia(docxModels.toString());\n    }\n    private String generateQRCodePath() {\n        return String.format(\"docxModules/%s/word/media/image1.png\", docxModels.toString().toLowerCase());\n    }\n\n    private String generateDOCXName() {\n        String[] splitNumBon = this.numBon.split(\"/\");\n\n        return String.format(\"%s_%s_%s_%d\", docxModels.toString().toLowerCase().split(\"_\")[0], splitNumBon[0], splitNumBon[1], obligRank);\n    }\n\n    private String getNumBon() {\n        return modelInformation.get(\"@num_bon\");\n    }\n\n    private void generateQRCode() throws IOException {\n        File outQRCode = new File(qrCodePath);\n        BufferedImage bufferedQRCode = getQRCode(numBon, 150, 150);\n        ImageIO.write(bufferedQRCode, \"png\", outQRCode);\n    }\n\n    private BufferedImage getQRCode(String targetUrl, int width,\n                                          int height) {\n        try {\n            Hashtable<EncodeHintType, Object> hintMap = new Hashtable<>();\n\n            hintMap.put(EncodeHintType.ERROR_CORRECTION,\n                    ErrorCorrectionLevel.L);\n            QRCodeWriter qrCodeWriter = new QRCodeWriter();\n            BitMatrix byteMatrix = qrCodeWriter.encode(targetUrl,\n                    BarcodeFormat.QR_CODE, width, height, hintMap);\n            int CrunchifyWidth = byteMatrix.getWidth();\n\n            BufferedImage image = new BufferedImage(CrunchifyWidth,\n                    CrunchifyWidth, BufferedImage.TYPE_INT_RGB);\n            image.createGraphics();\n\n            Graphics2D graphics = (Graphics2D) image.getGraphics();\n            graphics.setColor(Color.WHITE);\n            graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth);\n            graphics.setColor(Color.BLACK);\n\n            for (int i = 0; i < CrunchifyWidth; i++) {\n                for (int j = 0; j < CrunchifyWidth; j++) {\n                    if (byteMatrix.get(i, j)) {\n                        graphics.fillRect(i, j, 1, 1);\n                    }\n                }\n            }\n            return image;\n        } catch (WriterException e) {\n            e.printStackTrace();\n            throw new RuntimeException(\"Error getting QR Code\");\n        }\n\n    }\n\n\n    /** sometimes when generating QRCode it creates new files in media folder, so we clean this folder from any unnecessary files */\n    private void cleanMedia(String folderOf) {\n        String path = String.format(\"docxModules/%s/word/media/\", folderOf);\n        File mediaFolder = new File(path);\n\n        // Files list inside media folder\n        File[] fileList = mediaFolder.listFiles();\n\n        if (fileList != null) {\n            for (File file : fileList) {\n                String fileName = file.getName();\n                if (!(fileName.endsWith(\".png\") || fileName.endsWith(\".jpg\") || fileName.endsWith(\".jpeg\") || fileName.endsWith(\".svg\")))\n                    file.delete(); // if the file is not .png .jpg .jpeg .svg then delete file from media folder\n            }\n        }\n\n    }\n\n\n\n    public void replaceParameters() {\n        HashMap<String, String> replacements = new HashMap<>();\n        replacements.putAll(marginInformation);\n        replacements.putAll(modelInformation);\n\n        DOCXModifier docxModifier = new DOCXModifier(replacements);\n        docxModifier.replace(docxModels); // docxModules/\"fileOf\"/word/document.xml _> docxModules/modbon/word/document.xml\n\n        try {\n            ToDOCX.zipFile(docxModels, docxName, true);\n        } catch (IOException e) {\n            throw new RuntimeException(e);\n        }\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/tandhim/Models/Impression/Print2Word.java b/src/main/java/com/example/tandhim/Models/Impression/Print2Word.java
+--- a/src/main/java/com/example/tandhim/Models/Impression/Print2Word.java	(revision 7007c1f614a8650d9bdda6db102f27759ddb3fbc)
++++ b/src/main/java/com/example/tandhim/Models/Impression/Print2Word.java	(date 1656745271618)
+@@ -14,6 +14,9 @@
+ import java.awt.image.BufferedImage;
+ import java.io.File;
+ import java.io.IOException;
++import java.nio.file.Files;
++import java.nio.file.Paths;
++import java.time.LocalDate;
+ import java.util.HashMap;
+ import java.util.Hashtable;
+ 
+@@ -24,6 +27,9 @@
+ 
+     int obligRank;
+ 
++    private final String archivePath = "Tandim-Archive/";
++    private final LocalDate localDate;
++
+     private final String qrCodePath;
+     private final String docxName;
+     private final String numBon;
+@@ -38,6 +44,7 @@
+         docxName = generateDOCXName();
+         generateQRCode();
+         cleanMedia(docxModels.toString());
++        localDate = LocalDate.now();
+     }
+     private String generateQRCodePath() {
+         return String.format("docxModules/%s/word/media/image1.png", docxModels.toString().toLowerCase());
+@@ -123,13 +130,24 @@
+ 
+         DOCXModifier docxModifier = new DOCXModifier(replacements);
+         docxModifier.replace(docxModels); // docxModules/"fileOf"/word/document.xml _> docxModules/modbon/word/document.xml
+-
++        String wordPath = String.format("%s/%s", mkdir(), docxName);
+         try {
+-            ToDOCX.zipFile(docxModels, docxName, true);
++            ToDOCX.zipFile(docxModels, wordPath, true);
+         } catch (IOException e) {
+             throw new RuntimeException(e);
+         }
+     }
+ 
++    private String mkdir() {
++        String path = "";
++        try {
++            path = String.format("%s/%d/%s/%d", archivePath, localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth());
++            Files.createDirectories(Paths.get(path));
++        } catch (IOException e) {
++            throw new RuntimeException(e);
++        }
++        return path;
++    }
++
+ 
+ }

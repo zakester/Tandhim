@@ -1,0 +1,147 @@
+Index: src/main/java/com/example/tandhim/Models/Impression/Print2Word.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tandhim.Models.Impression;\n\nimport com.example.tandhim.DOCXModifier.DOCXModifier;\nimport com.example.tandhim.DOCXModifier.ToDOCX;\nimport com.google.zxing.BarcodeFormat;\nimport com.google.zxing.EncodeHintType;\nimport com.google.zxing.WriterException;\nimport com.google.zxing.common.BitMatrix;\nimport com.google.zxing.qrcode.QRCodeWriter;\nimport com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;\n\nimport javax.imageio.ImageIO;\nimport java.awt.*;\nimport java.awt.image.BufferedImage;\nimport java.io.File;\nimport java.io.IOException;\nimport java.util.HashMap;\nimport java.util.Hashtable;\n\npublic class Print2Word {\n    String docxModels;\n    HashMap<String, String> marginInformation;\n    HashMap<String, String> modelInformation;\n\n    int obligRank;\n\n    private final String qrCodePath;\n    private final String docxName;\n    private final String numBon;\n\n    public Print2Word(String docxModels, HashMap<String, String> marginInformation, HashMap<String, String> modelInformation, int obligRank) throws IOException {\n        this.docxModels = docxModels;\n        this.marginInformation = marginInformation;\n        this.modelInformation = modelInformation;\n        this.obligRank = obligRank;\n        this.numBon = getNumBon();\n        qrCodePath = generateQRCodePath();\n        docxName = generateDOCXName();\n        generateQRCode();\n        cleanMedia(docxModels.toString());\n    }\n    private String generateQRCodePath() {\n        return String.format(\"docxModules/%s/word/media/image1.png\", docxModels.toString().toLowerCase());\n    }\n\n    private String generateDOCXName() {\n        String[] splitNumBon = this.numBon.split(\"/\");\n\n        return String.format(\"%s_%s_%s_%d\", docxModels.toString().toLowerCase().split(\"_\")[0], splitNumBon[0], splitNumBon[1], obligRank);\n    }\n\n    private String getNumBon() {\n        return modelInformation.get(\"@num_bon\");\n    }\n\n    private void generateQRCode() throws IOException {\n        File outQRCode = new File(qrCodePath);\n        BufferedImage bufferedQRCode = getQRCode(numBon, 150, 150);\n        ImageIO.write(bufferedQRCode, \"png\", outQRCode);\n    }\n\n    private BufferedImage getQRCode(String targetUrl, int width,\n                                          int height) {\n        try {\n            Hashtable<EncodeHintType, Object> hintMap = new Hashtable<>();\n\n            hintMap.put(EncodeHintType.ERROR_CORRECTION,\n                    ErrorCorrectionLevel.L);\n            QRCodeWriter qrCodeWriter = new QRCodeWriter();\n            BitMatrix byteMatrix = qrCodeWriter.encode(targetUrl,\n                    BarcodeFormat.QR_CODE, width, height, hintMap);\n            int CrunchifyWidth = byteMatrix.getWidth();\n\n            BufferedImage image = new BufferedImage(CrunchifyWidth,\n                    CrunchifyWidth, BufferedImage.TYPE_INT_RGB);\n            image.createGraphics();\n\n            Graphics2D graphics = (Graphics2D) image.getGraphics();\n            graphics.setColor(Color.WHITE);\n            graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth);\n            graphics.setColor(Color.BLACK);\n\n            for (int i = 0; i < CrunchifyWidth; i++) {\n                for (int j = 0; j < CrunchifyWidth; j++) {\n                    if (byteMatrix.get(i, j)) {\n                        graphics.fillRect(i, j, 1, 1);\n                    }\n                }\n            }\n            return image;\n        } catch (WriterException e) {\n            e.printStackTrace();\n            throw new RuntimeException(\"Error getting QR Code\");\n        }\n\n    }\n\n\n    /** sometimes when generating QRCode it creates new files in media folder, so we clean this folder from any unnecessary files */\n    private void cleanMedia(String folderOf) {\n        String path = String.format(\"docxModules/%s/word/media/\", folderOf);\n        File mediaFolder = new File(path);\n\n        // Files list inside media folder\n        File[] fileList = mediaFolder.listFiles();\n\n        if (fileList != null) {\n            for (File file : fileList) {\n                String fileName = file.getName();\n                if (!(fileName.endsWith(\".png\") || fileName.endsWith(\".jpg\") || fileName.endsWith(\".jpeg\") || fileName.endsWith(\".svg\")))\n                    file.delete(); // if the file is not .png .jpg .jpeg .svg then delete file from media folder\n            }\n        }\n\n    }\n\n\n\n    public void replaceParameters() {\n        HashMap<String, String> replacements = new HashMap<>();\n        replacements.putAll(marginInformation);\n        replacements.putAll(modelInformation);\n\n        DOCXModifier docxModifier = new DOCXModifier(replacements);\n        docxModifier.replace(docxModels); // docxModules/\"fileOf\"/word/document.xml _> docxModules/modbon/word/document.xml\n\n        try {\n            ToDOCX.zipFile(docxModels, docxName, true);\n        } catch (IOException e) {\n            throw new RuntimeException(e);\n        }\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/tandhim/Models/Impression/Print2Word.java b/src/main/java/com/example/tandhim/Models/Impression/Print2Word.java
+--- a/src/main/java/com/example/tandhim/Models/Impression/Print2Word.java	(revision 7007c1f614a8650d9bdda6db102f27759ddb3fbc)
++++ b/src/main/java/com/example/tandhim/Models/Impression/Print2Word.java	(date 1656745053403)
+@@ -14,6 +14,9 @@
+ import java.awt.image.BufferedImage;
+ import java.io.File;
+ import java.io.IOException;
++import java.nio.file.Files;
++import java.nio.file.Paths;
++import java.time.LocalDate;
+ import java.util.HashMap;
+ import java.util.Hashtable;
+ 
+@@ -24,6 +27,9 @@
+ 
+     int obligRank;
+ 
++    private final String archivePath = "Tandim-Archive/";
++    private final LocalDate localDate;
++
+     private final String qrCodePath;
+     private final String docxName;
+     private final String numBon;
+@@ -38,6 +44,7 @@
+         docxName = generateDOCXName();
+         generateQRCode();
+         cleanMedia(docxModels.toString());
++        localDate = LocalDate.now();
+     }
+     private String generateQRCodePath() {
+         return String.format("docxModules/%s/word/media/image1.png", docxModels.toString().toLowerCase());
+@@ -123,13 +130,24 @@
+ 
+         DOCXModifier docxModifier = new DOCXModifier(replacements);
+         docxModifier.replace(docxModels); // docxModules/"fileOf"/word/document.xml _> docxModules/modbon/word/document.xml
+-
++        String wordPath = String.format("%s/%s", mkdir(), docxName);
+         try {
+-            ToDOCX.zipFile(docxModels, docxName, true);
++            ToDOCX.zipFile(docxModels, wordPath, true);
+         } catch (IOException e) {
+             throw new RuntimeException(e);
+         }
+     }
+ 
++    private String mkdir() {
++        String path = "";
++        try {
++            path = String.format("%s/%d/%s/%d", archivePath, localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth());
++            Files.createDirectories(Paths.get(path));
++        } catch (IOException e) {
++            throw new RuntimeException(e);
++        }
++        return path;
++    }
++
+ 
+ }
+Index: src/main/java/com/example/tandhim/DOCXModifier/DOCXModifier.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tandhim.DOCXModifier;\n\nimport java.io.*;\nimport java.util.HashMap;\n\npublic class DOCXModifier {\n\n    private final HashMap<String, String> replacements;\n    /**\n     * @param replacements <key, value>, keys are { @requester, @wanted, @price.... }\n     *\n     *                     example:\n     *                                  DOCXModifier modifier = new DOCXModifier(new HashMap<String, String> {{\n     *                                      put(\"@requester\", \"some name\");\n     *                                      put(\"@wanted\", \"some name\");\n     *                                      ....\n     *                                  }});\n     *                                  modifier.replace(\"modbon\");\n     *\n     * */\n    public DOCXModifier(HashMap<String, String> replacements) {\n        this.replacements = replacements;\n    }\n\n    /**\n     * This function replace old values with new values from HashMap<String, String> replacements\n     * @param fileOf name of the docx that you're working with ex: fileOf = modbon, so the hole path will be docxModules/modbon/word/document.xml\n     * */\n    public void replace(String fileOf) {\n\n        String pathXML = String.format(\"docxModules/%s/word/document.xml\", fileOf);\n        String tmpXMLPath = String.format(\"docxModules/%s/word/tmp_document.xml\", fileOf); // create temp XML file and modify it\n\n        try (BufferedReader br = new BufferedReader(new FileReader(pathXML)); BufferedWriter bw = new BufferedWriter(new FileWriter(tmpXMLPath))) {\n            String line;\n\n            while ((line = br.readLine()) != null) {\n                for (HashMap.Entry<String, String> entry : replacements.entrySet()) {\n                    String key = entry.getKey();\n                    String value = entry.getValue();\n\n                    if (line.contains(key))\n                        line = line.replace(key, value);\n                }\n\n                bw.write(line);\n            }\n        } catch (Exception e) {\n            e.printStackTrace();\n            return;\n        }\n        removeTmpFile(pathXML, tmpXMLPath); // after modification delete replace old XML with new XML\n\n    }\n\n\n    private void removeTmpFile(String inputFilePath, String tmpFilePath) {\n        // Once everything is complete, delete old XML.\n        File oldFile = new File(inputFilePath);\n        oldFile.delete();\n\n        // And rename tmp XML's name to old XML name\n        File newFile = new File(tmpFilePath);\n        newFile.renameTo(oldFile);\n\n    }\n\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/tandhim/DOCXModifier/DOCXModifier.java b/src/main/java/com/example/tandhim/DOCXModifier/DOCXModifier.java
+--- a/src/main/java/com/example/tandhim/DOCXModifier/DOCXModifier.java	(revision 7007c1f614a8650d9bdda6db102f27759ddb3fbc)
++++ b/src/main/java/com/example/tandhim/DOCXModifier/DOCXModifier.java	(date 1656744591799)
+@@ -6,6 +6,7 @@
+ public class DOCXModifier {
+ 
+     private final HashMap<String, String> replacements;
++
+     /**
+      * @param replacements <key, value>, keys are { @requester, @wanted, @price.... }
+      *
+@@ -65,5 +66,7 @@
+ 
+     }
+ 
++
++
+ }
+ 
+Index: target/classes/com/example/tandhim/css/light.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.button1\n{\n-fx-background-color : 194365;/*radial-gradient(focus-distance 0% , center 50% 50% , radius 70% ,grey,lightgrey );*/\n-fx-text-fill : white;\n}\n.button1:hover{\n-fx-background-color : #cbcbcb;\n-fx-text-fill: black;\n}\n.button1:pressed\n{\n-fx-background-color : #f5f5f5;\n-fx-text-fill: black;\n}\n.button1-pressed {\n-fx-background-color : #f5f5f5;\n-fx-text-fill: black;\n}\n.button2\n{\n-fx-background-color : #cbcbcb;/*radial-gradient(focus-distance 0% , center 50% 50% , radius 70% ,grey,lightgrey );*/\n-fx-text-fill : black;\n}\n.button2:hover{\n-fx-background-color : #f5f5f5;\n-fx-text-fill: black;\n}\n.button2:pressed\n{\n-fx-background-color : #cbcbcb;\n-fx-text-fill: black;\n}\n\n.scroll-pane {\n    -fx-background-color: #cbcbcb;\n}\n\n.scroll-bar:horizontal, .scroll-bar:vertical{\n    -fx-background-color:transparent;\n}\n\n.increment-button, .decrement-button {\n    -fx-background-color: transparent;\n    -fx-border-color: transparent;\n}\n\n.scroll-bar:horizontal .track,\n.scroll-bar:vertical .track{\n    -fx-background-color: transparent;\n    -fx-border-color: transparent;\n    -fx-background-radius: 0em;\n}\n\n.scroll-bar:horizontal .thumb,\n.scroll-bar:vertical .thumb {\n    -fx-background-color: #10165F;\n    -fx-background-radius: 5em;\n}\n\n.scroll-pane > .corner {\n    -fx-background-color: black;\n}\n.combo-status {\n\t-fx-border-color: transparent !important ; /*linear-gradient(to right,#f5f5f5,#02030A, #02030A);*/\n}\n.hbox-status {\n\t-fx-background-color:  transparent;\n    -fx-border-color:  #02030A;\n    -fx-border-radius: 2em;\n}\n.label {\n    -fx-border-color: transparent;\n    -fx-border-color: transparent;\n    -fx-text-fill: black;\n        -fx-font: 16px \"System\";\n\n}\n.combo-box-base {\n\t-fx-background-color:  transparent;\n    -fx-border-color:  #02030A;\n    -fx-border-radius: 2em;\n}\n.table-view {\n    -fx-background-color:  transparent;\n    \n}\n.table-view .table-cell{\n    -fx-border-color: transparent;\n    -fx-padding: 2 0 2 10px;\n}\n.table-row-cell:hover {\n    -fx-border-color:  #02030A;\n    -fx-text-background-color: #05071F;\n}\n.table-row-cell:odd{\n    -fx-background-color: white;\n    -fx-background-insets: 0, 0 0 1 0;\n    -fx-padding: 0.0em;\n}\n.table-row-cell:even{\n    -fx-background-color: lightgrey;\n    -fx-background-insets: 0, 0 0 1 0;\n    -fx-padding: 0.0em;\n}\n.table-view .column-header,\n.table-view .column-header .filler,\n.table-view .column-header-background .filler {\n    -fx-border-color:  #02030A;\n    -fx-text-background-color: white;\n}\n.combo-box .cell{\n    -fx-text-fill: black;\n    -fx-font: 16px \"System\";\n}\n\n.combo-box .list-cell{\n\n-fx-background-color:  transparent;\n\n}\n.combo-box .list-cell:selected{\n\n-fx-background-color:transparent; \n\n}\n.combo-box .list-cell:hover{\n\n-fx-background-color:#10165F;\n    -fx-text-fill: white;\n\n}\n .combo-box{\n\n-fx-background-color:transparent; \n }\n .combo-box .text-field{\n    -fx-background-color: transparent;\n    -fx-font-size :16px;\n\n    /*-fx-border-color: linear-gradient(from 25% 25% to 100% 100%, lightgrey, transparent);*/\n    }\n.combo-box .arrow-button {\n    -fx-background-color: transparent;\n    -fx-border-radius: 2em;\n    -fx-border-color:transparent;\n}\n\n.combo-box-popup .list-view .list-cell {\n    -fx-background-color:  transparent;\n}\n\n.combo-box-popup .list-view .list-cell:hover {\n    -fx-background-color: #02030A;\n}\n.combo-box-popup .list-view .list-cell:selected {\n    -fx-background-color:  #cbcbcb;\n    -fx-text-fill: white;\n}\n.date-picker > .text-field {\n    -fx-background-color:transparent;\n    -fx-border-color:transparent;\n    -fx-background-insets: 1 0 1 1;\n    -fx-background-radius: 2 0 0 2;\n    -fx-font-size :16px;\n}\n.date-picker > .arrow-button {\n    -fx-border-color:  transparent;\n\n    -fx-background-radius: 2em;\n}\n.bg {\n\t-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 25% ,white, #f5f5f5, #cbcbcb);\n}\n \n.dialog-pane .button{\n \t-fx-border-color: lightgrey;\n  -fx-background-color : #02030A; \n }\n .dialog {\n    -fx-background-color : #f5f5f5;\n }\n .dialog-pane {\n -fx-background-color : #cbcbcb;    \n }\n .dialog-pane:header .header-panel {\n    -fx-background-color: #cbcbcb;\n}\n.dialog-pane:header .header-panel .label {\n    -fx-font-style: italic;\n    -fx-font-size: 2em;\n    -fx-text-fill: black;\n}\n .text-area {\n    text-area-background: #f5f5f5 ;\n}\n .text-area .content {\n    -fx-background-color: text-area-background ;\n \t-fx-border-color: #02030A;\n    -fx-border-radius: 2em;\n    -fx-text-fill: black;\n }\n .Anchor {\n    -fx-background-color: #f5f5f5;\n }\n  .text-field{\n-fx-background-color : transparent;\n-fx-border-radius:2em;\n-fx-text-fill:black;\n-fx-border-color:  #02030A;\n\n\n }\n .text-area {\n    -fx-text-fill:black;\n}\n.label {\n    -fx-background-color : transparent;\n    -fx-text-fill:black;\n\n}\n.optionbar {\n\t-fx-background-color : #194365;\n\n}\n.login-right{\n    -fx-background-color: linear-gradient(to right,#f5f5f5,#f5f5f5,#f5f5f5, #cbcbcb);\n}\n.login-left{\n    -fx-background-color: linear-gradient(to left,#f5f5f5,#f5f5f5,#f5f5f5, #cbcbcb);\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/target/classes/com/example/tandhim/css/light.css b/target/classes/com/example/tandhim/css/light.css
+--- a/target/classes/com/example/tandhim/css/light.css	(revision 7007c1f614a8650d9bdda6db102f27759ddb3fbc)
++++ b/target/classes/com/example/tandhim/css/light.css	(date 1656582772266)
+@@ -120,7 +120,7 @@
+ }
+ .combo-box .list-cell:selected{
+ 
+--fx-background-color:transparent; 
++-fx-background-color:transparent;
+ 
+ }
+ .combo-box .list-cell:hover{
+@@ -131,7 +131,7 @@
+ }
+  .combo-box{
+ 
+--fx-background-color:transparent; 
++-fx-background-color:transparent;
+  }
+  .combo-box .text-field{
+     -fx-background-color: transparent;
+Index: target/classes/com/example/tandhim/css/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.button1\n{\n-fx-background-color : #05071F;\n-fx-text-fill : #e7e5e5;\n}\n.button1:hover{\n-fx-background-color : #10165F;\n}\n.button1:pressed\n{\n-fx-background-color : #1620A1;\n}\n.button1-pressed {\n-fx-background-color : #02030A;\n-fx-text-fill : white;\n}\n.button2\n{\n-fx-background-color : #05071F;\n-fx-text-fill : #e7e5e5;\n}\n.button2:hover{\n-fx-background-color : #10165F;\n}\n.button2:pressed\n{\n-fx-background-color : #1620A1;\n}\n\n.scroll-pane {\n    -fx-background-color: #02030A;\n}\n\n.scroll-bar:horizontal, .scroll-bar:vertical{\n    -fx-background-color:transparent;\n}\n\n.increment-button, .decrement-button {\n    -fx-background-color: transparent;\n    -fx-border-color: transparent;\n}\n\n.scroll-bar:horizontal .track,\n.scroll-bar:vertical .track{\n    -fx-background-color: transparent;\n    -fx-border-color: transparent;\n    -fx-background-radius: 0em;\n}\n\n.scroll-bar:horizontal .thumb,\n.scroll-bar:vertical .thumb {\n    -fx-background-color: #10165F;\n    -fx-background-radius: 5em;\n}\n\n.scroll-pane > .corner {\n    -fx-background-color: black;\n}\n.label {\n\t-fx-border-color: transparent;\n\t-fx-border-color: transparent;\n  \t-fx-text-fill: white;\n  \t    -fx-font: 16px \"System\";\n\n}\n\n.combo-status {\n    -fx-border-color: transparent !important ; /*linear-gradient(to right,#f5f5f5,#02030A, #02030A);*/\n    -fx-background-radius:2em;\n    -fx-background-color:transparent !important;\n}\n.hbox-status {\n    -fx-background-color:  transparent;\n    -fx-border-color:  #B7C3D7;\n    -fx-border-radius: 2em;\n}\n\n.combo-box-base {\n\t-fx-background-color:  #02030A;\n    -fx-border-color:  #B7C3D7;\n    -fx-border-radius: 2em;\n}\n.table-view {\n    -fx-background-color:  #02030A;\n    \n}\n.table-view .table-cell{\n    -fx-border-color: transparent;\n    -fx-padding: 2 0 2 10px;\n}\n.table-row-cell:hover {\n    -fx-background-color: #05071F;\n    -fx-text-background-color: #05071F;\n}\n.table-row-cell:odd{\n    -fx-background-color: white;\n    -fx-background-insets: 0, 0 0 1 0;\n    -fx-padding: 0.0em;\n}\n.table-row-cell:even{\n    -fx-background-color: lightgrey;\n    -fx-background-insets: 0, 0 0 1 0;\n    -fx-padding: 0.0em;\n}\n.table-view .column-header,\n.table-view .column-header .filler,\n.table-view .column-header-background .filler {\n    -fx-background-color:  #05071F;\n    -fx-text-background-color: white;\n}\n.combo-box .cell{\n    -fx-text-fill: white;\n    -fx-font: 16px \"System\";\n}\n\n.combo-box .list-cell{\n\n-fx-background-color:#02030A;\n\n}\n.combo-box .list-cell:selected{\n\n-fx-background-color:transparent; \n\n}\n.combo-box .list-cell:hover{\n\n-fx-background-color:#10165F;\n}\n .combo-box{\n\n-fx-background-color:transparent; \n }\n .combo-box .text-field{\n    -fx-background-color: transparent;\n    -fx-font-size :16px;\n\n    /*-fx-border-color: linear-gradient(from 25% 25% to 100% 100%, lightgrey, transparent);*/\n    }\n.combo-box .arrow-button {\n    -fx-background-color: transparent;\n    -fx-border-radius: 2em;\n    -fx-border-color:transparent;\n}\n\n.combo-box-popup .list-view .list-cell {\n    -fx-background-color: #02030A;\n}\n\n.combo-box-popup .list-view .list-cell:hover {\n    -fx-background-color: #05071F;\n}\n.combo-box-popup .list-view .list-cell:selected {\n    -fx-background-color: white;\n    -fx-text-fill: black;\n}\n.date-picker > .text-field {\n    -fx-background-color:transparent;\n    -fx-border-color:transparent;\n    -fx-background-insets: 1 0 1 1;\n    -fx-background-radius: 2 0 0 2;\n    -fx-font-size :16px;\n}\n.date-picker > .arrow-button {\n    -fx-background-color:#05071F;\n    -fx-background-radius: 2em;\n}\n.login-right {\n\t-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 25% ,white, #B7C3D7, #02030A);\n}\n.login-left {\n\t-fx-background-color : #05071F;\n}\n.dialog-pane .button{\n \t-fx-border-color: lightgrey;\n }\n .dialog {\n \t-fx-background-color : #02030A;\n }\n .dialog-pane {\n -fx-background-color : #10165F;\t\n }\n .dialog-pane:header .header-panel {\n    -fx-background-color: #10165F;\n}\n.dialog-pane:header .header-panel .label {\n    -fx-font-style: italic;\n    -fx-font-size: 2em;\n}\n .text-area {\n    text-area-background: #02030A ;\n}\n .text-area .content {\n    -fx-background-color: text-area-background ;\n \t-fx-border-color: lightgrey;\n    -fx-border-radius: 2em;\n    -fx-text-fill: white;\n }\n.textarea1 .content {\n    -fx-background-color: text-area-background ;\n    -fx-border-color: transparent !important;\n    -fx-border-radius: 2em;\n    -fx-text-fill: white;\n }\n\n .Anchor {\n    -fx-background-color: #02030A ;\n }\n .text-field{\n-fx-background-color : #02030A;\n-fx-border-color: #B7C3D7;\n-fx-border-radius:2em;\n-fx-text-fill:white;\n }\n .text-area {\n    -fx-text-fill:white;\n}\n.optionbar {\n\t-fx-background-color : #05071F;\n\n}\n.chart-pie-label-line {\n    -fx-stroke: grey;\n    -fx-fill: grey;\n}\n\n.chart-pie-label { /*this is what you need for labels*/\n    -fx-fill: grey;\n    -fx-font-size: 1em;\n} \n.chart-legend {\n   -fx-background-color: #02030A ;\n   -fx-stroke: #daa520;\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/target/classes/com/example/tandhim/css/style.css b/target/classes/com/example/tandhim/css/style.css
+--- a/target/classes/com/example/tandhim/css/style.css	(revision 7007c1f614a8650d9bdda6db102f27759ddb3fbc)
++++ b/target/classes/com/example/tandhim/css/style.css	(date 1656582772268)
+@@ -120,7 +120,7 @@
+ }
+ .combo-box .list-cell:selected{
+ 
+--fx-background-color:transparent; 
++-fx-background-color:transparent;
+ 
+ }
+ .combo-box .list-cell:hover{
+@@ -129,7 +129,7 @@
+ }
+  .combo-box{
+ 
+--fx-background-color:transparent; 
++-fx-background-color:transparent;
+  }
+  .combo-box .text-field{
+     -fx-background-color: transparent;
