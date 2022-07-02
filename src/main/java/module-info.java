@@ -13,6 +13,7 @@ module com.example.tandhim {
     requires com.google.zxing;
     requires jfreesvg;
     requires json.simple;
+    requires spring.security.core;
 
     opens com.example.tandhim to javafx.fxml;
     exports com.example.tandhim;

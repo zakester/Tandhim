@@ -12,7 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.example.tandhim.Models.BDConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,14 +54,16 @@ public class LoginController implements Initializable {
         BDConnection.findMySqlServer();
 
         Connection bd = BDConnection.getConnection();
-        String query = "SELECT * FROM users WHERE username='" + userName.getText() + "' AND password='"+ password.getText() +"'";
+        String query = "SELECT * FROM users WHERE username='" + userName.getText() + "' LIMIT 1";
+
         Statement st;
         ResultSet rs;
         try {
 
             st = bd.createStatement();
             rs = st.executeQuery(query);
-            if (rs.next()){
+            if (rs.next() && new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2A,12).matches(password.getText(),rs.getString("password"))){
+
                 FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("Home.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Controller controller2 = fxmlLoader.getController();
@@ -68,6 +71,7 @@ public class LoginController implements Initializable {
                 controller2.setUserType(rs.getString("type"));
                 controller2.setUserName(rs.getString("nom")+" "+rs.getString("prenom"));
                 String logQuery="CALL log_login("+ Controller.getUserID()+",' ');";
+
                 PreparedStatement preparedStmt = bd.prepareStatement(logQuery);
                 int idn = preparedStmt.executeUpdate();
 
@@ -82,12 +86,7 @@ public class LoginController implements Initializable {
             exp.printStackTrace();
         }
 
-/*
-        Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
-        primaryStage.close();
-        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();*/
+
 
 
     }
