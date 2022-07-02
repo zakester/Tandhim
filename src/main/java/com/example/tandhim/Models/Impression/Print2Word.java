@@ -14,6 +14,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Hashtable;
 
@@ -27,6 +30,7 @@ public class Print2Word {
     private final String qrCodePath;
     private final String docxName;
     private final String numBon;
+    private final LocalDate localDate;
 
     public Print2Word(String docxModels, HashMap<String, String> marginInformation, HashMap<String, String> modelInformation, int obligRank) throws IOException {
         this.docxModels = docxModels;
@@ -38,6 +42,7 @@ public class Print2Word {
         docxName = generateDOCXName();
         generateQRCode();
         cleanMedia(docxModels.toString());
+        localDate = LocalDate.now();
     }
     private String generateQRCodePath() {
         return String.format("docxModules/%s/word/media/image1.png", docxModels.toString().toLowerCase());
@@ -115,7 +120,6 @@ public class Print2Word {
     }
 
 
-
     public void replaceParameters() {
         HashMap<String, String> replacements = new HashMap<>();
         replacements.putAll(marginInformation);
@@ -123,12 +127,24 @@ public class Print2Word {
 
         DOCXModifier docxModifier = new DOCXModifier(replacements);
         docxModifier.replace(docxModels); // docxModules/"fileOf"/word/document.xml _> docxModules/modbon/word/document.xml
-
+        String wordPath = String.format("%s/%s", mkdir(), docxName);
         try {
-            ToDOCX.zipFile(docxModels, docxName, true);
+            ToDOCX.zipFile(docxModels, wordPath, true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String mkdir() {
+        final String archivePath = "Tandim-Archive";
+        String path = "";
+        try {
+            path = String.format("%s/%d/%s/%d", archivePath, localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth());
+            Files.createDirectories(Paths.get(path));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return path;
     }
 
 
