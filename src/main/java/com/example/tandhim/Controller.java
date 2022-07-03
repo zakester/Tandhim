@@ -19,6 +19,8 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -63,6 +65,8 @@ public class Controller implements Initializable {
     int hov = 0;
     @FXML
     private VBox pnItems = null;
+    @FXML
+    private ImageView imgQrCode;
     @FXML
     private VBox vboxFormePrincipale,vboxPubExe;
     @FXML
@@ -290,7 +294,12 @@ public class Controller implements Initializable {
         Type.getSelectionModel().select("الكل");
         //comChambre.getItems().addAll("القسم المدني","قسم الجنح" ,"قسم المخالفات","القسم الاستعجالي" ,"قسم شؤون الأسرة" ,"قسم الأحداث","القسم الاجتماعي","القسم العقاري" ,"القسم البحري" ,"القسم التجاري");
         //comCommission.getItems().addAll("محكمة","مجلس قضاء" ,"المحكمة الإدارية");
-
+        imgQrCode.setImage(new Image(Controller.class.getResourceAsStream("img/Qrcode.png")));
+    }
+    @FXML
+    void resetImage (){
+        System.out.println("image changed");
+        imgQrCode.setImage(new Image(Controller.class.getResourceAsStream("img/Qrcode.png")));
     }
     public void HidePublishExe() {
         vboxPubExe.setVisible(false);
@@ -2160,19 +2169,23 @@ public class Controller implements Initializable {
     public void PrintPV() {
         String typePv = "محضر "+ bonText.getText();
         String oblig = demList.getItems().get(0).toString();
+        int rank = 0;
         if (demList.getItems().size()>1) oblig+=" ومن معه";
         if (hboxOblig2.isVisible()){
             if (obligList.getSelectionModel().getSelectedItem()==null){
                 JOptionPane.showMessageDialog(null,"عليك تحديد المطلوب من قائمة المطلوبين");
                 return;
             }
-            else oblig= obligList.getSelectionModel().getSelectedItem().toString();
+            else {
+                oblig = obligList.getSelectionModel().getSelectedItem().toString();
+                rank = obligList.getItems().indexOf(oblig);
+            }
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PrintPv.fxml"));
         try {
             Parent p = (Parent) loader.load();
             PrintPvController ctrl = loader.getController();
-            ctrl.bonData(num_bon.getText(),typePv,oblig);
+            ctrl.bonData(num_bon.getText(),typePv,oblig,rank);
             Alert alert = new Alert(Alert.AlertType.NONE);
             DialogPane dialogPane = alert.getDialogPane();
             dialogPane.getStylesheets().add(

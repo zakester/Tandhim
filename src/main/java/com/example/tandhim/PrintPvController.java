@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.example.tandhim.Models.BonProvisions;
-import com.example.tandhim.Models.Demandeur;
+import com.example.tandhim.Models.*;
 import com.example.tandhim.Models.Impression.DOCXModels;
 import com.example.tandhim.Models.Impression.Print2Word;
 import javafx.collections.ObservableList;
@@ -18,9 +17,7 @@ import javafx.scene.Node;
 import java.util.ResourceBundle;
 import java.net.URL;
 import javafx.event.ActionEvent;
-import com.example.tandhim.Models.PriceArabicSpell;
 import javafx.stage.Stage;
-import com.example.tandhim.Models.EditBonSearch;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -35,6 +32,7 @@ import javafx.fxml.Initializable;
 
 public class PrintPvController implements Initializable
 {
+    private String typePersonne ="Physique";
     @FXML
     private Label typePv;
     @FXML
@@ -66,6 +64,8 @@ public class PrintPvController implements Initializable
     @FXML
     private CheckBox arcticle336;
     @FXML
+    private CheckBox article954;
+    @FXML
     private CheckBox arcticle349_354;
     @FXML
     private CheckBox arcticle950;
@@ -88,7 +88,7 @@ public class PrintPvController implements Initializable
     @FXML
     private VBox vboxDecision;
     @FXML
-    private ComboBox<String> comTypeDecision;
+    private ComboBox<String> comTypeDecision,heure,minute;
     @FXML
     private HBox hboxTypeJugement1;
     @FXML
@@ -104,7 +104,7 @@ public class PrintPvController implements Initializable
     @FXML
     private HBox hboxTypeJugement11;
     @FXML
-    private TextField langueExcuse;
+    private TextField langueExcuse,salle,branche;
     @FXML
     private TextField droitPropo;
     @FXML
@@ -142,8 +142,10 @@ public class PrintPvController implements Initializable
     @FXML
     private Button btnSave;
     public String numBon;
+    public int rank;
     
-    public void bonData( String numBon,  String typePv,  String oblig) {
+    public void bonData( String numBon,  String typePv,  String oblig , int rank) {
+        this.rank= rank;
         this.numBon = numBon;
         this.typePv.setText(typePv);
         this.labelOblig.setText(typePv);
@@ -172,64 +174,258 @@ public class PrintPvController implements Initializable
             this.checkTypePhysique.setDisable(true);
         }
     }
-    
+    public ArrayList PrintCitation(){
+        final EditBonSearch result = new EditBonSearch(this.numBon);
+        ArrayList <Object> pvData = new ArrayList();
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.citation_1_1); else pvData.add(DOCXModels.citation_1);
+        String oblig =labelOblig.getText().replace("المطلوب ضده :","");
+        String [] obl = oblig.split(" العنوان: ");
+        HashMap<String, String> marginInformation = new HashMap<>() {{
+            put("@huiss", "بن ثامر دحمان");
+            put("@wilaya", "البليدة");
+            put("@adrHuiss", "شارع 11 ديسمبر 1960 البليدة )مقابل مجلس قضاء البليدة(");
+        }};
+        pvData.add(marginInformation);
+        BonSeances bon = result.getBonData();
+        ArrayList<Demandeur> dem = result.getDemandeurList();
+        String demandeur = "";
+        int i=1;
+        for (Demandeur d:dem) {
+            demandeur +=i+"/ "+ d.getNom()+" العنوان: "+d.getAddr()+" ";
+        }
+        String finalDemandeur = demandeur;
+        HashMap<String, String> modelInformation = new HashMap<>() {{
+            put("@demandeur", finalDemandeur);
+            put("@requete", typeReq.getText());
+            put("@num", bon.getNum_seance());
+            put("@year", "اثنان وعشرون");
+            put("@date_citation", bon.getDate_seance());
+            put("@date_report1", bon.getDate_report());
+            put("@date_report2", bon.getDate_report2());
+            put("@obligatoire", obl[0]);
+            put("@address", obl[1]);
+            put("@num_bon", numBon);
+            put("@commission", bon.getCommission());
+            put("@heure", heure.getSelectionModel().getSelectedItem()+":"+minute.getSelectionModel().getSelectedItem());
+            put("@salle", salle.getText());
+            put("@branche", branche.getText());
+            put("@type", bon.getType());
+        }};
+        pvData.add(modelInformation);
+        return pvData;
+    }
+    public ArrayList PrintExcuse(){
+        final EditBonSearch result = new EditBonSearch(this.numBon);
+        ArrayList <Object> pvData = new ArrayList();
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.demeur_1_1); else pvData.add(DOCXModels.demeur_1);
+        String oblig =labelOblig.getText().replace("المطلوب ضده :","");
+        String [] obl = oblig.split(" العنوان: ");
+        HashMap<String, String> marginInformation = new HashMap<>() {{
+            put("@huiss", "بن ثامر دحمان");
+            put("@wilaya", "البليدة");
+            put("@adrHuiss", "شارع 11 ديسمبر 1960 البليدة )مقابل مجلس قضاء البليدة(");
+        }};
+        pvData.add(marginInformation);
+        BonExcuses bon = result.getBonExcusesData();
+        ArrayList<Demandeur> dem = result.getDemandeurList();
+        String demandeur = "";
+        int i=1;
+        for (Demandeur d:dem) {
+            demandeur +=i+"/ "+ d.getNom()+" العنوان: "+d.getAddr()+" ";
+        }
+        String finalDemandeur = demandeur;
+        String attached = "";
+        if (checkAttached.isSelected()) attached = "+ مرفق متكون من"+" "+nbrPages.getText()+" صفحة ";
+        String finalAttached = attached;
+        HashMap<String, String> modelInformation = new HashMap<>() {{
+            put("@demandeur", finalDemandeur);
+            put("@type", bon.getType());
+            put("@date", bon.getDate_marquage());
+            put("@attached", finalAttached);
+            put("@langue", langueExcuse.getText());
+            put("@year", "اثنان وعشرون");
+            put("@obligatoire", obl[0]);
+            put("@address", obl[1]);
+            put("@num_bon", numBon);
+        }};
+        pvData.add(modelInformation);
+        return pvData;
+    }
+
+    public ArrayList PrintJugement(){
+    final EditBonSearch result = new EditBonSearch(this.numBon);
+    ArrayList <Object> pvData = new ArrayList();
+    if (comTypeJug.getSelectionModel().getSelectedItem().equals("حكم حضوري")||
+            (comTypeJug.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(arcticle336.isSelected()))) {
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.jugement_1_1);
+        else pvData.add(DOCXModels.jugement_1);
+    }
+    if (comTypeJug.getSelectionModel().getSelectedItem().equals("حكم غيابي")||
+            (comTypeJug.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(arcticle329_336.isSelected()))) {
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.jugement_2_1);
+        else pvData.add(DOCXModels.jugement_2);
+    }
+    if (comTypeJug.getSelectionModel().getSelectedItem().equals("حكم حضوري إبتدائي نهائي")||
+            comTypeJug.getSelectionModel().getSelectedItem().equals("حكم حضوري نهائي") ||
+            (comTypeJug.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(arcticle349_354.isSelected()))) {
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.jugement_3_1);
+        else pvData.add(DOCXModels.jugement_3);
+    }
+    if (comTypeJug.getSelectionModel().getSelectedItem().equals("حكم غيابي إبتدائي نهائي")||
+        (comTypeJug.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(arcticle329_349_354.isSelected()))) {
+            if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.jugement_4_1);
+        else pvData.add(DOCXModels.jugement_4);
+    }
+    if (comTypeJug.getSelectionModel().getSelectedItem().equals("حكم غيابي نهائي")||
+            (comTypeJug.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(arcticle329_349_354.isSelected()))) {
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.jugement_5_1);
+        else pvData.add(DOCXModels.jugement_5);
+    }
+    if (comTypeJug.getSelectionModel().getSelectedItem().equals("حكم إداري")||
+            (comTypeJug.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(arcticle950.isSelected()))) {
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.jugement_6_1);
+        else pvData.add(DOCXModels.jugement_6);
+    }
+    String oblig =labelOblig.getText().replace("المطلوب ضده :","");
+    String [] obl = oblig.split(" العنوان: ");
+    HashMap<String, String> marginInformation = new HashMap<>() {{
+        put("@huiss", "بن ثامر دحمان");
+        put("@wilaya", "البليدة");
+        put("@adrHuiss", "شارع 11 ديسمبر 1960 البليدة )مقابل مجلس قضاء البليدة(");
+    }};
+    pvData.add(marginInformation);
+    BonProvisions bon = result.getBonProvisionsData();
+    ArrayList<Demandeur> dem = result.getDemandeurList();
+    String demandeur = "";
+    int i=1;
+    for (Demandeur d:dem) {
+        demandeur +=i+"/ "+ d.getNom()+" العنوان: "+d.getAddr()+" ";
+    }
+    String finalDemandeur = demandeur;
+    String type = comTypeJug.getSelectionModel().getSelectedItem().replace("حكم ","");
+    if (comTypeJug.getSelectionModel().getSelectedItem().equals("صنف آخر"))
+            type = typeJug.getText().replace("قرار ","");
+
+        String finalType = type;
+        HashMap<String, String> modelInformation = new HashMap<>() {{
+            put("@demandeur", finalDemandeur);
+            put("@type", finalType);
+            put("@commission", bon.getCommission());
+            put("@spec", bon.getSpec());
+            put("@year", "اثنان وعشرون");
+            put("@table", bon.getNum_table());
+            put("@indice", bon.getNum_indice());
+            put("@obligatoire", obl[0]);
+            put("@address", obl[1]);
+            put("@num_bon", numBon);
+            put("@date", bon.getDate());
+        }};
+    pvData.add(modelInformation);
+    return pvData;
+}
+public ArrayList PrintDecision(){
+    final EditBonSearch result = new EditBonSearch(this.numBon);
+    ArrayList <Object> pvData = new ArrayList();
+    if (comTypeDecision.getSelectionModel().getSelectedItem().equals("قرار حضوري")||
+            (comTypeDecision.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(article354.isSelected()))) {
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.decision_2_1);
+        else pvData.add(DOCXModels.decision_2);
+    }
+    if (comTypeDecision.getSelectionModel().getSelectedItem().equals("قرار غيابي")||
+            (comTypeDecision.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(article329_355_354.isSelected()))) {
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.decision_1_1);
+        else pvData.add(DOCXModels.decision_1);
+    }
+    if (comTypeDecision.getSelectionModel().getSelectedItem().equals("قرار إداري")||
+            (comTypeDecision.getSelectionModel().getSelectedItem().equals("صنف آخر")&&(article954.isSelected()))) {
+        if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.decision_3_1);
+        else pvData.add(DOCXModels.decision_3);
+    }
+    String oblig =labelOblig.getText().replace("المطلوب ضده :","");
+    String [] obl = oblig.split(" العنوان: ");
+    HashMap<String, String> marginInformation = new HashMap<>() {{
+        put("@huiss", "بن ثامر دحمان");
+        put("@wilaya", "البليدة");
+        put("@adrHuiss", "شارع 11 ديسمبر 1960 البليدة )مقابل مجلس قضاء البليدة(");
+    }};
+    pvData.add(marginInformation);
+    BonProvisions bon = result.getBonProvisionsData();
+    ArrayList<Demandeur> dem = result.getDemandeurList();
+    String demandeur = "";
+    int i=1;
+    for (Demandeur d:dem) {
+        demandeur +=i+"/ "+ d.getNom()+" العنوان: "+d.getAddr()+" ";
+    }
+    String finalDemandeur = demandeur;
+    String type=comTypeDecision.getSelectionModel().getSelectedItem().replace("قرار ","");
+    if (comTypeDecision.getSelectionModel().getSelectedItem().equals("صنف آخر"))
+        type = typeDecision.getText().replace("قرار ","");
+    String finalType = type;
+    HashMap<String, String> modelInformation = new HashMap<>() {{
+            put("@demandeur", finalDemandeur);
+            put("@type", finalType);
+            put("@commission", bon.getCommission());
+            put("@spec", bon.getSpec());
+            put("@year", "اثنان وعشرون");
+            put("@table", bon.getNum_table());
+            put("@indice", bon.getNum_indice());
+            put("@obligatoire", obl[0]);
+            put("@address", obl[1]);
+            put("@num_bon", numBon);
+            put("@date", bon.getDate());
+        }};
+    pvData.add(modelInformation);
+    return pvData;
+}
     @FXML
     void wordView() {
 
         final EditBonSearch result = new EditBonSearch(this.numBon);
         if (typePv.getText().equals("محضر تكليف بالوفاء بموجب سند قضائي")) {
-            this.vboxObligation.setVisible(true);
-        }
+
+            }
         if (typePv.getText().equals("محضر تكليف بالحضور لجلسة")) {
-            this.vboxCitation.setVisible(true);
+            Print2Word print2Word = null;
+            ArrayList pvdata = PrintCitation();
+            try {
+                print2Word = new Print2Word((String) pvdata.get(0),(HashMap<String, String>) pvdata.get(1),(HashMap<String, String>) pvdata.get(2), rank);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            print2Word.replaceParameters();
+
         }
         if (typePv.getText().equals("محضر تبليغ أمر")) {
             this.vboxOrder.setVisible(true);
         }
         if (typePv.getText().equals("محضر تبليغ حكم")) {
-            System.out.println("yeah im here");
-            String oblig =labelOblig.getText().replace("المطلوب ضده :","");
-            String [] obl = oblig.split(" العنوان: ");
-            HashMap<String, String> marginInformation = new HashMap<>() {{
-                put("@huiss", "بن ثامر دحمان");
-                put("@wilaya", "البليدة");
-                put("@adrHuiss", "شارع 11 ديسمبر 1960 البليدة )مقابل مجلس قضاء البليدة(");
-            }};
-            BonProvisions bon = result.getBonProvisionsData();
-            ArrayList<Demandeur> dem = result.getDemandeurList();
-            String demandeur = "";
-            int i=1;
-            for (Demandeur d:dem) {
-                demandeur +=i+"/ "+ d.getNom()+" العنوان: "+d.getAddr()+" ";
-            }
-            String finalDemandeur = demandeur;
-            HashMap<String, String> modelInformation = new HashMap<>() {{
-                put("@demandeur", finalDemandeur);
-                put("@commission", bon.getCommission());
-                put("@spec", bon.getSpec());
-                put("@year", "اثنان وعشرون");
-                put("@type", comTypeJug.getSelectionModel().getSelectedItem());
-                put("@table", bon.getNum_table());
-                put("@indice", bon.getNum_indice());
-                put("@obligatoire", obl[0]);
-                put("@address", obl[1]);
-                put("@num_bon", numBon);
-                put("@date", bon.getDate());
-            }};
             Print2Word print2Word = null;
+            ArrayList pvdata = PrintJugement();
             try {
-                print2Word = new Print2Word(DOCXModels.jugement_1, marginInformation, modelInformation, 0);
+                print2Word = new Print2Word((String) pvdata.get(0),(HashMap<String, String>) pvdata.get(1),(HashMap<String, String>) pvdata.get(2), rank);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             print2Word.replaceParameters();
         }
         if (typePv.getText().equals("محضر تبليغ قرار")) {
-            this.vboxDecision.setVisible(true);
-        }
+            Print2Word print2Word = null;
+            ArrayList pvdata = PrintDecision();
+            try {
+                print2Word = new Print2Word((String) pvdata.get(0),(HashMap<String, String>) pvdata.get(1),(HashMap<String, String>) pvdata.get(2), rank);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            print2Word.replaceParameters();        }
         if (typePv.getText().equals("محضر تبليغ إرسالية / طلب / إعذار")) {
-            this.vboxExcuse.setVisible(true);
-        }
+            Print2Word print2Word = null;
+            ArrayList pvdata = PrintExcuse();
+            try {
+                print2Word = new Print2Word((String) pvdata.get(0),(HashMap<String, String>) pvdata.get(1),(HashMap<String, String>) pvdata.get(2), rank);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            print2Word.replaceParameters();              }
         ((Stage)this.btnSave.getScene().getWindow()).close();
     }
     
@@ -304,21 +500,32 @@ public class PrintPvController implements Initializable
                 this.ObligationArea.setDisable(true);
             }
         }
-        String personne = "";
         if (event.getSource() == this.checkTypeMorale) {
-            if (this.checkContent.isSelected()) {
-                personne += "-1";
+            if (this.checkTypeMorale.isSelected()) {
+                typePersonne += "Morale";
+                if (checkTypePhysique.isSelected()) checkTypeMorale.setSelected(false);
             }
-            else {
-                this.ObligationArea.setDisable(true);
+
             }
+        if (event.getSource() == this.checkTypePhysique) {
+            if (this.checkTypePhysique.isSelected()) {
+                typePersonne += "Morale";
+                if (checkTypeMorale.isSelected()) checkTypeMorale.setSelected(false);
+            }
+
         }
+
     }
+
     
     public void initialize(final URL url, final ResourceBundle resourceBundle) {
         this.comTypeJug.getItems().addAll("حكم حضوري", "حكم غيابي", "حكم حضوري إبتدائي نهائي", "حكم غيابي إبتدائي نهائي", "حكم غيابي نهائي", "حكم حضوري نهائي", "حكم إداري", "حكم حضوري اعتباري", "صنف آخر");
         this.comTypeDecision.getItems().addAll("قرار حضوري", "قرار غيابي","قرار إداري","صنف آخر");
         this.comTypeOrder.getItems().addAll("أمر إستعجالي","أمر بإثبات حالة" ,"أمر بحجز تنفيذي على منقول","أمر بحجز تنفيذي على عقار","أمر بحجز تنفيذي على ما للمدين لدى الغير","أمر باستبدال خبير","أمر بالزيارة المؤقتة","أمر باستجواب" ,"أمر أداء","صنف آخر");
+        this.heure.getItems().addAll("08","09","10","11","12","13","14","15","16","17");
+        heure.getSelectionModel().selectFirst();
+        this.minute.getItems().addAll("00","05","10","15","20","25","30","35","40","45","55","55");
+        minute.getSelectionModel().selectFirst();
         for (final Node n : this.stackpane.getChildren()) {
             n.setVisible(false);
         }

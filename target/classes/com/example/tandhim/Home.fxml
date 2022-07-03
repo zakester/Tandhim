@@ -29,13 +29,15 @@
    <children>
       <VBox fx:id="rightMenu" alignment="TOP_CENTER" prefHeight="620.0" prefWidth="256.0" styleClass="optionbar" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/jimmy-fallon.png" />
-               </image>
-               <VBox.margin>
-                  <Insets bottom="10.0" top="50.0" />
-               </VBox.margin></ImageView>
+            <Button alignment="CENTER" contentDisplay="CENTER" minWidth="45.0" mnemonicParsing="false" onAction="#resetImage" prefHeight="125.0" prefWidth="122.0" styleClass="transparent-button1" stylesheets="@css/style1.css">
+               <graphic>
+                  <ImageView fx:id="imgQrCode" fitHeight="124.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/close.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Label fx:id="userNameLabel" text="الأستاذ بن ثامر دحمان" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="20.0" />
@@ -171,6 +173,9 @@
                </font>
             </Button>
          </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
       </VBox>
       <StackPane fx:id="stackPane" layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
          <Pane fx:id="pnlAdd" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css">
@@ -182,7 +187,7 @@
                            <Button fx:id="btnCitation" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تكليف بالحضور لجلسة" wrapText="true" />
                            <Button fx:id="btnOrder" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ أمر" wrapText="true" />
                            <Button fx:id="btnJugement" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ حكم" wrapText="true" />
-                           <Button fx:id="btnJugement1" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ قرار " wrapText="true" />
+                           <Button fx:id="btnJugement1" mnemonicParsing="false" onAction="#addBonInterface" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تبليغ قرار" wrapText="true" />
                            <StackPane fx:id="stpnlFormeExe" onMouseExited="#exitHover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style.css">
                               <children>
                                  <Button fx:id="btnFormeExecutif" mnemonicParsing="false" onMouseEntered="#hover1" prefHeight="78.0" prefWidth="140.0" stylesheets="@css/style1.css" text="تكليف بالوفاء" wrapText="true" />

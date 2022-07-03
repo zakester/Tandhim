@@ -45,10 +45,30 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="42.0" prefWidth="395.0" spacing="30.0">
                      <children>
-                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="محضر التكليف" />
-                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" selected="true" styleClass="button1-pressed" stylesheets="@css/style.css" text="محضر تبليغ التكلي" />
+                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" selected="true" styleClass="button1" stylesheets="@css/style.css" text="محضر التكليف" />
+                        <CheckBox fx:id="checkCitationPv1" mnemonicParsing="false" selected="true" styleClass="button1" stylesheets="@css/style.css" text="محضر تبليغ التكليف" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="20.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="140.0" spacing="4.0">
+                           <children>
+                              <ComboBox fx:id="minute" nodeOrientation="RIGHT_TO_LEFT" onAction="#changeType" prefHeight="3.0" prefWidth="68.0" promptText="دد" style="-fx-text-fill: white; -fx-font-size: 10px;" stylesheets="@css/style.css" />
+                              <ComboBox fx:id="heure" nodeOrientation="RIGHT_TO_LEFT" onAction="#changeType" prefHeight="3.0" prefWidth="68.0" promptText="سا" style="-fx-text-fill: white; -fx-font-size: 10px;" stylesheets="@css/style.css" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="salle" prefHeight="37.0" prefWidth="90.0" promptText="رقم القاعة" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="branche" prefHeight="37.0" prefWidth="90.0" promptText="رقم الفرع" stylesheets="@css/style.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
                      </children>
                   </HBox>
                </children>
@@ -62,14 +82,14 @@
                   </HBox>
                   <HBox fx:id="hboxTypeJugement" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
                      <children>
-                        <TextField fx:id="typeJug" prefHeight="37.0" prefWidth="230.0" promptText="نوع الحكم" stylesheets="@css/style.css">
+                        <TextField fx:id="typeJug" prefHeight="37.0" prefWidth="230.0" promptText="نوع الحكم" stylesheets="@css/style.css" visible="false">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox fx:id="hboxArticleJug" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                  <HBox fx:id="hboxArticleJug" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0" visible="false">
                      <children>
                         <VBox>
                            <children>
@@ -97,14 +117,14 @@
                   </HBox>
                   <HBox fx:id="hboxTypeOrder" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
                      <children>
-                        <TextField fx:id="typeOrder" prefHeight="37.0" prefWidth="230.0" promptText="نوع الأمر" stylesheets="@css/style.css">
+                        <TextField fx:id="typeOrder" prefHeight="37.0" prefWidth="230.0" promptText="نوع الأمر" stylesheets="@css/style.css" visible="false">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox fx:id="hboxOrderArticle" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
+                  <HBox fx:id="hboxOrderArticle" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0" visible="false">
                      <children>
                         <CheckBox fx:id="sansDelai" mnemonicParsing="false" onAction="#checkSelection" selected="true" styleClass="button1" stylesheets="@css/style.css" text="بدون أجل " />
                         <CheckBox fx:id="avecDelai" mnemonicParsing="false" onAction="#checkSelection" styleClass="button1" stylesheets="@css/style.css" text="بأجل 15 يوم" />
@@ -112,7 +132,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="vboxDecision" prefHeight="176.0" prefWidth="395.0" visible="false">
+            <VBox fx:id="vboxDecision" prefHeight="176.0" prefWidth="395.0">
                <children>
                   <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
                      <children>
@@ -121,7 +141,7 @@
                   </HBox>
                   <HBox fx:id="hboxTypeJugement1" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
                      <children>
-                        <TextField fx:id="typeDecision" prefHeight="37.0" prefWidth="230.0" promptText="نوع القرار" stylesheets="@css/style.css">
+                        <TextField fx:id="typeDecision" prefHeight="37.0" prefWidth="230.0" promptText="نوع القرار" stylesheets="@css/style.css" visible="false">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -130,7 +150,12 @@
                   </HBox>
                   <HBox fx:id="hboxDecisionArticle" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
                      <children>
-                        <CheckBox fx:id="article354" mnemonicParsing="false" selected="true" styleClass="button1" stylesheets="@css/style.css" text="طبقا لنص المادة 354" />
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <CheckBox fx:id="article354" mnemonicParsing="false" selected="true" styleClass="button1" stylesheets="@css/style.css" text="طبقا لنص المادة 354" />
+                              <CheckBox fx:id="article954" mnemonicParsing="false" selected="true" styleClass="button1" stylesheets="@css/style.css" text="طبقا لنص المادة 954" />
+                           </children>
+                        </VBox>
                         <CheckBox fx:id="article329_355_354" mnemonicParsing="false" styleClass="button1" stylesheets="@css/style.css" text="طبقا لنص المادة 329، 355، 354" />
                      </children>
                   </HBox>
@@ -164,7 +189,7 @@
                   <TextArea nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="200.0" promptText="الرجاء إدخال مضمون الطلب / الأمر " stylesheets="@css/style.css" />
                </children>
             </VBox>
-            <VBox fx:id="vboxObligation" prefHeight="176.0" prefWidth="395.0">
+            <VBox fx:id="vboxObligation" prefHeight="176.0" prefWidth="395.0" visible="false">
                <children>
                   <HBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="5.0">
                      <children>

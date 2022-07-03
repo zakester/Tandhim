@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="620.0" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="620.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="620.0" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="620.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tandhim.LoginController">
    <effect>
       <DropShadow color="#1b1eeb" />
    </effect>
@@ -62,7 +62,7 @@
                   <Font size="16.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="password" prefHeight="37.0" promptText="كلمة المرور" stylesheets="@css/style.css">
+            <PasswordField fx:id="password" onKeyReleased="#okPressed" prefHeight="37.0" promptText="كلمة المرور" stylesheets="@css/style.css">
                <font>
                   <Font size="16.0" />
                </font>

@@ -30,5 +30,9 @@ public final class DOCXModels {
     public static final String order_4 = "order-4";
     public static final String order_5_1 = "order-5-1";
     public static final String order_5 = "order-5";
+    public static final String citation_1 = "citation-1";
+    public static final String demeur_1 = "demeur-1";
+    public static final String citation_1_1 = "citation-1-1";
+    public static final String demeur_1_1 = "demeur-1-1";
 
 }

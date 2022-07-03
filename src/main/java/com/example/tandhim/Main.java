@@ -46,6 +46,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException {
+
         HashMap<String, String> marginInformation = new HashMap<>() {{
            put("@huiss", "حمزة حاج عمار");
            put("@wilaya", "البليدة");

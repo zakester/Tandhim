@@ -33,7 +33,23 @@ public class BDConnection {
             = "com.mysql.jdbc.Driver";
     static final String DB_USER = "root";
     static final String DB_PASSWD = "";
+    public static String getMySqlServerAddress(){
+        if(host.equals("localhost") || host.equals("127.0.0.1")){
+            InetAddress localhost;
+            String ipr = "";
+            try {
+                localhost = InetAddress.getLocalHost();
+                ipr = localhost.getHostAddress() ;
+                return ipr;
+            }catch (Exception e){
 
+            }
+
+            }else{
+            return host;
+        }
+        return null;
+    }
     // Converts IP address to the binary form
     private static int[] bina(String[] str) {
         int re[] = new int[32];

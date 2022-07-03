@@ -5,6 +5,8 @@
  */
 package com.example.tandhim;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -12,6 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.example.tandhim.Models.BDConnection;
@@ -26,7 +31,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import static com.example.tandhim.Models.impression.getQRCode;
 
 public class LoginController implements Initializable {
 
@@ -43,16 +51,25 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            generateQRCode();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-    public void Login(ActionEvent e) throws IOException {
+    private void generateQRCode() throws IOException {
+        String path = String.format("src/main/resources/com/example/tandhim/img/Qrcode.png");
+        File outQRCode = new File(path);
+        BufferedImage bufferedQRCode = getQRCode(BDConnection.getMySqlServerAddress(), 150, 150);
+        ImageIO.write(bufferedQRCode, "png", outQRCode);
+    }
+    public void Login() throws IOException {
         if (userName.getText().equals("") || password.getText().equals("")){
             JOptionPane op = new JOptionPane();
             op.showMessageDialog(null, "إسم المستخدم أو كلمة المرور خاطئة2222");
             return ;
         }
         BDConnection.findMySqlServer();
-
         Connection bd = BDConnection.getConnection();
         String query = "SELECT * FROM users WHERE username='" + userName.getText() + "' LIMIT 1";
 
@@ -90,7 +107,15 @@ public class LoginController implements Initializable {
 
 
     }
-
+    public void okPressed (KeyEvent key) {
+        if (key.getCode().equals(KeyCode.ENTER)) {
+            try {
+                Login();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void Close() {
         Stage stage = (Stage) btnLogin.getScene().getWindow();
         stage.close();
