@@ -34,5 +34,11 @@ public final class DOCXModels {
     public static final String demeur_1 = "demeur-1";
     public static final String citation_1_1 = "citation-1-1";
     public static final String demeur_1_1 = "demeur-1-1";
+    public static final String obligation_1_1 = "obligation-1-1";
+    public static final String obligation_1 = "obligation-1";
+    public static final String obligation_2_1 = "obligation-2-1";
+    public static final String obligation_2 = "obligation-2";
+    public static final String obligation_3_1 = "obligation-3-1";
+    public static final String obligation_3 = "obligation-3";
 
 }

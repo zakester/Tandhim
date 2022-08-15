@@ -60,7 +60,7 @@ public class LoginController implements Initializable {
     private void generateQRCode() throws IOException {
         String path = String.format("src/main/resources/com/example/tandhim/img/Qrcode.png");
         File outQRCode = new File(path);
-        BufferedImage bufferedQRCode = getQRCode(BDConnection.getMySqlServerAddress(), 150, 150);
+        BufferedImage bufferedQRCode = getQRCode("http://"+BDConnection.getMySqlServerAddress()+":80", 150, 150);
         ImageIO.write(bufferedQRCode, "png", outQRCode);
     }
     public void Login() throws IOException {
@@ -102,9 +102,6 @@ public class LoginController implements Initializable {
         } catch (Exception exp) {
             exp.printStackTrace();
         }
-
-
-
 
     }
     public void okPressed (KeyEvent key) {

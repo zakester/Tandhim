@@ -214,6 +214,68 @@ public class PrintPvController implements Initializable
         pvData.add(modelInformation);
         return pvData;
     }
+    public ArrayList PrintObligation(){
+        final EditBonSearch result = new EditBonSearch(this.numBon);
+        ArrayList <Object> pvData = new ArrayList();
+        if (checkContent.isSelected()&&checkMontant.isSelected()){
+            if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.obligation_2_1);
+            else pvData.add(DOCXModels.obligation_2);
+        } else {
+            if (checkMontant.isSelected()){
+                if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.obligation_1_1);
+                else pvData.add(DOCXModels.obligation_1);
+            }
+            if (checkContent.isSelected()){
+                if (checkTypeMorale.isSelected()) pvData.add(DOCXModels.obligation_3_1);
+                else pvData.add(DOCXModels.obligation_3);
+            }
+        }
+        String oblig =labelOblig.getText().replace("المطلوب ضده :","");
+        String [] obl = oblig.split(" العنوان: ");
+        HashMap<String, String> marginInformation = new HashMap<>() {{
+            put("@huiss", "بن ثامر دحمان");
+            put("@wilaya", "البليدة");
+            put("@adrHuiss", "شارع 11 ديسمبر 1960 البليدة )مقابل مجلس قضاء البليدة(");
+        }};
+        pvData.add(marginInformation);
+        BonProvisions bon = result.getBonProvisionsData();
+        NotificationFidelite notif = result.getNotificationFidelité();
+        ArrayList<Demandeur> dem = result.getDemandeurList();
+        String demandeur = "";
+        int i=1;
+        for (Demandeur d:dem) {
+            demandeur +=i+"/ "+ d.getNom()+" العنوان: "+d.getAddr()+" ";
+        }
+        String finalDemandeur = demandeur;
+        HashMap<String, String> modelInformation = new HashMap<>() {{
+            put("@demandeur", finalDemandeur);
+            put("@text", contentArea.getText());
+            put("@montant-1", montant.getText());
+            put("@montant2", PriceArabicSpell.SpellCombine(montant.getText()));
+            put("@droit-propo", droitPropo.getText());
+            put("@droit-propo2", PriceArabicSpell.SpellCombine(droitPropo.getText()));
+            put("@charges", charge.getText());
+            put("@charges2", PriceArabicSpell.SpellCombine(charge.getText()));
+            put("@totale", totale.getText());
+            put("@totale2", PriceArabicSpell.SpellCombine(totale.getText()));
+            put("@text1", ObligationArea.getText());
+            put("@demandeur", finalDemandeur);
+            put("@num_notif", notif.getNum());
+            put("@date_notif", notif.getDate());
+            put("@type_prov", bon.getType());
+            put("@commission", bon.getCommission());
+            put("@spec", bon.getSpec());
+            put("@year", "اثنان وعشرون");
+            put("@table", bon.getNum_table());
+            put("@indice", bon.getNum_indice());
+            put("@obligatoire", obl[0]);
+            put("@address", obl[1]);
+            put("@num_bon", numBon);
+            put("@date", bon.getDate());
+        }};
+        pvData.add(modelInformation);
+        return pvData;
+    }
     public ArrayList PrintExcuse(){
         final EditBonSearch result = new EditBonSearch(this.numBon);
         ArrayList <Object> pvData = new ArrayList();
@@ -382,6 +444,14 @@ public ArrayList PrintDecision(){
 
         final EditBonSearch result = new EditBonSearch(this.numBon);
         if (typePv.getText().equals("محضر تكليف بالوفاء بموجب سند قضائي")) {
+            Print2Word print2Word = null;
+            ArrayList pvdata = PrintObligation();
+            try {
+                print2Word = new Print2Word((String) pvdata.get(0),(HashMap<String, String>) pvdata.get(1),(HashMap<String, String>) pvdata.get(2), rank);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            print2Word.replaceParameters();
 
             }
         if (typePv.getText().equals("محضر تكليف بالحضور لجلسة")) {

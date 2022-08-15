@@ -132,7 +132,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="vboxDecision" prefHeight="176.0" prefWidth="395.0">
+            <VBox fx:id="vboxDecision" prefHeight="176.0" prefWidth="395.0" visible="false">
                <children>
                   <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="395.0" spacing="30.0">
                      <children>
@@ -189,7 +189,7 @@
                   <TextArea nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="200.0" promptText="الرجاء إدخال مضمون الطلب / الأمر " stylesheets="@css/style.css" />
                </children>
             </VBox>
-            <VBox fx:id="vboxObligation" prefHeight="176.0" prefWidth="395.0" visible="false">
+            <VBox fx:id="vboxObligation" prefHeight="176.0" prefWidth="395.0">
                <children>
                   <HBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="5.0">
                      <children>

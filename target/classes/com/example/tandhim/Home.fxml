@@ -178,7 +178,7 @@
          </padding>
       </VBox>
       <StackPane fx:id="stackPane" layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
-         <Pane fx:id="pnlAdd" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <Pane fx:id="pnlAdd" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
             <children>
                <VBox layoutX="19.0" layoutY="149.0" prefHeight="382.0" prefWidth="754.0" spacing="15.0">
                   <children>
@@ -364,7 +364,7 @@
                </ScrollPane>
             </children>
          </Pane>
-         <Pane fx:id="pnlStats" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
+         <Pane fx:id="pnlStats" minHeight="620.0" prefHeight="620.0" prefWidth="200.0" styleClass="Anchor" stylesheets="@css/style.css">
             <children>
                <HBox layoutX="37.0" layoutY="83.0" prefHeight="76.0" prefWidth="720.0" spacing="5.0">
                   <children>
@@ -442,7 +442,7 @@
                               </columns>
                            </TableView>
                         </children></Pane>
-                     <Pane fx:id="pnlStatsBon">
+                     <Pane fx:id="pnlStatsBon" visible="false">
                         <children>
                            <StackPane>
                               <children>
@@ -486,7 +486,7 @@
                            </StackPane>
                         </children>
                      </Pane>
-                     <Pane fx:id="pnlStatsFinance" prefHeight="200.0" prefWidth="200.0">
+                     <Pane fx:id="pnlStatsFinance" prefHeight="200.0" prefWidth="200.0" visible="false">
                         <children>
                            <PieChart fx:id="pieChartPrice" prefHeight="310.0" prefWidth="382.0" stylesheets="@css/style.css" />
                            <PieChart fx:id="pieChartCount" layoutX="400.0" prefHeight="310.0" prefWidth="310.0" stylesheets="@css/style.css" />
@@ -528,7 +528,7 @@
                </Label>
             </children>
          </Pane>
-         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css">
+         <Pane fx:id="pnlEdit" minHeight="620.0" prefHeight="620.0" prefWidth="793.0" styleClass="Anchor" stylesheets="@css/style.css" visible="false">
             <children>
                <Pane layoutX="37.0" layoutY="120.0" prefHeight="340.0" prefWidth="720.0">
                   <children>
