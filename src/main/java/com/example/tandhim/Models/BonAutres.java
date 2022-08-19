@@ -60,4 +60,26 @@ public class BonAutres extends Bon{
 
         return false;
     }
+
+    @Override
+    public String getNum_bon() {
+        return num_bon;
+    }
+
+    public String getType_pv() {
+        return type_pv;
+    }
+
+    public String getJoint_table() {
+        return joint_table;
+    }
+
+    @Override
+    public int getPrix() {
+        return prix;
+    }
+
+    public int getSomme() {
+        return somme;
+    }
 }

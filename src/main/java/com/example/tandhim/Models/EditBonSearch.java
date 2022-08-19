@@ -83,7 +83,42 @@ public class EditBonSearch {
     public String getId() {
         return id;
     }
+    public OrderFile getJointOrder(){
+        String query = "SELECT  num_order,date_order,commission,spec,type_order  FROM orders WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
 
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                OrderFile bon = new OrderFile(id, rs.getString("num_order"), rs.getString("date_order"), rs.getString("commission"), rs.getString("spec"), rs.getString("type_order"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public BonAutres getBonAutre() {
+        String query = "SELECT prix,joint_table,type_pv,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = bd.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("yes it found it");
+                BonAutres bon = new BonAutres(id, rs.getString("type_pv"), rs.getString("joint_table"),rs.getInt("prix"), rs.getInt("somme"));
+                return bon;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public BonSeances getBonData() {
             System.out.println(Service);
             String query = "SELECT prix,num_seance,type,commission,date_seance,date_report,date_report2,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
@@ -379,7 +414,6 @@ public class EditBonSearch {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return a;
     }
 

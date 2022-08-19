@@ -1309,6 +1309,15 @@ public class Controller implements Initializable {
                 }
             }
 
+            if (result.getService().equals("bon_autres")) {
+                BonAutres bon = result.getBonAutre();
+                System.out.println(bon);
+                    typeArea.setText(bon.getType_pv());
+                if (bon.getJoint_table().equals("orders")) {
+                    OrderFile order = result.getJointOrder();
+                    typeArea.setText(typeArea.getText()+" بموجب : "+order.getTypeOrder()+" الصادر عن "+order.getCommission()+" بتاريخ: "+ order.getDateOrder()+" تحت رقم: "+order.getNumOrder());
+                }
+            }
             if (result.getService().equals("bon_seances")) {
                 System.out.println(result.getBonData());
                 BonSeances bon = result.getBonData();
@@ -1529,6 +1538,41 @@ public class Controller implements Initializable {
             }
             fillBonSceance(result);
         }
+        if (result.getService().equals("bon_autres"))
+        {
+            BonAutres bon = result.getBonAutre();
+            ActionEvent actionEvent=null;
+            if (bon.getType_pv().equals("حجز على منقول")) {
+                 actionEvent = new ActionEvent(btnSaisieMob, null);
+            }
+            if (bon.getType_pv().equals("حجز على ما للمدين لدى الغير")) {
+                 actionEvent = new ActionEvent(btnSaisieCpt, null);
+            }
+            if (bon.getType_pv().equals("حجز على عقار")) {
+                 actionEvent = new ActionEvent(btnSaisieImmob, null);
+            }
+            if (bon.getType_pv().equals("حساب فردي")) {
+                 actionEvent = new ActionEvent(btnCalculeIndiv, null);
+            }
+            if (bon.getType_pv().equals("حساب مشترك")) {
+                 actionEvent = new ActionEvent(btnCalculeCollect, null);
+            }
+            if (bon.getType_pv().equals("جرد")) {
+                 actionEvent = new ActionEvent(btnJard, null);
+            }
+            if (bon.getType_pv().equals("إشهاد")) {
+                 actionEvent = new ActionEvent(btnRecip, null);
+            }
+            e=actionEvent;
+            try {
+                addBonInterface(e);
+                hboxEditBon.setVisible(true);
+                hboxAddBon.setVisible(false);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            fillBonAutre(result);
+        }
         if (result.getService().equals("bon_provisions") && result.isNotificationFidelité())
         {
             e = new ActionEvent(btnFormeJudiciere, null);
@@ -1676,6 +1720,26 @@ public class Controller implements Initializable {
 
 
 
+    }
+    public void fillBonAutre(EditBonSearch result) {
+        ClearAddInterface();
+        BonAutres bon =result.getBonAutre();
+        num_bon.setText(bon.getNum_bon());
+        if (result.getObligatoireList()!=null) {
+            obligList.getItems().addAll(FXCollections.observableArrayList(result.getObligatoireList()));
+        }
+        demList.getItems().addAll(FXCollections.observableArrayList(result.getDemandeurList()));
+        if (bon.getJoint_table().equals("orders")){
+            OrderFile order = result.getJointOrder();
+            ComCtrl.setCom_NomCommission(order.getCommission());
+            ComCtrl.setComType(order.getSpec());
+            OrderCtrl.setNumOrder(order.getNumOrder());
+            OrderCtrl.setDateOrder(order.getDateOrder());
+            OrderCtrl.setComTypeOrder(order.getTypeOrder());
+        }
+        prix.setText(""+bon.getSomme());
+        taxe_supp.setText("0");
+        taxe_fixe.setText(""+bon.getPrix());
     }
     public void fillBonSceance(EditBonSearch result) {
         ClearAddInterface();
@@ -1997,6 +2061,36 @@ public class Controller implements Initializable {
                     obl.delete();
                 }
 
+            }
+        }
+        if (result.getService().equals("bon_autres")){
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                  alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+            BonAutres bon = new BonAutres(num_bon.getText(),bonType,result.getBonAutre().getJoint_table(),prix,somme);
+
+            if (bon.getJoint_table().equals("orders")){
+                OrderFile order = new OrderFile(num_bon.getText(), OrderCtrl.getNumOrder(), OrderCtrl.getDateOrder(), ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(), ComCtrl.getComType(), OrderCtrl.getComTypeOrder());
+                order.update();
+            }
+            bon.update();
+            for (Demandeur dem :demToAdd) {
+                dem.insert();
+            }
+            for (Obligatoire obl:obligToAdd) {
+                obl.insert();
+            }
+            for (Demandeur dem :demToDelete) {
+                dem.delete();
+            }
+            for (Obligatoire obl:obligToDelete) {
+                obl.delete();
             }
         }
         if (result.getService().equals("bon_provisions")&& !result.isNotificationFidelité()){
