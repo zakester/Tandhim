@@ -38,7 +38,7 @@ public class OtherFile {
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
-            String query = "UPDATE actes SET  type_fichier='" + typeFile + "', date_marquage='" + dateMarquage + "', langue='" + langue + "' WHERE num_bon='" + numBon + "';";
+            String query = "UPDATE fichiers SET  type_fichier='" + typeFile + "', date_marquage='" + dateMarquage + "', langue='" + langue + "' WHERE num_bon='" + numBon + "';";
             PreparedStatement preparedStmt = bd.prepareStatement(query);
             int id = preparedStmt.executeUpdate();
             if (id >= 1) {

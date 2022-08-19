@@ -90,7 +90,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<BonStats.bonStatsExeRow, String> colNumBonExe, colCommissionExe, colObligatoireExe, colTypeExe, colCreatedAtExe, colStatusExe, colDateExe;
     @FXML
-    private Button btnNotif,btnEnableEdit,btnCalculeIndiv,btnCalculeCollect,btnCalcule;
+    private Button btnNotif,btnEnableEdit,btnCalculeIndiv,btnCalculeCollect,btnCalcule,btnRecip,btnConstatAutre,btnSaisieMob,btnSaisieCpt,btnSaisieImmob,btnDemandeExp,btnStatExp;
     @FXML
     private StackPane stpnlFormeExe, stpnlStatsBon,StackPaneStats;
     @FXML
@@ -569,6 +569,7 @@ public class Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("orders.fxml"));
             Parent p = (Parent) loader.load();
             OrderCtrl = loader.getController();
+            OrderCtrl.setContatOrder();
             vboxFormePrincipale.getChildren().add(p);
             FXMLLoader loader1 = new FXMLLoader(getClass().getResource("commission.fxml"));
             Parent p1 = (Parent) loader1.load();
@@ -584,16 +585,78 @@ public class Controller implements Initializable {
             hboxOblig.setVisible(false);
             hboxOblig2.setVisible(false);
         }
-        if (e.getSource() == btnJard) {
+        if ((e.getSource() == btnJard)||(e.getSource() == btnRecip)||(e.getSource() == btnConstatAutre)) {
             hboxAddBon.setVisible(true);
             hboxEditBon.setVisible(false);
-            bonText.setText(btnJard.getText());
+            bonText.setText(((Button)e.getSource()).getText());
             pnlAdd2.toFront();
             pnlAdd2.setVisible(true);
             hboxOblig.setVisible(false);
             hboxOblig2.setVisible(false);
         }
-
+        if ((e.getSource() == btnCalculeCollect)||(e.getSource() == btnCalculeIndiv)) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
+            bonText.setText(((Button)e.getSource()).getText());
+            pnlAdd2.toFront();
+            pnlAdd2.setVisible(true);
+            hboxOblig.setVisible(true);
+            hboxOblig2.setVisible(true);
+        }
+        if (e.getSource() == btnSaisieMob) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
+            bonText.setText(btnSaisieMob.getText());
+            pnlAdd2.toFront();
+            pnlAdd2.setVisible(true);
+            hboxOblig.setVisible(true);
+            hboxOblig2.setVisible(true);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("orders.fxml"));
+            Parent p = (Parent) loader.load();
+            OrderCtrl = loader.getController();
+            OrderCtrl.setSaisieOrderMob();
+            vboxFormePrincipale.getChildren().add(p);
+            FXMLLoader loader1 = new FXMLLoader(getClass().getResource("commission.fxml"));
+            Parent p1 = (Parent) loader1.load();
+            ComCtrl = loader1.getController();
+            vboxFormePrincipale.getChildren().add(p1);
+        }
+        if (e.getSource() == btnSaisieImmob) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
+            bonText.setText(btnSaisieImmob.getText());
+            pnlAdd2.toFront();
+            pnlAdd2.setVisible(true);
+            hboxOblig.setVisible(true);
+            hboxOblig2.setVisible(true);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("orders.fxml"));
+            Parent p = (Parent) loader.load();
+            OrderCtrl = loader.getController();
+            OrderCtrl.setSaisieOrderImmob();
+            vboxFormePrincipale.getChildren().add(p);
+            FXMLLoader loader1 = new FXMLLoader(getClass().getResource("commission.fxml"));
+            Parent p1 = (Parent) loader1.load();
+            ComCtrl = loader1.getController();
+            vboxFormePrincipale.getChildren().add(p1);
+        }
+        if (e.getSource() == btnSaisieCpt) {
+            hboxAddBon.setVisible(true);
+            hboxEditBon.setVisible(false);
+            bonText.setText(btnSaisieCpt.getText());
+            pnlAdd2.toFront();
+            pnlAdd2.setVisible(true);
+            hboxOblig.setVisible(true);
+            hboxOblig2.setVisible(true);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("orders.fxml"));
+            Parent p = (Parent) loader.load();
+            OrderCtrl = loader.getController();
+            OrderCtrl.setSaisieOrderCpt();
+            vboxFormePrincipale.getChildren().add(p);
+            FXMLLoader loader1 = new FXMLLoader(getClass().getResource("commission.fxml"));
+            Parent p1 = (Parent) loader1.load();
+            ComCtrl = loader1.getController();
+            vboxFormePrincipale.getChildren().add(p1);
+        }
     }
 
     public void typeFormeExeItemChanged1(String s) throws IOException {
@@ -815,11 +878,70 @@ public class Controller implements Initializable {
             alert.showAndWait();
             return;
         }
+        if (bonType.equals("حجز على منقول")|| bonType.equals("حجز على ما للمدين لدى الغير")|| bonType.equals("حجز على عقار")) {
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonAutres bon = new BonAutres(num_bon.getText(),bonType,"orders",prix,somme);
+            OrderFile order = new OrderFile(num_bon.getText(),OrderCtrl.getNumOrder(),OrderCtrl.getDateOrder(),ComCtrl.getComCommission() + " : " + ComCtrl.getComNomCommission(),ComCtrl.getComType(),OrderCtrl.getComTypeOrder());
+            if (order.validate()) {
+                order.insert();
+                bon.insert();
+                id.increment();
+                for (int i = 0; i < demList.getItems().size(); i++) {
+                    String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                    Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                    d.insert();
+                    btnCreatePV.setDisable(false);
+                }
+
+                for (int i = 0; i < obligList.getItems().size(); i++) {
+                    String[] a = obligList.getItems().get(i).toString().split(" العنوان: ");
+                    Obligatoire d = new Obligatoire(a[0], a[1], num_bon.getText(), null, null, 0);
+                    d.insert();
+                }
+            }
+        }
+        if (bonType.equals("حساب فردي")|| bonType.equals("حساب مشترك")) {
+            if (obligList.getItems().size() < 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = alert.getDialogPane();
+                alert.setTitle("خطأ في الإدخال");
+                alert.setContentText(
+                        "قائمة المطلوبين فارغة");
+                alert.showAndWait();
+                return;
+            }
+
+            BonAutres bon = new BonAutres(num_bon.getText(),bonType,"none",prix,somme);
+            bon.insert();
+            id.increment();
+            for (int i = 0; i < demList.getItems().size(); i++) {
+                String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                d.insert();
+                btnCreatePV.setDisable(false);
+            }
+
+            for (int i = 0; i < obligList.getItems().size(); i++) {
+                String[] a = obligList.getItems().get(i).toString().split(" العنوان: ");
+                Obligatoire d = new Obligatoire(a[0], a[1], num_bon.getText(), null, null, 0);
+                d.insert();
+            }
+
+        }
         if (bonType.equals("تكليف بالحضور لجلسة")) {
             if (obligList.getItems().size() < 1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = alert.getDialogPane();
-                  alert.setTitle("خطأ في الإدخال");
+                alert.setTitle("خطأ في الإدخال");
                 alert.setContentText(
                         "قائمة المطلوبين فارغة");
                 alert.showAndWait();
@@ -1104,15 +1226,26 @@ public class Controller implements Initializable {
         }
         if (bonType.equals("حضور جمعية عامة")) {
             BonAssociations bon = new BonAssociations(num_bon.getText(), prix, somme);
-                bon.insert();
-                id.increment();
-                for (int i = 0; i < demList.getItems().size(); i++) {
-                    String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
-                    Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
-                    d.insert();
-                    btnCreatePV.setDisable(false);
+            bon.insert();
+            id.increment();
+            for (int i = 0; i < demList.getItems().size(); i++) {
+                String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                d.insert();
+                btnCreatePV.setDisable(false);
 
-                }
+            }
+        }
+        if (bonType.equals("جرد")||bonType.equals("إشهاد")) {
+            BonAutres bon = new BonAutres(num_bon.getText(),bonType,"none",prix,somme);
+            bon.insert();
+            id.increment();
+            for (int i = 0; i < demList.getItems().size(); i++) {
+                String[] a = demList.getItems().get(i).toString().split(" العنوان: ");
+                Demandeur d = new Demandeur(a[0], a[1], num_bon.getText());
+                d.insert();
+                btnCreatePV.setDisable(false);
+            }
         }
 
 

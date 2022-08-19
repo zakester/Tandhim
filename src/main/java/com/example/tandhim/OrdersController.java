@@ -40,6 +40,22 @@ public class OrdersController implements Initializable{
         comTypeOrder.getItems().addAll("أمر إستعجالي","أمر بإثبات حالة" ,"أمر بحجز تنفيذي على منقول","أمر بحجز تنفيذي على عقار","أمر بحجز تنفيذي على ما للمدين لدى الغير","أمر باستبدال خبير","أمر بالزيارة المؤقتة","أمر باستجواب" ,"أمر أداء");
         comTypeOrder.getSelectionModel().selectFirst();
     }
+    public void setContatOrder(){
+        comTypeOrder.getSelectionModel().select("أمر بإثبات حالة");
+        comTypeOrder.setDisable(true);
+    }
+    public void setSaisieOrderMob(){
+        comTypeOrder.getSelectionModel().select("أمر بحجز تنفيذي على منقول");
+        comTypeOrder.setDisable(true);
+    }
+    public void setSaisieOrderImmob(){
+        comTypeOrder.getSelectionModel().select("أمر بحجز تنفيذي على عقار");
+        comTypeOrder.setDisable(true);
+    }
+    public void setSaisieOrderCpt(){
+        comTypeOrder.getSelectionModel().select("أمر بحجز تنفيذي على ما للمدين لدى الغير");
+        comTypeOrder.setDisable(true);
+    }
     public String getNumOrder() {
         return numOrder.getText();
     }
