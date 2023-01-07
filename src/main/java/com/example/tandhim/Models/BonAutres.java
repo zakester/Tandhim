@@ -13,15 +13,17 @@ import java.sql.SQLException;
  *
  * @author DELL
  */
-public class BonAutres extends Bon{
-    String num_bon,type_pv,joint_table; int prix,somme;
-    public BonAutres(String num_bon,String type_pv,String joint_table, int prix, int somme) {
+public class BonAutres extends Bon {
+    String num_bon, type_pv, joint_table, status, date_fin;
+    int prix, somme;
+
+    public BonAutres(String num_bon, String type_pv, String joint_table, int prix, int somme) {
         super(num_bon, prix);
-        this.num_bon=num_bon;
-        this.prix=prix;
-        this.somme=somme;
-        this.type_pv=type_pv;
-        this.joint_table=joint_table;
+        this.num_bon = num_bon;
+        this.prix = prix;
+        this.somme = somme;
+        this.type_pv = type_pv;
+        this.joint_table = joint_table;
 
     }
 
@@ -45,6 +47,7 @@ public class BonAutres extends Bon{
 
         return false;
     }
+
     public boolean update() {
         try {
             Connection bd = BDConnection.getConnection();
@@ -81,5 +84,41 @@ public class BonAutres extends Bon{
 
     public int getSomme() {
         return somme;
+    }
+
+    @Override
+    public String getDate_fin() {
+        return date_fin;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setType_pv(String type_pv) {
+        this.type_pv = type_pv;
+    }
+
+    public void setJoint_table(String joint_table) {
+        this.joint_table = joint_table;
+    }
+
+    @Override
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public void setDate_fin(String date_fin) {
+        this.date_fin = date_fin;
+    }
+
+    @Override
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+
+    public void setSomme(int somme) {
+        this.somme = somme;
     }
 }

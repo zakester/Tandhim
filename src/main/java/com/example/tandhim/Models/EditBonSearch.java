@@ -102,7 +102,7 @@ public class EditBonSearch {
         return null;
     }
     public BonAutres getBonAutre() {
-        String query = "SELECT prix,joint_table,type_pv,somme  FROM "+getService()+" WHERE num_bon='" + id + "'";
+        String query = "SELECT prix,joint_table,type_pv,somme,status,date_fin  FROM "+getService()+" WHERE num_bon='" + id + "'";
         Statement st;
         ResultSet rs;
         try {
@@ -112,6 +112,8 @@ public class EditBonSearch {
             while (rs.next()) {
                 System.out.println("yes it found it");
                 BonAutres bon = new BonAutres(id, rs.getString("type_pv"), rs.getString("joint_table"),rs.getInt("prix"), rs.getInt("somme"));
+                bon.setStatus(rs.getString("status"));
+                bon.setDate_fin(rs.getString("date_fin"));
                 return bon;
             }
         } catch (Exception e) {

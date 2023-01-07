@@ -1316,6 +1316,8 @@ public class Controller implements Initializable {
                 if (bon.getJoint_table().equals("orders")) {
                     OrderFile order = result.getJointOrder();
                     typeArea.setText(typeArea.getText()+" بموجب : "+order.getTypeOrder()+" الصادر عن "+order.getCommission()+" بتاريخ: "+ order.getDateOrder()+" تحت رقم: "+order.getNumOrder());
+                    statusArea.setText(bon.getStatus()+" بتاريخ : "+bon.getDate_fin());
+                    editBonStatus.setText(bon.getStatus());
                 }
             }
             if (result.getService().equals("bon_seances")) {
@@ -1370,9 +1372,18 @@ public class Controller implements Initializable {
                 typeArea.setText("تكليف بالوفاء بموجب : " + bon.getType() + " رقم : " + bon.getNum() + " بتاريخ: " + bon.getDate() + " لدى: " + bon.getNomNotaire());
             }
             if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associations"))) {
-                Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
-                editBonStatus.setText(obl.getStatus());
-                statusArea.setText(obl.OblStatus());
+                if (result.getService().equals("bon_autres")&&(result.getBonAutre().getType_pv().equals("الجرد")||result.getBonAutre().getType_pv().equals("إشهاد")||result.getBonAutre().getType_pv().equals("إثبات الحالة (أخرى)"))){
+                    for (Demandeur dem : result.getDemandeurList()) {
+                        String s = dem.getNom() + " العنوان : " + dem.getAddr();
+                        EditComObligList.getItems().add(s);
+                        EditComObligList.getSelectionModel().selectFirst();
+                    }
+                }
+                else{
+                    Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
+                    editBonStatus.setText(obl.getStatus());
+                    statusArea.setText(obl.OblStatus());
+                }
 
             }
             else
@@ -1445,9 +1456,11 @@ public class Controller implements Initializable {
     public void UpdateStatus() {
         EditBonSearch result = new EditBonSearch(editNumBon.getText());
         if ((!result.getService().equals("bon_apercus")) && (!result.getService().equals("bon_apercu_parorders")) && (!result.getService().equals("bon_associations"))) {
-            Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
-            editBonStatus.setText(obl.getStatus());
-            statusArea.setText(obl.OblStatus());
+            if (result.getService().equals("bon_autres")&&!(result.getBonAutre().getType_pv().equals("الجرد")||result.getBonAutre().getType_pv().equals("إشهاد")||result.getBonAutre().getType_pv().equals("إثبات الحالة (أخرى)"))){
+                Obligatoire obl = result.getObligatoireList().get(EditComObligList.getSelectionModel().getSelectedIndex());
+                editBonStatus.setText(obl.getStatus());
+                statusArea.setText(obl.OblStatus());
+            }
         }
         if (result.isNotificationFidelité() || result.getService().equals("bon_acte")){
             if (editBonStatus.getText().equals("تم التبليغ") || editBonStatus.getText().equals("تم إرسال رسالة")|| editBonStatus.getText().equals("تم التعليق")) {

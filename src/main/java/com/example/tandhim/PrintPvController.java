@@ -17,17 +17,12 @@ import javafx.scene.Node;
 import java.util.ResourceBundle;
 import java.net.URL;
 import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.fxml.Initializable;
 
 public class PrintPvController implements Initializable
@@ -37,110 +32,189 @@ public class PrintPvController implements Initializable
     private Label typePv;
     @FXML
     private Label labelOblig;
+
     @FXML
     private TextField avocat;
+
     @FXML
     private CheckBox checkTypePhysique;
+
     @FXML
     private CheckBox checkTypeMorale;
+
     @FXML
     private StackPane stackpane;
+
     @FXML
     private VBox vboxCitation;
+
     @FXML
     private TextField typeReq;
+
     @FXML
     private CheckBox checkCitationPv1;
+
+    @FXML
+    private ComboBox<String> minute;
+
+    @FXML
+    private ComboBox<String> heure;
+
+    @FXML
+    private TextField salle;
+
+    @FXML
+    private TextField branche;
+
     @FXML
     private VBox vboxJugement;
+
     @FXML
     private ComboBox<String> comTypeJug;
-    @FXML
-    private HBox hboxTypeJugement;
+
     @FXML
     private TextField typeJug;
-    @FXML
-    private CheckBox arcticle329_336;
-    @FXML
-    private CheckBox arcticle336;
-    @FXML
-    private CheckBox article954;
-    @FXML
-    private CheckBox arcticle349_354;
-    @FXML
-    private CheckBox arcticle950;
-    @FXML
-    private CheckBox arcticle329_349_354;
-    @FXML
-    private VBox vboxOrder;
-    @FXML
-    private ComboBox<String> comTypeOrder;
-    @FXML
-    private HBox hboxTypeOrder;
-    @FXML
-    private TextField typeOrder;
-    @FXML
-    private HBox hboxDecisionArticle1;
-    @FXML
-    private CheckBox sansDelai;
-    @FXML
-    private CheckBox avecDelai,checkAttached;
-    @FXML
-    private VBox vboxDecision;
-    @FXML
-    private ComboBox<String> comTypeDecision,heure,minute;
-    @FXML
-    private HBox hboxTypeJugement1;
-    @FXML
-    private TextField typeDecision;
-    @FXML
-    private HBox hboxDecisionArticle;
-    @FXML
-    private CheckBox article354;
-    @FXML
-    private CheckBox article329_355_354;
-    @FXML
-    private VBox vboxExcuse;
-    @FXML
-    private HBox hboxTypeJugement11;
-    @FXML
-    private TextField langueExcuse,salle,branche;
-    @FXML
-    private TextField droitPropo;
-    @FXML
-    private TextField totale;
-    @FXML
-    private CheckBox article3541;
-    @FXML
-    private HBox hboxTypeJugement111;
-    @FXML
-    private TextField nbrPages;
-    @FXML
-    private VBox vboxConstat;
-    @FXML
-    private TextArea contentArea;
-    @FXML
-    private VBox vboxObligation;
-    @FXML
-    private TextArea contentExeArea;
-    @FXML
-    private CheckBox checkContent;
-    @FXML
-    private CheckBox checkMontant;
-    @FXML
-    private TextField montant;
-    @FXML
-    private TextField charge;
-    @FXML
-    private TextArea ObligationArea;
-    @FXML
-    private HBox hboxStatus1;
+
     @FXML
     private HBox hboxArticleJug;
+
+    @FXML
+    private CheckBox arcticle329_336;
+
+    @FXML
+    private CheckBox arcticle336;
+
+    @FXML
+    private CheckBox arcticle349_354;
+
+    @FXML
+    private CheckBox arcticle950;
+
+    @FXML
+    private CheckBox arcticle329_349_354;
+
+    @FXML
+    private VBox vboxOrder;
+
+    @FXML
+    private ComboBox<String> comTypeOrder;
+
+    @FXML
+    private TextField typeOrder;
+
     @FXML
     private HBox hboxOrderArticle;
+
+    @FXML
+    private CheckBox sansDelai;
+
+    @FXML
+    private CheckBox avecDelai;
+
+    @FXML
+    private VBox vboxDecision;
+
+    @FXML
+    private ComboBox<String> comTypeDecision;
+
+    @FXML
+    private TextField typeDecision;
+
+    @FXML
+    private HBox hboxDecisionArticle;
+
+    @FXML
+    private CheckBox article354;
+
+    @FXML
+    private CheckBox article954;
+
+    @FXML
+    private CheckBox article329_355_354;
+
+    @FXML
+    private VBox vboxExcuse;
+
+    @FXML
+    private TextField langueExcuse;
+
+    @FXML
+    private CheckBox checkAttached;
+
+    @FXML
+    private TextField nbrPages;
+
+    @FXML
+    private VBox vboxConstat;
+
+    @FXML
+    private TextArea constatContent;
+
+    @FXML
+    private VBox vboxObligation;
+
+    @FXML
+    private TextArea contentArea;
+
+    @FXML
+    private CheckBox checkContent;
+
+    @FXML
+    private CheckBox checkMontant;
+
+    @FXML
+    private TextField montant;
+
+    @FXML
+    private TextField charge;
+
+    @FXML
+    private TextField droitPropo;
+
+    @FXML
+    private TextField totale;
+
+    @FXML
+    private TextArea ObligationArea;
+
+    @FXML
+    private VBox vboxRecip;
+
+    @FXML
+    private ComboBox<String> comTypeCarte;
+
+    @FXML
+    private TextField numCarte;
+    @FXML
+    private DatePicker dateCarte;
+
+    @FXML
+    private TextField etablissement;
+
+    @FXML
+    private TextArea ObligationArea1;
+
+    @FXML
+    private VBox vboxJard;
+
+    @FXML
+    private TextArea JardContent;
+
+    @FXML
+    private VBox vboxSaisie;
+
+    @FXML
+    private TextArea JardContent1;
+
+    @FXML
+    private VBox vboxCacule;
+
+    @FXML
+    private TextArea basedFiles;
+
     @FXML
     private Button btnSave;
+
     public String numBon;
     public int rank;
     
@@ -150,6 +224,21 @@ public class PrintPvController implements Initializable
         this.typePv.setText(typePv);
         this.labelOblig.setText(typePv);
         this.labelOblig.setText(oblig);
+        if (typePv.equals("محضر جرد")) {
+            this.vboxJard.setVisible(true);
+        }
+        if (typePv.equals("محضر إشهاد")) {
+            this.vboxRecip.setVisible(true);
+        }
+        if (typePv.equals("محضر حساب فردي")||typePv.equals("محضر حساب مشترك")) {
+            this.vboxCacule.setVisible(true);
+        }
+        if (typePv.equals("محضر حجز على منقول")||typePv.equals("محضر حجز على ما للمدين لدى الغير")||typePv.equals("محضر حجز على عقار")) {
+            this.vboxSaisie.setVisible(true);
+        }
+        if (typePv.equals("محضر معاينة بأمر")||typePv.equals("محضر معاينة")||typePv.equals("محضر حضور جمعية عامة")||typePv.equals("محضر إثبات الحالة (أخرى)")) {
+            this.vboxConstat.setVisible(true);
+        }
         if (typePv.equals("محضر تكليف بالوفاء بموجب سند قضائي")) {
             this.vboxObligation.setVisible(true);
         }
@@ -592,6 +681,7 @@ public ArrayList PrintDecision(){
         this.comTypeJug.getItems().addAll("حكم حضوري", "حكم غيابي", "حكم حضوري إبتدائي نهائي", "حكم غيابي إبتدائي نهائي", "حكم غيابي نهائي", "حكم حضوري نهائي", "حكم إداري", "حكم حضوري اعتباري", "صنف آخر");
         this.comTypeDecision.getItems().addAll("قرار حضوري", "قرار غيابي","قرار إداري","صنف آخر");
         this.comTypeOrder.getItems().addAll("أمر إستعجالي","أمر بإثبات حالة" ,"أمر بحجز تنفيذي على منقول","أمر بحجز تنفيذي على عقار","أمر بحجز تنفيذي على ما للمدين لدى الغير","أمر باستبدال خبير","أمر بالزيارة المؤقتة","أمر باستجواب" ,"أمر أداء","صنف آخر");
+        this.comTypeCarte.getItems().addAll("بطاقة التعريف الوطني","رخصة السياقة" ,"جواز السفر");
         this.heure.getItems().addAll("08","09","10","11","12","13","14","15","16","17");
         heure.getSelectionModel().selectFirst();
         this.minute.getItems().addAll("00","05","10","15","20","25","30","35","40","45","55","55");
